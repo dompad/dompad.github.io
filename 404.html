@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name='viewport' content='width=device-width,initial-scale=1.0,maximum-scale=1.0'>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+        <meta name='apple-mobile-web-app-capable' content='yes'>
+        <meta name='apple-mobile-web-app-status-bar-style'>
+        <meta name="apple-mobile-web-app-title">
+        <meta name="application-name">
+        <meta name="application-shortname">
+        <meta name="msapplication-TileColor">
+        <meta name='theme-color'>
+        <base href="/">
+        <script>
+            let base;
+            if (window.self === window.top) {
+                base = document.head.querySelector("base");
+                window.boot = window.location.pathname + window.location.search + window.location.hash;
+            } else {
+                base = document.createElement("base");
+                base.href = window.parent.location.protocol + "//" + window.parent.location.host;
+                document.head.appendChild(base);
+                var pathname = window.parent.location.pathname;
+                var dir = window.parent.rout.ed.dir(pathname);
+                dir.splice(0, 4);
+                window.boot = window.parent.rout.ed.url(dir);
+            }
+        </script>
+        <script src="raw/asset/js/crypto.js"></script>
+        <script src="raw/asset/js/github.js"></script>
+        <script src="raw/asset/js/github.crud.js"></script>
+        <script src="raw/asset/js/global.js"></script>
+        <script src="raw/asset/js/iro.min.js"></script>
+        <script src="raw/asset/js/mvc.m.js"></script>
+        <script src="raw/asset/js/mvc.v.js"></script>
+        <script src="raw/asset/js/mvc.c.js"></script>
+        <script src="raw/asset/js/modal.js"></script>
+        <script src="raw/asset/js/on.js"></script>
+        <script src="raw/asset/js/router.js"></script>
+        <script src="raw/asset/js/stripe.js"></script>
+        <script src="raw/asset/js/touch.js"></script>
+        <script src="raw/asset/js/tracer.js"></script>
+        <script src="raw/asset/js/vanilla.js"></script>
+        <script src="raw/asset/js/wavesurfer.js"></script>
+        <script src="raw/style/framework.js"></script>
+        <script src="index.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+        <link href="index.css" rel="stylesheet">
+        <link href="raw/asset/css/gg.css" rel="stylesheet">
+        <link href="raw/style/theme.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#963d97">
+    </head>
+    <body class="-dark-background-color-1f background-color-fff" data-theme="system">
+        <boot id="boot"></boot>
+    </body>
+</html>
