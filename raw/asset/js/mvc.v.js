@@ -355,7 +355,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         github.repos.contents({
                             owner: window.owner.login,
                             path: "/site.webmanifest",
-                            repo: GET[1]
+                            repo: get[1]
                         }, {
                             data: JSON.stringify({
                                 content: btoa(JSON.stringify(json, null, 2)),
