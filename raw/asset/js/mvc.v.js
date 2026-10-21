@@ -130,7 +130,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     });
 
                     var repository = await github.repos.get({
-                        owner: app.owner.login,
+                        owner: window.owner.login,
                         repo: get[1]
                     }, {
                         accept: "application/vnd.github.raw",
