@@ -130,6 +130,7 @@ window.modal = {
         }
         ;
         byId('boot').insertAdjacentHTML('afterend', ppp.outerHTML);
+        alert('modal.page');
         modal.zIndex(document.querySelectorAll('aside'));
         dom.body.classList.add('overflow-hidden');
         //dom.body.onclick = () => on.touch.tap(event,'tap');
