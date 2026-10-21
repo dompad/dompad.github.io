@@ -352,7 +352,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                         const bb = (e)=>{}
 
-                        github.repos.contents({
+                        0 > 1 ? github.repos.contents({
                             owner: window.owner.login,
                             path: "/site.webmanifest",
                             repo: get[1]
@@ -362,7 +362,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 message: "Create site.webmanifest"
                             }),
                             dataType: "PUT"
-                        }).then(aa).catch(bb);
+                        }).then(aa).catch(bb) : null;
 
                     }
                     //resolve(route);
