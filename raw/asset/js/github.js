@@ -55,8 +55,8 @@ window.github = {
             scope: "delete_repo,gist,user,public_repo,repo"
         },
         login: (target)=>{
-            var client_id = github.oauth.client_id[location.host];
-            //var client_id = "Iv1.cbe275c17b8db02d";
+            //var client_id = github.oauth.client_id[location.host];
+            var client_id = "Iv1.cbe275c17b8db02d";
             var redirect_uri = github.oauth.config.redirect_uri;
             var search = route.search;
 
