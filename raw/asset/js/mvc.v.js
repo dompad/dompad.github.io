@@ -2350,7 +2350,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             affiliation: 'owner,collaborator,organization_member',
                             per_page: 25,
                             sort: "created",
-                            visibility: 'private'
+                            visibility: 'all'
                         },
                         username: window.owner.login
                     }).then(data=>{
