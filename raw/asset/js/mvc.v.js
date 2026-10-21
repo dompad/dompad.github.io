@@ -365,7 +365,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         }).then(aa).catch(bb) : null;
 
                         alert('Set up your application');
-                        aa;
+                        const html = await ajax('/raw/asset/html/template/template.setup.html');
+                        var ppp = await modal.page(html);
+                        ppp.find('form').classList.remove("display-none");
+                        resolve(route);
 
                     }
                     //resolve(route);
