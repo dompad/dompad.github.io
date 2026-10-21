@@ -364,6 +364,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             dataType: "PUT"
                         }).then(aa).catch(bb) : null;
 
+                        aa;
+
                     }
                     //resolve(route);
 
