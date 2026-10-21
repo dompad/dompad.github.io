@@ -364,7 +364,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             dataType: "PUT"
                         }).then(aa).catch(bb) : null;
 
-                        alert('Set up your application');
+                        alert('Set up your application details.');
                         const html = await ajax('/raw/asset/html/template/template.setup.html');
                         var ppp = await modal.page(html);
                         alert('Ready to set up');
