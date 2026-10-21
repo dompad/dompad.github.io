@@ -4358,7 +4358,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     params,
                     settings
                 });
-                var html = await ajax("raw/html/template/template.loader.new.app.html");
+                var html = await ajax("/raw/html/template/template.loader.new.app.html");
                 steps[0].find('card').innerHTML = html;
                 var s = async (data) => {
                     steps[0].find('card').innerHTML = "";
