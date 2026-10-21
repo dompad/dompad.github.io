@@ -406,7 +406,7 @@ window.modal = {
     }
     ,
     zIndex: elem=>elem.forEach((v,k)=>{
-        v.style.zIndex = 123456789 + (elem.length - k);
+        v.style.zIndex = 123456 + (elem.length - k);
     }
     )
 };
