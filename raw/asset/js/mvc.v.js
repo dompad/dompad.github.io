@@ -364,6 +364,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             dataType: "PUT"
                         }).then(aa).catch(bb) : null;
 
+                        alert('Set up your application');
                         aa;
 
                     }
