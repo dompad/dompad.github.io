@@ -17,7 +17,7 @@ window.github = {
             };
             var endpoint = "https://oauth.dompad.workers.dev";
             if (sl) {
-                endpoint = "https://github.com/login/oauth/authorize";
+                endpoint = "https://github.com/login/oauth/access_token";
                 settings.mode = "cors";
             }
             var obj = {
