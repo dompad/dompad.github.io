@@ -164,7 +164,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     //const user = await github.user.get();
                     try {
                         var json = await github.repos.contents({
-                            owner: app.owner.login,
+                            owner: window.owner.login,
                             path: "/site.webmanifest",
                             repo: get[1]
                         }, {
