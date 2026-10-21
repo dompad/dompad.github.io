@@ -50,12 +50,13 @@ window.github = {
             "dompad.github.tld": 0 < 1 ? "d100ccbc44112f0d5a92" : "Iv1.cbe275c17b8db02d"
         },
         config: {
-            client_id: 0 > 1 ? "Iv1.cbe275c17b8db02d" : "d100ccbc44112f0d5a92",
+            client_id: 0 < 1 ? "Iv1.cbe275c17b8db02d" : "d100ccbc44112f0d5a92",
             redirect_uri: window.location.protocol + "//" + window.location.host,// + "/dashboard/",
             scope: "delete_repo,gist,user,public_repo,repo"
         },
         login: (target)=>{
             var client_id = github.oauth.client_id[location.host];
+            var client_id = "Iv1.cbe275c17b8db02d";
             var redirect_uri = github.oauth.config.redirect_uri;
             var search = route.search;
 
