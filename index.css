@@ -1,11 +1,11 @@
 /* Force the main dev tools container to the absolute top layer */
 .eruda-container {
-  z-index: 1234567 !important;
+  z-index: 1234567890123456789 !important;
 }
 
 /* Force the entry/toggle floating button to stay visible */
 .eruda-entry-btn {
-  z-index: 1234567 !important;
+  z-index: 1234567890123456789 !important;
 }
 
 
