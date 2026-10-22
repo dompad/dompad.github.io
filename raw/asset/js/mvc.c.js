@@ -4928,6 +4928,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                         });
                                         window.location.pathname.router();
                                     }) : null;
+                                }).catch(async(e) => {
+                                    alert('There is no site wemanifest.');
                                 });
 
                             }
