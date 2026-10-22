@@ -92,6 +92,7 @@ window.modal = {
     ,
     page: async(h,style,className)=>{
         //console.log(style);
+        alert(h);
         var ppp = document.createElement('aside');
         ppp.innerHTML = h;
         if (style) {
