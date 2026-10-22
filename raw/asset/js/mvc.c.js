@@ -4773,7 +4773,64 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                         controller.setup.iro('#' + colors.random());
                                     }) : null;
                                 }).catch(async(e)=>{
+                                    
                                     alert('There is no index.html file.');
+                                    const html = await ajax('/raw/asset/html/template/template.app.html');
+                                    var raw = btoa(html);
+                                    var content = atob(raw);
+                                    var doc = new DOMParser().parseFromString(content, "text/html");
+                                    doc.head.find('title').textContent = title.value;
+
+                                    var DOM = {
+                                        body: doc.body,
+                                        doc: doc.head,
+                                        head: doc.head,
+                                        html: doc.all[0]
+                                    }
+                                    console.log(808, {
+                                        DOM
+                                    });
+                                    var content = btoa(DOM.html.outerHTML);
+                                    var message = "Create index.html";
+                                    var data = {
+                                        content,
+                                        message
+                                    };
+                                    //sha ? data.sha = sha : null;
+                                    console.log(1708, {
+                                        content,
+                                        data,
+                                        html,
+                                        raw
+                                    });
+
+                                    var upload = 1 > 0 ? await github.repos.contents({
+                                        owner: user.login,
+                                        repo: GET[1],
+                                        path: "/index.html"
+                                    }, {
+                                        data: JSON.stringify({
+                                            content,
+                                            message
+                                        }),
+                                        dataType: "PUT"
+                                    }).then(function(data) {
+                                        console.log(1805, {
+                                            data
+                                        });
+                                        //window.location.pathname.router();
+                                        step.find('input').dataset.value = title.value;
+                                        $(form.all('block > *')).addClass('display-none');
+                                        $(form.all('form > header box flex')).attr("css-height", "30px");
+                                        $(form.all('form > header box flex')).attr("css-width", "30px");
+                                        $(form.all('form > header box flex')[1]).attr("css-height", "50px");
+                                        $(form.all('form > header box flex')[1]).attr("css-width", "50px");
+                                        $(form.all('block > *')[1]).removeClass('display-none');
+                                        controller.setup.iro('#' + colors.random());
+                                    }).catch(async(e)=>{
+                                        alert('Could not create site webmanifest.');
+                                    }) : null;
+                                    
                                 });
                             }
                         } else {
