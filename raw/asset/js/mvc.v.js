@@ -2250,16 +2250,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 direction: 'desc',
                                 sort: "updated",
                             })
-                        }, {
-                            data: JSON.stringify({
-                                direction: 'desc',
-                                sort: "updated"
-                            }),
-                            query: {
-                                direction: 'desc',
-                                sort: "updated",
-                                per_page: 25
-                            }
                         }).then(p);
                     }
                     resolve(route);
