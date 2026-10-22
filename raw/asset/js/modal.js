@@ -112,6 +112,7 @@ window.modal = {
             ppp,
             fetching2,
         });
+        alert('modal 1');
         if (fetching2.length > 0) {
             var ff = 0;
             do {
@@ -121,6 +122,7 @@ window.modal = {
                 ff++;
             } while (fetching2.length < 0);
         }
+        alert('modal 2');
 
         ppp.onclick = event=>{
             //console.log(event);
