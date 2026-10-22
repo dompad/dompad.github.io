@@ -2244,7 +2244,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             owner: window.owner.login,
                             repo: "db.dompad.io",
                             path: "/v1/apps/index.json"
-                        }).then(p) : github.user.repos({
+                        }).then(p) : github.repos.user({
                             username: window.owner.login,
                             query: JSON.stringify({
                                 direction: 'desc',
