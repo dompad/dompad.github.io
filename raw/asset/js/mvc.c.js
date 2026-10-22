@@ -4342,8 +4342,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 var data = JSON.stringify({
                     //description: about,
                     name: title,
-                    owner: user.login,
-                    private: true
+                    //owner: user.login,
+                    //private: true
                 });
                 const dataType = "POST";
                 const params = {
@@ -4362,7 +4362,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 steps[0].find('card').innerHTML = html;
                 var s = async (data) => {
                     steps[0].find('card').innerHTML = "";
-                    var confirm = 1 < 0 ? await modal.confirm({
+                    var confirm = 0 > 1 ? await modal.confirm({
                         body: "Do you want to create a logo or skip this wizard?",
                         title: "App Created"
                     }, ["Skip", "Continue"]) : null;
@@ -4374,14 +4374,17 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         console.log('repos.generate ' + name, {
                             data
                         });
-                        var href = "/dashboard/" + data.name + "/";
+                        var href = "/dashboard";
                         href.router();
                     }
                 }
                 var ss = () => {
-                    steps[0].find('card').innerHTML = "";
+                    alert('Failed to create repository.')
+                    //steps[0].find('card').innerHTML = "";
                 }
-                1 > 0 ? github.repos.generate(params, settings).then(s).catch(ss) : null;
+                0 > 1 ? 
+                    github.repos.generate(params, settings).then(s).catch(ss) : 
+                    github.repos.create(settings).then(s).catch(ss);
             }
         },
 
