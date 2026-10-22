@@ -364,13 +364,13 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             dataType: "PUT"
                         }).then(aa).catch(bb) : null;
 
-                        alert('Set up your application details.');
+                        //alert('Set up your application details.');
                         try {
                             //alert(1);
                             const html = await ajax('/raw/asset/html/template/template.setup.html');
                             //alert(2);
                             var ppp = await modal.page(html);
-                            alert('Ready to set up');
+                            alert('Ready to set up your application details.');
                             ppp.find('form').classList.remove("display-none");
                         } catch(e) {
                             console.log('374 ', e)
