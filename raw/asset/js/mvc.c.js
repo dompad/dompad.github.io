@@ -4772,6 +4772,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                         $(form.all('block > *')[1]).removeClass('display-none');
                                         controller.setup.iro('#' + colors.random());
                                     }) : null;
+                                }).catch(async(e)=>{
+                                    alert('There is no index.html file.');
                                 });
                             }
                         } else {
