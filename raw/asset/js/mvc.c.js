@@ -4930,8 +4930,48 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                     }) : null;
                                 }).catch(async(e) => {
                                     alert('There is no site wemanifest.');
-                                });
+                                    var raw = btoa('{}');
+                                    var content = atob(raw);
+                                    var json = JSON.parse(content);
+                                    json.description = about;
+                                    json.icons = [{
+                                        src: "icon.png",
+                                        sizes: "570x570",
+                                        type: "image/png"
+                                    }];
+                                    json.name = steps[0].find('input').value;
+                                    json["short_name"] = GET[1];
+                                    var content = btoa(JSON.stringify(json, null, 2));
+                                    var message = "Create site.webmnifest";
+                                    var data = {
+                                        content,
+                                        message
+                                    };
+                                    //sha ? data.sha = sha : null;
+                                    console.log(1708, {
+                                        content,
+                                        data,
+                                        json,
+                                        raw
+                                    });
 
+                                    var upload = 1 > 0 ? await github.repos.contents({
+                                        owner: user.login,
+                                        repo: GET[1],
+                                        path: "/site.webmanifest"
+                                    }, {
+                                        data: JSON.stringify({
+                                            content,
+                                            message
+                                        }),
+                                        dataType: "PUT"
+                                    }).then(function(data) {
+                                        console.log(1805, {
+                                            data
+                                        });
+                                        window.location.pathname.router();
+                                    }) : null;
+                                });
                             }
                         } else {
                             modal.alert({
