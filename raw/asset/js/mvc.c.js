@@ -4970,6 +4970,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                             data
                                         });
                                         window.location.pathname.router();
+                                    }).catch(async(e)=>{
+                                        alert('Could not create site webmanifest.');
                                     }) : null;
                                 });
                             }
