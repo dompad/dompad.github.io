@@ -2239,7 +2239,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 } while (x < data.length);
                             }
                         }
-                        0 < 1 ? github.repos.contents({
+                        0 > 1 ? github.repos.contents({
                             //cache.feed.dashboard.index
                             owner: window.owner.login,
                             repo: "db.dompad.io",
