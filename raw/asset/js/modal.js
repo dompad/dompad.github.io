@@ -410,9 +410,9 @@ window.modal = {
     }
     ,
     zIndex: elem=>elem.forEach((v,k)=>{
-        v.style.zIndex = 123; 
+        //v.style.zIndex = 123; 
         //alert(v.style.zIndex)
-        //v.style.zIndex = 123456789 + (elem.length - k);
+        v.style.zIndex = 123456789 + (elem.length - k);
     }
     )
 };
