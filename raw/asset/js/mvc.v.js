@@ -2248,7 +2248,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             username: window.owner.login,
                             query: JSON.stringify({
                                 direction: 'desc',
-                                sort: "pushed",
+                                sort: "updated",
                             })
                         }, {
                             data: JSON.stringify({
