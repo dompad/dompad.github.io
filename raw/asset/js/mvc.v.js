@@ -370,7 +370,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             const html = await ajax('/raw/asset/html/template/template.setup.html');
                             //alert(2);
                             var ppp = await modal.page(html);
-                            alert('Ready to set up your application details.');
+                            //alert('Ready to set up your application details.');
                             ppp.find('form').classList.remove("display-none");
                         } catch(e) {
                             console.log('374 ', e)
