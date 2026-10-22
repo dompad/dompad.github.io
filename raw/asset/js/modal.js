@@ -92,7 +92,7 @@ window.modal = {
     ,
     page: async(h,style,className)=>{
         //console.log(style);
-        alert(h);
+        //alert(h);
         var ppp = document.createElement('aside');
         ppp.innerHTML = h;
         if (style) {
@@ -113,7 +113,7 @@ window.modal = {
             ppp,
             fetching2,
         });
-        alert('modal 1');
+        //alert('modal 1');
         if (fetching2.length > 0) {
             var ff = 0;
             do {
@@ -123,7 +123,7 @@ window.modal = {
                 ff++;
             } while (fetching2.length < 0);
         }
-        alert('modal 2');
+        //alert('modal 2');
 
         ppp.onclick = event=>{
             //console.log(event);
@@ -133,7 +133,7 @@ window.modal = {
         }
         ;
         byId('boot').insertAdjacentHTML('afterend', ppp.outerHTML);
-        alert('modal.page');
+        //alert('modal.page');
         modal.zIndex(document.querySelectorAll('aside'));
         dom.body.classList.add('overflow-hidden');
         //dom.body.onclick = () => on.touch.tap(event,'tap');
