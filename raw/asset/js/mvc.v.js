@@ -116,21 +116,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 0 < 1 ? controller.nav.hide() : controller.nav.close();
                 if (get.length > 1) { if(github.oauth.verify()) {
                     
-                    var apps = await github.repos.contents({
-                        owner: window.owner.login,
-                        repo: "db.dompad.io",
-                        path: "/v1/apps/index.json"
-                    }, {
-                        accept: "application/vnd.github.raw",
-                        cache: "reload"
-                    });
-                    var app = apps.find(o=>o.name === get[1]);
-                    console.log(127, {
-                        apps,
-                        app
-                    });
-                    
-
                     var repository = await github.repos.get({
                         owner: window.owner.login,
                         repo: get[1]
