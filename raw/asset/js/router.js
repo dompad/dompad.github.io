@@ -4,7 +4,7 @@ String.prototype.router = async function(params) {
     var url = new URL(uri,location.origin);
     var tabs = await rout.ed.vars(rout.ed.dir(url.hash ? url.hash.split('#')[1] : uri));
     var goto = rout.ed.url(tabs);
-    var route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto);// + url.search + url.hash);
+    var route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
     //console.log(8, uri, url, route);
 
     var pages = dom.body.find('pages[data-page="' + rout.es() + '"]');
@@ -153,7 +153,7 @@ window.rout.e = state=>{
         root,
         search
     };
-    0 > 1 ? console.log(164, {
+    0 < 1 ? console.log(164, {
         data
     }) : null;
     return data;
