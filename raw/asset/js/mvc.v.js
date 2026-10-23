@@ -114,7 +114,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 //console.log(107, root, get);
                 0 < 1 ? controller.nav.hide() : controller.nav.close();
                 if (get.length > 1) {
-
+                    
                     var apps = await github.repos.contents({
                         owner: window.owner.login,
                         repo: "db.dompad.io",
@@ -128,6 +128,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         apps,
                         app
                     });
+                    
 
                     var repository = await github.repos.get({
                         owner: window.owner.login,
@@ -2203,8 +2204,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     }
                 } else {
                     console.log(352, github.oauth.verify());
-                    window.owner = await github.user.get();
                     if (github.oauth.verify()) {
+                        window.owner = await github.user.get();
                         var params = {};
                         const user = await github.user.get();
                         var p = d=>{
