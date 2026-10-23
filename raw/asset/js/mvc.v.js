@@ -34,6 +34,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         var state = params['state'].split('_')[0];
                         if (state === 'github') {
                             await github.oauth.authorize(params);
+                            route = rout.e(route.path);
                         }
                         if (state === 'stripe') {
                             var href = localStorage.getItem('redirect_uri');
