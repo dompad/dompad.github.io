@@ -2212,6 +2212,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         var p = d=>{
                             var data = d.content ? JSON.parse(atob(d.content)) : d;
                             const feed = byId('feed-dashboard');
+                            console.log(2215, {feed});
                             feed.innerHTML = "";
                             if (data.length > 0) {
                                 var x = 0;
