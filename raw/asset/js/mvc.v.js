@@ -2275,7 +2275,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                     var params = {
                         owner: "dompad",
-                        path: "/index.json",
+                        path: "/",
                         repo: "preview"
                     };
                     var settings = {};
