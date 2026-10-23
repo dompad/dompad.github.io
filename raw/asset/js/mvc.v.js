@@ -113,7 +113,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
             if (root === "dashboard") {
                 //console.log(107, root, get);
                 0 < 1 ? controller.nav.hide() : controller.nav.close();
-                if (get.length > 1) {
+                if (get.length > 1) { if(github.oauth.verify()) {
                     
                     var apps = await github.repos.contents({
                         owner: window.owner.login,
@@ -2201,7 +2201,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             ajax('raw/asset/json/templates.json').then(a);
                             resolve(route);
                         }
-                    }
+                    } }
                 } else {
                     console.log(352, github.oauth.verify());
                     if (github.oauth.verify()) {
