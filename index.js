@@ -43,7 +43,7 @@ async function init() {
 
         //STRIPE
         try {
-            var json = await ajax('raw/asset/json/stripe.json');
+            var json = await ajax('/raw/asset/json/stripe.json');
             var stripe = JSON.parse(json);            
             console.log(48, stripe);
             
