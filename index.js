@@ -269,29 +269,6 @@ async function init() {
     if (localStorage.githubAccessToken) {
         try {
             window.owner = await github.user.get();
-            if (owner) {
-                try {
-                    cache.repository = await github.repos.get({
-                        owner: owner.login,
-                        repo: "db.dompad.io"
-                    })
-                } catch (e) {
-                    try {
-                        cache.repository = await github.repos.create({
-                            data: JSON.stringify({
-                                name: "db.dompad.io",
-                                private: true
-                            })
-                        });
-                    } catch (e) {
-                        modal.alert({
-                            body: "There was an error creating the cache.",
-                            submit: "OK",
-                            title: "Database Error"
-                        })
-                    }
-                }
-            }
         } catch (e) {}
     }
 
