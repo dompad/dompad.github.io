@@ -132,7 +132,7 @@ window.rout.e = state=>{
             }) : null;
             return bool;
         }) : null;
-        0 > 1 ? console.log(124, {
+        0 < 1 ? console.log(124, {
             pgs
         }) : null;
         var n = 0;
