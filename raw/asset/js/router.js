@@ -138,7 +138,8 @@ window.rout.e = state=>{
         }) : null;
         var n = 0;
         do {
-            page = window.rout.ing(pgs, state, GOT, n);
+            //page = window.rout.ing(pgs, state, GOT, n);
+            page = window.rout.ing(pgs, path, GOT, n);
             console.log(148, {n, state, path, page});
             if (page)
                 break;
