@@ -140,7 +140,7 @@ window.rout.e = state=>{
         do {
             //page = window.rout.ing(pgs, state, GOT, n);
             page = window.rout.ing(pgs, path, GOT, n);
-            console.log(148, {n, state, path, page});
+            console.log(148, {n, path, state, page});
             if (page)
                 break;
             n++;
