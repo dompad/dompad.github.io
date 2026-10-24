@@ -26,6 +26,7 @@ String.prototype.router = async function(params) {
         }
         if (page.innerHTML === "") {
             page.innerHTML = pg.replace(/>\s+</g, '><');
+            alert('Page HTML Updated');
             //await ajax(page.dataset.fetch);
             if (is.iframe(window)) {
                 window.top.css.style.sheet(page);
