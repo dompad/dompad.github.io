@@ -477,7 +477,8 @@ async function viewPage(vp) {
                 var path = vp.dataset.fetch;
                 var pg = await ajax(path);
             }
-            vp.innerHTML = pg;
+            alert('Inserting Page HTML');
+            //vp.innerHTML = pg;
             console.log("router.js 33", path, vp, vp.dataset.fetch);
         }
         const fetching2 = vp.all('[data-fetch]');
