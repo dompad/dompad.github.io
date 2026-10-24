@@ -418,7 +418,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         var res = await github.repos.contents({
                                             owner: window.owner.login,
                                             repo: get[1],
-                                            path: 'icon.svg'
+                                            path: '/icon.svg'
                                         }, {
                                             accept: 'application/vnd.github.raw'
                                         });
