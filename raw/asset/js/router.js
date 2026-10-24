@@ -459,7 +459,7 @@ window.rout.ing = (pgs,href,GOT,n)=>{
 }
 
 async function viewPage(vp) {
-
+    console.log(462, {routes: rout.es()});
     const fetching3 = dom.body.all('[data-fetch][data-page="' + rout.es() + '"]:empty');
     if (fetching3.length > 0) {
         var ff = 0;
