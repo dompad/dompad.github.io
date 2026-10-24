@@ -471,6 +471,7 @@ async function viewPage(vp) {
         } while (ff < fetching3.length);
     }
     if (vp) {
+        console.log(474, vp.dataset.fetch);
         if (vp.innerHTML === "" && vp.dataset.fetch) {
             if (is.iframe(window)) {
                 var path = "/" + window.parent + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
