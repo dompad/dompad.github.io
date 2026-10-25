@@ -147,6 +147,8 @@ pgs.sort((a, b) => {
   // If 'a' starts with '*' and 'b' does not, 'a' comes first (-1)
   return aIsStar ? -1 : 1;
 });
+
+        pgs = pgs.toReversed();
         
         0 < 1 ? console.log(124, 151, {
             pgs,
