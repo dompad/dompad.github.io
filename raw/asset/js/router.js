@@ -466,7 +466,7 @@ window.rout.ing = (pgs,href,GOT,n)=>{
         }
     });
     var l = checked[checked.length - 1];
-    0 > 1 ? console.log(385, {
+    0 < 1 ? console.log(385, {
         ed,
         checked,
         l
