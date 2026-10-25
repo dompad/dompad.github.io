@@ -136,7 +136,7 @@ window.rout.e = state=>{
             return bool;
         }) : null;
 
-pgs.sort((a, b) => {
+0 < 1 ? null : pgs.sort((a, b) => {
   const aIsStar = a.startsWith('*');
   const bIsStar = b.startsWith('*');
 
