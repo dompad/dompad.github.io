@@ -136,19 +136,6 @@ window.rout.e = state=>{
             return bool;
         }) : null;
 
-0 < 1 ? null : pgs.sort((a, b) => {
-  const aIsStar = a.startsWith('*');
-  const bIsStar = b.startsWith('*');
-
-  // If both start with '*', or both do not, sort normally
-  if (aIsStar === bIsStar) {
-    return a.localeCompare(b);
-  }
-
-  // If 'a' starts with '*' and 'b' does not, 'a' comes first (-1)
-  return aIsStar ? -1 : 1;
-});
-
         //pgs = pgs.toReversed();
         
         0 < 1 ? console.log(124, 151, {
