@@ -121,7 +121,7 @@ window.rout.e = state=>{
         0 > 1 ? console.log(126, "1.2.3", {
             pgs
         }) : null;
-        0 > 1 ? pgs.sort(function(a, b) {
+        0 < 1 ? pgs.sort(function(a, b) {
             var al = a.split('/').length - 1;
             var bl = b.split('/').length - 1;
             var bool = b.endsWith('*') && al === bl ? -1 : 1;
