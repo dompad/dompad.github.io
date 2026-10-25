@@ -148,7 +148,7 @@ pgs.sort((a, b) => {
   return aIsStar ? -1 : 1;
 });
 
-        pgs = pgs.toReversed();
+        //pgs = pgs.toReversed();
         
         0 < 1 ? console.log(124, 151, {
             pgs,
