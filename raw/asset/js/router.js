@@ -134,7 +134,21 @@ window.rout.e = state=>{
             }) : null;
             return bool;
         }) : null;
-        0 < 1 ? console.log(124, {
+
+pgs.sort((a, b) => {
+  const aIsStar = a.startsWith('*');
+  const bIsStar = b.startsWith('*');
+
+  // If both start with '*', or both do not, sort normally
+  if (aIsStar === bIsStar) {
+    return a.localeCompare(b);
+  }
+
+  // If 'a' starts with '*' and 'b' does not, 'a' comes first (-1)
+  return aIsStar ? -1 : 1;
+});
+        
+        0 < 1 ? console.log(124, 151, {
             pgs,
             GOT
         }) : null;
