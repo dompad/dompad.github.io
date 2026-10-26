@@ -3569,8 +3569,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     console.log(2452, 'controller.pages.update', "array", {
                         array
                     });
-                    alert('Pushing to Git...');
-                    await github.crud.update(params, array);
+                    alert('Pushing page to Git...');
+                    await github.crude.push(params, array);
                     "/dashboard/:get/pages/".router();
 
                 }
