@@ -325,7 +325,7 @@ github.crud.update = async(params,array)=>{
             body: JSON.stringify({
                 "tree": tree
             }),
-            method: "POST"
+            dataType: "POST"
         }).catch(error=>{
             console.log(2530, 'POST github.database.trees', error);
         }
@@ -346,7 +346,7 @@ github.crud.update = async(params,array)=>{
                 "parents": [references.object.sha],
                 "tree": trees.sha
             }),
-            method: "POST"
+            dataType: "POST"
         }).catch(error=>{
             console.log(2530, 'POST github.database.commits', error);
         }
@@ -367,7 +367,7 @@ github.crud.update = async(params,array)=>{
                 force: true,
                 sha: commits.sha
             }),
-            method: "PATCH"
+            dataType: "PATCH"
         });
         //var sha = refs.object.sha;
         console.log("references", {
