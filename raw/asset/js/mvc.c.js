@@ -3456,7 +3456,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             data.noindex = noindex;
             data.page = page;
             data.pages = pages;
-            data.popup = popup;
+            data.popup = main;
             Object.keys(seo).length > 0 ? data.seo = seo : null;
             data.slug = slug;
             data.title = title;
