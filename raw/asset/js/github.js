@@ -1238,6 +1238,7 @@ window.github.crud.update = async(params,array)=>{
 
     //TREE
     var tree = [];
+    console.log(1241, {array});
     if (array.length > 0) {
         var b = 0;
         do {
