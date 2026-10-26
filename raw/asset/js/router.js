@@ -391,15 +391,6 @@ window.rout.ing = (pgs,href,GOT,n)=>{
     0 > 1 ? console.log(338, {
         pgs
     }) : null;
-pgs.sort((a, b) => {
-  const aIsStar = a.startsWith("*");
-  const bIsStar = b.startsWith("*");
-
-  if (aIsStar && !bIsStar) return -1; // place 'a' before 'b'
-  if (!aIsStar && bIsStar) return 1;  // place 'b' before 'a'
-
-  return a.localeCompare(b);           // standard alphabetical sort
-}); console.log(402, {pgs});
     //pages = [...new Set(pages)];
     var stop = false;
     var routes = pgs.forEach(function(el, index) {
