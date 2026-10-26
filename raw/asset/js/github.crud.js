@@ -110,7 +110,7 @@ github.crud.update = async(params,array)=>{
         do {
             var row = array[b];
             console.log(112, {row});
-            if (row.content) {
+            if (row && row.content) {
                 var res = await github.database.blobs({
                     owner,
                     repo
