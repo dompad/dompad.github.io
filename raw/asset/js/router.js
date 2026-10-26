@@ -146,7 +146,7 @@ window.rout.e = state=>{
         do {
             //page = window.rout.ing(pgs, state, GOT, n);
             page = window.rout.ing(pgs, path, GOT, n);
-            console.log(148, {n, path, state, page});
+            //console.log(148, {n, path, state, page});
             if (page)
                 break;
             n++;
@@ -161,7 +161,7 @@ window.rout.e = state=>{
         root,
         search
     };
-    0 < 1 ? console.log(164, {
+    0 > 1 ? console.log(164, {
         data
     }) : null;
     return data;
@@ -453,15 +453,15 @@ window.rout.ing = (pgs,href,GOT,n)=>{
             //return check;
         }
     });
-checked.sort((a, b) => {
-  const aIsStar = a.startsWith("*");
-  const bIsStar = b.startsWith("*");
+    checked.sort((a, b) => {
+      const aIsStar = a.startsWith("*");
+      const bIsStar = b.startsWith("*");
 
-  if (aIsStar && !bIsStar) return -1; // place 'a' before 'b'
-  if (!aIsStar && bIsStar) return 1;  // place 'b' before 'a'
+      if (aIsStar && !bIsStar) return -1; // place 'a' before 'b'
+      if (!aIsStar && bIsStar) return 1;  // place 'b' before 'a'
 
-  return a.localeCompare(b);           // standard alphabetical sort
-});
+      return a.localeCompare(b);           // standard alphabetical sort
+    });
     var l = checked[checked.length - 1];
     0 < 1 ? console.log(385, {
         ed,
@@ -473,7 +473,7 @@ checked.sort((a, b) => {
 }
 
 async function viewPage(vp) {
-    console.log(462, {routes: rout.es()});
+    //console.log(462, {routes: rout.es()});
     const fetching3 = dom.body.all('[data-fetch][data-page="' + rout.es() + '"]:empty');
     if (fetching3.length > 0) {
         var ff = 0;
@@ -485,7 +485,7 @@ async function viewPage(vp) {
         } while (ff < fetching3.length);
     }
     if (vp) {
-        console.log(474, {fetch: vp.dataset.fetch, vp, html: vp.innerHTML});
+        //console.log(474, {fetch: vp.dataset.fetch, vp, html: vp.innerHTML});
         if (vp.innerHTML === "" && vp.dataset.fetch) {
             if (is.iframe(window)) {
                 var path = "/" + window.parent + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
@@ -499,10 +499,10 @@ async function viewPage(vp) {
             console.log("router.js 33", path, vp, vp.dataset.fetch);
         }
         const fetching2 = vp.all('[data-fetch]');
-        console.log(482, {
+        0 > 1 ? console.log(482, {
             vp,
             fetching2
-        });
+        }) : null;
         if (fetching2.length > 0) {
             var ff = 0;
             do {
