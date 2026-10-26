@@ -119,7 +119,7 @@ github.crud.update = async(params,array)=>{
                         content: row.content,
                         encoding: row.hasOwnProperty('type') ? row.type : "utf-8"
                     }),
-                    method: "POST"
+                    dataType: "POST"
                 }).catch(error=>{
                     console.log(2504, 'github.database.blobs', error, row);
                 }
