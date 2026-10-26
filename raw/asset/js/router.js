@@ -453,6 +453,15 @@ window.rout.ing = (pgs,href,GOT,n)=>{
             //return check;
         }
     });
+checked.sort((a, b) => {
+  const aIsStar = a.startsWith("*");
+  const bIsStar = b.startsWith("*");
+
+  if (aIsStar && !bIsStar) return -1; // place 'a' before 'b'
+  if (!aIsStar && bIsStar) return 1;  // place 'b' before 'a'
+
+  return a.localeCompare(b);           // standard alphabetical sort
+});
     var l = checked[checked.length - 1];
     0 < 1 ? console.log(385, {
         ed,
