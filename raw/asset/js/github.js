@@ -1242,6 +1242,7 @@ window.github.crud.update = async(params,array)=>{
         var b = 0;
         do {
             var row = array[b];
+            console.log(1245, {row});
             if (row.content) {
                 var res = await github.database.blobs({
                     owner,
@@ -1249,7 +1250,7 @@ window.github.crud.update = async(params,array)=>{
                 }, {
                     data: JSON.stringify({
                         content: row.content,
-                        encoding: row.type ? row.type : "utf-8"
+                        encoding: row.hasOwnProperty('type') ? row.type : "utf-8"
                     }),
                     dataType: "POST"
                 }).catch(error=>{
