@@ -537,7 +537,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         0 < 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
                                             var raw = await github.repos.contents({
                                                 owner: window.owner.login,
-                                                path: el.dataset.favicon,
+                                                path: '/' + el.dataset.favicon,
                                                 repo: GET[1]
                                             }, {
                                                 accept: 'application/vnd.github.raw'
