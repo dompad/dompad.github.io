@@ -468,6 +468,7 @@ checked.sort((a, b) => {
         checked,
         l
     }) : null;
+    $('[data-page="' + l + '"]').attr("data-active", true);
     return ed;
 }
 
