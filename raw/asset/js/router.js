@@ -468,8 +468,7 @@ checked.sort((a, b) => {
         checked,
         l
     }) : null;
-    //return ed;
-    return l;
+    return ed;
 }
 
 async function viewPage(vp) {
