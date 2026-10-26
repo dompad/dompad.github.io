@@ -104,6 +104,7 @@ github.crud.update = async(params,array)=>{
 
     //TREE
     var tree = [];
+    alert('Building Git Tree');
     if (array.length > 0) {
         var b = 0;
         do {
@@ -115,7 +116,7 @@ github.crud.update = async(params,array)=>{
                 }, {
                     body: JSON.stringify({
                         content: row.content,
-                        encoding: row.type ? row.type : "utf-8"
+                        encoding: row.hasOwnProperty('type') ? row.type : "utf-8"
                     }),
                     method: "POST"
                 }).catch(error=>{
