@@ -3415,6 +3415,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
         create: async (event) => {
 
             event.preventDefault();
+            alert('Creating page...');
 
             var form = event.target;
             var postfix = form.find("[data-value='pages.slug']");
