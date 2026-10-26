@@ -217,7 +217,7 @@ window.rout.ed.bang = async(route)=>{
         var i = 0;
         do {
             var check = route.page && (route.page.includes(rs[i].dataset.page) || (rout.ed.dir(route.page).length === rout.ed.dir(rs[i].dataset.page).length && rs[i].dataset.page.endsWith('*')));
-            //console.log(210, route.page, rs[i].dataset.page, check);
+            console.log(210, route.page, rs[i].dataset.page, check);
             if (check) {
                 //console.log(1, 'activate', rs[i].dataset.page, rs[i], route.page);
                 if (!rs[i].getAttribute('data-active') && route.page.includes(rs[i].dataset.page)) {
