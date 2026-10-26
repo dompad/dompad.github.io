@@ -318,6 +318,7 @@ github.crud.update = async(params,array)=>{
 
     //TREES POST
     if (0 < 1) {
+        console.log(321, {tree});
         var trees = await github.database.trees({
             owner,
             repo
@@ -331,7 +332,8 @@ github.crud.update = async(params,array)=>{
         }
         );
         console.log(2537, 'controller.posts.update', "POST trees", {
-            trees
+            trees,
+            tree
         });
     }
 
