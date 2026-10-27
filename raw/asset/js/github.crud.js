@@ -1,5 +1,5 @@
-window.github.crude = {};
-window.github.crude.create = async(event)=>{
+window.github.crud = {};
+window.github.crud.create = async(event)=>{
     var row = [];
     event.preventDefault();
     var form = event.target;
@@ -74,8 +74,8 @@ window.github.crude.create = async(event)=>{
 
     }
 }
-window.github.crude.read = ()=>{}
-window.github.crude.push = async(params,array)=>{
+window.github.crud.read = ()=>{}
+window.github.crud.push = async(params,array)=>{
     console.log(2466, 'controller.posts.update', "variables", {
         params,
         array
@@ -368,4 +368,4 @@ window.github.crude.push = async(params,array)=>{
     }
 
 }
-window.github.crude.delete = ()=>{}
+window.github.crud.delete = ()=>{}
