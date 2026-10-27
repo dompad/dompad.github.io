@@ -3415,7 +3415,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
         create: async (event) => {
 
             event.preventDefault();
-            alert('Creating page...');
+            //alert('Creating page...');
 
             var form = event.target;
             var postfix = form.find("[data-value='pages.slug']");
@@ -3532,9 +3532,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         path: "raw/pages/pages.json"
                     }, {
                         content,
-                        path: "raw/pages/" + page
-                    }, {
-                        content,
                         path: "raw/pages" + (slug === "/" ? "" : slug.replace('*', '_')) + "/page.html"
                     }, {
                         content: JSON.stringify(row, null, 4),
@@ -3569,7 +3566,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     console.log(2452, 'controller.pages.update', "array", {
                         array
                     });
-                    alert('Pushing page to Git...');
+                    //alert('Pushing page to Git...');
                     await github.crud.update(params, array);
                     "/dashboard/:get/pages/".router();
 
