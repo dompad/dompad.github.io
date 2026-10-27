@@ -75,7 +75,7 @@ window.github.crud.create = async(event)=>{
     }
 }
 window.github.crud.read = ()=>{}
-window.github.crud.push = async(params,array)=>{
+window.github.crud.update = async(params,array)=>{
     console.log(2466, 'controller.posts.update', "variables", {
         params,
         array
