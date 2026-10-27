@@ -3655,13 +3655,14 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     var d = 0;
                     do {
                         var removed = deleted[d];
+                        var rplcd = removed.slug.replace('*', '_');
                         array.push({
                             content: null,
-                            path: "raw/pages" + removed.slug.replace('*', '_') + '/page.html'
+                            path: "raw/pages" + removed.slug.replace('*', '_') + (rplcd === '/' ? '' : rplcd) + 'page.html'
                         });
                         array.push({
                             content: null,
-                            path: "raw/pages" + removed.slug.replace('*', '_') + '/page.json'
+                            path: "raw/pages" + removed.slug.replace('*', '_') + (rplcd === '/' ? '' : rplcd) + 'page.json'
                         });
                         removed.image ? array.push({
                             content: null,
