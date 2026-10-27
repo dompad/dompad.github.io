@@ -3675,8 +3675,14 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     array,
                     params
                 });
-                //await github.crud.update(params, array);
-                //('/dashboard/:get/pages/').router();
+                var confirm = await modal.confirm({
+                body: "Are you sure you want to delete this page",
+                title: "Delete Page"
+            }, ["No", "Yes"]);
+                if(confirm) {
+                    //await github.crud.update(params, array);
+                    //('/dashboard/:get/pages/').router();
+                }
             }
         },
 
