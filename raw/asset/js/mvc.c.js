@@ -3680,8 +3680,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 title: "Delete Page"
             }, ["No", "Yes"]);
                 if(confirm) {
-                    //await github.crud.update(params, array);
-                    //('/dashboard/:get/pages/').router();
+                    await github.crud.update(params, array);
+                    ('/dashboard/:get/pages/').router();
                 }
             }
         },
