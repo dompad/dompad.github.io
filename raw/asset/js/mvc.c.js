@@ -3570,7 +3570,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         array
                     });
                     alert('Pushing page to Git...');
-                    await github.crude.push(params, array);
+                    await github.crud.push(params, array);
                     "/dashboard/:get/pages/".router();
 
                 }
@@ -3677,7 +3677,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     array,
                     params
                 });
-                await github.crude.push(params, array);
+                await github.crud.push(params, array);
                 ('/dashboard/:get/pages/').router();
             }
         },
