@@ -3674,8 +3674,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     array,
                     params
                 });
-                await github.crud.update(params, array);
-                ('/dashboard/:get/pages/').router();
+                //await github.crud.update(params, array);
+                //('/dashboard/:get/pages/').router();
             }
         },
 
