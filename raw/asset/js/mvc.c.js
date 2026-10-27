@@ -3658,11 +3658,11 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         var rplcd = removed.slug.replace('*', '_');
                         array.push({
                             content: null,
-                            path: "raw/pages" + removed.slug.replace('*', '_') + (rplcd === '/' ? '' : rplcd) + 'page.html'
+                            path: "raw/pages" + removed.slug.replace('*', '_') + (rplcd === '/' ? '' : '/') + 'page.html'
                         });
                         array.push({
                             content: null,
-                            path: "raw/pages" + removed.slug.replace('*', '_') + (rplcd === '/' ? '' : rplcd) + 'page.json'
+                            path: "raw/pages" + removed.slug.replace('*', '_') + (rplcd === '/' ? '' : '/') + 'page.json'
                         });
                         removed.image ? array.push({
                             content: null,
