@@ -187,6 +187,7 @@ async function init() {
             }
         }
     }).catch(e => {
+        alert("Page not loaded");
         console.log('Page not loaded', {e});
         var confirm = await window.parent.modal.confirm({
             "title": "404",
