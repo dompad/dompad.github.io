@@ -11,6 +11,13 @@ String.prototype.router = async function(params) {
     var page = dom.body.find('page[data-page="' + route.page + '"]');
     var page = page ? page : page;//dom.body.find('pages[data-page="' + route.page + '"]');
     var vp = page ? page : pages;
+
+    0 < 1 ? console.log(15, {
+        page,
+        pages,
+        route,
+        vp
+    }) : null;
     
     var rd = rout.ed.dir(route.page);
     var rp = rout.ed.dir(route.path);
