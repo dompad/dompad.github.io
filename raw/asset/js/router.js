@@ -34,7 +34,7 @@ String.prototype.router = async function(params) {
     var four = ((!pages && page && rd.length < rp.length));
     
     is.iframe(window) ? alert('Router checking page') : null;
-    if (four) {
+    if (four && !page) {
         alert("router.js 404");
     } else {
         if (is.iframe(window)) {
