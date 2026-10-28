@@ -173,6 +173,7 @@ async function init() {
     var go = false;
     alert('Loading page...');
     window.boot.router().then(function() {
+        alert('Page loaded');
         go = true;
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
         var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
@@ -185,7 +186,6 @@ async function init() {
                 console.log(183, {goto})
             }
         }
-        alert('Page loaded');
     }).catch(e => {
         alert('Page not loaded');
     });
