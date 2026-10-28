@@ -165,7 +165,7 @@ window.rout.e = state=>{
     var rd = rout.ed.dir(page);
     var rp = rout.ed.dir(path);
     if(rd.length < rp.length) {
-        page = null;
+        page = page;
     }
 
     const data = {
