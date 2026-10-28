@@ -20,7 +20,11 @@ String.prototype.router = async function(params) {
     if (page) {
         if (is.iframe(window)) {
             var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
-            var pg = atob((await github.raw.path(path)).content);
+            try {
+                var pg = atob((await github.raw.path(path)).content);
+            } catch(e) {
+                console.log(26, {path});
+            }
         } else {
             var path = vp.dataset.fetch;
             var pg = await ajax(path);
