@@ -171,6 +171,7 @@ async function init() {
 
     //ROUTE
     var go = false;
+    alert('Loading page...');
     window.boot.router().then(function() {
         go = true;
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
