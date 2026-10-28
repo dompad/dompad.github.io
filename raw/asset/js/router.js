@@ -37,8 +37,10 @@ String.prototype.router = async function(params) {
     is.iframe(window) ? alert('Router checking page') : null;
     if (four) {
         alert("router.js 404");
+        vp = null;
     }
-    if(page) {
+    if(vp) {
+        if(page) {
         if (is.iframe(window)) {
             alert('Router fetching page');
             var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
@@ -54,7 +56,7 @@ String.prototype.router = async function(params) {
             var path = vp.dataset.fetch;
             var pg = await ajax(path);
         }
-        if (page.innerHTML === "") {
+        if (pg && page.innerHTML === "") {
             page.innerHTML = pg.replace(/>\s+</g, '><');
             //alert('Page HTML Updated');
             //await ajax(page.dataset.fetch);
@@ -62,9 +64,9 @@ String.prototype.router = async function(params) {
                 window.top.css.style.sheet(page);
             }
         }
+        }
+        await viewPage(vp);
     }
-
-    await viewPage(vp);
     route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
     //console.log(route);
 
