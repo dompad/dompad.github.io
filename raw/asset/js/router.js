@@ -11,6 +11,13 @@ String.prototype.router = async function(params) {
     var page = dom.body.find('page[data-page="' + route.page + '"]');
     var page = page ? page : page;//dom.body.find('pages[data-page="' + route.page + '"]');
     var vp = page ? page : pages;
+    
+    var rd = rout.ed.dir(route.page);
+    var rp = rout.ed.dir(route.path);
+    if((!pages && page) && rd.length < rp.length) {
+        page = null;
+    }
+
     0 < 1 ? console.log(13, {
         page,
         pages,
@@ -42,6 +49,8 @@ String.prototype.router = async function(params) {
                 window.top.css.style.sheet(page);
             }
         }
+    } else {
+        alert("router.js 404");
     }
 
     await viewPage(vp);
@@ -160,12 +169,6 @@ window.rout.e = state=>{
                 break;
             n++;
         } while (n < GOT.length);
-    }
-
-    var rd = rout.ed.dir(page);
-    var rp = rout.ed.dir(path);
-    if(rd.length < rp.length) {
-        page = page;
     }
 
     const data = {
