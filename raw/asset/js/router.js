@@ -25,13 +25,14 @@ String.prototype.router = async function(params) {
         //route.page = "";
     }
 
+    var four = ((!pages && page && rd.length < rp.length));
     0 < 1 ? console.log(13, {
+        four,
         page,
         pages,
         route,
         vp
     }) : null;
-    var four = ((!pages && page && rd.length < rp.length));
     
     is.iframe(window) ? alert('Router checking page') : null;
     if (four && !page) {
