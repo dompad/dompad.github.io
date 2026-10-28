@@ -477,7 +477,7 @@ window.rout.ing = (pgs,href,GOT,n)=>{
         checked,
         l
     }) : null;
-    $('[data-page="' + l + '"]').attr("data-active", true);
+    $('pages[data-page="' + l + '"]').attr("data-active", true);
     return ed;
 }
 
