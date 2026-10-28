@@ -171,7 +171,7 @@ window.rout.e = state=>{
         search,
         pages
     };
-    0 > 1 ? console.log(164, {
+    0 < 1 ? console.log(164, {
         data
     }) : null;
     return data;
