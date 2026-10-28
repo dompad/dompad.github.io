@@ -36,7 +36,15 @@ String.prototype.router = async function(params) {
     
     //is.iframe(window) ? alert('Router checking page') : null;
     if (four) {
-        modal.alert("router.js 404");
+        var confirm = await modal.confirm({
+            "title": "404",
+            "body": "Page Not Found",
+        }, ["Exit", "Create"]);
+        if(confirm) {
+            "/dashboard/:get/build".router();
+        } else {
+            "/dashboard/:get/pages/page".router();
+        }
         vp = null;
     }
     if(vp) {
