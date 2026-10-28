@@ -162,6 +162,12 @@ window.rout.e = state=>{
         } while (n < GOT.length);
     }
 
+    var rd = rout.ed.dir(page);
+    var rp = rout.ed.dir(path);
+    if(rd.length < rp.length) {
+        page = null;
+    }
+
     const data = {
         GOT,
         hash,
