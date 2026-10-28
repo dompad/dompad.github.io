@@ -173,11 +173,18 @@ async function init() {
     var go = false;
     0 < 1 ? window.boot.router().then(function() {
         go = true;
-        if (window.self !== window.top) {
-            var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
-            var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
+        var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
+        var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
+        if(vp) {
             vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
+        } else {
+            var confirm = modal.confirm("This page does not exist");
+            if(confirm) {
+                var goto = '/dashboard/:get/pages/page';
+                console.log(183, {goto})
+            }
         }
+        
     }) : null;
 
     console.log("...Initialized", {
