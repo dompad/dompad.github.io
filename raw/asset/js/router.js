@@ -41,9 +41,9 @@ String.prototype.router = async function(params) {
             "body": "Page Not Found",
         }, ["Exit", "Create"]);
         if(confirm) {
-            "/dashboard/:get/build".router();
+            window.parent.String.prototype.router.call("/dashboard/:get/build");
         } else {
-            "/dashboard/:get/pages/page".router();
+            window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
         }
         vp = null;
     }
