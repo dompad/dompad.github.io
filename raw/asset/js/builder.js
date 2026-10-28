@@ -187,7 +187,16 @@ async function init() {
             }
         }
     }).catch(e => {
-        alert('Page not loaded');
+        console.log('Page not loaded', {e});
+        var confirm = await window.parent.modal.confirm({
+            "title": "404",
+            "body": "Page Not Found",
+        }, ["Create", "Exit"]);
+        if(confirm) {
+            window.parent.String.prototype.router.call("/dashboard/:get/build");
+        } else {
+            window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
+        }
     });
 
     console.log("...Initialized", {
