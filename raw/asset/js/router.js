@@ -36,7 +36,7 @@ String.prototype.router = async function(params) {
     
     //is.iframe(window) ? alert('Router checking page') : null;
     if (four) {
-        var confirm = await modal.confirm({
+        var confirm = await window.parent.modal.confirm({
             "title": "404",
             "body": "Page Not Found",
         }, ["Exit", "Create"]);
