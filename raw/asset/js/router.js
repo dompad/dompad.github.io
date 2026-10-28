@@ -22,7 +22,7 @@ String.prototype.router = async function(params) {
     var rd = rout.ed.dir(route.page);
     var rp = rout.ed.dir(route.path);
     if((!pages && page) && rd.length < rp.length) {
-        route.page = "";
+        //route.page = "";
     }
 
     0 < 1 ? console.log(13, {
