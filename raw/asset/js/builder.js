@@ -24,59 +24,6 @@ async function init() {
     var html = ``;
     if (window.self === window.top) {
 
-        //WEBMANIFEST
-        try {
-            var json = await ajax('site.webmanifest');
-            var manifest = JSON.parse(json);
-            console.log(31, manifest);
-            
-            document.head.find('title').textContent = manifest.name;
-            document.head.find('[name="apple-mobile-web-app-title"]').content = manifest.name;
-            document.head.find('[name="apple-mobile-web-app-status-bar-style"]').content = manifest.theme_color;
-            document.head.find('[name="application-name"]').content = manifest.name;
-            document.head.find('[name="application-shortname"]').content = manifest.short_name;
-            document.head.find('[name="msapplication-TileColor"]').content = manifest.theme_color;
-            document.head.find('[name="theme-color"]').content = manifest.theme_color;
-        } catch (e) {
-            console.log(41, e);
-        }
-
-        //STRIPE
-        try {
-            var json = await ajax('/raw/asset/json/stripe.json');
-            var stripe = JSON.parse(json);            
-            console.log(48, stripe);
-            
-            var key = document.createElement('meta');
-            key.content = stripe.publishable_key;
-            key.name = "stripe_publishable_key";
-            document.head.find('base').insertAdjacentHTML('beforebegin', key.outerHTML);
-            
-            var key = document.createElement('meta');
-            key.content = stripe.user_id;
-            key.name = "stripe_user_id";
-            document.head.find('base').insertAdjacentHTML('beforebegin', key.outerHTML);
-        } catch (e) {
-            console.log(60, e);
-        }
-
-        html = await ajax('/raw/style/template.html');
-        html.length > 0 ? dom.body.find('boot').insertAdjacentHTML('afterend', html) : null;
-
-        const fetching = 0 > 1 ? dom.body.all(':not(page):not(pages)[data-fetch]') : dom.body.all(':not([data-page])[data-fetch]');
-        //console.log(fetching);
-        if (fetching.length > 0) {
-            var f = 0;
-            do {
-                //console.log(34, fetching[f]);
-                if (fetching[f].innerHTML === "") {
-                    //alert(fetching[f].outerHTML);
-                    fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
-                }
-                f++;
-            } while (f < fetching.length);
-        }
-        //dom.body.all('[data-page][data-fetch]').forEach(a=>console.log(1234, a.outerHTML))       
     } else {
         //BUILDER
         const user = await github.user.get();
@@ -197,64 +144,13 @@ async function init() {
         //console.log(e.type);
     });
 
-    is.iframe(window) ? document.addEventListener("keyup", function(e) {
+    document.addEventListener("keyup", function(e) {
         if (e.key === "Escape") {
             if (window.parent.route.page === "/dashboard/*/build/preview/") {
                 window.parent.dom.body.find('[data-href="/dashboard/:get/build/"]').click()
             }
         }
-    }) : document.addEventListener("keyup", function(e) {
-        if (e.key === "Escape") {
-            if (route.page === "/dashboard/*/build/preview/") {
-                '/dashboard/:get/build/'.router();
-            }
-        }
     });
-
-    is.iframe(window) ? null : window.addEventListener("message", (e)=>{
-        var event = e.data[0]
-        var data = e.data[1];
-        if (is.iframe(window) === false) {
-            if (event === "router") {
-                var page = route.page;
-                var path = route.path;
-                var slug = data;
-
-                if (rout.es() === "/dashboard/*/build/er") {
-                    var rte1 = rout.ed.dir(path).splice(0, 4);
-                    var rte2 = rout.ed.dir(slug);
-                    var rte0 = rte1.concat(rte2);
-                    var href = rout.ed.url(rte0);
-                }
-
-                if (href) {
-                    console.log(window.location, is.iframe(window), {
-                        path,
-                        slug,
-                        href
-                    }, {
-                        rte0,
-                        rte1,
-                        rte2
-                    });
-                    href.router();
-                }
-            }
-        }
-    }
-    )
-
-    is.iframe(window) ? null : window.onpopstate = (event)=>{
-        if (event.state) {
-            console.log(event.state);
-            var state = is.local(window.location.protocol) ? event.state.replace(/^#+/, '') : event.state;
-            event.state.length > 0 ? event.state.router() : null;
-        } else {
-            if (document.location) {//console.log({place});
-            }
-        }
-        //console.log(event, "location: " + document.location + ", state: " + JSON.stringify(state));
-    }
 
     window.addEventListener("resize", window.on.resize)
 
