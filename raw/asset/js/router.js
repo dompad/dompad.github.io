@@ -35,9 +35,10 @@ String.prototype.router = async function(params) {
     }) : null;
     
     is.iframe(window) ? alert('Router checking page') : null;
-    if (four === true) {
+    if (four) {
         alert("router.js 404");
-    } else {
+    }
+    if(page) {
         if (is.iframe(window)) {
             alert('Router fetching page');
             var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
