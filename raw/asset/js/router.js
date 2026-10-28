@@ -35,7 +35,7 @@ String.prototype.router = async function(params) {
     }) : null;
     
     is.iframe(window) ? alert('Router checking page') : null;
-    if (!page) {
+    if (four) {
         alert("router.js 404");
     } else {
         if (is.iframe(window)) {
