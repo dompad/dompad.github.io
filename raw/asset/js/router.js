@@ -17,7 +17,9 @@ String.prototype.router = async function(params) {
         route,
         vp
     }) : null;
+    alert('Router checking page');
     if (page) {
+        alert('Router fetching page');
         if (is.iframe(window)) {
             var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
             try {
