@@ -171,7 +171,7 @@ async function init() {
 
     //ROUTE
     var go = false;
-    0 < 1 ? window.boot.router().then(function() {
+    window.boot.router().then(function() {
         go = true;
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
         var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
@@ -184,8 +184,10 @@ async function init() {
                 console.log(183, {goto})
             }
         }
-        
-    }) : null;
+        alert('Page loaded');
+    }).catch(e => {
+        alert('Page not loaded');
+    });
 
     console.log("...Initialized", {
         iframe: is.iframe(window)
