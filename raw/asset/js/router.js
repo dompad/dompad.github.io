@@ -168,7 +168,8 @@ window.rout.e = state=>{
         page,
         path,
         root,
-        search
+        search,
+        pages
     };
     0 > 1 ? console.log(164, {
         data
