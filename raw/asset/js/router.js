@@ -17,10 +17,10 @@ String.prototype.router = async function(params) {
         route,
         vp
     }) : null;
-    alert('Router checking page');
+    is.iframe(window) ? alert('Router checking page') : null;
     if (page) {
-        alert('Router fetching page');
         if (is.iframe(window)) {
+            alert('Router fetching page');
             var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
             try {
                 var pg = atob((await github.raw.path(path)).content);
