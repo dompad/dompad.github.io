@@ -31,8 +31,12 @@ String.prototype.router = async function(params) {
         route,
         vp
     }) : null;
+    var four = ((!pages && page && rd.length < rp.length));
+    
     is.iframe(window) ? alert('Router checking page') : null;
-    if (page) {
+    if (four) {
+        alert("router.js 404");
+    } else {
         if (is.iframe(window)) {
             alert('Router fetching page');
             var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
@@ -56,8 +60,6 @@ String.prototype.router = async function(params) {
                 window.top.css.style.sheet(page);
             }
         }
-    } else {
-        alert("router.js 404");
     }
 
     await viewPage(vp);
