@@ -109,7 +109,7 @@ String.prototype.router = async function(params) {
             //await viewPage(vp);
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-            
+            is.iframe(window) ? alert('Router.js 112') : null;
             if(four) {
                 const e = {
                     code: 404
