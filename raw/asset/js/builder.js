@@ -171,9 +171,9 @@ async function init() {
 
     //ROUTE
     var go = false;
-    alert('Loading page...');
+    //alert('Loading page...');
     window.boot.router().then(function() {
-        alert('Page loaded');
+        //alert('Page loaded');
         go = true;
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
         var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
@@ -187,7 +187,7 @@ async function init() {
             }
         }
     }).catch(async(e) => {
-        alert("Page not loaded");
+        //alert("Page not loaded");
         console.log('Page not loaded', {e});
         var confirm = await window.parent.modal.confirm({
             "title": "404",
