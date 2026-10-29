@@ -1720,9 +1720,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 var vp = window.vp = {
                                     pages: dom.body.find('pages[data-page="/dashboard/*/pages/*"]'),
                                     page: dom.body.find('pages[data-page="/dashboard/*/pages/page"]'),
-                                    seo: dom.body.find('block[data-page="/dashboard/*/pages/seo"]'),
-                                    social: dom.body.find('block[data-page="/dashboard/*/pages/social"]'),
-                                    advanced: dom.body.find('block[data-page="/dashboard/*/pages/advanced"]')
+                                    seo: dom.body.find('pages[data-page="/dashboard/*/pages/seo"]'),
+                                    social: dom.body.find('pages[data-page="/dashboard/*/pages/social"]'),
+                                    advanced: dom.body.find('pages[data-page="/dashboard/*/pages/advanced"]')
                                 }
 
                                 var page = vp.page.find('[data-value="pages.slug"]').value;
