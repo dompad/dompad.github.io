@@ -114,7 +114,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
             if (root === "dashboard") {
                 //console.log(107, root, get);
                 0 < 1 ? controller.nav.hide() : controller.nav.close();
-                if (get.length > 1) { if(github.oauth.verify()) {
+                if (get.length > 1) { 
+
+                    alert(119 + " " + github.oauth.verify());
+                    if(github.oauth.verify()) {
+                    alert(121 + " " + github.oauth.verify());
                     
                     var repository = await github.repos.get({
                         owner: window.owner.login,
