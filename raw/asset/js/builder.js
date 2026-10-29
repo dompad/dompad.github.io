@@ -86,6 +86,7 @@ async function init() {
                 footer
             }) : null;
         } catch (e) {
+            console.log(89, {e});
             if (e.code === 404) {
                 modal.alert(e.code + ": " + e.message);
             }
