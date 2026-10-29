@@ -73,6 +73,7 @@ String.prototype.router = async function(params) {
         is.iframe(window) ? alert('Go') : null;
         console.log('String.prototype.router', route);
         if (route) {
+            is.iframe(window) ? alert("Router.js 76") : null;
             var pop = params ? params.pop : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
