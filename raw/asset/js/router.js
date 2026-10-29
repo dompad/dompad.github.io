@@ -85,15 +85,18 @@ String.prototype.router = async function(params) {
             window.view ? await view(route) : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-
+            is.iframe(window) ? alert("Router.js 88") : null;
+            
             //await rout.ed.bang(route);
             //alert('bang');
 
             var path = route.path;
             window.GET = rout.ed.dir(path);
 
+            is.iframe(window) ? alert("Router.js 96") : null;
             vp ? lazyLoad(dom.body.all('[data-src]'), vp) : null;
-
+            is.iframe(window) ? alert("Router.js 98") : null;
+            
             if (!pop && !["blob:"].includes(window.location.protocol)) {
 
                 const hash = window.hub ? "/#" : "";
@@ -108,6 +111,8 @@ String.prototype.router = async function(params) {
                 history.pushState(link, '', link);
 
             }
+
+            is.iframe(window) ? alert("Router.js 115") : null;
 
             //await viewPage(vp);
 
