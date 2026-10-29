@@ -86,8 +86,21 @@ window.github = {
             dom.body.removeAttribute('data-uid');
         }
         ,
-        verify: ()=>{
-            return localStorage.githubAccessToken;
+        verify: async()=>{
+            var bool = true;
+            var token = localStorage.githubAccessToken;
+
+            if(token) {
+                try {
+                    await github.user.get();
+                } catch(e) {
+                    bool = false;
+                }
+            } else {
+                bool = false;
+            }
+            
+            return bool;
         }
     },
     raw: {
