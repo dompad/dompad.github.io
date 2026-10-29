@@ -118,6 +118,7 @@ String.prototype.router = async function(params) {
                 reject(e);
                 //resolve(route);
             } else {
+                alert(200);
                 resolve(route);
             }
         } else {
