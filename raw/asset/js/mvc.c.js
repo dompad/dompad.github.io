@@ -1338,16 +1338,23 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 console.log(1136, 'controller.config.deploy', {
                     create
                 });
+                if(create) {
+                    route.path.router();
+                }
             } else {
-                var del = await github.pages.crud({
-                    owner: window.owner.login,
-                    repo: GET[1]
-                }, {
-                    dataType: "DELETE"
-                });
-                console.log(1136, 'controller.config.deploy', {
-                    del
-                });
+                try {
+                    var del = await github.pages.crud({
+                        owner: window.owner.login,
+                        repo: GET[1]
+                    }, {
+                        dataType: "DELETE"
+                    });
+                    console.log(1136, 'controller.config.deploy', {
+                        del
+                    });
+                    route.path.router();
+                } catch(e) {
+                }
             }
         },
 
