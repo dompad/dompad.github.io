@@ -125,7 +125,7 @@ async function init() {
     } catch (e) {
             console.log(89, {e});
             if (e.code === 404) {
-                var confirm = window.parent.modal.confirm({
+                var confirm = await window.parent.modal.confirm({
                     title: "Missing Shell",
                     body: "Would you like to generate a template file.",
                 }, ["Yes", "No"]);
