@@ -124,7 +124,7 @@ String.prototype.router = async function(params) {
                 const e = {
                     code: 404
                 };
-                is.iframe(window) ? alert(e.code) : null;
+                //is.iframe(window) ? alert(e.code) : null;
                 reject(e);
                 //resolve(route);
             } else {
