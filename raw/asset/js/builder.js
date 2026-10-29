@@ -59,7 +59,7 @@ async function init() {
                         var tagName = 'page' + (row.pages ? 's' : '');
                         var sel = tagName + '[data-page="' + row.page + '"]';
                         el = doc.createElement(tagName);
-                        el.dataset.fetch = "raw/pages" + row.slug + (rout.ed.dir(row.slug).length > 0 ? "/" : "") + "page.html";
+                        el.dataset.fetch = "raw/pages" + row.slug.replaceAll("*", "_") + (rout.ed.dir(row.slug).length > 0 ? "/" : "") + "page.html";
                         el.dataset.page = row.slug;
                         if (row.main) {
                             main.find('template').insertAdjacentHTML('beforebegin', el.outerHTML);
