@@ -70,7 +70,7 @@ String.prototype.router = async function(params) {
     //console.log(route);
 
     var go = async function(resolve, reject) {
-        is.iframe(window) ? alert('Go') : null;
+        //is.iframe(window) ? alert('Go') : null;
         console.log('String.prototype.router', route);
         if (route) {
             //is.iframe(window) ? alert("Router.js 76") : null;
@@ -128,7 +128,7 @@ String.prototype.router = async function(params) {
                 reject(e);
                 //resolve(route);
             } else {
-                is.iframe(window) ? alert(200) : null;
+                //is.iframe(window) ? alert(200) : null;
                 resolve(route);
             }
         } else {
