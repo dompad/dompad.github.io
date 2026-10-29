@@ -22,9 +22,7 @@ async function init() {
 
     //SHELL
     var html = ``;
-    if (window.self === window.top) {
-
-    } else {
+    
         //BUILDER
         const user = await github.user.get();
         const owner = user.login;
@@ -85,14 +83,54 @@ async function init() {
                 header,
                 footer
             }) : null;
+
+
+    //ROUTE
+    var go = false;
+    //alert('Loading page...');
+    window.boot.router().then(function() {
+        //alert('Page loaded');
+        go = true;
+        var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
+        var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
+        if(vp) {
+            vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
+        } else {
+            var confirm = modal.confirm("This page does not exist");
+            if(confirm) {
+                var goto = '/dashboard/:get/pages/page';
+                console.log(183, {goto})
+            }
+        }
+    }).catch(async(e) => {
+        //alert("Page not loaded");
+        console.log('Page not loaded', {e});
+        var confirm = await window.parent.modal.confirm({
+            "title": e.code,
+            "body": "Page Not Found",
+        }, ["Create", "Exit"]);
+        if(confirm) {
+            window.parent.String.prototype.router.call("/dashboard/:get/build");
+        } else {
+            window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
+        }
+    });
+
+
+
+            
         } catch (e) {
             console.log(89, {e});
             if (e.code === 404) {
-                window.parent.modal.alert({
-                    title: e.code,
-                    body: e.message,
-                    submit: "OK"
-                });
+                var confirm = window.parent.modal.confirm({
+                    title: "Missing Shell",
+                    body: "Would you like to generate a template file.",
+                }, ["Yes", "No"]);
+                if(confirm) {
+                    alert("Creating shell...");
+                } else {
+                    "/dashboard/:get/build".router();
+                }
             }
         }
         console.log(43, "index.js init", {
@@ -102,7 +140,12 @@ async function init() {
             path,
             repo
         });
-    }
+
+
+    
+
+        
+    
     const fetching = dom.body.all(':not(page):not(pages)[data-fetch]');
     if (fetching.length > 0) {
         var f = 0;
@@ -174,37 +217,7 @@ async function init() {
         } catch (e) {}
     }
 
-    //ROUTE
-    var go = false;
-    //alert('Loading page...');
-    window.boot.router().then(function() {
-        //alert('Page loaded');
-        go = true;
-        var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
-        var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
-        if(vp) {
-            vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
-        } else {
-            var confirm = modal.confirm("This page does not exist");
-            if(confirm) {
-                var goto = '/dashboard/:get/pages/page';
-                console.log(183, {goto})
-            }
-        }
-    }).catch(async(e) => {
-        //alert("Page not loaded");
-        console.log('Page not loaded', {e});
-        var confirm = await window.parent.modal.confirm({
-            "title": e.code,
-            "body": "Page Not Found",
-        }, ["Create", "Exit"]);
-        if(confirm) {
-            window.parent.String.prototype.router.call("/dashboard/:get/build");
-        } else {
-            window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
-        }
-    });
-
+    
     console.log("...Initialized", {
         iframe: is.iframe(window)
     }, {
