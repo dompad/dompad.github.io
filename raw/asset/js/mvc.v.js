@@ -2192,7 +2192,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             resolve(route);
                         }
                     } else {
-                        github.oauth.logout();
+                        //github.oauth.logout();
                     }
                     
                     }
