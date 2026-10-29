@@ -37,10 +37,6 @@ String.prototype.router = async function(params) {
     //is.iframe(window) ? alert('Router checking page') : null;
     if (four) {
         vp = null;
-        const e = {
-            code: 400
-        };
-        reject(e);
     }
     if(vp) {
         if(page) {
@@ -112,8 +108,15 @@ String.prototype.router = async function(params) {
             //await viewPage(vp);
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-
-            resolve(route);
+            
+            if(four) {
+                const e = {
+                    code: 404
+                };
+                reject(e);
+            } else {
+                resolve(route);
+            }
         } else {
             const e = {
                 code: 400
