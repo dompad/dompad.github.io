@@ -116,7 +116,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 0 < 1 ? controller.nav.hide() : controller.nav.close();
                 if (get.length > 1) { 
 
-                alert("119 - " + github.oauth.verify());
+                alert("119 " + github.oauth.verify());
                 if(await github.oauth.verify()) {
                     alert(121 + " - " + github.oauth.verify());
                     
