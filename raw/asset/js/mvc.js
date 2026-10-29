@@ -562,18 +562,21 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
         window.manifest = {};
         if (is.iframe(window)) {
-            window.webmanifest = await github.repos.contents({
-                owner: window.parent.owner.login,
-                path: "site.webmanifest",
-                repo: window.parent.GET[1]
-            }, {
-                accept: "application/vnd.github.raw"
-            });
-            console.log('webmanifest', 'iframe: ' + is.iframe, webmanifest, {
-                owner: window.parent.owner.login,
-                path: "site.webmanifest",
-                repo: window.parent.GET[1]
-            });
+            try {
+                window.webmanifest = await github.repos.contents({
+                    owner: window.parent.owner.login,
+                    path: "/site.webmanifest",
+                    repo: window.parent.GET[1]
+                }, {
+                    accept: "application/vnd.github.raw"
+                });
+                console.log('webmanifest', 'iframe: ' + is.iframe, webmanifest, {
+                    owner: window.parent.owner.login,
+                    path: "/site.webmanifest",
+                    repo: window.parent.GET[1]
+                });
+            } catch(e) {
+            }
         } else {
             var json = await ajax('/site.webmanifest');
             if (json) {
