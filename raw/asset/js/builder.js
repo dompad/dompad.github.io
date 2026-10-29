@@ -88,7 +88,11 @@ async function init() {
         } catch (e) {
             console.log(89, {e});
             if (e.code === 404) {
-                modal.alert(e.code + ": " + e.message);
+                window.parent.modal.alert({
+                    title: e.code,
+                    body: e.message,
+                    submit: "OK"
+                });
             }
         }
         console.log(43, "index.js init", {
