@@ -113,8 +113,8 @@ String.prototype.router = async function(params) {
                 const e = {
                     code: 404
                 };
-                //reject(e);
-                resolve(route);
+                reject(e);
+                //resolve(route);
             } else {
                 resolve(route);
             }
