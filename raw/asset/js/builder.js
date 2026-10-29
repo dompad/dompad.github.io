@@ -190,7 +190,7 @@ async function init() {
         //alert("Page not loaded");
         console.log('Page not loaded', {e});
         var confirm = await window.parent.modal.confirm({
-            "title": "404",
+            "title": e.code,
             "body": "Page Not Found",
         }, ["Create", "Exit"]);
         if(confirm) {
