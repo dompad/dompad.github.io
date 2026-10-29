@@ -73,21 +73,21 @@ String.prototype.router = async function(params) {
         is.iframe(window) ? alert('Go') : null;
         console.log('String.prototype.router', route);
         if (route) {
-            is.iframe(window) ? alert("Router.js 76") : null;
+            //is.iframe(window) ? alert("Router.js 76") : null;
             var pop = params ? params.pop : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             
-            is.iframe(window) ? alert("Router.js 81") : null;
+            //is.iframe(window) ? alert("Router.js 81") : null;
             await rout.ed.bang(route, goto);
 
-            is.iframe(window) ? alert("Router.js 84") : null;
-            is.iframe(window) ? alert("Router.js 85") : null;
+            //is.iframe(window) ? alert("Router.js 84") : null;
+            //is.iframe(window) ? alert("Router.js 85") : null;
             window.view ? await view(route) : null;
-            is.iframe(window) ? alert("Router.js 86") : null;
+            //is.iframe(window) ? alert("Router.js 86") : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-            is.iframe(window) ? alert("Router.js 88") : null;
+            //is.iframe(window) ? alert("Router.js 88") : null;
             
             //await rout.ed.bang(route);
             //alert('bang');
@@ -95,9 +95,9 @@ String.prototype.router = async function(params) {
             var path = route.path;
             window.GET = rout.ed.dir(path);
 
-            is.iframe(window) ? alert("Router.js 96") : null;
+            //is.iframe(window) ? alert("Router.js 96") : null;
             vp ? lazyLoad(dom.body.all('[data-src]'), vp) : null;
-            is.iframe(window) ? alert("Router.js 98") : null;
+            //is.iframe(window) ? alert("Router.js 98") : null;
             
             if (!pop && !["blob:"].includes(window.location.protocol)) {
 
@@ -114,12 +114,12 @@ String.prototype.router = async function(params) {
 
             }
 
-            is.iframe(window) ? alert("Router.js 115") : null;
+            //is.iframe(window) ? alert("Router.js 115") : null;
 
             //await viewPage(vp);
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-            is.iframe(window) ? alert('Router.js 112') : null;
+            //is.iframe(window) ? alert('Router.js 112') : null;
             if(four) {
                 const e = {
                     code: 404
