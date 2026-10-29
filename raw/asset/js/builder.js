@@ -130,9 +130,9 @@ async function init() {
                     body: "Would you like to generate a template file.",
                 }, ["Yes", "No"]);
                 if(confirm) {
-                    alert("Creating shell...");
-                } else {
                     "/dashboard/:get/build".router();
+                } else {
+                    alert("Creating shell...");
                 }
             }
     }
