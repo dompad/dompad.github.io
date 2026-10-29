@@ -77,9 +77,11 @@ String.prototype.router = async function(params) {
             var pop = params ? params.pop : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-
+            
+            is.iframe(window) ? alert("Router.js 81") : null;
             await rout.ed.bang(route, goto);
 
+            is.iframe(window) ? alert("Router.js 84") : null;
             window.view ? await view(route) : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
@@ -90,7 +92,7 @@ String.prototype.router = async function(params) {
             var path = route.path;
             window.GET = rout.ed.dir(path);
 
-            lazyLoad(dom.body.all('[data-src]'), vp);
+            vp ? lazyLoad(dom.body.all('[data-src]'), vp) : null;
 
             if (!pop && !["blob:"].includes(window.location.protocol)) {
 
