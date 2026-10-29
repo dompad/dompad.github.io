@@ -23,28 +23,28 @@ async function init() {
     //SHELL
     var html = ``;
     
-        //BUILDER
-        const user = await github.user.get();
-        const owner = user.login;
-        const repo = window.parent.route.GOT[1];
-        const branch = 'main';
-        const path = '/raw/style/template.html';
-        const resource = '/' + owner + '/' + repo + '/' + branch + path;
-        try {
-            console.log(44, 'index.init.template', {
-                iframe: is.iframe(window)
-            }, {
-                owner,
-                path,
-                repo
-            }, resource);
-            html = await github.raw.git(resource);
-            var doc = new DOMParser().parseFromString(html, 'text/html');
+    //BUILDER
+    const user = await github.user.get();
+    const owner = user.login;
+    const repo = window.parent.route.GOT[1];
+    const branch = 'main';
+    const path = '/raw/style/template.html';
+    const resource = '/' + owner + '/' + repo + '/' + branch + path;
+    try {
+        console.log(44, 'index.init.template', {
+            iframe: is.iframe(window)
+        }, {
+            owner,
+            path,
+            repo
+        }, resource);
+        html = await github.raw.git(resource);
+        var doc = new DOMParser().parseFromString(html, 'text/html');
 
-            var header = doc.body.find('body > header');
-            if (header) {
-                dom.body.find('body > header').replaceWith(header);
-            }
+        var header = doc.body.find('body > header');
+        if (header) {
+            dom.body.find('body > header').replaceWith(header);
+        }
 
             try {
                 var pages = await github.raw.git('/' + owner + '/' + repo + '/' + branch + "/raw/pages/pages.json");
@@ -85,10 +85,10 @@ async function init() {
             }) : null;
 
 
-    //ROUTE
-    var go = false;
-    //alert('Loading page...');
-    window.boot.router().then(function() {
+        //ROUTE
+        var go = false;
+        //alert('Loading page...');
+        window.boot.router().then(function() {
         //alert('Page loaded');
         go = true;
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
@@ -102,7 +102,9 @@ async function init() {
                 console.log(183, {goto})
             }
         }
-    }).catch(async(e) => {
+        
+        }).catch(async(e) => {
+        
         //alert("Page not loaded");
         console.log('Page not loaded', {e});
         var confirm = await window.parent.modal.confirm({
@@ -114,12 +116,13 @@ async function init() {
         } else {
             window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
         }
-    });
+        
+        });
 
 
 
             
-        } catch (e) {
+    } catch (e) {
             console.log(89, {e});
             if (e.code === 404) {
                 var confirm = window.parent.modal.confirm({
@@ -132,7 +135,7 @@ async function init() {
                     "/dashboard/:get/build".router();
                 }
             }
-        }
+    }
         console.log(43, "index.js init", {
             branch,
             html,
