@@ -63,6 +63,19 @@ String.prototype.router = async function(params) {
                 window.top.css.style.sheet(page);
             }
         }
+        } else {
+            if (pages && is.iframe(window)) {
+                alert('Router fetching pages');
+                var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
+                console.log(25, {path});
+                try {
+                    console.log(27);
+                    var pg = atob((await github.raw.path(path)).content);
+                    console.log(29);
+                } catch(e) {
+                    console.log(26, {path});
+                }
+            }
         }
         await viewPage(vp);
     }
