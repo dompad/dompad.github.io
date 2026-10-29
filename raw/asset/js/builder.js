@@ -186,7 +186,7 @@ async function init() {
                 console.log(183, {goto})
             }
         }
-    }).catch(e => {
+    }).catch(async(e) => {
         alert("Page not loaded");
         console.log('Page not loaded', {e});
         var confirm = await window.parent.modal.confirm({
