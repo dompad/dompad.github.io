@@ -672,6 +672,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                                     } catch (e) {
                                         console.log(e);
+                                        var deployment = public.all('card')[0];
+                                        deployment.setAttribute('css-display', 'none');
                                     }
 
                                     resolve(route);
