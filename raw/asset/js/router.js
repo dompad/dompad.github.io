@@ -82,7 +82,9 @@ String.prototype.router = async function(params) {
             await rout.ed.bang(route, goto);
 
             is.iframe(window) ? alert("Router.js 84") : null;
+            is.iframe(window) ? alert("Router.js 85") : null;
             window.view ? await view(route) : null;
+            is.iframe(window) ? alert("Router.js 86") : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             is.iframe(window) ? alert("Router.js 88") : null;
