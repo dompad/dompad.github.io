@@ -52,11 +52,11 @@ async function init() {
         }
 
         0 > 1 ? console.log(48, {
-                doc,
-                html
+            doc,
+            html
         }, {
-                header,
-                footer
+            header,
+            footer
         }) : null;
             
     } catch (e) {
