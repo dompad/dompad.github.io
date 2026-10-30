@@ -186,16 +186,10 @@ async function init() {
     var go = false;
     0 < 1 ? window.boot.router().then(function() {
         go = true;
-        if (window.self !== window.top) {
-            var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
-            var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
-            vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
-        }
+        console.log("...Initialized", {
+            iframe: is.iframe(window)
+        }, {
+            boot
+        });
     }) : null;
-
-    console.log("...Initialized", {
-        iframe: is.iframe(window)
-    }, {
-        boot
-    });
 }
