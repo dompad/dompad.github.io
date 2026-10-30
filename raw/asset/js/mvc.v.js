@@ -1801,7 +1801,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 //GENERAL
                                                 if (vp.page) {
                                                     vp.page.find('[data-value="pages.title"]').value = "title"in json ? json.title : "";
-                                                    vp.page.find('[data-value="pages.slug"]').value = "slug"in json && json.slug.length > 1 ? json.slug.slice(1) : "index.html";
+                                                    vp.page.find('[data-value="pages.slug"]').value = "slug"in json && json.slug.length > 1 ? json.slug.slice(1) : "";
                                                     vp.page.find('[data-value="pages.pages"]').checked = "pages"in json ? json.pages : false;
                                                     vp.page.find('[data-value="pages.main"]').checked = "main"in json ? !json.main : false;
                                                     vp.page.find('[data-value="pages.visibility"]').checked = "visibility"in json ? json.visibility : false;
