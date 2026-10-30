@@ -46,6 +46,43 @@ async function init() {
             dom.body.find('body > header').replaceWith(header);
         }
 
+            var footer = doc.body.find('body > footer');
+            if (footer) {
+                dom.body.find('body > footer').replaceWith(footer);
+            }
+
+            0 > 1 ? console.log(48, {
+                doc,
+                html
+            }, {
+                header,
+                footer
+            }) : null;
+            
+    } catch (e) {
+        console.log(89, {e});
+        if (0 > 1 && e.code === 404) {
+            var confirm = await window.parent.modal.confirm({
+                title: "Missing Shell",
+                body: "Would you like to generate a template file.",
+            }, ["Yes", "No"]);
+            if(confirm) {
+                window.parent.String.prototype.router.call("/dashboard/:get/build");
+            } else {
+                alert("Creating shell...");
+            }
+        }
+    }
+        console.log(43, "index.js init", {
+            branch,
+            html,
+            owner,
+            path,
+            repo
+        });
+
+
+
             //PAGES
             try {
                 var pages = await github.raw.git('/' + owner + '/' + repo + '/' + branch + "/raw/pages/pages.json");
@@ -72,44 +109,9 @@ async function init() {
                 console.log(72, e);
             }
 
-            var footer = doc.body.find('body > footer');
-            if (footer) {
-                dom.body.find('body > footer').replaceWith(footer);
-            }
-
-            0 > 1 ? console.log(48, {
-                doc,
-                html
-            }, {
-                header,
-                footer
-            }) : null;
 
 
-            
-    } catch (e) {
-        console.log(89, {e});
-        if (0 > 1 && e.code === 404) {
-            var confirm = await window.parent.modal.confirm({
-                title: "Missing Shell",
-                body: "Would you like to generate a template file.",
-            }, ["Yes", "No"]);
-            if(confirm) {
-                window.parent.String.prototype.router.call("/dashboard/:get/build");
-            } else {
-                alert("Creating shell...");
-            }
-        }
-    }
-        console.log(43, "index.js init", {
-            branch,
-            html,
-            owner,
-            path,
-            repo
-        });
-
-
+    
         
         //ROUTE
         var go = false;
