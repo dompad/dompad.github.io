@@ -60,17 +60,6 @@ async function init() {
         //dom.body.all('[data-page][data-fetch]').forEach(a=>console.log(1234, a.outerHTML))       
     }
     
-    const fetching = dom.body.all(':not(page):not(pages)[data-fetch]');
-    if (fetching.length > 0) {
-        var f = 0;
-        do {
-            if (fetching[f].innerHTML === "") {
-                fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
-            }
-            f++;
-        } while (fetching.length < 0);
-    }
-
     //EVENTS
     touch.ing = false;
     touch.events = {
