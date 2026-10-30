@@ -60,6 +60,7 @@ async function init() {
         }) : null;
             
     } catch (e) {
+        var doc = document;
         console.log(89, {e});
         if (0 > 1 && e.code === 404) {
             var confirm = await window.parent.modal.confirm({
