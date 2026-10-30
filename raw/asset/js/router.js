@@ -88,7 +88,7 @@ String.prototype.router = async function(params) {
         }
         await viewPage(vp);
     }
-    route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
+    //route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
     //console.log(route);
 
     var go = async function(resolve, reject) {
@@ -98,7 +98,7 @@ String.prototype.router = async function(params) {
             //is.iframe(window) ? alert("Router.js 76") : null;
             var pop = params ? params.pop : null;
 
-            route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
+            //route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             
             //is.iframe(window) ? alert("Router.js 81") : null;
             await rout.ed.bang(route, goto);
@@ -108,7 +108,7 @@ String.prototype.router = async function(params) {
             window.view ? await view(route) : null;
             //is.iframe(window) ? alert("Router.js 86") : null;
 
-            route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
+            //route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             //is.iframe(window) ? alert("Router.js 88") : null;
             
             //await rout.ed.bang(route);
@@ -140,7 +140,7 @@ String.prototype.router = async function(params) {
 
             //await viewPage(vp);
 
-            route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
+            //route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             //is.iframe(window) ? alert('Router.js 112') : null;
             if(four) {
                 const e = {
