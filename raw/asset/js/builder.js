@@ -46,6 +46,7 @@ async function init() {
             dom.body.find('body > header').replaceWith(header);
         }
 
+            //PAGES
             try {
                 var pages = await github.raw.git('/' + owner + '/' + repo + '/' + branch + "/raw/pages/pages.json");
                 console.log(66, 'pages.json', pages);
@@ -85,6 +86,31 @@ async function init() {
             }) : null;
 
 
+            
+    } catch (e) {
+        console.log(89, {e});
+        if (0 > 1 && e.code === 404) {
+            var confirm = await window.parent.modal.confirm({
+                title: "Missing Shell",
+                body: "Would you like to generate a template file.",
+            }, ["Yes", "No"]);
+            if(confirm) {
+                window.parent.String.prototype.router.call("/dashboard/:get/build");
+            } else {
+                alert("Creating shell...");
+            }
+        }
+    }
+        console.log(43, "index.js init", {
+            branch,
+            html,
+            owner,
+            path,
+            repo
+        });
+
+
+        
         //ROUTE
         var go = false;
         //alert('Loading page...');
@@ -119,34 +145,7 @@ async function init() {
         
         });
 
-
-
-            
-    } catch (e) {
-        console.log(89, {e});
-        if (0 > 1 && e.code === 404) {
-            var confirm = await window.parent.modal.confirm({
-                title: "Missing Shell",
-                body: "Would you like to generate a template file.",
-            }, ["Yes", "No"]);
-            if(confirm) {
-                window.parent.String.prototype.router.call("/dashboard/:get/build");
-            } else {
-                alert("Creating shell...");
-            }
-        }
-    }
-        console.log(43, "index.js init", {
-            branch,
-            html,
-            owner,
-            path,
-            repo
-        });
-
-
     
-
         
     
     const fetching = dom.body.all(':not(page):not(pages)[data-fetch]');
