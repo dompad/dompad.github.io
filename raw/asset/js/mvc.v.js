@@ -380,11 +380,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             var vp = dom.body.find('pages[data-page="/dashboard/*/build"]');
                             var iframe = vp.find('iframe');
 
-                            if (iframe && !iframe.contentWindow.document.body.querySelector('boot')) {
-                                await mvc.c.build.boot(iframe);
-                            }
-
                             if (get[3]) {
+
+                                if (iframe && !iframe.contentWindow.document.body.querySelector('boot')) {
+                                    await mvc.c.build.boot(iframe);
+                                }
 
                                 dom.body.classList.add('overflow-hidden');
                                 if (get[3] === "er") {
