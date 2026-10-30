@@ -41,25 +41,6 @@ async function init() {
             console.log(41, e);
         }
 
-        //STRIPE
-        try {
-            var json = await ajax('/raw/asset/json/stripe.json');
-            var stripe = JSON.parse(json);            
-            console.log(48, stripe);
-            
-            var key = document.createElement('meta');
-            key.content = stripe.publishable_key;
-            key.name = "stripe_publishable_key";
-            document.head.find('base').insertAdjacentHTML('beforebegin', key.outerHTML);
-            
-            var key = document.createElement('meta');
-            key.content = stripe.user_id;
-            key.name = "stripe_user_id";
-            document.head.find('base').insertAdjacentHTML('beforebegin', key.outerHTML);
-        } catch (e) {
-            console.log(60, e);
-        }
-
         html = await ajax('/raw/style/template.html');
         html.length > 0 ? dom.body.find('boot').insertAdjacentHTML('afterend', html) : null;
 
@@ -77,80 +58,8 @@ async function init() {
             } while (f < fetching.length);
         }
         //dom.body.all('[data-page][data-fetch]').forEach(a=>console.log(1234, a.outerHTML))       
-    } else {
-        //BUILDER
-        const user = await github.user.get();
-        const owner = user.login;
-        const repo = window.parent.route.GOT[1];
-        const branch = 'main';
-        const path = '/raw/style/template.html';
-        const resource = '/' + owner + '/' + repo + '/' + branch + path;
-        try {
-            console.log(44, 'index.init.template', {
-                iframe: is.iframe(window)
-            }, {
-                owner,
-                path,
-                repo
-            }, resource);
-            html = await github.raw.git(resource);
-            var doc = new DOMParser().parseFromString(html, 'text/html');
-
-            var header = doc.body.find('body > header');
-            if (header) {
-                dom.body.find('body > header').replaceWith(header);
-            }
-
-            try {
-                var pages = await github.raw.git('/' + owner + '/' + repo + '/' + branch + "/raw/pages/pages.json");
-                console.log(66, 'pages.json', pages);
-                if (pages && pages.length > 0) {
-                    var main = dom.body.find('main');
-                    var p = 0;
-                    do {
-                        var row = pages[p];
-                        var tagName = 'page' + (row.pages ? 's' : '');
-                        var sel = tagName + '[data-page="' + row.page + '"]';
-                        el = doc.createElement(tagName);
-                        el.dataset.fetch = "raw/pages" + row.slug + (rout.ed.dir(row.slug).length > 0 ? "/" : "") + row.page;
-                        el.dataset.page = row.slug;
-                        if (row.main) {
-                            main.find('template').insertAdjacentHTML('beforebegin', el.outerHTML);
-                        } else {
-                            main.insertAdjacentHTML('beforebegin', el.outerHTML);
-                        }
-                        p++;
-                    } while (p < pages.length);
-                }
-            } catch (e) {
-                console.log(72, e);
-            }
-
-            var footer = doc.body.find('body > footer');
-            if (footer) {
-                dom.body.find('body > footer').replaceWith(footer);
-            }
-
-            0 > 1 ? console.log(48, {
-                doc,
-                html
-            }, {
-                header,
-                footer
-            }) : null;
-        } catch (e) {
-            if (e.code === 404) {
-                modal.alert(e.code + ": " + e.message);
-            }
-        }
-        console.log(43, "index.js init", {
-            branch,
-            html,
-            owner,
-            path,
-            repo
-        });
     }
+    
     const fetching = dom.body.all(':not(page):not(pages)[data-fetch]');
     if (fetching.length > 0) {
         var f = 0;
