@@ -46,18 +46,18 @@ async function init() {
             dom.body.find('body > header').replaceWith(header);
         }
 
-            var footer = doc.body.find('body > footer');
-            if (footer) {
-                dom.body.find('body > footer').replaceWith(footer);
-            }
+        var footer = doc.body.find('body > footer');
+        if (footer) {
+            dom.body.find('body > footer').replaceWith(footer);
+        }
 
-            0 > 1 ? console.log(48, {
+        0 > 1 ? console.log(48, {
                 doc,
                 html
-            }, {
+        }, {
                 header,
                 footer
-            }) : null;
+        }) : null;
             
     } catch (e) {
         console.log(89, {e});
@@ -73,13 +73,13 @@ async function init() {
             }
         }
     }
-        console.log(43, "index.js init", {
-            branch,
-            html,
-            owner,
-            path,
-            repo
-        });
+    console.log(43, "index.js init", {
+        branch,
+        html,
+        owner,
+        path,
+        repo
+    });
 
 
 
@@ -113,10 +113,10 @@ async function init() {
 
     
         
-        //ROUTE
-        var go = false;
-        //alert('Loading page...');
-        window.boot.router().then(function() {
+    //ROUTE
+    var go = false;
+    //alert('Loading page...');
+    window.boot.router().then(function() {
         //alert('Page loaded');
         go = true;
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
@@ -131,7 +131,7 @@ async function init() {
             }
         }
         
-        }).catch(async(e) => {
+    }).catch(async(e) => {
         
         //alert("Page not loaded");
         console.log('Page not loaded', {e});
@@ -145,11 +145,11 @@ async function init() {
             window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
         }
         
-        });
+    });
 
     
         
-    
+    //FETCH
     const fetching = dom.body.all(':not(page):not(pages)[data-fetch]');
     if (fetching.length > 0) {
         var f = 0;
@@ -160,6 +160,8 @@ async function init() {
             f++;
         } while (fetching.length < 0);
     }
+
+    
 
     //EVENTS
     touch.ing = false;
