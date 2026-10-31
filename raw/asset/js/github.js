@@ -99,7 +99,8 @@ window.github = {
             } else {
                 bool = false;
             }
-            
+
+            console.log(bool);
             return bool;
         }
     },
