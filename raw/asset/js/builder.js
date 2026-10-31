@@ -22,8 +22,6 @@ async function init() {
 
     //SHELL
     var html = ``;
-    
-    //BUILDER
     const user = await github.user.get();
     const owner = user.login;
     const repo = window.parent.route.GOT[1];
