@@ -1033,7 +1033,7 @@ window.github = {
         }
     },
     user: {
-        get: (params)=>{
+        get: async(params)=>{
             return new Promise((resolve,reject)=>{
                 const url = github.endpoint + "/user";
                 const a = (d)=>{
