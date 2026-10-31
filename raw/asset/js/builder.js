@@ -121,7 +121,10 @@ async function init() {
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
         var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
         if(vp) {
-            vp.find('blocks') ? vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML) : null;
+            if(!vp.find('blocks')) {
+                vp.insertAdjacentHTML('beforeend', '<blocks></blocks>');
+            }
+            vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
         } else {
             var confirm = modal.confirm("This page does not exist");
             if(confirm) {
