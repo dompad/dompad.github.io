@@ -100,7 +100,6 @@ window.github = {
                 bool = false;
             }
 
-            console.log(bool);
             return bool;
         }
     },
