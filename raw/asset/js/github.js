@@ -93,14 +93,13 @@ window.github = {
             if(token) {
                 try {
                     await github.user.get();
+                    return true
                 } catch(e) {
-                    bool = false;
+                    return false;
                 }
             } else {
-                bool = false;
+                return false;
             }
-
-            return bool;
         }
     },
     raw: {
