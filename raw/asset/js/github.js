@@ -93,7 +93,7 @@ window.github = {
             var token = localStorage.githubAccessToken;
 
             if(token) {
-                //try {
+                try {
                     var user = await github.user.get();
                     if(user) {
                         console.log(99);
@@ -102,10 +102,10 @@ window.github = {
                         console.log(102);
                         reject(false);
                     }
-                //} catch(e) {
-                    //console.log(106)
-                    //reject(false);
-                //}
+                } catch(e) {
+                    console.log(106)
+                    reject(false);
+                }
             } else {
                 console.log(110)
                 reject(false);
