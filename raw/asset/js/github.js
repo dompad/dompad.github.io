@@ -94,8 +94,14 @@ window.github = {
 
             if(token) {
                 try {
-                    await github.user.get();
-                    resolve(true);
+                    var user = await github.user.get();
+                    if(user) {
+                        console.log(99);
+                        resolve(true);
+                    } else {
+                        console.log(102);
+                        reject(false);
+                    }
                 } catch(e) {
                     reject(false);
                 }
