@@ -103,8 +103,8 @@ window.github = {
                         reject(false);
                     }
                 } catch(e) {
-                    console.log(106)
-                    reject(false);
+                    console.log(106+" : true")
+                    resolve(false);
                 }
             } else {
                 console.log(110)
