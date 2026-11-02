@@ -117,7 +117,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 if (get.length > 1) { 
 
                 //alert("119 " + github.oauth.verify());
-                if(await github.oauth.verify()) {
+                if(0>1) {
                     console.log(121, "Token valid");
                     alert(121 + " - " + await github.oauth.verify());
                     
@@ -2201,6 +2201,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         console.log(2200, "Token invalid");
                         //github.oauth.logout();
                         alert("Token invalid");
+                        resolve(route);
                     }
                     
                     }
