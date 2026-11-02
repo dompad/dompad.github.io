@@ -87,19 +87,23 @@ window.github = {
         }
         ,
         verify: async()=>{
+            return new Promise((resolve,reject)=>{
+            
             var bool = true;
             var token = localStorage.githubAccessToken;
 
             if(token) {
                 try {
                     await github.user.get();
-                    return true
+                    resolve(true);
                 } catch(e) {
-                    return false;
+                    reject(false);
                 }
             } else {
-                return false;
+                reject(false);
             }
+
+            });
         }
     },
     raw: {
