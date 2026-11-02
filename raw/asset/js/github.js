@@ -1044,7 +1044,7 @@ window.github = {
                     resolve(data);
                 }
                 const b = (error)=>{
-                    console.log(1043, {error});
+                    //console.log(1043, {error});
                     //alert(error.message.message);
                     reject(error);
                 }
