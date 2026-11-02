@@ -103,7 +103,7 @@ window.github = {
                         reject(false);
                     }
                 } catch(e) {
-                    console.log(106+" : false")
+                    console.log(106, false)
                     resolve(false);
                 }
             } else {
