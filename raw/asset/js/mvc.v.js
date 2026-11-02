@@ -2207,8 +2207,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     
                     } else {
                         console.log(2209, "Token invalid");
-                        //github.oauth.logout();
-                        alert("Token invalid");
+                        github.oauth.logout();
+                        //alert("Token invalid");
                         resolve(route);
                     }
                 } else {
