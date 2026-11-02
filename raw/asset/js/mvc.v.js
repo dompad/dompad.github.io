@@ -117,10 +117,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 if (get.length > 1) { 
 
                 var isLogin = await github.oauth.verify();
-                alert("119 : " + isLogin);
+                //alert("119 : " + isLogin);
                 if(isLogin) {
                     console.log(121, "Token valid");
-                    alert(121 + " - " + await github.oauth.verify());
+                    //alert(121 + " - " + await github.oauth.verify());
                     
                     var repository = await github.repos.get({
                         owner: window.owner.login,
