@@ -117,7 +117,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 if (get.length > 1) { 
 
                 var isLogin = await github.oauth.verify();
-                alert("119 - " + isLogin);
+                alert("119 : " + isLogin);
                 if(isLogin) {
                     console.log(121, "Token valid");
                     alert(121 + " - " + await github.oauth.verify());
@@ -2199,12 +2199,17 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             resolve(route);
                         }
                     } else {
-                        console.log(2200, "Token invalid");
+                        //console.log(2200, "Token invalid");
+                        //github.oauth.logout();
+                        //alert("Token invalid");
+                        //resolve(route);
+                    }
+                    
+                    } else {
+                        console.log(2209, "Token invalid");
                         //github.oauth.logout();
                         alert("Token invalid");
                         resolve(route);
-                    }
-                    
                     }
                 } else {
                     console.log(352, github.oauth.verify());
