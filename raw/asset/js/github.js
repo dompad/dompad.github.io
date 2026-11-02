@@ -103,9 +103,11 @@ window.github = {
                         reject(false);
                     }
                 } catch(e) {
+                    console.log(106)
                     reject(false);
                 }
             } else {
+                console.log(110)
                 reject(false);
             }
 
