@@ -2198,6 +2198,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         }
                     } else {
                         //github.oauth.logout();
+                        alert("Token invalid");
                     }
                     
                     }
