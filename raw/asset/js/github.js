@@ -87,7 +87,7 @@ window.github = {
         }
         ,
         verify: async()=>{
-            return new Promise((resolve,reject)=>{
+            return new Promise(async(resolve,reject)=>{
             
             var bool = true;
             var token = localStorage.githubAccessToken;
