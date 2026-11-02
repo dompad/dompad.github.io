@@ -86,7 +86,7 @@ window.github = {
             dom.body.removeAttribute('data-uid');
         }
         ,
-        verify: async()=>{
+        verify: ()=>{
             return new Promise(async(resolve,reject)=>{
             
             var bool = true;
