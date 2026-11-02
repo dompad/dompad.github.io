@@ -116,7 +116,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                 0 < 1 ? controller.nav.hide() : controller.nav.close();
                 if (get.length > 1) { 
 
-                alert("119");
+                alert("119" + await github.user.get());
                 if(await github.oauth.verify()) {
                     console.log(121, "Token valid");
                     alert(121 + " - " + await github.oauth.verify());
