@@ -118,7 +118,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                 //alert("119 " + github.oauth.verify());
                 if(await github.oauth.verify()) {
-                    //alert(121 + " - " + github.oauth.verify());
+                    console.log(121, "Token valid");
+                    alert(121 + " - " + await github.oauth.verify());
                     
                     var repository = await github.repos.get({
                         owner: window.owner.login,
@@ -2197,6 +2198,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             resolve(route);
                         }
                     } else {
+                        console.log(2200, "Token invalid");
                         //github.oauth.logout();
                         alert("Token invalid");
                     }
