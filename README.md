@@ -50,34 +50,41 @@ Repository structure
 
 The following is a guide to the major directories and files. It is not an exhaustive listing of every asset.
 
-.
+dompad/
+│
 ├── index.html                  # Dashboard application document
 ├── index.js                    # Dashboard startup and initialization
 ├── index.css                   # Dashboard base styles
 ├── site.webmanifest            # Web app manifest
-├── sw.js                       # Service worker-related file
+├── sw.js                       # Service worker
 ├── worker.js                   # Worker-related code
-├── raw/
-│   ├── asset/
-│   │   ├── css/                # Shared and component stylesheets
-│   │   ├── html/
-│   │   │   ├── block/          # Reusable content blocks
-│   │   │   ├── error/          # Error-page templates
-│   │   │   ├── modal/          # Modal templates
-│   │   │   ├── template/       # Application and editor templates
-│   │   │   └── tool/           # Builder tool templates
-│   │   ├── js/                 # Dashboard and runtime JavaScript
-│   │   ├── json/               # Static JSON configuration/data
-│   │   ├── png/                # Raster image assets
-│   │   ├── psd/                # Design source assets
-│   │   ├── svg/                # Vector icons and illustrations
-│   │   └── xml/                # XML configuration assets
-│   ├── pages/                  # Dashboard and application page templates
-│   └── style/
-│       ├── framework.js        # JavaScript framework / DOM and styling behavior
-│       ├── template.html       # Dashboard application shell template
-│       └── theme.css           # Theme styles
-└── ...
+│
+└── raw/
+    │
+    ├── asset/
+    │   │
+    │   ├── css/                # Shared and component stylesheets
+    │   │
+    │   ├── html/               # HTML components and templates
+    │   │   ├── block/          # Reusable content blocks
+    │   │   ├── error/          # Error-page templates
+    │   │   ├── modal/          # Modal templates
+    │   │   ├── template/       # Application and editor templates
+    │   │   └── tool/           # Builder tool templates
+    │   │
+    │   ├── js/                 # Dashboard and website runtime scripts
+    │   ├── json/               # Static JSON configuration and data
+    │   ├── png/                # Raster images and illustrations
+    │   ├── psd/                # Design source files
+    │   ├── svg/                # Vector icons and illustrations
+    │   └── xml/                # XML configuration files
+    │
+    ├── pages/                  # Dashboard and application page templates
+    │
+    └── style/
+        ├── framework.js        # JavaScript framework and DOM behavior
+        ├── template.html       # Dashboard application shell
+        └── theme.css           # Theme styles
 
 Important JavaScript files
 
