@@ -2,7 +2,169 @@
     body:not([wireframe="true"]) empty {
         display: none;
     }
+
+    body > header:empty, body > footer:empty {
+        display: none;
+    }
+    
+    body[buildable="true"] {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    @media {
+        /*WIREFRAME*/
+        body[buildable="true"] > header:empty, body[buildable="true"] block:empty, body[buildable="true"] footer:empty {
+            outline: 2px dashed #77777780;
+            outline-offset: 0px;
+        }
+
+        body[buildable="true"] > header card:has(> :not(picture):not(template):empty), body[buildable="true"] block card:not([focus]):not(:hover):has(> :not(picture):not(template):empty), body[buildable="true"] > footer card:has(> :not(picture):not(template):empty) {
+            outline: 2px dashed #77777780;
+            outline-offset: 0px;
+        }
+
+        body[buildable="true"] > footer card box:has(> :not(picture):not(template):empty), body[buildable="true"] > header card box:has(> :not(picture):not(template):empty), body[buildable="true"] card box:has(> :not(picture):not(template):empty) {
+            outline: 2px dashed #77777780;
+            outline-offset: 0px;
+        }
+    }
+
+    @media screen {
+        body[buildable="true"][wireframe="true"] > header, body[buildable="true"][wireframe="true"] block, body[buildable="true"][wireframe="true"] footer {
+            /* outline: 2px dashed #77777780; */
+            outline-offset: 0px;
+        }
+
+        body[buildable="true"][wireframe="true"] > header card, body[buildable="true"][wireframe="true"] block card, body[buildable="true"][wireframe="true"] > footer card {
+            /* outline: 2px dashed #77777780; */
+            outline-offset: 0px;
+        }
+
+        body[buildable="true"][wireframe="true"] > footer card box, body[buildable="true"][wireframe="true"] > header card box, body[buildable="true"][wireframe="true"] card box {
+            /* outline: 2px dashed #77777780; */
+            outline-offset: 0px;
+        }
+    }
+
+    /*FOCUS*/
+    body[buildable="true"]:not([insertable]) > header:not([focus]):hover, body[buildable="true"]:not([insertable]) block:not([focus]):hover, body[buildable="true"]:not([insertable]) > footer:not([focus]):hover {
+        outline: 2px dashed #ff3b3080;
+        outline-offset: -2px;
+    }
+
+    body[buildable="true"]:not([insertable])[focus] > header[focus="header"], body[buildable="true"]:not([insertable])[focus] block[focus="block"], body[buildable="true"]:not([insertable])[focus] > footer[focus="footer"] {
+        outline: 2px solid #ff3b30;
+        outline-offset: -2px;
+    }
+
+    body[buildable="true"]:not([insertable]) > header card:hover, body[buildable="true"]:not([insertable]) block:not([focus="box"]) card:hover, body[buildable="true"]:not([insertable]):not([focus="box"]) > footer card:hover {
+        outline: 2px dashed #32cd3280;
+        outline-offset: 0px;
+    }
+
+    body[buildable="true"]:not([insertable])[focus] > header card[focus="card"], body[buildable="true"]:not([insertable])[focus] block card[focus="card"], body[buildable="true"]:not([insertable])[focus] > footer card[focus="card"] {
+        outline: 2px solid #32cd32;
+        outline-offset: 0px;
+    }
+
+    body[buildable="true"]:not([insertable]) > footer card box:hover, body[buildable="true"]:not([insertable]) > header card box:hover, body[buildable="true"]:not([insertable]) card box:hover {
+        outline: 2px dashed #52b9d680;
+        outline-offset: 0px;
+    }
+
+    body[buildable="true"]:not([insertable])[focus] > footer card box[focus="box"], body[buildable="true"]:not([insertable])[focus] > header card box[focus="box"], body[buildable="true"]:not([insertable])[focus] card box[focus="box"] {
+        outline: 2px solid #52b9d6;
+        outline-offset: 0px;
+    }
+
+    /*ELEMENTS*/
+    body[buildable="true"] card:has(> :not(backdrop):not(empty):not(template):empty) {
+        min-height: 50px;
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    body[buildable="true"] box:has(> :not(backdrop):not(empty):not(template):empty) {
+        min-height: 50px;
+        min-width: 50px;
+    }
+
+    body[buildable="true"] box text:empty {
+        min-height: 20px;
+    }
+
+    body[buildable="true"] box > * > picture:empty, body[buildable="true"] box > * > picture:has(img:not([src])) {
+        height: 0;
+        min-width: 100%;
+        padding-top: 100%;
+        /* background-color: #f7f7f7; */
+    }
+    
+    body[buildable="true"] block picture:empty:before, body[buildable="true"] block picture:not([css-background-color]):has(img:not([src])):before,
+    body[buildable="true"] block picture:empty:before, body[buildable="true"] block picture:not([css-background-color]):has(img:not([src])):before,
+    body[buildable="true"] card picture:empty:before, body[buildable="true"] card picture:not([css-background-color]):has(img:not([src])):before, 
+    body[buildable="true"] box picture:empty:before, body[buildable="true"] box picture:not([css-background-color]):has(img:not([src])):before {
+        content: '';
+        position: absolute;
+        top: 0;
+        height: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f7f7f7;
+        z-index: -1;
+    }
+
+    body[buildable="true"] box clip:empty {
+        height: 0;
+        min-width: 100%;
+        padding-top: 56.25%;
+        background-color: #f7f7f7;
+    }
+
+    body[buildable="true"] box video:empty {
+        /* height: 0; */
+        /* min-width: 100%; */
+        /* padding-top: 56.25%; */
+        width: 100%;
+        background-color: #f7f7f7;
+    }
+
+    body[buildable="true"] box audio:empty {
+        width: 100%;
+    }
+
+    /*UI*/
+    body[buildable] block, body[buildable] > header, body[buildable] > footer {
+        transition: 0.3s transform;
+        /* margin: 1px 0; */
+    }
+
+    body:not([insertable]) insertable {
+        display: none;
+    }
+
+    body[insertable="true"] block, body[insertable="true"] > header, body[insertable="true"] > footer, insertable {
+        /* box-shadow: 0 1px 6px rgb(32 33 36 / 28%); */
+        position: relative;
+        transform: scale(calc(100%));
+        margin: 0;
+    }
+
+    body[insertable="true"] insertable {
+        z-index: 123456789;
+        position: relative;
+        padding: 10px 0;
+        /* transform: scale(.75); */
+        /* box-shadow: 0 1px 6px rgb(32 33 36 / 28%); */
+        border-top: 2px dashed;
+        border-bottom: 2px dashed;
+        border: 2px dashed;
+    }
 }
+
 
 @media screen {
     [css-background-color="rgba(0,0,0,0.5)"] {
