@@ -583,7 +583,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             //blocks.classList.add('left-320px');
             //blocks.getAttribute("css-dw960px-transform") = "0";
 
-            const builder = iframe.closest('pages[data-page="/dashboard/*/build"]');
+            const builder = iframe.closest('pages[data-page="/dashboard/*/*/build"]');
             builder.setAttribute("css-transform", "translateY(calc(100% - 50px))");
             //block.dataset.height = "calc(100% - 10px)";
             //block.dataset.width = "calc(100% - 260px)";
