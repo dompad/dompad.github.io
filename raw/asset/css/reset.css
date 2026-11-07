@@ -1,0 +1,641 @@
+/*PSEUDO*/
+@media screen {
+    [data-after]:after {
+        content: attr(data-after);
+    }
+
+    [data-before]:before {
+        content: attr(data-before);
+    }
+
+    body:not([data-uid]) .-isauth, body[data-uid] .-noauth,
+    body:not([auth]) [auth="true"], body[auth] [auth="false"] {
+        display: none;
+    }
+
+    :focus {
+        outline: none;
+    }
+
+    [tabindex]:has([data-dropdown] + :not([css-display="none"])) {
+        z-index: 12345;
+    }
+
+    ::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #005cc8;
+        cursor: pointer;
+    }
+}
+
+/*EMPTY*/
+@media screen {
+    [data-empty]:empty:before {
+        content: attr(data-empty);
+    }
+
+    empty:empty, .empty:empty {
+        display: none;
+        ` }
+
+    :not(:empty) + empty, :not(:empty) + .empty-state, :not(:empty) + .empty-state-adjacent {
+        display: none;
+    }
+
+    :not(:empty):first-child ~ .empty-state-subsequent {
+        display: none;
+    }
+
+    :empty + .full-state, :empty + .full-state-adjacent {
+        display: none;
+    }
+
+    :empty:first-child ~ .full-state-subsequent {
+        display: none;
+    }
+
+    :empty:not(:hover) + .-hover-empty-state-adjacent, :empty:not(:hover) + .-hover-empty-state-adjacent:not(:hover) {
+        display: none;
+    }
+
+    :not(:empty):first-child:hover ~ .-hover-full-state-subsequent, :not(:empty):first-child ~ .-hover-full-state-subsequent:hover {
+        display: flex;
+    }
+}
+
+/*SHELL*/
+@media screen {
+    html, body {
+        /* min-height: 100%; */
+        height: 100%;
+    }
+    html, body, main, page, pages, blocks {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        /* min-height: 100%; */
+    }
+    
+    html {
+        width: 100%;
+    }
+
+    body {
+        font-family: Arial;
+        margin: 0;
+        width: 100%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        body[data-theme="system"] {
+        }
+    }
+
+    body > header, body > footer {
+        display: flex;
+        display: -webkit-flex;
+    }
+
+    body > header > section, body > footer > section {
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+    }
+    
+    :-webkit-any-link {
+        color: #005cc8;
+    }
+
+    wysiwyg a[href] {
+        text-decoration: underline;
+    }
+
+    :fullscreen {
+        overflow-x: hidden
+    }
+
+    blocks {
+        /* min-height: 100%; */
+        width: 100%;
+        /* display: block; */
+        margin: 0;
+    }
+
+    block, box, card {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    block {
+    }
+
+    card {
+        max-width: 100%;
+    }
+
+    box {
+    }
+
+    block > section, card > section, box > section {
+        width: 100%;
+    }
+
+    block > section, card > section, box > section {
+        position: relative;
+    }
+
+    block > section, card > section, box > section {
+        display: flex;
+        flex: 1;
+    }
+
+    header > picture, nav > picture, footer > picture, block > picture, card > picture, box > picture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* z-index: 0; */
+        width: 100%;
+        height: 100%;
+    }
+
+    block > picture ~ *, card > picture ~ *, box > picture ~ * {
+        position: relative;
+        z-index: 1;
+    }
+
+    block > figure, card > figure, box > figure {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    box > * > clip {
+        display: flex;
+        display: -webkit-flex;
+        width: 100%;
+    }
+
+    box > * > picture {
+        display: flex;
+        display: -webkit-flex;
+        position: relative;
+        /* width: 100%; */
+    }
+
+    blockquote {
+        border-left: 2px solid #5E35B1;
+        color: #5E35B1;
+        font-size: 20px;
+        margin: 40px 20px;
+        margin-left: 0;
+        padding-left: 5px;
+    }
+
+    blockquote {
+    }
+
+    blockquote blockquote {
+        border-color: #00BCD4;
+        color: #00BCD4;
+    }
+
+    blockquote blockquote blockquote {
+        border-color: #43A047;
+        color: #43A047;
+    }
+
+    button {
+        appearance: none;
+        background: transparent;
+        border: none;
+        line-height: 50px;
+    }
+
+    column, flex, row {
+        display: flex;
+        display: -webkit-flex;
+    }
+
+    block > footer, card > footer, box > footer {
+        display: flex;
+        display: -webkit-flex;
+    }
+
+    ._hover {
+        background: red;
+    }
+
+    column {
+        flex-direction: column;
+        /* flex-grow: 1; */
+    }
+
+    card > column {
+        /* margin: auto; */
+        /* width: 100%; */
+        /* flex: 1; */
+    }
+
+    dropdown {
+        /* position: relative; */
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+    }
+
+    row {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    row[tabindex]:focus {
+        z-index: 123456;
+    }
+
+    embedded {
+        display: flex;
+        width: 100%;
+    }
+
+    embedded:empty {
+        height: 0;
+        padding-top: 100%;
+        background: #f7f7f7;
+    }
+
+    embedded > * {
+        display: flex;
+        width: 100%;
+    }
+
+    sound {
+        display: flex;
+        width: 100%;
+    }
+
+    sound:empty {
+        height: 0;
+        padding-top: 50px;
+        background: #f7f7f7;
+    }
+
+    sound > * {
+        display: flex;
+        width: 100%;
+    }
+
+    figure {
+        margin: unset;
+    }
+
+    form {
+        margin: 0;
+    }
+
+    form > * {
+        /* width: 100%; */
+    }
+
+    line {
+        display: flex;
+        /* margin-bottom: 5px; */
+        /* margin-top: 5px; */
+    }
+
+    line:not([css-background-color]) {
+        /* background-color: #333; */
+    }
+
+    line:not([css-height]) {
+        height: 2px;
+    }
+
+    line:not([css-width]) {
+        width: 100%;
+    }
+
+    main {
+        display: flex;
+        display: -webkit-flex;
+        /* display: inherit; */
+        width: 100%;
+        /* min-height: 100%; */
+        /* height: 100%; */
+        /* overflow: visible; */
+        position: relative;
+        /* min-height: 100%; */
+        /* background: #bbb; */
+        /* overflow-x: hidden; */
+        z-index: 1;
+    }
+
+    nav {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+    }
+
+    picture > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    page > block > picture {
+        position: relative;
+        top: 0;
+        background: black;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        line-height: 1.5;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        oveflow-wrap: break-word;
+    }
+
+    ico {
+        align-items: center;
+        display: inline-flex;
+        display: webkit-inline-flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    ico:not([css-height]) {
+        height: 50px;
+    }
+
+    ico:not([css-width]) {
+        width: 50px;
+    }
+
+    img:not([src]) {
+        display: none;
+    }
+
+    iframe {
+        border: 0;
+        background: #fff;
+    }
+
+    input {
+        border: 0;
+        margin: 0;
+        -webkit-appearance: none;
+    }
+
+    input[disabled] {
+        opacity: 0.5;
+    }
+
+    input[type="text"][disabled], input[type="checkbox"][disabled] + *, input[type="radio"][disabled] + * {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input::placeholder {
+        color: #8e8e8e;
+        font-size: 16px;
+        font-family: Arial;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    [type="text"], [type="password"] {
+        background: none;
+        border: unset;
+        padding: 0;
+    }
+
+    input[type="file"], input[type="submit"] {
+        display: none;
+    }
+
+    menu {
+        margin: 0;
+        padding: 0;
+    }
+
+    ol, ul, dl {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+    page, pages {
+        display: inherit;
+        position: relative;
+        overflow: hidden;
+        /* height: 100%; */
+    }
+
+    pre {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        overflow: auto;
+        -ms-overflow-style: scrollbar;
+    }
+
+    tab {
+        margin-left: 20px;
+        display: block;
+    }
+
+    text {
+        display: inline-block;
+    }
+
+    textarea {
+        -webkit-appearance: none;
+        border: unset;
+        resize: none;
+        font-family: Arial;
+        padding: 0;
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+
+    body > aside {
+        position: absolute;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        /* background: white; */
+    }
+
+    body > aside ~ * {
+        /* position: fixed; */
+    }
+
+    body > page, body > pages {
+        z-index: 123456789;
+    }
+
+    wave {
+        width: 100%;
+    }
+
+    wysiwyg * {
+        max-width: 100%;
+    }
+
+    wysiwyg div {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    wysiwyg iframe {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    wysiwyg img {
+        /* width: 300px; */
+        width: 100%;
+        /* max-height: 300px; */
+        margin: 5px auto;
+        display: block;
+        object-fit: contain;
+    }
+
+    wysiwyg video {
+        width: 600px;
+        margin: 5px auto;
+        display: block;
+        object-fit: contain;
+    }
+
+    [placeholder]:not(input):empty:before {
+        content: attr(placeholder);
+        opacity: 0.5;
+    }
+
+    body [data-hide]:not([data-active="true"]), body [data-page]:not([data-active="true"]):not(.-active), body [data-pages]:not([data-active="true"]):not(.-active), body [data-path]:not([data-active="true"]):not(.-active),
+    body [data-hide]:not([data-active="true"]), body [route]:not([data-active="true"]):not(.active), body [data-pages]:not([data-active="true"]):not(.active), body [route]:not([data-active="true"]):not(.active) {
+        display: none;
+    }
+}
+
+@media print {
+    body :not(print) {
+        display: none;
+    }
+
+    body print {
+        display: block;
+        position: absolute;
+        z-index: 12345;
+        top: 0;
+    }
+
+    body print * {
+        display: block !important;
+    }
+}
+
+/*FOCUS*/
+@media screen {
+    body > footer, body > header, body > nav {
+        position: relative;
+        /* z-index: 123456789; */
+    }
+
+    body block, body card, body card box {
+        position: relative;
+    }
+
+    body > header > *, body > header card > *, body > header box > * {
+        z-index: 12;
+    }
+
+    body > header > picture, body > header > card > picture, body > header > card > box > picture {
+        z-index: 0;
+    }
+
+    body > header > video, body > header > card > picture, body > header > card > box > picture {
+        z-index: 0;
+    }
+
+    body > header > * ~ *, body > header card > * ~ *, body > header card box > * ~ * {
+        z-index: 12;
+    }
+
+    body > footer > *, body > footer card > *, body > footer box > * {
+        z-index: 12;
+    }
+
+    body > footer > picture, body > footer > card > picture, body > footer > card > box > picture {
+        z-index: 0;
+    }
+
+    body > footer > video, body > footer > card > picture, body > footer > card > box > picture {
+        z-index: 0;
+    }
+
+    body > footer > * ~ *, body > footer card > * ~ *, body > footer card box > * ~ * {
+        z-index: 12;
+    }
+
+    body block > * {
+        /* z-index: 1; */
+    }
+
+    body card > * {
+        /* z-index: 1; */
+    }
+
+    body card box > * {
+        /* z-index: 1; */
+    }
+
+    blocks block > picture, blocks card > picture, blocks card box > picture {
+        z-index: -1;
+    }
+
+    body block > video, body card > video, body card box > video {
+        z-index: 0;
+    }
+
+    body block > * ~ *, body card > * ~ *, body card box > * ~ * {
+        z-index: 12;
+    }
+}
