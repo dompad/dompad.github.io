@@ -1,4 +1,4 @@
-domPad
+# domPad
 
 domPad is a browser-based website builder and content management system built around GitHub repositories. It uses a flat-file approach: website content, configuration, media indexes, and commerce data are represented as files in a repository, while the domPad dashboard provides the interface for managing them.
 
