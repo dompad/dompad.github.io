@@ -156,10 +156,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         //if (window.database.dashboard.hasOwnProperty(get[1]) === false) {
                         //const user = await github.user.get();
                         try {
+                            //alert(get[1] + "/" + get[2])
                             var json = await github.repos.contents({
-                                owner: window.owner.login,
+                                owner: get[1],
                                 path: "/site.webmanifest",
-                                repo: get[1]
+                                repo: get[2]
                             }, {
                                 accept: "application/vnd.github.raw",
                                 cache: "reload"
@@ -168,7 +169,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 //var content = data.content;
                                 //var raw = atob(content);
                                 //var json = JSON.parse(raw);
-                                0 > 1 ? console.log(261, {
+                                0 < 1 ? console.log(261, {
                                     json
                                 }) : null;
     
@@ -187,8 +188,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     //GET index.html
                                     try {
                                         var data = await github.repos.contents({
-                                            owner: window.owner.login,
-                                            repo: GET[1],
+                                            owner: get[1],
+                                            repo: get[2],
                                             path: "/index.html"
                                         }, {
                                             cache: "reload"
@@ -212,8 +213,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     //GET icon.svg
                                     try {
                                         var data = await github.repos.contents({
-                                            owner: window.owner.login,
-                                            repo: GET[1],
+                                            owner: get[1],
+                                            repo: get[2],
                                             path: "/icon.svg"
                                         }, {
                                             cache: "reload"
@@ -235,8 +236,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     //GET site.webmanifest
                                     try {
                                         var data = await github.repos.contents({
-                                            owner: window.owner.login,
-                                            repo: GET[1],
+                                            owner: get[1],
+                                            repo: get[2],
                                             path: "/site.webmanifest"
                                         }, {
                                             cache: "reload"
@@ -244,7 +245,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         var raw = atob(data.content);
                                         var sha = data.sha;
                                         var json = JSON.parse(raw);
-                                        var about = null;
+                                        var about = json.description;
                                         console.log(319, {
                                             data,
                                             json,
@@ -424,8 +425,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         try {
     
                                             var res = await github.repos.contents({
-                                                owner: window.owner.login,
-                                                repo: get[1],
+                                                owner: get[1],
+                                                repo: get[2],
                                                 path: '/icon.svg'
                                             }, {
                                                 accept: 'application/vnd.github.raw'
@@ -1865,9 +1866,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                     if (vp.advanced) {
                                                         try {
                                                             var res = await github.repos.contents({
-                                                                owner: window.owner.login,
+                                                                owner: get[1],
                                                                 path: '/raw/pages' + json.slug.replace('*', '_') + (json.slug === "/" ? "" : "/") + 'page.html',
-                                                                repo: get[1]
+                                                                repo: get[2]
                                                             }, {
                                                                 accept: "application/vnd.github.raw"
                                                             });
@@ -1968,9 +1969,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         var vp = dom.body.find('pages[data-page="/dashboard/*/*/pages"]');
                                         //alert("Attempting to fetch files");
                                         github.repos.contents({
-                                            owner: window.owner.login,
+                                            owner: get[1],
                                             path: "/raw/pages/pages.json",
-                                            repo: get[1]
+                                            repo: get[2]
                                         }, {}).then(d=>{
                                             var data = JSON.parse(atob(d.content));
                                             if (data) {

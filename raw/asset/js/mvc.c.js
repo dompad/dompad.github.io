@@ -432,9 +432,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 const branch = 'main';
                 try {
                     var raw = 0 > 1 ? await github.repos.contents({
-                        owner: window.owner.login,
+                        owner: GET[1],
                         path: 'index.html',
-                        repo: GET[1]
+                        repo: GET[2]
                     }, {
                         accept: 'application/vnd.github.raw'
                     }) : await ajax('raw/asset/html/template/template.iframe.html');
@@ -1295,8 +1295,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             if(confirm) {
                 console.log(window.owner.login, GET[1]);
                 github.repos.delete({
-                    owner: window.owner.login,
-                    repo: GET[1]
+                    owner: GET[1],
+                    repo: GET[2]
                 }, {
                     dataType: "DELETE"
                 }).then(data => {
@@ -4744,8 +4744,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                                 //Update index.html
                                 github.repos.contents({
-                                    owner: user.login,
-                                    repo: GET[1],
+                                    owner: GET[1],
+                                    repo: GET[2],
                                     path: "/index.html"
                                 }, {
                                     cache: "reload"
@@ -4777,9 +4777,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                     var content = btoa(DOM.html.outerHTML);
                                     var message = "Update index.html";
 
-                                    var upload = 1 > 0 ? await github.repos.contents({
-                                        owner: user.login,
-                                        repo: GET[1],
+                                    var upload = 0 < 1 ? await github.repos.contents({
+                                        owner: GET[1],
+                                        repo: GET[2],
                                         path: "/index.html"
                                     }, {
                                         data: JSON.stringify({
@@ -4830,9 +4830,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                         raw
                                     });
 
-                                    var upload = 1 > 0 ? await github.repos.contents({
-                                        owner: user.login,
-                                        repo: GET[1],
+                                    var upload = 0 < 1 ? await github.repos.contents({
+                                        owner: GET[1],
+                                        repo: GET[2],
                                         path: "/index.html"
                                     }, {
                                         data: JSON.stringify({
@@ -4888,8 +4888,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         var file = controller.setup.ico(box);
                         var user = await github.user.get();
                         github.repos.contents({
-                            owner: user.login,
-                            repo: GET[1],
+                            owner: GET[1],
+                            repo: GET[2],
                             path: "/icon.svg"
                         }, {
                             cache: "reload"
@@ -4899,7 +4899,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                             var content = atob(raw);
                             var doc = new DOMParser().parseFromString(content, "text/html");
                             //var json = JSON.parse(content);
-                            console.log(807, {
+                            console.log(4902, {
                                 content,
                                 data,
                                 doc,
@@ -4933,9 +4933,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                 data,
                                 sha
                             });
-                            var upload = 1 > 0 ? await github.repos.contents({
-                                owner: user.login,
-                                repo: GET[1],
+                            var upload = 0 < 1 ? await github.repos.contents({
+                                owner: GET[1],
+                                repo: GET[2],
                                 path: "/icon.svg"
                             }, {
                                 data: JSON.stringify(data),
@@ -4962,8 +4962,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                 //Update site.webmanifest
                                 var user = await github.user.get();
                                 github.repos.contents({
-                                    owner: user.login,
-                                    repo: GET[1],
+                                    owner: GET[1],
+                                    repo: GET[2],
                                     path: "/site.webmanifest"
                                 }, {
                                     cache: "reload"
@@ -4996,9 +4996,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                         sha
                                     });
 
-                                    var upload = 1 > 0 ? await github.repos.contents({
-                                        owner: user.login,
-                                        repo: GET[1],
+                                    var upload = 0 < 1 ? await github.repos.contents({
+                                        owner: GET[1],
+                                        repo: GET[2],
                                         path: "/site.webmanifest"
                                     }, {
                                         data: JSON.stringify({
@@ -5007,7 +5007,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                                             sha
                                         }),
                                         dataType: "PUT"
-                                    }).then(function(data) {
+                                    })
+                                    .then(function(data) {
                                         console.log(1805, {
                                             data
                                         });
