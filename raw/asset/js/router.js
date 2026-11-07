@@ -150,6 +150,7 @@ String.prototype.router = async function(params) {
                 if(e.code === 404) {
                     var main = dom.body.find('main');
                     var error = document.createElement("page");
+                    error.dataset.error = 404;
                     error.dataset.active = true;
                     var tpl = is.iframe(window) ? "/raw/asset/html/error/error.404.builder.html" : "/raw/asset/html/error/error.404.html";
                     error.innerHTML = await ajax(tpl);
