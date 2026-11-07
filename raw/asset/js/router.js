@@ -41,7 +41,7 @@ String.prototype.router = async function(params) {
     if(vp) {
         if(page) {
             if (is.iframe(window)) {
-                alert('Router fetching page');
+                //alert('Router fetching page');
                 var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
                 console.log(25, {path});
                 try {
@@ -65,7 +65,7 @@ String.prototype.router = async function(params) {
             }
         } else {
             if (pages && is.iframe(window)) {
-                alert('Router fetching pages');
+                //alert('Router fetching pages');
                 var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
                 console.log(25, {path});
                 try {
