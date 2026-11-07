@@ -41,7 +41,7 @@ async function init() {
             console.log(41, e);
         }
 
-        html = await ajax('/raw/style/template.html');
+        html = await ajax('./raw/style/template.html');
         html.length > 0 ? dom.body.find('boot').insertAdjacentHTML('afterend', html) : null;
 
         const fetching = 0 > 1 ? dom.body.all(':not(page):not(pages)[data-fetch]') : dom.body.all(':not([data-page])[data-fetch]');
