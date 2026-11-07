@@ -57,7 +57,8 @@ async function init() {
             footer
         }) : null;
             
-    } catch (e) {
+    }
+    catch (e) {
         var doc = document;
         console.log(89, {e});
         if (0 > 1 && e.code === 404) {
@@ -81,35 +82,32 @@ async function init() {
     });
 
 
-
-            //PAGES
-            try {
-                var pages = await github.raw.git('/' + owner + '/' + repo + '/' + branch + "/raw/pages/pages.json");
-                console.log(66, 'pages.json', pages);
-                if (pages && pages.length > 0) {
-                    var main = dom.body.find('main');
-                    var p = 0;
-                    do {
-                        var row = pages[p];
-                        var tagName = 'page' + (row.pages ? 's' : '');
-                        var sel = tagName + '[data-page="' + row.page + '"]';
-                        el = doc.createElement(tagName);
-                        el.dataset.fetch = "raw/pages" + row.slug.replaceAll("*", "_") + (rout.ed.dir(row.slug).length > 0 ? "/" : "") + "page.html";
-                        el.dataset.page = row.slug;
-                        if (row.main) {
-                            main.find('template').insertAdjacentHTML('beforebegin', el.outerHTML);
-                        } else {
-                            main.insertAdjacentHTML('beforebegin', el.outerHTML);
-                        }
-                        p++;
-                    } while (p < pages.length);
+    //PAGES
+    try {
+        var pages = await github.raw.git('/' + owner + '/' + repo + '/' + branch + "/raw/pages/pages.json");
+        console.log(66, 'pages.json', pages);
+        if (pages && pages.length > 0) {
+            var main = dom.body.find('main');
+            var p = 0;
+            do {
+                var row = pages[p];
+                var tagName = 'page' + (row.pages ? 's' : '');
+                var sel = tagName + '[data-page="' + row.page + '"]';
+                el = doc.createElement(tagName);
+                el.dataset.fetch = "raw/pages" + row.slug.replaceAll("*", "_") + (rout.ed.dir(row.slug).length > 0 ? "/" : "") + "page.html";
+                el.dataset.page = row.slug;
+                if (row.main) {
+                    main.find('template').insertAdjacentHTML('beforebegin', el.outerHTML);
+                } else {
+                    main.insertAdjacentHTML('beforebegin', el.outerHTML);
                 }
-            } catch (e) {
-                console.log(72, e);
-            }
-
-
-
+                p++;
+            } while (p < pages.length);
+        }
+    } 
+    catch (e) {
+        console.log(72, e);
+    }
     
         
     //ROUTE
@@ -133,35 +131,28 @@ async function init() {
             }
         }
         
-    }).catch(async(e) => {
+    })
+    .catch(async(e) => {
         
         //alert("Page not loaded");
         console.log('Page not loaded', {e});
-        var confirm = await window.parent.modal.confirm({
-            "title": e.code,
-            "body": "Page Not Found",
-        }, ["Create", "Exit"]);
-        if(confirm) {
-            window.parent.String.prototype.router.call("/dashboard/:get/build");
+        if(0 > 1) {
+            var confirm = await window.parent.modal.confirm({
+                "title": e.code,
+                "body": "Page Not Found",
+            }, ["Create", "Exit"]);
+            if(confirm) {
+                window.parent.String.prototype.router.call("/dashboard/:get/build");
+            } else {
+                window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
+            }
         } else {
-            window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
+            if(e.code === 404) {
+                //alert(e.code);           
+            }
         }
         
     });
-
-    
-        
-    //FETCH
-    const fetching = dom.body.all(':not(page):not(pages)[data-fetch]');
-    if (fetching.length > 0) {
-        var f = 0;
-        do {
-            if (fetching[f].innerHTML === "") {
-                fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
-            }
-            f++;
-        } while (fetching.length < 0);
-    }
 
     
 

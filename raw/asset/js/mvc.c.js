@@ -629,7 +629,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             }
 
             iframe.contentWindow.document.body.removeAttribute('buildable');
-            iframe.contentWindow.document.body.setAttribute('wireframe', true);
+            iframe.contentWindow.document.body.setAttribute('wireframe', false);
 
             var path = route.path;
             var dir = rout.ed.dir(path);

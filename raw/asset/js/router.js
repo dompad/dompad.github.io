@@ -40,29 +40,29 @@ String.prototype.router = async function(params) {
     }
     if(vp) {
         if(page) {
-        if (is.iframe(window)) {
-            alert('Router fetching page');
-            var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
-            console.log(25, {path});
-            try {
-                console.log(27);
-                var pg = atob((await github.raw.path(path)).content);
-                console.log(29);
-            } catch(e) {
-                console.log(26, {path});
-            }
-        } else {
-            var path = vp.dataset.fetch;
-            var pg = await ajax(path);
-        }
-        if (pg && page.innerHTML === "") {
-            page.innerHTML = pg.replace(/>\s+</g, '><');
-            //alert('Page HTML Updated');
-            //await ajax(page.dataset.fetch);
             if (is.iframe(window)) {
-                window.top.css.style.sheet(page);
+                alert('Router fetching page');
+                var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
+                console.log(25, {path});
+                try {
+                    console.log(27);
+                    var pg = atob((await github.raw.path(path)).content);
+                    console.log(29);
+                } catch(e) {
+                    console.log(26, {path});
+                }
+            } else {
+                var path = vp.dataset.fetch;
+                var pg = await ajax(path);
             }
-        }
+            if (pg && page.innerHTML === "") {
+                page.innerHTML = pg.replace(/>\s+</g, '><');
+                //alert('Page HTML Updated');
+                //await ajax(page.dataset.fetch);
+                if (is.iframe(window)) {
+                    window.top.css.style.sheet(page);
+                }
+            }
         } else {
             if (pages && is.iframe(window)) {
                 alert('Router fetching pages');
@@ -147,6 +147,14 @@ String.prototype.router = async function(params) {
                     code: 404
                 };
                 //is.iframe(window) ? alert(e.code) : null;
+                if(e.code === 404) {
+                    var main = dom.body.find('main');
+                    var error = document.createElement("page");
+                    error.dataset.active = true;
+                    var tpl = is.iframe(window) ? "/raw/asset/html/error/error.404.builder.html" : "/raw/asset/html/error/error.404.html";
+                    error.innerHTML = await ajax(tpl);
+                    main.lastElementChild.insertAdjacentHTML("beforebegin", error.outerHTML);               
+                }
                 reject(e);
                 //resolve(route);
             } else {
