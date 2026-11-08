@@ -133,8 +133,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             dom.body.find('[data-page="/dashboard/*"]').setAttribute('github-repo-private', repository.private);
                         }
     
-                        const user = await github.user.get();
-    
                         var project = dom.body.find('main nav').find('[placeholder="Project Name"]');
                         var link = dom.body.find('main nav').find('[placeholder="Link"]');
                         var username = dom.body.find('main nav').find('[placeholder="username"]');
@@ -142,11 +140,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         //link.dataset.href = "/" + user.login + "/" + get[1] + "." + "dompad.io";
                         link.textContent = get[1];
     
-                        username.textContent = user.login;
-                        username.closest('box').dataset.href = "/" + user.login + "/";
+                        username.textContent = get[1];
+                        username.closest('box').dataset.href = "/" + get[1] + "/" + get[2];
     
                         try {
-                            var icon = await github.raw.path("/" + user.login + "/" + get[1] + "/main/icon.svg");
+                            var icon = await github.raw.path("/" + get[1] + "/" + get[2] + "/main/icon.svg");
                             project.closest('box').previousElementSibling.find('img').src = "data:image/svg+xml;base64," + icon.content;
                         } catch (e) {
                             console.log(e);
@@ -2204,14 +2202,15 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 ajax('raw/asset/json/templates.json').then(a);
                                 resolve(route);
                             }
-                        } else {
+                        }
+                        else {
                             //console.log(2200, "Token invalid");
                             //github.oauth.logout();
                             //alert("Token invalid");
                             //resolve(route);
                         }
                         
-                        } 
+                    } 
                     else {
                         console.log(2209, "Token invalid");
                         github.oauth.logout();
@@ -2221,11 +2220,12 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     
                 } 
                 else {
-                    console.log(352, github.oauth.verify());
-                    if (github.oauth.verify()) {
+
+                    var isLogin = await github.oauth.verify();
+                    console.log(352, isLogin);
+                    if (isLogin) {
                         window.owner = await github.user.get();
                         var params = {};
-                        const user = await github.user.get();
                         var p = d=>{
                             var data = d.content ? JSON.parse(atob(d.content)) : d;
                             const feed = byId('feed-dashboard');
@@ -2258,23 +2258,25 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     feed.insertAdjacentHTML('beforeend', template.outerHTML);
                                     x++;
                                 } while (x < data.length);
+                                resolve(route);
                             }
                         }
-                        0 > 1 ? github.repos.contents({
-                            //cache.feed.dashboard.index
-                            owner: window.owner.login,
-                            repo: "db.dompad.io",
-                            path: "/v1/apps/index.json"
-                        }).then(p) : github.repos.user({
-                            username: window.owner.login,
+                        github.repos.user({
+                            username: get[1],
                             query: JSON.stringify({
                                 direction: 'desc',
-                                sort: "created",
-                                per_page: 60
+                                sort: "pushed",
+                                per_page: 60,
+                                affiliation: "owner"
                             })
                         }).then(p);
                     }
-                    resolve(route);
+                    else {
+                        console.log(2279, "Token invalid");
+                        github.oauth.logout();
+                        //alert("Token invalid");
+                        resolve(route);
+                    }
                 }
             } else if (root === "design") {
 
