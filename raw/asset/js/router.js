@@ -42,7 +42,7 @@ String.prototype.router = async function(params) {
         if(page) {
             if (is.iframe(window)) {
                 //alert('Router fetching page');
-                var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
+                var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
                 console.log(25, {path});
                 try {
                     console.log(27);
@@ -66,7 +66,7 @@ String.prototype.router = async function(params) {
         } else {
             if (pages && is.iframe(window)) {
                 //alert('Router fetching pages');
-                var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
+                var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
                 console.log(25, {path});
                 try {
                     console.log(27);
@@ -558,13 +558,13 @@ window.rout.ing = (pgs,href,GOT,n)=>{
 }
 
 async function viewPage(vp) {
-    //console.log(462, {routes: rout.es()});
+    console.log(561, {vp, routes: rout.es()});
     const fetching3 = dom.body.all('[data-fetch][data-page="' + rout.es() + '"]:empty');
     if (fetching3.length > 0) {
         var ff = 0;
         do {
             if (fetching3[ff].innerHTML === "") {
-                fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
+                //fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
             }
             ff++;
         } while (ff < fetching3.length);
@@ -573,14 +573,18 @@ async function viewPage(vp) {
         //console.log(474, {fetch: vp.dataset.fetch, vp, html: vp.innerHTML});
         if (vp.innerHTML === "" && vp.dataset.fetch) {
             if (is.iframe(window)) {
-                var path = "/" + window.parent + "/" + window.parent.GET[1] + "/main/" + vp.dataset.fetch;
+                var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
                 var pg = atob((await github.raw.path(path)).content);
+                console.log(578, {pg});
             } else {
                 var path = vp.dataset.fetch;
                 var pg = await ajax(path);
             }
             //alert('Inserting Page HTML');
-            //vp.innerHTML = pg;
+            if(pg === '') {
+                pg = '<blocks></blocks>';
+            }
+            vp.innerHTML = pg;
             console.log("router.js 33", path, vp, vp.dataset.fetch);
         }
         const fetching2 = vp.all('[data-fetch]');
