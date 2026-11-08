@@ -480,7 +480,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                             resolve(elems.iframe);
                         } :
                         resolve(iframe);
-                } catch (e) {}
+                } 
+                catch (e) {}
             })
         },
         editor: async () => {
@@ -519,8 +520,10 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var dir = rout.ed.dir(path);
             dir = dir.splice(4, dir.length - 1);
             var href = "/dashboard/" + route.GOT[1] + "/build/er" + rout.ed.url(dir);
+            var rsrc = "/" + route.GOT[1] + "/" + route.GOT[2] + "/main" + '/raw/pages/pages.json';
             //alert(window.parent.GET[1]);
-            var data = await github.raw.git("/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main" + '/raw/pages/pages.json');
+            console.log(524, route, href, dir, rsrc);
+            var data = await github.raw.git(rsrc);
             var json = data.find(o => o.slug === rout.ed.url(dir))
             0 > 1 ? console.log({
                 json

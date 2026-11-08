@@ -199,12 +199,11 @@ window.github = {
         ,
         git: async(resource)=>{
             var r = rout.ed.dir(resource);
+            var owner = r[0];
             var repo = r[1];
             r.splice(0, 3);
             var path = rout.ed.url(r);
-            var user = await github.user.get();
-            var owner = user.login;
-            //console.log({owner, path, repo});
+            console.log(207, {r, owner, path, repo, resource});
             return await github.repos.contents({
                 owner,
                 path,
