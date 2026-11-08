@@ -16,16 +16,11 @@
         <base>
         <script>
             const base = document.head.querySelector("base");
-            if (window.self === window.top) {
-                base.href = "/";
-                window.boot = window.location.pathname + window.location.search + window.location.hash;
-            } else {
-                base.href = window.parent.location.protocol + "//" + window.parent.location.host;
-                var pathname = window.parent.location.pathname;
-                var dir = window.parent.rout.ed.dir(pathname);
-                dir.splice(0, 4);
-                window.boot = window.parent.rout.ed.url(dir);
-            }
+            base.href = window.parent.location.protocol + "//" + window.parent.location.host;
+            var pathname = window.parent.location.pathname;
+            var dir = window.parent.rout.ed.dir(pathname);
+            dir.splice(0, 5);
+            window.boot = window.parent.rout.ed.url(dir);            
         </script>
         <script async="" src="raw/asset/js/crypto.js"></script>
         <script async="" src="raw/asset/js/github.js"></script>

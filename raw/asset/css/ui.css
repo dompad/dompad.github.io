@@ -70,7 +70,7 @@
         outline-offset: 0px;
     }
 
-    body[buildable="true"]:not([insertable]) > footer card box:hover, body[buildable="true"]:not([insertable]) > header card box:hover, body[buildable="true"]:not([insertable]) card box:hover {
+    body[buildable="true"]:not([insertable]) > footer card box:hover, body[buildable="true"]:not([insertable]) > header card box:hover, body[buildable="true"]:not([insertable]) block card box:hover {
         outline: 2px dashed #52b9d680;
         outline-offset: 0px;
     }

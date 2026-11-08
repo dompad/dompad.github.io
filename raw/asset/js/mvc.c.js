@@ -530,9 +530,10 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             }) : null;
             //alert("controller.build.editor: " + href);
 
-            iframe.closest('pages').find('[placeholder="Page Name"]').textContent = json.title;
-            iframe.closest('pages').find('[placeholder="/page-name"]').textContent = json.slug;
-
+            if(json) {
+                iframe.closest('pages').find('[placeholder="Page Name"]').textContent = json.title;
+                iframe.closest('pages').find('[placeholder="/page-name"]').textContent = json.slug;
+            }
         },
         else: async () => {
 
@@ -3971,8 +3972,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 //POST
                 try {
                     var data = await github.repos.contents({
-                        owner: owner.login,
-                        repo: GET[1],
+                        owner: GET[1],
+                        repo: GET[2],
                         path: "/raw/posts/posts.json"
                     });
                     var j = JSON.parse(atob(data.content));
@@ -4010,9 +4011,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                 //PUSH
                 var params = {
-                    message: "Add " + name + " to Merch",
-                    repo: GET[1],
-                    owner: owner.login
+                    message: "Add " + name + " to Posts",
+                    repo: GET[2],
+                    owner: GET[1]
                 };
                 var array = [{
                     content: str1,
@@ -4033,12 +4034,12 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 });
                 try {
                     await github.crud.update(params, array);
-                    ("/dashboard/:get/posts/").router()
+                    ("/dashboard/:get/:get/posts/").router()
                 } catch (e) {
                     modal.alert({
-                        body: "There was an error creating this product.",
+                        body: "There was an error creating this post.",
                         submit: "OK",
-                        title: "Catalog Error"
+                        title: "Blog Error"
                     })
                 }
 
@@ -4126,12 +4127,12 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
             var user = await github.user.get();
             var feed = byId('feed-dashboard-posts');
-            var vp = dom.body.find('page[data-page="/dashboard/*/merch"]');
+            var vp = dom.body.find('page[data-page="/dashboard/*/*/merch"]');
             //alert("Attempting to fetch files");
             github.repos.contents({
-                owner: user.login,
+                owner: GET[1],
                 path: "/raw/posts/posts.json",
-                repo: GET[1]
+                repo: GET[2]
             }, {
                 accept: "application/vnd.github.raw"
             }).then(data => {

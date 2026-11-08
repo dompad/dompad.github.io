@@ -143,7 +143,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         username.closest('box').dataset.href = "/" + get[1] + "/" + get[2];
     
                         try {
-                            var icon = await github.raw.path("/" + route.get[1] + "/" + get[2] + "/main/icon.svg");
+                            var icon = await github.raw.path("/" + get[1] + "/" + get[2] + "/main/icon.svg");
                             project.closest('box').previousElementSibling.find('img').src = "data:image/svg+xml;base64," + icon.content;
                         } catch (e) {
                             console.log(e);

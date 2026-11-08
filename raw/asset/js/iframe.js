@@ -253,8 +253,8 @@ framework.on = async function(event) {
 
                     }
 
-                } else {
-
+                } 
+                else {
                     var media = selected.closest('[media]') ? selected.closest('[media]').getAttribute('media') : null;
                     0 < 1 ? console.log({
                         focus: 'within',

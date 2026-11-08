@@ -142,6 +142,7 @@ String.prototype.router = async function(params) {
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             //is.iframe(window) ? alert('Router.js 112') : null;
+            console.log(145, {four})
             if(four) {
                 const e = {
                     code: 404
@@ -221,7 +222,7 @@ window.rout.e = state=>{
 
         //pgs = pgs.toReversed();
         
-        0 < 1 ? console.log(124, 151, {
+        0 > 1 ? console.log(124, 151, {
             pgs,
             GOT
         }) : null;
@@ -245,7 +246,7 @@ window.rout.e = state=>{
         search,
         pgs
     };
-    0 < 1 ? console.log(164, {
+    0 > 1 ? console.log(164, {
         data
     }) : null;
     return data;
