@@ -518,20 +518,20 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
             var path = route.path;
             var dir = rout.ed.dir(path);
-            dir = dir.splice(4, dir.length - 1);
+            dir = dir.splice(5, dir.length - 1);
             var href = "/dashboard/" + route.GOT[1] + "/build/er" + rout.ed.url(dir);
             var rsrc = "/" + route.GOT[1] + "/" + route.GOT[2] + "/main" + '/raw/pages/pages.json';
             //alert(window.parent.GET[1]);
             console.log(524, route, href, dir, rsrc);
             var data = await github.raw.git(rsrc);
             var json = data.find(o => o.slug === rout.ed.url(dir))
-            0 > 1 ? console.log({
+            0 < 1 ? console.log(528, {
                 json
             }) : null;
             //alert("controller.build.editor: " + href);
 
-            iframe.closest('pages').previousElementSibling.find('[placeholder="Page Name"]').textContent = json.title;
-            iframe.closest('pages').previousElementSibling.find('[placeholder="/page-name"]').textContent = json.slug;
+            iframe.closest('pages').find('[placeholder="Page Name"]').textContent = json.title;
+            iframe.closest('pages').find('[placeholder="/page-name"]').textContent = json.slug;
 
         },
         else: async () => {
