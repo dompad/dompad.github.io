@@ -500,7 +500,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = iframe.closest('main nav + pages');
 
-            const builder = iframe.closest('pages[data-page="/dashboard/*/build"]');
+            const builder = iframe.closest('pages[data-page="/dashboard/*/*/build"]');
             builder.setAttribute("css-transform", "translateY(0)");
 
             const win = iframe.contentWindow;
@@ -527,8 +527,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             dir = dir.splice(4, dir.length - 1);
             var href = "/dashboard/" + route.GOT[1] + "/build/er" + rout.ed.url(dir);
 
-            var path = "/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main/" + href;
-            var data = await github.raw.git("/" + window.parent.owner.login + "/" + window.parent.GET[1] + "/main" + '/raw/pages/pages.json');
+            var path = "/" + window.parent.GET[1]+ "/" + window.parent.GET[2] + "/main/" + href;
+            var data = await github.raw.git("/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main" + '/raw/pages/pages.json');
             var json = data.find(o => o.slug === rout.ed.url(dir))
             0 > 1 ? console.log({
                 json
@@ -568,7 +568,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
         index: async () => {
 
             const iframe = byId('iframe-editor');
-            const block = dom.body.find('[data-page="/dashboard/*/build"]');
+            const block = dom.body.find('[data-page="/dashboard/*/*/build"]');
             //iframe.closest('pages');
             const header = block.find('header');
 

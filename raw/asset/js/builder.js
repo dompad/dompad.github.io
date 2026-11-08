@@ -22,9 +22,8 @@ async function init() {
 
     //SHELL
     var html = ``;
-    const user = await github.user.get();
-    const owner = user.login;
-    const repo = window.parent.route.GOT[1];
+    const owner = window.parent.route.GOT[1];
+    const repo = window.parent.route.GOT[2];
     const branch = 'main';
     const path = '/raw/style/template.html';
     const resource = '/' + owner + '/' + repo + '/' + branch + path;
@@ -124,11 +123,12 @@ async function init() {
             }
             vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
         } else {
-            var confirm = modal.confirm("This page does not exist");
-            if(confirm) {
-                var goto = '/dashboard/:get/pages/page';
-                console.log(183, {goto})
-            }
+            alert("This page does not exist")
+            //var confirm = modal.confirm("This page does not exist");
+            //if(confirm) {
+                //var goto = '/dashboard/:get/pages/page';
+                //console.log(183, {goto})
+            //}
         }
         
     })

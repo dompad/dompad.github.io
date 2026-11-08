@@ -606,6 +606,58 @@ window.github = {
             );
         }
     },
+    installations: {
+        repositories: (params, settings) => {
+            console.log(611, params);
+            return new Promise((resolve,reject)=>{
+                console.log(588, params);
+                const query = params && params.query ? "?" + new URLSearchParams(params.query).toString() : "";
+                const url = github.endpoint + "/installations/repositories" + query;
+                const a = (d)=>{
+                    const data = d ? JSON.parse(d) : null;
+                    resolve(data);
+                }
+                const b = (error)=>{
+                    console.log(error);
+                    reject(error);
+                }
+                const accessToken = localStorage.githubAccessToken;
+                settings = settings ? settings : {};
+                accessToken ? settings.headers = {
+                    Accept: settings && settings.accept ? settings.accept : "application/vnd.github+json",
+                    Authorization: "token " + accessToken,
+                    'If-None-Match': ''
+                } : null;
+                ajax(url, settings).then(a).catch(b);
+            }
+            );            
+        },
+        user: (params, settings) => {
+            console.log(611, params);
+            return new Promise((resolve,reject)=>{
+                console.log(588, params);
+                const query = params && params.query ? "?" + new URLSearchParams(params.query).toString() : "";
+                const url = github.endpoint + "/user/installations" + query;
+                const a = (d)=>{
+                    const data = d ? JSON.parse(d) : null;
+                    resolve(data);
+                }
+                const b = (error)=>{
+                    console.log(error);
+                    reject(error);
+                }
+                const accessToken = localStorage.githubAccessToken;
+                settings = settings ? settings : {};
+                accessToken ? settings.headers = {
+                    Accept: settings && settings.accept ? settings.accept : "application/vnd.github+json",
+                    Authorization: "token " + accessToken,
+                    'If-None-Match': ''
+                } : null;
+                ajax(url, settings).then(a).catch(b);
+            }
+            );            
+        }
+    },
     pages: {
         crud: function(params, settings) {
             console.log(586, params, settings);

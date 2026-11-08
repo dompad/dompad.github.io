@@ -2,28 +2,28 @@
     <row class="justify-content-space-between width-100pct" tabindex="1">
         <card class="height-50px justify-content-center margin-0 width-auto">
             <row class="align-items-center">
-                <box data-href="/dashboard/:get/build/er" data-page="/dashboard/*/build">
+                <box data-href="/dashboard/:get/:get/build/er" data-page="/dashboard/*/*/build">
                     <row class="align-items-center">
                         <ico>
                             <n class="gg-pen"></n>
                         </ico>
                     </row>
                 </box>
-                <box data-href="/dashboard/:get/build/er" data-page="/dashboard/*/build/preview">
+                <box data-href="/dashboard/:get/:get/build/er" data-page="/dashboard/*/*/build/preview">
                     <row class="align-items-center">
                         <ico>
                             <n class="gg-pen"></n>
                         </ico>
                     </row>
                 </box>
-                <box class="display-none" data-href="/dashboard/:get/build" data-page="/dashboard/*/build/er">
+                <box class="display-none" data-href="/dashboard/:get/:get/build" data-page="/dashboard/*/*/build/er">
                     <row class="align-items-center">
                         <ico>
                             <n class="gg-close"></n>
                         </ico>
                     </row>
                 </box>
-                <box class="position-relative" data-page="/dashboard/*/build/er">
+                <box class="position-relative" data-page="/dashboard/*/*/build/er">
                     <row class="align-items-center justify-content-center" data-dropdown data-ignore>
                         <ico class="margin-left-5px">
                             <n class="gg-menu"></n>
@@ -32,8 +32,8 @@
                     </row>
                     <column class="-hd-width-100pct- background-color-fff border-radius-10px box-shadow-0-1px-6px-0 color-000 line-height-30px margin-auto padding-y-10px position-absolute white-space-nowrap width-auto" data-command="fontName" css-display="none" data-hidden="tap" css-left="5px" css-top="calc(100% - 5px)">
                         <text class="-hover-background-color-eb padding-x-20px" data-tap="controller.builder.push()">Save</text>
-                        <text class="-hover-background-color-eb padding-x-20px" data-href="/dashboard/:get/build/preview">Preview</text>
-                        <text class="-hover-background-color-eb color-ff3b30 padding-x-20px" data-href="/dashboard/:get/build">Exit</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-href="/dashboard/:get/:get/build/preview">Preview</text>
+                        <text class="-hover-background-color-eb color-ff3b30 padding-x-20px" data-href="/dashboard/:get/:getbuild">Exit</text>
                     </column>
                 </box>
                 <box class="margin-x-5px">
@@ -46,14 +46,14 @@
         </card>
         <card class="flex-direction-row font-weight-bolder margin-0 padding-x-10px width-auto">
             <row>
-                <box css-dw960px-display="flex" data-href="/dashboard/:get/build/preview" data-page="/dashboard/*/build">
+                <box css-dw960px-display="flex" data-href="/dashboard/:get/:get/build/preview" data-page="/dashboard/*/*/build">
                     <row>
                         <ico>
                             <n class="gg-eye"></n>
                         </ico>
                     </row>
                 </box>
-                <box data-href="/dashboard/:get/pages/:dir" data-page="/dashboard/*/build/preview">
+                <box data-href="/dashboard/:get/:get/pages/:dir" data-page="/dashboard/*/*/build/preview">
                     <row>
                         <ico>
                             <n class="gg-options"></n>
@@ -61,7 +61,7 @@
                     </row>
                 </box>
             </row>
-            <row class="display-flex flex-direction-row" data-page="/dashboard/*/build/er">
+            <row class="display-flex flex-direction-row" data-page="/dashboard/*/*/build/er">
                 <box>
                     <row>
                         <ico>
@@ -72,7 +72,7 @@
                         </ico>
                     </row>
                 </box>
-                <box class="position-relative" data-page="/dashboard/*/build/er">
+                <box class="position-relative" data-page="/dashboard/*/*/build/er">
                     <row class="align-items-center justify-content-center">
                         <ico>
                             <n class="gg-options"></n>
@@ -85,7 +85,7 @@
 </header>
 <block class="flex-1 position-relative">
     <iframe class="background-color-fff height-100pct width-100pct" id="iframe-editor"></iframe>
-    <tool class="bottom-20px left-20px margin-auto right-auto position-absolute" data-page="/dashboard/*/build/er">
+    <tool class="bottom-20px left-20px margin-auto right-auto position-absolute" data-page="/dashboard/*/*/build/er">
         <card class="background-color-ffffff border-radius-50px" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" data-mode="tip">
             <row>
                 <ico data-tap="controller.builder.create(event.target)" css-transition="0.3s">

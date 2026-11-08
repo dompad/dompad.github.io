@@ -2263,12 +2263,12 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         }
                         github.repos.user({
                             username: get[1],
-                            query: JSON.stringify({
+                            query: {
                                 direction: 'desc',
                                 sort: "pushed",
                                 per_page: 60,
-                                affiliation: "owner"
-                            })
+                                affiliation: "owner, organization_member"
+                            }
                         }).then(p);
                     }
                     else {

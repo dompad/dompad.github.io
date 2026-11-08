@@ -564,16 +564,16 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
         if (is.iframe(window)) {
             try {
                 window.webmanifest = await github.repos.contents({
-                    owner: window.parent.owner.login,
+                    owner: window.parent.GET[1],
                     path: "/site.webmanifest",
-                    repo: window.parent.GET[1]
+                    repo: window.parent.GET[2]
                 }, {
                     accept: "application/vnd.github.raw"
                 });
                 console.log('webmanifest', 'iframe: ' + is.iframe, webmanifest, {
-                    owner: window.parent.owner.login,
+                    owner: window.parent.GET[1],
                     path: "/site.webmanifest",
-                    repo: window.parent.GET[1]
+                    repo: window.parent.GET[2]
                 });
             } catch(e) {
             }
