@@ -29,8 +29,6 @@ async function init() {
     const resource = '/' + owner + '/' + repo + '/' + branch + path;
     try {
         console.log(44, 'index.init.template', {
-            iframe: is.iframe(window)
-        }, {
             owner,
             path,
             repo
@@ -189,14 +187,6 @@ async function init() {
         //window.touch.ing = false;
         touch.handler(event);
         //console.log(e.type);
-    });
-
-    document.addEventListener("keyup", function(e) {
-        if (e.key === "Escape") {
-            if (window.parent.route.page === "/dashboard/*/build/preview/") {
-                window.parent.dom.body.find('[data-href="/dashboard/:get/build/"]').click()
-            }
-        }
     });
 
     window.addEventListener("resize", window.on.resize)

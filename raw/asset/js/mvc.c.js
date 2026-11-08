@@ -426,18 +426,11 @@ window.mvc.c ? null : (window.mvc.c = controller = {
     build: {
         boot: async (iframe) => {
             return new Promise(async (resolve, reject) => {
-                const user = await github.user.get();
-                const owner = user.login;
-                const repo = route.GOT[1];
+                const owner = route.GOT[1];
+                const repo = route.GOT[2];
                 const branch = 'main';
                 try {
-                    var raw = 0 > 1 ? await github.repos.contents({
-                        owner: GET[1],
-                        path: 'index.html',
-                        repo: GET[2]
-                    }, {
-                        accept: 'application/vnd.github.raw'
-                    }) : await ajax('raw/asset/html/template/template.iframe.html');
+                    var raw = await ajax('raw/asset/html/template/template.iframe.html');
                     var doc = new DOMParser().parseFromString(raw, 'text/html');
 
                     try {
@@ -526,8 +519,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var dir = rout.ed.dir(path);
             dir = dir.splice(4, dir.length - 1);
             var href = "/dashboard/" + route.GOT[1] + "/build/er" + rout.ed.url(dir);
-
-            var path = "/" + window.parent.GET[1]+ "/" + window.parent.GET[2] + "/main/" + href;
+            //alert(window.parent.GET[1]);
             var data = await github.raw.git("/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main" + '/raw/pages/pages.json');
             var json = data.find(o => o.slug === rout.ed.url(dir))
             0 > 1 ? console.log({
@@ -535,8 +527,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             }) : null;
             //alert("controller.build.editor: " + href);
 
-            //iframe.closest('pages').previousElementSibling.find('[placeholder="Page Name"]').textContent = json.title;
-            //iframe.closest('pages').previousElementSibling.find('[placeholder="/page-name"]').textContent = json.slug;
+            iframe.closest('pages').previousElementSibling.find('[placeholder="Page Name"]').textContent = json.title;
+            iframe.closest('pages').previousElementSibling.find('[placeholder="/page-name"]').textContent = json.slug;
 
         },
         else: async () => {
@@ -944,8 +936,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             //PUSH
             var params = {
                 message: 'Update "' + title + '" Page UI',
-                repo: GET[1],
-                owner: window.owner.login
+                repo: GET[2],
+                owner: GET[1]
             };
             var array = [{
                 content,

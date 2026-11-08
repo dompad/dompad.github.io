@@ -136,15 +136,14 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         var project = dom.body.find('main nav').find('[placeholder="Project Name"]');
                         var link = dom.body.find('main nav').find('[placeholder="Link"]');
                         var username = dom.body.find('main nav').find('[placeholder="username"]');
-    
-                        //link.dataset.href = "/" + user.login + "/" + get[1] + "." + "dompad.io";
+                        
                         link.textContent = get[1];
     
                         username.textContent = get[1];
                         username.closest('box').dataset.href = "/" + get[1] + "/" + get[2];
     
                         try {
-                            var icon = await github.raw.path("/" + get[1] + "/" + get[2] + "/main/icon.svg");
+                            var icon = await github.raw.path("/" + route.get[1] + "/" + get[2] + "/main/icon.svg");
                             project.closest('box').previousElementSibling.find('img').src = "data:image/svg+xml;base64," + icon.content;
                         } catch (e) {
                             console.log(e);

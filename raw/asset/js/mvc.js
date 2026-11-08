@@ -52,9 +52,9 @@ window.mvc.m ? null : (window.mvc.m = model = {
                     if (is.iframe(window)) {
                         var user = await github.user.get();
                         posts = await github.repos.contents({
-                            owner: user.login,
+                            owner: window.parent.GET[1],
                             path: '/raw/media/audio/audio.json',
-                            repo: window.parent.GET[1]
+                            repo: window.parent.GET[2]
                         }, {
                             accept: "application/vnd.github.raw"
                         });
@@ -879,8 +879,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     }
                     try {
                         var res = window.descendant = 0 > 1 ? await github.repos.contents({
-                            owner: user.login,
-                            repo: get[1],
+                            owner: get[1],
+                            repo: get[2],
                             path: "/raw/merch/" + parent + "/" + attr.join('_') + "/merch.json"
                         }, {
                             accept: "application/vnd.github.raw",
