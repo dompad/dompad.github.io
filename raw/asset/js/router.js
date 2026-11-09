@@ -575,15 +575,14 @@ async function viewPage(vp) {
             if (is.iframe(window)) {
                 var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
                 var pg = atob((await github.raw.path(path)).content);
-                console.log(578, {pg});
+                if(pg === '') {
+                    pg = '<blocks></blocks>';
+                }
             } else {
                 var path = vp.dataset.fetch;
                 var pg = await ajax(path);
             }
             //alert('Inserting Page HTML');
-            if(pg === '') {
-                pg = '<blocks></blocks>';
-            }
             vp.innerHTML = pg;
             console.log("router.js 33", path, vp, vp.dataset.fetch);
         }

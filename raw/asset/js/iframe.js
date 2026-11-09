@@ -24,7 +24,7 @@ framework.builder.block = async function(target) {
 }
 framework.builder.blocks = async function(target) {
     if (target) {
-        var tagName = typeof target === "string" ? target : (target.closest('block, main') || target.closest('empty').previousElementSibling).tagName.toLowerCase();
+        var tagName = typeof target === "string" ? target : (target.closest('block, header, footer, main') || target.closest('empty').previousElementSibling).tagName.toLowerCase();
         var html = await ajax('raw/asset/html/template/template.blocks.' + tagName + '.html')
         var ppp = await window.parent.modal.popup(html);
         console.log(27, {
@@ -232,7 +232,8 @@ framework.on = async function(event) {
 
                         //$(window.top.dom.body.find('tool').all('ico')).forEach(o=>o.classList.remove('display-none'));
 
-                    } else {
+                    }
+                    else {
 
                         0 < 1 ? console.log({
                             focus: 'without'
@@ -255,7 +256,7 @@ framework.on = async function(event) {
 
                 } 
                 else {
-                    var media = selected.closest('[media]') ? selected.closest('[media]').getAttribute('media') : null;
+                    var media = selected && selected.closest('[media]') ? selected.closest('[media]').getAttribute('media') : null;
                     0 < 1 ? console.log({
                         focus: 'within',
                         el,
@@ -324,7 +325,8 @@ framework.on = async function(event) {
                                 });
                                 console.log(media, json);
                             }
-                        } else if (0 > 1) {
+                        } 
+                        else if (0 > 1) {
                             console.log({
                                 node
                             })
