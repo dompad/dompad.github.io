@@ -27,36 +27,6 @@ framework.builder.blocks = async function(target) {
         var tagName = typeof target === "string" ? target : (target.closest('block, header, footer, main') || target.closest('empty').previousElementSibling).tagName.toLowerCase();
         var html = await ajax('raw/asset/html/template/template.blocks.' + tagName + '.html')
         var ppp = await window.parent.modal.popup(html);
-        console.log(27, {
-            tagName,
-            target
-        }, typeof target);
-        0 > 1 ? ppp.find('card').lastElementChild.onclick = async(event)=>{
-            //framework.builder.block(event.target);
-            var box = event.target.closest('box');
-            if (box) {
-                var index = box.index() + 1;
-                var element = target.closest('empty').previousElementSibling;
-                var tagName = event.target.closest('[data-element]').dataset.element;
-                tagName = tagName === 'main' ? 'block' : tagName;
-                var asset = 'raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html';
-                var html = await ajax(asset)
-                //window.parent.modal.popup(html);
-                //var element = dom.body.find(tagName);
-                var block = framework.builder.focus();
-                if (element) {
-                    element.insertAdjacentHTML('beforeend', html);
-                    modal.exit(event.target)
-                }
-                console.log({
-                    asset,
-                    element,
-                    target,
-                    block,
-                    html
-                }, 'raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html');
-            }
-        } : null;
         console.log({
             target,
             html,

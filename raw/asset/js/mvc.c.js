@@ -806,6 +806,15 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
         },
 
+        component: async function(target) {
+            var box = target.closest('box');
+            var index = box.index();
+            var component = box.find('.component');
+            var root = component.shadowRoot;
+            var elem = root.lastElementChild;
+            console.log(810, {target, box, index, component, root, elem});  
+        },
+
         read: async function(target) {},
 
         update: async function(target) {
