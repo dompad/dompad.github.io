@@ -819,7 +819,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var selected = popup.selected;
             var clone = elem.cloneNode(true);
             console.log(821, {editor, popup, selected});
-            selected.replaceWith(clone);
+            const shadow = selected.attachShadow({mode: 'open'});
+            shadow.innerHTML = clone.outerHTML;
             modal.exit(popup);
         },
 
