@@ -160,6 +160,7 @@
 
     .component {
         overflow: hidden;
+        box-shadow: 0 0 10px -3px;
     }
 
     block > section, card > section, box > section {

@@ -2290,7 +2290,7 @@
 
 @media {
     [css-outline="1px dashed gray"] {
-        outline: 1px solid gray
+        outline: 1px solid gray;
     }
     
     .outline-4px-solid {

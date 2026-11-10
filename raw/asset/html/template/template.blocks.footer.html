@@ -1,36 +1,42 @@
-<block class="align-items-center height-100pct justify-content-center width-100pct" data-background-color="rgba(0,0,0,0.5)" data-backdrop-filter="blur(10px)">
-    <picture data-tap="modal.exit(event.target)"></picture>
-    <flex>
-        <card class="background-color-fff border-radius-10px display-inline-flex flex-direction-row margin-auto" data-element="main">
-            <column class="padding-20px width-160px">
-                <box class="font-size-16px gap-20px line-height-30px">
+<block class="align-items-center min-height-100pct justify-content-center width-100pct" css-background-color="rgba(0,0,0,0.5)" css-backdrop-filter="blur(10px)">
+    <flex css-position="absolute" css-height="100%" css-width="100%" data-tap="modal.exit(event.target)"></flex>
+    <flex class="margin-20px" css-height="100%" css-width="calc(100% - 40px)">
+        <card class="background-color-fff border-radius-10px margin-auto" css-width="100%" data-element="main">
+            <column class="padding-20px">
+                <box class="font-size-16px gap-20px">
                     <column>
-                        <text class="font-weight-bolder" data-tap="controller.builder.create(event.target)">Blank</text>
-                    </column>
-                    <column>
-                        <text class="font-weight-bolder">Media</text>
-                        <text class="font-weight-bolder">Merch</text>
-                        <text class="font-weight-bolder">Video</text>
-                        <text class="font-weight-bolder">Audio</text>
-                        <text class="font-weight-bolder">Photo</text>
+                        <text class="font-weight-bolder" css-display="inline-flex" css-line-height="36px">
+                            <span>Footer</span>
+                            <ico css-height="36px" css-margin-left="auto" css-width="36px" data-tap="modal.exit(event.target)">
+                                <n class="gg-close"></n>
+                            </ico>
+                        </text>
+                        <text class="line-height-18px">Select a global footer to be placed at the bottom of your application shell.</text>
                     </column>
                 </box>
             </column>
-            <column class="border-color-db border-left-1px-solid gap-10px padding-20px width-480px" data-columns="2" data-tap="controller.builder.create(event.target)">                
-                <box>
-                    <section>
-                        <picture class="background-color-000 height-50px width-100pct"></picture>
-                    </section>
-                </box>
-                <box>
-                    <section>
-                        <picture class="background-color-000 height-75px width-100pct"></picture>
-                    </section>
-                </box>
-                <box>
-                    <section>
-                        <picture class="background-color-000 height-100px width-100pct"></picture>
-                    </section>
+            <column class="gap-20px padding-20px">                
+                <box css-gap="5px">
+                    <section class="component" class="background-color-000 height-50px width-100pct"></section>
+                    <footer>
+                        <text css-background-color="#000" css-border-radius="20px" css-color="#fff" css-display="inline-flex" css-line-height="36px" css-margin-left="auto" data-tap="controller.builder.component(event.target)">
+                            <ico css-height="36px" css-width="36px">
+                                <n class="gg-math-plus"></n>
+                            </ico>
+                            <span css-padding-right="10px">Add</span>
+                        </text>
+                    </footer>
+                </box>                
+                <box css-gap="5px">
+                    <section class="component" class="background-color-000 height-50px width-100pct"></section>
+                    <footer>
+                        <text css-background-color="#000" css-border-radius="20px" css-color="#fff" css-display="inline-flex" css-line-height="36px" css-margin-left="auto" data-tap="controller.builder.component(event.target)">
+                            <ico css-height="36px" css-width="36px">
+                                <n class="gg-math-plus"></n>
+                            </ico>
+                            <span css-padding-right="10px">Add</span>
+                        </text>
+                    </footer>
                 </box>
             </column>
         </card>
