@@ -24,7 +24,7 @@ framework.builder.block = async function(target) {
 }
 framework.builder.blocks = async function(target) {
     if (target) {
-        var tagName = typeof target === "string" ? target : (target.closest('block, header, footer, main') || target.closest('empty').previousElementSibling).tagName.toLowerCase();
+        var tagName = typeof target === "string" ? target : (target.closest('block, header, footer, main') || target.closest('empty').previousElementSibling.parentNode).tagName.toLowerCase();
         var html = await ajax('raw/asset/html/template/template.blocks.' + tagName + '.html')
         var ppp = await window.parent.modal.popup(html);
         console.log({

@@ -1,6 +1,6 @@
 @media screen {
     body {
-        margin: 20px 0;
+        padding: 20px 0;
     }
     
     body:not([wireframe="true"]) empty {

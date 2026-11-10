@@ -651,4 +651,8 @@
     body block > * ~ *, body card > * ~ *, body card box > * ~ * {
         z-index: 12;
     }
+
+    body tool {
+        display: none;
+    }
 }
