@@ -1,5 +1,9 @@
 /*PSEUDO*/
 @media screen {
+    :host(.host) {
+        background: #cccccc;
+    }
+    
     [data-after]:after {
         content: attr(data-after);
     }
