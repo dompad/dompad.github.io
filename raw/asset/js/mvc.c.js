@@ -828,9 +828,14 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const cssgg = document.createElement("link");
             cssgg.setAttribute("rel", "stylesheet");
             cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+
+            const build = document.createElement("link");
+            build.setAttribute("rel", "stylesheet");
+            build.setAttribute("href", "/raw/asset/css/builder.css");
             
             shadow.innerHTML = clone.outerHTML;
             shadow.prepend(framework.css.render(shadow));
+            shadow.prepend(build);
             shadow.prepend(cssgg);
             shadow.prepend(reset);
             selected.setAttribute("shadow", true);

@@ -71,37 +71,6 @@
         }
     }
 
-    /*FOCUS*/
-    body[buildable="true"]:not([insertable]) > header:not([focus]):hover, body[buildable="true"]:not([insertable]) block:not([focus]):hover, body[buildable="true"]:not([insertable]) > footer:not([focus]):hover {
-        outline: 2px dashed #ff3b3080;
-        outline-offset: -2px;
-    }
-
-    body[buildable="true"]:not([insertable])[focus] > header[focus="header"], body[buildable="true"]:not([insertable])[focus] block[focus="block"], body[buildable="true"]:not([insertable])[focus] > footer[focus="footer"] {
-        outline: 2px solid #ff3b30;
-        outline-offset: -2px;
-    }
-
-    body[buildable="true"]:not([insertable]) > header card:hover, body[buildable="true"]:not([insertable]) block:not([focus="box"]) card:hover, body[buildable="true"]:not([insertable]):not([focus="box"]) > footer card:hover {
-        outline: 2px dashed #32cd3280;
-        outline-offset: 0px;
-    }
-
-    body[buildable="true"]:not([insertable])[focus] > header card[focus="card"], body[buildable="true"]:not([insertable])[focus] block card[focus="card"], body[buildable="true"]:not([insertable])[focus] > footer card[focus="card"] {
-        outline: 2px solid #32cd32;
-        outline-offset: 0px;
-    }
-
-    body[buildable="true"]:not([insertable]) > footer card box:hover, body[buildable="true"]:not([insertable]) > header card box:hover, body[buildable="true"]:not([insertable]) block card box:hover {
-        outline: 2px dashed #52b9d680;
-        outline-offset: 0px;
-    }
-
-    body[buildable="true"]:not([insertable])[focus] > footer card box[focus="box"], body[buildable="true"]:not([insertable])[focus] > header card box[focus="box"], body[buildable="true"]:not([insertable])[focus] card box[focus="box"] {
-        outline: 2px solid #52b9d6;
-        outline-offset: 0px;
-    }
-
     /*ELEMENTS*/
     body[buildable="true"] card:has(> :not(backdrop):not(empty):not(template):empty) {
         min-height: 50px;
@@ -165,17 +134,20 @@
     }
 
     body > main > page {
-        padding: 20px 0;
+        /* padding: 20px 0; */
     }
 
     body > header, body page > blocks > empty, body > footer {
         box-shadow: 0 0 10px -3px;
         display: flex;
         flex-direction: column;
-        margin: 0 20px;
+        margin: 0 20px 20px;
         width: calc(100% - 40px);
     }
 
+    body > header:has(.host[shadow="true"]) .host {
+    }
+    
     body:not([insertable]) insertable {
         display: none;
     }
@@ -239,6 +211,12 @@
 }
 
 @media screen {
+    .flex-1 {
+        flex: 1;
+    }
+}
+
+@media screen {
     .font-size-24px {
         font-size: 24px;
     }
@@ -253,6 +231,10 @@
 @media screen {
     .margin-auto {
         margin: auto;
+    }
+
+    .margin-left-auto {
+        margin-left: auto;
     }
 
     .padding-5px {

@@ -34,6 +34,7 @@
         <script src="//cdn.jsdelivr.net/npm/eruda"></script>
         <link href="index.css" rel="stylesheet">
         <link href="raw/asset/css/ui.css" rel="stylesheet">
+        <link href="raw/asset/css/gg.css" rel="stylesheet">
     </head>
     <body oncontextmenu="return true;" tabindex="0">
         <boot id="boot"></boot>
@@ -44,14 +45,14 @@
                     <text class="display-block font-weight-bolder">Add Site Header</text>
                     <text class="background-color-777 border-radius-5px color-fff display-block font-size-13px margin-auto padding-5px text-transform-uppercase width-100px" data-tap="framework.builder.blocks(event.target)">Add Block</text>
                 </column>
-                <flex>
+                <flex class="flex-1">
                     <ico>
                         <n class="gg-pen"></n>
                     </ico>
                     <ico>
                         <n class="gg-add"></n>
                     </ico>
-                    <ico class="margin-left-auto">
+                    <ico class="margin-left-auto" data-tap="framework.builder.delete(event.target)">
                         <n class="gg-trash"></n>
                     </ico>
                 </flex>
@@ -74,7 +75,7 @@
                     <text class="display-block font-weight-bolder">Add Site Footer</text>
                     <text class="background-color-777 border-radius-5px color-fff display-block font-size-13px margin-auto padding-5px text-transform-uppercase width-100px" data-tap="framework.builder.blocks(event.target)">Add Block</text>
                 </column>
-                <flex>
+                <flex class="flex-1">
                     <ico>
                         <n class="gg-pen"></n>
                     </ico>

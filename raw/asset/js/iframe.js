@@ -113,6 +113,22 @@ framework.builder.insert = function(target) {
         }
     }
 }
+framework.builder.delete = async function(target) {
+    var block = target.closest('block, header, footer');
+    var host = block.find('.host');
+    var shadow = host.shadowRoot;
+    var element = shadow.lastElementChild;
+    console.log(122, { block, host, shadow, element });
+
+    if(host.selected) {
+        
+    } 
+    else {
+        var section = document.createElement('section');
+        section.className = 'host';
+        host.replaceWith(section);
+    }
+}
 
 framework.css = {}
 framework.css.render = (host) => {

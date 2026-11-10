@@ -475,7 +475,7 @@
     page, pages {
         display: inherit;
         position: relative;
-        overflow: hidden;
+        /* overflow: hidden; */
         /* height: 100%; */
     }
 

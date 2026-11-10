@@ -1,0 +1,42 @@
+/*FOCUS*/
+header:not([focus]):hover, 
+block:not([focus]):hover, 
+footer:not([focus]):hover {
+    outline: 2px dashed #ff3b3080;
+    outline-offset: 0px;
+}
+
+body[buildable="true"]:not([insertable])[focus] > header[focus="header"], 
+body[buildable="true"]:not([insertable])[focus] block[focus="block"], 
+body[buildable="true"]:not([insertable])[focus] > footer[focus="footer"] {
+    outline: 2px solid #ff3b30;
+    outline-offset: 0px;
+}
+
+header card:hover, 
+block card:hover, 
+footer card:hover {
+    outline: 2px dashed #32cd3280;
+    outline-offset: 0px;
+}
+
+body[buildable="true"]:not([insertable])[focus] > header card[focus="card"], 
+body[buildable="true"]:not([insertable])[focus] block card[focus="card"], 
+body[buildable="true"]:not([insertable])[focus] > footer card[focus="card"] {
+    outline: 2px solid #32cd32;
+    outline-offset: 0px;
+}
+
+footer card box:hover, 
+header card box:hover, 
+block card box:hover {
+    outline: 2px dashed #52b9d680;
+    outline-offset: 0px;
+}
+
+body[buildable="true"]:not([insertable])[focus] > footer card box[focus="box"], 
+body[buildable="true"]:not([insertable])[focus] > header card box[focus="box"], 
+body[buildable="true"]:not([insertable])[focus] card box[focus="box"] {
+    outline: 2px solid #52b9d6;
+    outline-offset: 0px;
+}
