@@ -8,7 +8,7 @@
     }
 
     body > header > section:empty, body > footer > section:empty {
-        display: none;
+        /*display: none;*/
     }
     
     body[buildable="true"] {
