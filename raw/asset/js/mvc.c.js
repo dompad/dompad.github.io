@@ -805,7 +805,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             }
 
         },
-
         component: async function(target) {
             var box = target.closest('box');
             var index = box.index();
