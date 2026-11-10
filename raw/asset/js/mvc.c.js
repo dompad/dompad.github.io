@@ -820,7 +820,20 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var clone = elem.cloneNode(true);
             console.log(821, {editor, popup, selected});
             const shadow = selected.attachShadow({mode: 'open'});
+
+            const reset = document.createElement("link");
+            reset.setAttribute("rel", "stylesheet");
+            reset.setAttribute("href", "/raw/asset/css/reset.css");
+                
+            const cssgg = document.createElement("link");
+            cssgg.setAttribute("rel", "stylesheet");
+            cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+            
             shadow.innerHTML = clone.outerHTML;
+            //shadow.prepend(framework.css.render(shadow));
+            shadow.prepend(cssgg);
+            shadow.prepend(reset);
+            
             modal.exit(popup);
         },
 
