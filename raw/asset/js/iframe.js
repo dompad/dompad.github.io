@@ -70,12 +70,19 @@ framework.builder.blocks = async function(target) {
                 var component = components[c];
                 var block = await ajax('raw/asset/html/block/' + tagName + '/' + tagName + '.' + c + '.html');
                 const shadow = component.attachShadow({mode: "open"});
-                const link = document.createElement("link");
-                link.setAttribute("rel", "stylesheet");
-                link.setAttribute("href", "/raw/asset/css/reset.css");
+                
+                const reset = document.createElement("link");
+                reset.setAttribute("rel", "stylesheet");
+                reset.setAttribute("href", "/raw/asset/css/reset.css");
+                
+                const cssgg = document.createElement("link");
+                cssgg.setAttribute("rel", "stylesheet");
+                cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+                
                 shadow.innerHTML = block;
                 shadow.prepend(framework.css.render(shadow));
-                shadow.prepend(link);
+                shadow.prepend(cssgg);
+                shadow.prepend(reset);
                 c++;
             } while(c < components.length);
         }
