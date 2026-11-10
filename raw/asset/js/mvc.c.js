@@ -812,7 +812,16 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var component = box.find('.component');
             var root = component.shadowRoot;
             var elem = root.lastElementChild;
-            console.log(810, {target, box, index, component, root, elem});  
+            var tagName = elem.tagName.toLowerCase();
+            console.log(810, {target, box, index, component, root, elem, tagName});
+
+            var editor = byId('iframe-editor');
+            var popup = target.closest('aside');
+            var selected = popup.selected;
+            var clone = elem.cloneNode(true);
+            console.log(821, {editor, popup, selected});
+            selected.replaceWith(clone);
+            modal.exit(popup);
         },
 
         read: async function(target) {},

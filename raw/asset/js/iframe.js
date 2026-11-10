@@ -32,6 +32,7 @@ framework.builder.blocks = async function(target) {
             html,
             ppp
         });
+        ppp.selected = target.closest('empty').previousElementSibling;
         var components = ppp.all("section.component");
         console.log(66, {components});
         if(components.length > 0) {
