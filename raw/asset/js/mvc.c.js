@@ -830,7 +830,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             cssgg.setAttribute("href", "/raw/asset/css/gg.css");
             
             shadow.innerHTML = clone.outerHTML;
-            //shadow.prepend(framework.css.render(shadow));
+            shadow.prepend(framework.css.render(shadow));
             shadow.prepend(cssgg);
             shadow.prepend(reset);
             
