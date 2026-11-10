@@ -469,7 +469,7 @@ window.on.touch = {
         window[library.dataset.api][library.dataset.method][library.dataset.resource](target);
     }
 
-    window.framework && framework.on ? framework.on(event) : null;
+    //window.framework && framework.on ? framework.on(event) : null;
 }
 );
 
