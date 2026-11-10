@@ -833,7 +833,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             shadow.prepend(framework.css.render(shadow));
             shadow.prepend(cssgg);
             shadow.prepend(reset);
-            shadow.setAttribute("shadow", true);
+            selected.setAttribute("shadow", true);
             
             modal.exit(popup);
         },
