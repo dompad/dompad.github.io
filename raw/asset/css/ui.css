@@ -1,9 +1,13 @@
 @media screen {
+    body {
+        margin: 20px 0;
+    }
+    
     body:not([wireframe="true"]) empty {
         display: none;
     }
 
-    body > header:empty, body > footer:empty {
+    body > header > section:empty, body > footer > section:empty {
         display: none;
     }
     
@@ -145,6 +149,18 @@
     body[buildable] block, body[buildable] > header, body[buildable] > footer {
         transition: 0.3s transform;
         /* margin: 1px 0; */
+    }
+
+    body > main > page {
+        padding: 20px 0;
+    }
+
+    body > header, body page > blocks > empty, body > footer {
+        box-shadow: 0 0 10px -3px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+        width: calc(100% - 40px);
     }
 
     body:not([insertable]) insertable {

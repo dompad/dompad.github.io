@@ -576,7 +576,8 @@ async function viewPage(vp) {
                 var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
                 var pg = atob((await github.raw.path(path)).content);
                 if(pg === '') {
-                    pg = '<blocks></blocks>';
+                    var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
+                    pg = '<blocks><empty><section></section>'+empty.outerHTML+'</empty></blocks>';
                 }
             } else {
                 var path = vp.dataset.fetch;

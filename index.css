@@ -81,7 +81,7 @@
 @media screen {
     html, body {
         /* min-height: 100%; */
-        height: 100%;
+        /* height: 100%; */
     }
     html, body, main, page, pages, blocks {
         /* display: flex; */

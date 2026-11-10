@@ -116,10 +116,12 @@ async function init() {
         var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
         var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
         if(vp) {
-            if(!vp.find('blocks')) {
-                vp.insertAdjacentHTML('beforeend', '<blocks></blocks>');
+            if(vp.find('blocks')) {
+                //vp.insertAdjacentHTML('beforeend', '<blocks><section></section>'+empty.outerHTML+'</blocks>');
+            } else {
+                //vp.insertAdjacentHTML('beforeend', '<blocks><section></section>'+empty.outerHTML+'</blocks>');
             }
-            vp.find('blocks').insertAdjacentHTML('afterend', empty.outerHTML);
+            //vp.find('blocks').find('section').insertAdjacentHTML('aftereend', empty.outerHTML);
         } else {
             alert("This page does not exist")
             //var confirm = modal.confirm("This page does not exist");
