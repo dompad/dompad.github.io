@@ -3,6 +3,10 @@
     :host(.host) {
         border-bottom: 1px solid #cccccc;
     }
+
+    :host(.host) + empty {
+        background-color: #ddd;
+    }
     
     [data-after]:after {
         content: attr(data-after);
