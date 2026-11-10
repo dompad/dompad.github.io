@@ -2,8 +2,14 @@
     .host[shadow="true"] + empty > :nth-child(1) {
         display: none;
     }
+    .host:not([shadow="true"]) + empty > :nth-child(1) {
+        display: flex;
+    }
     .host[shadow="true"] + empty > :nth-child(2) {
         display: flex;
+    }
+    .host:not([shadow="true"]) + empty > :nth-child(2) {
+        display: none;
     }
     
     body {
