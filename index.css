@@ -158,6 +158,10 @@
     box {
     }
 
+    .component {
+        overflow: hidden;
+    }
+
     block > section, card > section, box > section {
         width: 100%;
     }

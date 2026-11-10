@@ -763,6 +763,40 @@
 }
 
 @media {
+    .gg-facebook {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--ggs, 1));
+        width: 20px;
+        height: 20px;
+    }
+    .gg-facebook::after,
+    .gg-facebook::before {
+        content: "";
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+    }
+    .gg-facebook::before {
+        width: 8px;
+        height: 20px;
+        border-left: 4px solid;
+        border-top: 4px solid;
+        border-top-left-radius: 5px;
+        left: 6px;
+    }
+    .gg-facebook::after {
+        width: 10px;
+        height: 4px;
+        background: currentColor;
+        top: 7px;
+        left: 4px;
+        transform: skew(-5deg);
+    }
+}
+
+@media {
     .gg-file {
         box-sizing: border-box;
         position: relative;
@@ -2096,6 +2130,45 @@
         border-top-right-radius: 2px;
         top: -7px;
         left: -2px
+    }
+}
+
+@media {
+    .gg-twitter {
+      box-sizing: border-box;
+      position: relative;
+      display: block;
+      transform: scale(var(--ggs, 1));
+      width: 20px;
+      height: 20px;
+    }
+    .gg-twitter::after,
+    .gg-twitter::before {
+      content: "";
+      display: block;
+      position: absolute;
+      box-sizing: border-box;
+      left: 4px;
+    }
+    .gg-twitter::before {
+      width: 9px;
+      height: 14px;
+      border-left: 4px solid;
+      border-bottom: 4px solid;
+      border-bottom-left-radius: 6px;
+      background: linear-gradient(to left, currentColor 12px, transparent 0)
+        no-repeat center 2px/10px 4px;
+      top: 4px;
+    }
+    .gg-twitter::after {
+      width: 4px;
+      height: 4px;
+      background: currentColor;
+      border-radius: 20px;
+      top: 2px;
+      box-shadow:
+        7px 4px 0,
+        7px 12px 0;
     }
 }
 
