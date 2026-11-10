@@ -31,7 +31,7 @@ framework.builder.blocks = async function(target) {
             tagName,
             target
         }, typeof target);
-        ppp.find('card').lastElementChild.onclick = async(event)=>{
+        0 > 1 ? ppp.find('card').lastElementChild.onclick = async(event)=>{
             //framework.builder.block(event.target);
             var box = event.target.closest('box');
             if (box) {
@@ -56,12 +56,14 @@ framework.builder.blocks = async function(target) {
                     html
                 }, 'raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html');
             }
-        }
+        } : null;
         console.log({
             target,
             html,
             ppp
         });
+        var components = ppp.all("component");
+        console.log("66", { components });
     }
 }
 framework.builder.focus = ()=>{

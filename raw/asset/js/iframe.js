@@ -31,7 +31,7 @@ framework.builder.blocks = async function(target) {
             tagName,
             target
         }, typeof target);
-        ppp.find('card').lastElementChild.onclick = async(event)=>{
+        0 > 1 ? ppp.find('card').lastElementChild.onclick = async(event)=>{
             //framework.builder.block(event.target);
             var box = event.target.closest('box');
             if (box) {
@@ -56,12 +56,29 @@ framework.builder.blocks = async function(target) {
                     html
                 }, 'raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html');
             }
-        }
+        } : null;
         console.log({
             target,
             html,
             ppp
         });
+        var components = ppp.all("section.component");
+        console.log(66, {components});
+        if(components.length > 0) {
+            var c = 0;
+            do {
+                var component = components[c];
+                var block = await ajax('raw/asset/html/block/' + tagName + '/' + tagName + '.' + c + '.html');
+                const shadow = component.attachShadow({mode: "open"});
+                const link = document.createElement("link");
+                link.setAttribute("rel", "stylesheet");
+                link.setAttribute("href", "/raw/asset/css/reset.css");
+                shadow.innerHTML = block;
+                shadow.prepend(framework.css.render(shadow));
+                shadow.prepend(link);
+                c++;
+            } while(c < components.length);
+        }
     }
 }
 framework.builder.focus = ()=>{
@@ -117,6 +134,38 @@ framework.builder.insert = function(target) {
             modal.exit(target);
         }
     }
+}
+
+framework.css = {}
+framework.css.render = (host) => {
+    console.log(141, { host });
+    var elems = host.lastElementChild.all("*");
+    var rules = [];
+    elems.forEach(elem => {
+        if(elem.attributes.length > 0) {
+            console.log(`Element: <${elem.tagName.toLowerCase()}>`);
+            for (let i = 0; i < elem.attributes.length; i++) {
+                const attr = elem.attributes[i]; //console.log(147, attr);
+                if(attr.name.startsWith('css-')) {
+                    var property = attr.name.replace("css-", "");
+                    var value = attr.value;
+                    var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
+                    console.log({
+                        css: property + ' - ' + value,
+                        kv: `  ${attr.name} = "${attr.value}"`,
+                        rule: rule
+                    });
+                    rules.push(rule);
+                }
+            }
+        }
+    });
+    var stylesheet = rules.join("\n");    
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = stylesheet;
+    console.log(163, {rules, stylesheet});
+    return style;
 }
 
 framework.on = async function(event) {

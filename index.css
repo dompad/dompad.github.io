@@ -130,6 +130,10 @@
         overflow-x: hidden
     }
 
+    component {
+        display: flex;
+    }
+
     blocks {
         /* min-height: 100%; */
         width: 100%;

@@ -1,36 +1,21 @@
-<block class="align-items-center height-100pct justify-content-center width-100pct" css-background-color="rgba(0,0,0,0.5)" css-backdrop-filter="blur(10px)">
-    <picture data-tap="modal.exit(event.target)"></picture>
-    <flex>
-        <card class="background-color-fff border-radius-10px display-inline-flex flex-direction-row margin-auto" data-element="main">
-            <column class="padding-20px width-160px">
+<block class="align-items-center min-height-100pct justify-content-center width-100pct" css-background-color="rgba(0,0,0,0.5)" css-backdrop-filter="blur(10px)">
+    <flex css-position="absolute" css-height="100%" css-width="100%" data-tap="modal.exit(event.target)"></flex>
+    <flex class="margin-20px" css-height="100%" css-width="calc(100% - 40px)">
+        <card class="background-color-fff border-radius-10px margin-auto padding-y-20px" css-width="100%" data-element="main">
+            <column class="padding-20px">
                 <box class="font-size-16px gap-20px line-height-30px">
                     <column>
-                        <text class="font-weight-bolder" data-tap="controller.builder.create(event.target)">Blank</text>
-                    </column>
-                    <column>
-                        <text class="font-weight-bolder">Media</text>
-                        <text class="font-weight-bolder">Merch</text>
-                        <text class="font-weight-bolder">Video</text>
-                        <text class="font-weight-bolder">Audio</text>
-                        <text class="font-weight-bolder">Photo</text>
+                        <text class="font-weight-bolder">Header</text>
+                        <text>Select a global header to be placed at the top of your application shell.</text>
                     </column>
                 </box>
             </column>
-            <column class="border-color-db border-left-1px-solid gap-10px padding-20px width-480px" data-columns="2" data-tap="controller.builder.create(event.target)">                
+            <column class="gap-20px padding-20px" data-tap="controller.builder.create(event.target)">                
                 <box>
-                    <section>
-                        <picture class="background-color-000 height-50px width-100pct"></picture>
-                    </section>
-                </box>
+                    <section class="component" class="background-color-000 height-50px width-100pct" css-outline="1px dashed gray"></section>
+                </box>                
                 <box>
-                    <section>
-                        <picture class="background-color-000 height-75px width-100pct"></picture>
-                    </section>
-                </box>
-                <box>
-                    <section>
-                        <picture class="background-color-000 height-100px width-100pct"></picture>
-                    </section>
+                    <section class="component" class="background-color-000 height-50px width-100pct" css-outline="1px dashed gray"></section>
                 </box>
             </column>
         </card>

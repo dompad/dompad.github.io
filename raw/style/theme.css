@@ -2289,6 +2289,10 @@
 }
 
 @media {
+    [css-outline="1px dashed gray"] {
+        outline: 1px solid gray
+    }
+    
     .outline-4px-solid {
         outline: 4px solid;
     }
@@ -2331,6 +2335,14 @@
 
 /*PADDING*/
 @media screen {
+    [css-padding="20px"] {
+        padding: 20px;
+    }
+    
+    [css-padding="20px 0"] {
+        padding: 20px 0;
+    }
+    
     .padding-0 {
         padding: 0;
     }
@@ -2485,11 +2497,6 @@
         padding-top: 10px;
     }
 
-    .padding-y-20px {
-        padding-bottom: 20px;
-        padding-top: 20px;
-    }
-
     .padding-y-50px {
         padding-bottom: 50px;
         padding-top: 50px;
@@ -2566,7 +2573,7 @@
 
 /*POSITION*/
 @media screen {
-    .position-absolute {
+    .position-absolute, [css-position="absolute"] {
         position: absolute;
     }
 
