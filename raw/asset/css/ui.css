@@ -1,8 +1,10 @@
 @media screen {
-    .host[shadow="true"] + empty {
-        background-color: #ddd;
+    .host[shadow="true"] + empty > :nth-child(1) {
+        display: none;
     }
-    
+    .host[shadow="true"] + empty > :nth-child(2) {
+        display: flex;
+    }
     
     body {
         padding: 20px 0;
