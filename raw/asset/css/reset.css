@@ -150,15 +150,13 @@
 
     block > section, card > section, box > section {
         width: 100%;
-    }
-
-    block > section, card > section, box > section {
         position: relative;
-    }
-
-    block > section, card > section, box > section {
         display: flex;
         flex: 1;
+    }
+
+    card > section {
+        flex-wrap: wrap;
     }
 
     header > picture, nav > picture, footer > picture, block > picture, card > picture, box > picture {

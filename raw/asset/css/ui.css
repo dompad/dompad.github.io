@@ -146,6 +146,7 @@
     }
 
     body > header:has(.host[shadow="true"]) .host {
+    overflow: hidden;
     }
     
     body:not([insertable]) insertable {

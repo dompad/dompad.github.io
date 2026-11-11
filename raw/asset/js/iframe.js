@@ -113,15 +113,61 @@ framework.builder.insert = function(target) {
         }
     }
 }
+
+framework.builder.tap = function(target) {
+    console.log(118, { target });
+}
+
+framework.builder.create = async function(target) {
+    var block = target.closest('block, header, footer');
+    var host = block.find('.host');
+    var shadow = host.shadowRoot;
+    var element = shadow.lastElementChild;
+    var selected = host.selected;
+    console.log(122, { block, host, shadow, element, selected });
+
+    if(selected) {
+        var tagName = selected.tagName.toLowerCase();
+        if(tagName === 'header') {
+            var card = document.createElement('card');
+            card.innerHTML = '<section></section>';
+            element.find('section').insertAdjacentHTML('beforeEnd', card.outerHTML);
+        }
+        else if(tagName === 'card') {            
+            var box = document.createElement('box');
+            box.innerHTML = '<section></section>';
+            selected.find('section').insertAdjacentHTML('beforeEnd', box.outerHTML);
+        }
+    }
+}
 framework.builder.delete = async function(target) {
     var block = target.closest('block, header, footer');
     var host = block.find('.host');
     var shadow = host.shadowRoot;
     var element = shadow.lastElementChild;
-    console.log(122, { block, host, shadow, element });
+    var selected = host.selected;
+    console.log(122, { block, host, shadow, element, selected });
 
-    if(host.selected) {
-        
+    if(selected) {
+        var tagName = selected.tagName.toLowerCase();
+        if(['block', 'header', 'footer'].includes(tagName)) {
+            var section = document.createElement('section');
+            section.className = 'host';
+            host.replaceWith(section);            
+        }
+        else if(tagName === 'card') {
+            var parent = selected.closest('block, header, footer');
+            parent.setAttribute('focus', parent.tagName.toLowerCase());
+            host.selected = parent;
+            selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove();          
+        }
+        else if(tagName === 'box') {
+            var parent = selected.closest('card');
+            parent.setAttribute('focus', 'card');
+            element.setAttribute('focus', 'card');
+            host.selected = parent;
+            selected.remove();         
+        }
     } 
     else {
         var section = document.createElement('section');

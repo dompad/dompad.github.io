@@ -819,6 +819,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var selected = popup.selected;
             var clone = elem.cloneNode(true);
             console.log(821, {editor, popup, selected});
+
+            clone.setAttribute('focus', tagName);
             const shadow = selected.attachShadow({mode: 'open'});
 
             const reset = document.createElement("link");
@@ -839,12 +841,16 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             shadow.prepend(cssgg);
             shadow.prepend(reset);
             selected.setAttribute("shadow", true);
+
+            console.log(843, shadow.lastElementChild);
+            selected.selected = shadow.lastElementChild;
+            shadow.lastElementChild.addEventListener("click", (event) => {
+                controller.builder.tap(event.target, selected);
+            });
             
             modal.exit(popup);
         },
-
         read: async function(target) {},
-
         update: async function(target) {
             var dock = target.closest('pages > header');
             //var toolset = dock.children[0];
@@ -910,7 +916,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 }) : null;
             }
         },
-
         delete: async function(target) {
             var iframe = byId('iframe-editor');
             var doc = iframe.contentWindow.document;
@@ -960,6 +965,23 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 focus.remove();
                 //parent ? $([parent.closest('body'), parent]).attr('focus', parent.tagName.toLowerCase()) : null;
             }
+        },
+
+        tap: function(target, host) {
+            var tagName = target.tagName.toLowerCase();
+            if(['block', 'card', 'box'].includes(tagName)) {
+                var element = target;
+            } else {
+                var element = target.closest('block, box, card, footer, header');
+            }
+            var focus = element.tagName.toLowerCase();
+            var block = target.closest('block, footer, header');
+            console.log(969, { target, tagName, element, focus, block });
+            block.removeAttribute('focus');
+            block.querySelector('[focus]') ? block.querySelector('[focus]').removeAttribute('focus') : null;
+            element.setAttribute('focus', focus);
+            block.setAttribute('focus', focus)
+            host.selected = element;
         },
 
         push: async function() {
