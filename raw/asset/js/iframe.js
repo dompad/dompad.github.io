@@ -166,7 +166,7 @@ framework.builder.delete = async function(target) {
             parent.setAttribute('focus', 'card');
             element.setAttribute('focus', 'card');
             host.selected = parent;
-            selected.remove();         
+            selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove(); 
         }
     } 
     else {
