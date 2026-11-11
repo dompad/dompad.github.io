@@ -168,11 +168,6 @@ framework.builder.delete = async function(target) {
             host.selected = parent;
             selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove(); 
         }
-    } 
-    else {
-        var section = document.createElement('section');
-        section.className = 'host';
-        host.replaceWith(section);
     }
 }
 
