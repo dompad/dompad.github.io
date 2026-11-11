@@ -114,10 +114,36 @@ framework.builder.insert = function(target) {
     }
 }
 
-framework.builder.tap = function(target) {
-    console.log(118, { target });
+framework.tools = {};
+framework.tools.path = function(target) {
+    console.log(119, { target });
+    var block = target.closest('block, header, footer');
+    var host = block.find('.host');
+    var shadow = host.shadowRoot;
+    var element = shadow.lastElementChild;
+    var selected = host.selected;
+    console.log(122, { block, host, shadow, element, selected });
+
+    if(selected) {
+        
+    }
 }
 
+framework.builder.tap = function(target) {
+    console.log(118, { target });
+        var tagName = selected.tagName.toLowerCase();
+        if(tagName === 'card') {
+            var parent = selected.closest('block, header, footer');
+            parent.setAttribute('focus', parent.tagName.toLowerCase());
+            host.selected = parent;          
+        }
+        else if(tagName === 'box') {
+            var parent = selected.closest('card');
+            parent.setAttribute('focus', 'card');
+            element.setAttribute('focus', 'card');
+            host.selected = parent;
+        }
+}
 framework.builder.create = async function(target) {
     var block = target.closest('block, header, footer');
     var host = block.find('.host');

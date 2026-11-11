@@ -1,27 +1,6 @@
 window.framework = {};
 
 framework.builder = {};
-framework.builder.block = async function(target) {
-    var box = target.closest('box');
-    if (box) {
-        var index = box.index() + 1;
-        var tagName = target.closest('card').dataset.element;
-        var html = await ajax('raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html')
-        //window.parent.modal.popup(html);
-        var element = dom.body.find(tagName);
-        var block = framework.builder.focus();
-        if (element) {
-            element.insertAdjacentHTML('beforeend', html);
-            modal.exit(target)
-        }
-        console.log({
-            element,
-            target,
-            block,
-            html
-        }, 'raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html');
-    }
-}
 framework.builder.blocks = async function(target) {
     if (target) {
         var tagName = typeof target === "string" ? target : (target.closest('block, main') || target.closest('empty').previousElementSibling).tagName.toLowerCase();
@@ -120,6 +99,7 @@ framework.builder.insert = function(target) {
         }
     }
 }
+
 framework.branding = {};
 framework.branding.appName = event=>{
     var target = event.target;
