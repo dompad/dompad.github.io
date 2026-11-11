@@ -129,13 +129,15 @@ framework.tools.path = function(target) {
         if(tagName === 'card') {
             var parent = selected.closest('block, header, footer');
             parent.setAttribute('focus', parent.tagName.toLowerCase());
-            host.selected = parent;         
+            host.selected = parent;
+            selected.removeAttribute('focus');
         }
         else if(tagName === 'box') {
             var parent = selected.closest('card');
             parent.setAttribute('focus', 'card');
             element.setAttribute('focus', 'card');
             host.selected = parent;
+            selected.removeAttribute('focus');
         }
     }
 }
