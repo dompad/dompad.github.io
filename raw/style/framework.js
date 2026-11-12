@@ -561,6 +561,17 @@ framework.css.render = (host) => {
         }
     });
     let unique = rules.filter((item, index) => rules.indexOf(item) === index);
+    unique.sort((a, b) => {
+        const startsWithPlaceA = a.startsWith("@media screen");
+        const startsWithPlaceB = b.startsWith("@media screen");    
+        if (startsWithPlaceA && !startsWithPlaceB) {
+            return 1;
+        }
+        if (!startsWithPlaceA && startsWithPlaceB) {
+            return -1;
+        }
+        return a.localeCompare(b);
+    });
     var stylesheet = unique.join("\n");    
     const style = document.createElement('style');
     style.type = 'text/css';
