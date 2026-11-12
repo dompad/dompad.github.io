@@ -407,6 +407,7 @@
     iframe {
         border: 0;
         background: #fff;
+        display: flex;
     }
 
     input {
@@ -473,7 +474,7 @@
     }
 
     page, pages {
-        display: inherit;
+        display: flex;
         position: relative;
         /* overflow: hidden; */
         /* height: 100%; */

@@ -15,10 +15,6 @@
     body {
         padding: 20px 0;
     }
-    
-    body:not([wireframe="true"]) empty {
-        display: none;
-    }
 
     body > header > section:empty, body > footer > section:empty {
         /*display: none;*/

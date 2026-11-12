@@ -485,7 +485,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             })
         },
         editor: async () => {
-
             const iframe = byId('iframe-editor');
             const block = iframe.closest('pages');
             const header = block.find('header');
@@ -494,27 +493,12 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = iframe.closest('main nav + pages');
 
-            const builder = iframe.closest('pages[data-page="/dashboard/*/*/build"]');
+            const builder = iframe.closest('pages[data-page="/dashboard/*/*/build/er"]');
             builder.setAttribute("css-transform", "translateY(0)");
 
             const win = iframe.contentWindow;
             const head = win.document.head;
             const body = win.document.body;
-
-            if (head.find) {
-                const css = head.find("#style-editor");
-                //header.classList.remove('display-none');
-                builder.classList.add('border-top-left-radius-10px');
-                builder.classList.add('border-top-right-radius-10px');
-                builder.classList.add('margin-top-10px');
-                builder.classList.add('margin-x-20px');
-                builder.setAttribute("css-width", "calc(100% - 40px)");
-                //block.find('builder-toolbar-preview').classList.add('display-none');
-                //css.setAttribute('href', 'raw/css/editor.css')
-            }
-
-            iframe.contentWindow.document.body.setAttribute('buildable', true);
-            iframe.contentWindow.document.body.setAttribute('wireframe', true);
 
             var path = route.path;
             var dir = rout.ed.dir(path);
@@ -528,8 +512,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             0 < 1 ? console.log(528, {
                 json
             }) : null;
-            //alert("controller.build.editor: " + href);
-
             if(json) {
                 iframe.closest('pages').find('[placeholder="Page Name"]').textContent = json.title;
                 iframe.closest('pages').find('[placeholder="/page-name"]').textContent = json.slug;
@@ -562,7 +544,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             }
         },
         index: async () => {
-
             const iframe = byId('iframe-editor');
             const block = dom.body.find('[data-page="/dashboard/*/*/build"]');
             //iframe.closest('pages');
@@ -572,28 +553,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = block.closest('main nav + pages');
             const toggle = 0 < 1;
-
-            nav.classList.remove('display-none');
-            //nav.getAttribute("css-dw960px-transform") = "translateX(0%)";
-
-            //blocks.classList.add('left-320px');
-            //blocks.getAttribute("css-dw960px-transform") = "0";
-
-            const builder = iframe.closest('pages[data-page="/dashboard/*/*/build"]');
-            builder.setAttribute("css-transform", "translateY(calc(100% - 50px))");
-            //block.dataset.height = "calc(100% - 10px)";
-            //block.dataset.width = "calc(100% - 260px)";
-
-            if (0 > 1 && iframe) {
-                const css = head.find("#style-editor");
-                header.classList.remove('display-none');
-                block.classList.add('border-top-left-radius-10px');
-                block.classList.add('border-top-right-radius-10px');
-                block.classList.add('margin-top-10px');
-                block.classList.add('margin-x-10px');
-                //block.find('builder-toolbar-preview').classList.add('display-none');
-                css.removeAttribute('href')
-            }
         },
         preview: async function() {
 
