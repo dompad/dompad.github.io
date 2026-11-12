@@ -520,8 +520,6 @@ framework.branding.marginSize = event=>{
     $(target.closest('card').all('foreignObject')).attr('x', x).attr('y', y);
 }
 
-
-
 framework.css = {}
 framework.css.render = (host) => {
     console.log(141, { host });
@@ -533,24 +531,41 @@ framework.css.render = (host) => {
             for (let i = 0; i < elem.attributes.length; i++) {
                 const attr = elem.attributes[i]; //console.log(147, attr);
                 if(attr.name.startsWith('css-')) {
-                    var property = attr.name.replace("css-", "");
-                    var value = attr.value;
-                    var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
-                    console.log({
-                        css: property + ' - ' + value,
-                        kv: `  ${attr.name} = "${attr.value}"`,
-                        rule: rule
-                    });
-                    rules.push(rule);
+                    var parts = attr.name.split('-');
+                    if(parts[1].startsWith('dw')) {
+                        var width = parts[1].split('dw')[1];
+                        var property = parts[2];
+                        var value = attr.value; //css-dw960px-display="none"
+                        var rule = "@media screen and (max-width: " + width + ") { [" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " } }";
+                        console.log(542, 'media screen', {
+                            css: property + ' - ' + value,
+                            kv: `${attr.name} = "${attr.value}"`,
+                            rule: rule,
+                            width: width
+                        });
+                        rules.push(rule);
+                    }
+                    else {
+                        var property = attr.name.replace("css-", "");
+                        var value = attr.value;
+                        var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
+                        console.log(551, 'css rule', {
+                            css: property + ' - ' + value,
+                            kv: `${attr.name} = "${attr.value}"`,
+                            rule: rule
+                        });
+                        rules.push(rule);
+                    }
                 }
             }
         }
     });
-    var stylesheet = rules.join("\n");    
+    let unique = rules.filter((item, index) => rules.indexOf(item) === index);
+    var stylesheet = unique.join("\n");    
     const style = document.createElement('style');
     style.type = 'text/css';
     style.innerHTML = stylesheet;
-    console.log(163, {rules, stylesheet});
+    console.log(163, {rules, stylesheet, unique});
     return style;
 }
 

@@ -51,7 +51,7 @@ framework.builder.blocks = async function(target) {
                 cssgg.setAttribute("href", "/raw/asset/css/gg.css");
                 
                 shadow.innerHTML = block;
-                shadow.prepend(framework.css.render(shadow));
+                shadow.prepend(window.parent.framework.css.render(shadow));
                 shadow.prepend(cssgg);
                 shadow.prepend(reset);
                 c++;
@@ -208,38 +208,6 @@ framework.builder.delete = async function(target) {
             selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove(); 
         }
     }
-}
-
-framework.css = {}
-framework.css.render = (host) => {
-    console.log(141, { host });
-    var elems = host.lastElementChild.all("*");
-    var rules = [];
-    elems.forEach(elem => {
-        if(elem.attributes.length > 0) {
-            console.log(`Element: <${elem.tagName.toLowerCase()}>`);
-            for (let i = 0; i < elem.attributes.length; i++) {
-                const attr = elem.attributes[i]; //console.log(147, attr);
-                if(attr.name.startsWith('css-')) {
-                    var property = attr.name.replace("css-", "");
-                    var value = attr.value;
-                    var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
-                    console.log({
-                        css: property + ' - ' + value,
-                        kv: `  ${attr.name} = "${attr.value}"`,
-                        rule: rule
-                    });
-                    rules.push(rule);
-                }
-            }
-        }
-    });
-    var stylesheet = rules.join("\n");    
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.innerHTML = stylesheet;
-    console.log(163, {rules, stylesheet});
-    return style;
 }
 
 framework.on = async function(event) {
