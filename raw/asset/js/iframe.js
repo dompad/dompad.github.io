@@ -77,6 +77,7 @@ framework.builder.create = async function(target) {
         else if(tagName === 'box') {
             var html = await ajax('raw/asset/html/template/template.blocks.cells.html')
             var ppp = await window.parent.modal.popup(html);
+            ppp.selected = selected;
             console.log({
                 target,
                 html,
