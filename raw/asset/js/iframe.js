@@ -74,6 +74,15 @@ framework.builder.create = async function(target) {
             box.innerHTML = '<section></section>';
             selected.find('section').insertAdjacentHTML('beforeEnd', box.outerHTML);
         }
+        else if(tagName === 'box') {
+            var html = await ajax('raw/asset/html/template/template.blocks.cells.html')
+            var ppp = await window.parent.modal.popup(html);
+            console.log({
+                target,
+                html,
+                ppp
+            });   
+        }
     }
 }
 framework.builder.delete = async function(target) {
