@@ -590,7 +590,9 @@ framework.tools.close = function(target) {
 framework.tools.elements = function(target) {
     var text = target.closest("[data-value]");
     var value = text.dataset.value;
-    console.log(591, { target, text, value });
+    var ppp = target.closest('aside');
+    var selected = ppp.selected;
+    console.log(591, { target, text, value, ppp, selected });
 }
 framework.tools.page = function(target) {
     var pages = byId('iframe-editor').closest('pages');
