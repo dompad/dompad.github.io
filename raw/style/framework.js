@@ -580,6 +580,14 @@ framework.css.render = (host) => {
     return style;
 }
 
+framework.tools = {}
+framework.tools.close = function(target) {
+    var pages = byId('iframe-editor').closest('pages');
+    var tools = pages.nextElementSibling;
+    pages.removeAttribute('css-dw800px-margin-top');
+    tools.setAttribute('css-dw800px-bottom', '100%');
+}
+
 window.tool = {}
 
 window.tool.set = {};

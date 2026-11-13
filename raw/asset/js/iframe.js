@@ -209,6 +209,37 @@ framework.builder.delete = async function(target) {
         }
     }
 }
+framework.builder.update = function(target) {
+    var block = target.closest('block, header, footer');
+    var host = block.find('.host');
+    var shadow = host.shadowRoot;
+    var element = shadow.lastElementChild;
+    var selected = host.selected;
+    console.log(218, { block, host, shadow, element, selected });
+
+    if(selected) {
+        var iframe = window.parent.byId('iframe-editor');
+        var pages = iframe.closest('pages');
+        var tools = pages.nextElementSibling;
+        var tagName = selected.tagName.toLowerCase();
+        tools.selected = selected;
+        $(tools.querySelector('blocks').children).attr('css-display', 'none');
+        pages.setAttribute('css-dw800px-margin-top', '50vh');
+        tools.setAttribute('css-dw800px-bottom', '50vh')
+        if(['block', 'header', 'footer'].includes(tagName)) {
+            var toolset = tools.querySelector("[data-mode='block']");
+            toolset.removeAttribute('css-display');
+        }
+        else if(tagName === 'card') {
+            var toolset = tools.querySelector("[data-mode='card']");
+            toolset.removeAttribute('css-display');
+        }
+        else if(tagName === 'box') {
+            var toolset = tools.querySelector("[data-mode='box']");
+            toolset.removeAttribute('css-display');
+        }        
+    }
+}
 
 framework.on = async function(event) {
     //console.log(is.iframe, event);

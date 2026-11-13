@@ -626,6 +626,10 @@
     }
 
     @media screen and (max-width: 800px) {
+        [css-dw800px-bottom="50vh"] {
+            bottom: 50vh;
+        }
+        
         [css-dw800px-bottom="100%"] {
             bottom: 100%;
         }
@@ -1877,6 +1881,12 @@
         margin-right: 20px;
     }
 
+    @media screen and (max-width: 800px) {
+        [css-dw800px-margin-right="10px"] {
+            margin-right: 10px;
+        }
+    }
+
     .margin-top-1px {
         margin-top: 1px;
     }
@@ -2035,6 +2045,12 @@
         }
     }
 
+    @media (max-width: 800px) {
+        [css-dw800px-margin-top="50vh"] {
+            margin-top: 50vh;
+        }
+    }
+    
     @media (max-width: 680px) {
         .-dw680px-margin-x-20px {
             margin-left: 20px;
