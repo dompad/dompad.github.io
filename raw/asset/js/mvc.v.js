@@ -1623,7 +1623,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 } while (c < categories.length)
                                             }
                                         }
-                                    } else if (get[3] === "orders") {
+                                    } 
+                                    else if (get[3] === "orders") {
                                         var vp = dom.body.find('page[data-page="/dashboard/*/merch/orders"]');
     
                                         var orders = await github.repos.contents({
@@ -1656,7 +1657,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 console.log(1643, order);
                                             }
                                         });
-                                    } else if (get[3] === "product") {
+                                    } 
+                                    else if (get[3] === "product") {
                                         var vp = dom.body.find('pages[data-page="/dashboard/*/merch/product"]');
                                         var slug = get[4];
                                         if (slug) {
@@ -1672,7 +1674,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             vp.find('[placeholder="Enter a title"]').value = row.title;
                                         }
                                     }
-                                } else {
+                                } 
+                                else {
                                     var feed = byId('feed-dashboard-merch');
                                     var vp = dom.body.find('page[data-page="/dashboard/*/merch"]');
                                     vp.find('block > footer').setAttribute("css-display", "none");
