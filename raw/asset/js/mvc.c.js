@@ -603,14 +603,14 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                             do {
                                 var row = arr[d];
                                 var href = hrefs[d];
-                                var card = byId('template-feed-dashboard-pages').content.firstElementChild.cloneNode(true);
+                                var card = byId('template-feed-dashboard-build').content.firstElementChild.cloneNode(true);
                                 if ((d > 0 && names[d][0] !== names[d - 1][0])) {
                                     html += "</card>";
                                 }
                                 if (d === 0 || (d > 0 && names[d][0] !== names[d - 1][0])) {
                                     html += "<card class='" + card.className + "'>";
                                 }
-                                card.find('[placeholder="Page URL"]').closest('box').dataset.href = "/dashboard/:get/:get/build/er" + row.slug;
+                                card.find('[placeholder="Page URL"]').closest('box').nextElementSibling.dataset.href = "/dashboard/:get/:get/build/er" + row.slug;
                                 card.find('[placeholder="Page URL"]').textContent = row.title;
                                 card.firstElementChild.dataset.sha = row.sha;
                                 //card.find('[placeholder="Page URL"]').dataset.href = "/dashboard/:get/build/er/" + name.join('/');

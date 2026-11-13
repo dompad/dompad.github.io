@@ -1,27 +1,6 @@
 window.framework = {};
 
 framework.builder = {};
-framework.builder.block = async function(target) {
-    var box = target.closest('box');
-    if (box) {
-        var index = box.index() + 1;
-        var tagName = target.closest('card').dataset.element;
-        var html = await ajax('raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html')
-        //window.parent.modal.popup(html);
-        var element = dom.body.find(tagName);
-        var block = framework.builder.focus();
-        if (element) {
-            element.insertAdjacentHTML('beforeend', html);
-            modal.exit(target)
-        }
-        console.log({
-            element,
-            target,
-            block,
-            html
-        }, 'raw/asset/html/block/' + tagName + '/' + tagName + '.' + index + '.html');
-    }
-}
 framework.builder.blocks = async function(target) {
     if (target) {
         var tagName = typeof target === "string" ? target : (target.closest('block, header, footer, main') || target.closest('empty').previousElementSibling.parentNode).tagName.toLowerCase();
@@ -56,88 +35,6 @@ framework.builder.blocks = async function(target) {
                 shadow.prepend(reset);
                 c++;
             } while(c < components.length);
-        }
-    }
-}
-framework.builder.focus = ()=>{
-    var focused = dom.body.all('[focus="true"]');
-    return focused[focused.length - 1];
-}
-framework.builder.select = ()=>{
-    $('focus').remove();
-    var elem = dom.body.find('[focus]')
-    var selection = window.parent.byId('focus-element').content.firstElementChild.cloneNode(true);
-    var rect = elem.getBoundingClientRect();
-    selection.style.height = elem.clientHeight + "px";
-    selection.style.width = elem.clientWidth + "px";
-    //selection.style.backgroundColor = "rgba(0,0,0,0.5)";
-    selection.style.left = (rect.left + document.documentElement.scrollLeft) + "px";
-    selection.style.top = (rect.top + document.documentElement.scrollTop) + "px";
-    selection.style.zIndex = "1234568799";
-    doc.body.insertAdjacentHTML('beforeend', selection.outerHTML);
-}
-framework.builder.insert = function(target) {
-    var iframe = byId('iframe-editor');
-    var win = iframe.contentWindow;
-    var doc = win.document;
-    var blocks = $(doc.body.all('blocks block'));
-    //blocks.attr('data-transform', 'scale(calc(1/3))');
-    var element = target.closest('[data-element]').dataset.element;
-    console.log({
-        blocks,
-        element,
-        target
-    });
-    if (element === 'main') {
-        if (target.closest('[data-tap]').tagName.toLowerCase() === 'text') {
-            var el = document.createElement('block');
-            el.innerHTML = '<flex></flex>';
-
-            var page = doc.body.find('[data-active="true"][data-page]');
-            page.find('blocks').insertAdjacentHTML('beforeend', el.outerHTML);
-
-            var block = page.find('blocks').lastElementChild;
-            $(doc.body.all('[focus]')).removeAttr('focus');
-            block.setAttribute('focus', 'block');
-            doc.body.setAttribute('focus', 'block');
-
-            var rect = block.getBoundingClientRect();
-            console.log(doc, doc.body.all('[focus]'), block, block.scrollTop, win.scrollTop, rect);
-            win.scrollTo({
-                behavior: 'smooth',
-                left: 0,
-                top: rect.top + doc.documentElement.scrollTop
-            });
-
-            modal.exit(target);
-        }
-    }
-}
-
-framework.tools = {};
-framework.tools.path = function(target) {
-    console.log(119, { target });
-    var block = target.closest('block, header, footer');
-    var host = block.find('.host');
-    var shadow = host.shadowRoot;
-    var element = shadow.lastElementChild;
-    var selected = host.selected;
-    console.log(122, { block, host, shadow, element, selected });
-
-    if(selected) {
-        var tagName = selected.tagName.toLowerCase();
-        if(tagName === 'card') {
-            var parent = selected.closest('block, header, footer');
-            parent.setAttribute('focus', parent.tagName.toLowerCase());
-            host.selected = parent;
-            selected.removeAttribute('focus');
-        }
-        else if(tagName === 'box') {
-            var parent = selected.closest('card');
-            parent.setAttribute('focus', 'card');
-            element.setAttribute('focus', 'card');
-            host.selected = parent;
-            selected.removeAttribute('focus');
         }
     }
 }
@@ -238,6 +135,34 @@ framework.builder.update = function(target) {
             var toolset = tools.querySelector("[data-mode='box']");
             toolset.removeAttribute('css-display');
         }        
+    }
+}
+
+framework.tools = {};
+framework.tools.path = function(target) {
+    console.log(119, { target });
+    var block = target.closest('block, header, footer');
+    var host = block.find('.host');
+    var shadow = host.shadowRoot;
+    var element = shadow.lastElementChild;
+    var selected = host.selected;
+    console.log(122, { block, host, shadow, element, selected });
+
+    if(selected) {
+        var tagName = selected.tagName.toLowerCase();
+        if(tagName === 'card') {
+            var parent = selected.closest('block, header, footer');
+            parent.setAttribute('focus', parent.tagName.toLowerCase());
+            host.selected = parent;
+            selected.removeAttribute('focus');
+        }
+        else if(tagName === 'box') {
+            var parent = selected.closest('card');
+            parent.setAttribute('focus', 'card');
+            element.setAttribute('focus', 'card');
+            host.selected = parent;
+            selected.removeAttribute('focus');
+        }
     }
 }
 
