@@ -2,30 +2,16 @@
     <row class="justify-content-space-between width-100pct" tabindex="1">
         <card class="height-50px justify-content-center margin-0 width-auto">
             <row class="align-items-center">
-                <box data-href="/dashboard/:get/:get/build/er" data-page="/dashboard/*/*/build">
-                    <row class="align-items-center">
-                        <ico>
-                            <n class="gg-pen"></n>
-                        </ico>
-                    </row>
-                </box>
-                <box data-href="/dashboard/:get/:get/build/er" data-page="/dashboard/*/*/build/preview">
-                    <row class="align-items-center">
-                        <ico>
-                            <n class="gg-pen"></n>
-                        </ico>
-                    </row>
-                </box>
-                <box class="display-none" data-href="/dashboard/:get/:get/build" data-page="/dashboard/*/*/build/er">
+                <box data-href="/dashboard/:get/:get/build" data-page="/dashboard/*/*/build/er">
                     <row class="align-items-center">
                         <ico>
                             <n class="gg-close"></n>
                         </ico>
                     </row>
                 </box>
-                <box class="position-relative" data-page="/dashboard/*/*/build/er">
+                <box class="display-none position-relative" data-page="/dashboard/*/*/build/er">
                     <row class="align-items-center justify-content-center" data-dropdown data-ignore>
-                        <ico class="margin-left-5px">
+                        <ico>
                             <n class="gg-menu"></n>
                             <n class="--ggs-50pct gg-chevron-down" css-width="10px"></n>
                         </ico>
@@ -36,7 +22,7 @@
                         <text class="-hover-background-color-eb color-ff3b30 padding-x-20px" data-href="/dashboard/:get/:get/build">Exit</text>
                     </column>
                 </box>
-                <box class="margin-x-5px">
+                <box>
                     <column>
                         <text class="font-weight-bolder" placeholder="Page Name"></text>
                         <text class="color-0096c7" placeholder="/page-name"></text>
@@ -61,19 +47,23 @@
                     </row>
                 </box>
             </row>
-            <row class="display-flex flex-direction-row" data-page="/dashboard/*/*/build/er">
+            <row>
                 <box>
                     <row>
                         <ico>
-                            <n class="gg-undo"></n>
-                        </ico>
-                        <ico>
-                            <n class="gg-redo"></n>
+                            <n class="gg-eye"></n>
                         </ico>
                     </row>
                 </box>
                 <box class="position-relative" data-page="/dashboard/*/*/build/er">
                     <row class="align-items-center justify-content-center">
+                        <ico>
+                            <n class="gg-software-upload"></n>
+                        </ico>
+                    </row>
+                </box>
+                <box data-tap="framework.tools.page()">
+                    <row>
                         <ico>
                             <n class="gg-options"></n>
                         </ico>

@@ -587,6 +587,12 @@ framework.tools.close = function(target) {
     pages.removeAttribute('css-dw800px-margin-top');
     tools.setAttribute('css-dw800px-bottom', '100%');
 }
+framework.tools.page = function(target) {
+    var pages = byId('iframe-editor').closest('pages');
+    var tools = pages.nextElementSibling;
+    pages.setAttribute('css-dw800px-margin-top', '50vh');
+    tools.setAttribute('css-dw800px-bottom', '50vh');
+}
 
 window.tool = {}
 
