@@ -553,6 +553,84 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = block.closest('main nav + pages');
             const toggle = 0 < 1;
+            
+            var feed = byId('feed-dashboard-pages');
+            if (0 < 1) {
+                var vp = dom.body.find('pages[data-page="/dashboard/*/*/build"]');
+                //alert("Attempting to fetch files");
+                github.repos.contents({
+                    owner: route.GOT[1],
+                    path: "/raw/pages/pages.json",
+                    repo: route.GOT[2]
+                }, {}).then(d=>{
+                    var data = JSON.parse(atob(d.content));
+                    if (data) {
+                        0 > 1 ? console.log(84, {
+                            data
+                        }) : null;
+                        feed.innerHTML = "";
+                        if (data.length > 0) {
+                            vp.all('header card')[1].find('box').classList.remove('display-none');
+                            var html = "";
+                            var d = 0;
+                            var names = [];
+                            var html = "";
+                            var hrefs = [];
+                            var arr = [];
+
+                            do {
+                                var row = data[d];
+                                hrefs[d] = row.slug;
+                                d++;
+                            } while (d < data.length);
+                            hrefs.sort(function(a, b) {
+                                return a.localeCompare(b)
+                            });
+
+                            d = 0;
+                            var names = [];
+                            do {
+                                var href = hrefs[d];
+                                names[d] = rout.ed.dir(href);
+                                arr[d] = data[d];
+                                d++;
+                            } while (d < hrefs.length);
+                            arr.sort(function(a, b) {
+                                return a.slug.localeCompare(b.slug);
+                            });
+
+                            d = 0;
+                            do {
+                                var row = arr[d];
+                                var href = hrefs[d];
+                                var card = byId('template-feed-dashboard-pages').content.firstElementChild.cloneNode(true);
+                                if ((d > 0 && names[d][0] !== names[d - 1][0])) {
+                                    html += "</card>";
+                                }
+                                if (d === 0 || (d > 0 && names[d][0] !== names[d - 1][0])) {
+                                    html += "<card class='" + card.className + "'>";
+                                }
+                                card.find('[placeholder="Page URL"]').closest('box').dataset.href = "/dashboard/:get/:get/build/er" + row.slug;
+                                card.find('[placeholder="Page URL"]').textContent = row.title;
+                                card.firstElementChild.dataset.sha = row.sha;
+                                //card.find('[placeholder="Page URL"]').dataset.href = "/dashboard/:get/build/er/" + name.join('/');
+                                //card.find('.gg-file-add').closest('text').dataset.href = "/dashboard/:get/:get/pages/page" + href;
+                                //card.find('.gg-code-slash').closest('text').dataset.href = "/dashboard/:get/:get/build/er" + href;
+                                //card.find('.gg-eye').closest('text').dataset.href = "/dashboard/:get/:getbuild/preview" + href;
+                                html += card.innerHTML;
+                                //feed.insertAdjacentHTML('beforeend', html);
+                                d++;
+                            } while (d < names.length);
+
+                            feed.innerHTML = html;
+                        } else {
+                            vp.all('header card')[1].find('box').classList.add('display-none');
+                        }
+                    }
+
+                }
+                );
+            }
         },
         preview: async function() {
 
