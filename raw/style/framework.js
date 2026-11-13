@@ -588,7 +588,9 @@ framework.tools.close = function(target) {
     tools.setAttribute('css-dw800px-bottom', '100%');
 }
 framework.tools.elements = function(target) {
-    console.log(591, { target });
+    var text = target.closest("[data-value]");
+    var value = text.dataset.value;
+    console.log(591, { target, text, value });
 }
 framework.tools.page = function(target) {
     var pages = byId('iframe-editor').closest('pages');
