@@ -45,23 +45,6 @@ framework.builder.blocks = async function(target) {
         console.log("66", { components });
     }
 }
-framework.builder.focus = ()=>{
-    var focused = dom.body.all('[focus="true"]');
-    return focused[focused.length - 1];
-}
-framework.builder.select = ()=>{
-    $('focus').remove();
-    var elem = dom.body.find('[focus]')
-    var selection = window.parent.byId('focus-element').content.firstElementChild.cloneNode(true);
-    var rect = elem.getBoundingClientRect();
-    selection.style.height = elem.clientHeight + "px";
-    selection.style.width = elem.clientWidth + "px";
-    //selection.style.backgroundColor = "rgba(0,0,0,0.5)";
-    selection.style.left = (rect.left + document.documentElement.scrollLeft) + "px";
-    selection.style.top = (rect.top + document.documentElement.scrollTop) + "px";
-    selection.style.zIndex = "1234568799";
-    doc.body.insertAdjacentHTML('beforeend', selection.outerHTML);
-}
 framework.builder.insert = function(target) {
     var iframe = byId('iframe-editor');
     var win = iframe.contentWindow;
@@ -588,11 +571,38 @@ framework.tools.close = function(target) {
     tools.setAttribute('css-dw800px-bottom', '100%');
 }
 framework.tools.elements = function(target) {
-    var text = target.closest("[data-value]");
-    var value = text.dataset.value;
-    var ppp = target.closest('aside');
-    var selected = ppp.selected;
-    console.log(591, { target, text, value, ppp, selected });
+    var button = target.closest("[data-value]");
+    if(button) {
+        var value = button.dataset.value;
+        var ppp = target.closest('aside');
+        var selected = ppp.selected;
+        console.log(591, { target, text, value, ppp, selected });
+        if(value === 'link') {
+            var href = doument.createElement('href');
+            selected.insertAdjacentHTML('beforeEnd', href.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'text') {
+            var text = document.createElement('text')
+            selected.insertAdjacentHTML('beforeEnd', text.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'icon') {
+            var ico = document.createElement('ico');
+            selected.insertAdjacentHTML('beforeEnd', ico.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'media') {
+            var feed = document.createElement('feed');
+            selected.insertAdjacentHTML('beforeEnd', feed.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'image') {
+            var picture = document.createElement('picture');
+            selected.insertAdjacentHTML('beforeEnd', picture.outerHTML);
+            modal.exit(target);
+        }
+    }
 }
 framework.tools.page = function(target) {
     var pages = byId('iframe-editor').closest('pages');
