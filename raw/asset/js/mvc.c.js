@@ -858,7 +858,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             console.log(821, {editor, popup, selected});
 
             clone.setAttribute('focus', tagName);
-            $(clone.all('text')).attr('contenteditable', true);
+            //$(clone.all('text')).attr('contenteditable', true);
             const shadow = selected.attachShadow({mode: 'open'});
 
             const reset = document.createElement("link");

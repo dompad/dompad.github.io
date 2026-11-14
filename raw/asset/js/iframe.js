@@ -96,23 +96,31 @@ framework.builder.delete = async function(target) {
 
     if(selected) {
         var tagName = selected.tagName.toLowerCase();
-        if(['block', 'header', 'footer'].includes(tagName)) {
+        var focus = selected.getAttribute("focus");
+        if(['block', 'header', 'footer'].includes(focus)) {
             var section = document.createElement('section');
             section.className = 'host';
             host.replaceWith(section);            
         }
-        else if(tagName === 'card') {
+        else if(focus === 'card') {
             var parent = selected.closest('block, header, footer');
             parent.setAttribute('focus', parent.tagName.toLowerCase());
             host.selected = parent;
             selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove();          
         }
-        else if(tagName === 'box') {
+        else if(focus === 'box') {
             var parent = selected.closest('card');
             parent.setAttribute('focus', 'card');
             element.setAttribute('focus', 'card');
             host.selected = parent;
             selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove(); 
+        }
+        else if(focus === 'cell') {
+            var parent = selected.closest('box');
+            parent.setAttribute('focus', 'box');
+            element.setAttribute('focus', 'box');
+            host.selected = parent;
+            selected.parentNode.children.length === 1 ? selected.parentNode.innerHTML = '' : selected.remove();    
         }
     }
 }
