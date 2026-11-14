@@ -1018,7 +1018,12 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         var element = cell;
                         var focus = "cell";
                     } else {
-                        var focus = element.tagName.toLowerCase();
+                        if( ['href', 'text', 'ico', 'feed', 'picture'].includes(host.selected.tagName.toLowerCase()) && host.selected.contains(cell) ) {
+                            var element = cell;
+                            var focus = "cell";
+                        } else {
+                            var focus = element.tagName.toLowerCase();
+                        }
                     }
                 } else {
                     var focus = element.tagName.toLowerCase();
