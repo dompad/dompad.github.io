@@ -1025,11 +1025,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         if( ['href', 'text', 'ico', 'feed', 'picture'].includes(host.selected.tagName.toLowerCase()) && host.selected.contains(cell) ) {
                             var element = cell;
                             var focus = "cell";
-                            if(cell.tagName.toLowerCase() === 'text') {
-                                cell.setAttribute('contenteditable', true);
-                                cell.setAttribute("oninput", "framework.tools.oninput(event)")
-                                cell.focus();
-                            }
                         } else {
                             var focus = element.tagName.toLowerCase();
                         }
@@ -1044,6 +1039,11 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             element.setAttribute('focus', focus);
             block.setAttribute('focus', focus)
             host.selected = element;
+            if(focus === 'cell' && cell.tagName.toLowerCase() === 'text') {
+                cell.setAttribute('contenteditable', true);
+                cell.setAttribute("oninput", "framework.tools.oninput(event)")
+                cell.focus();
+            }
         },
 
         push: async function() {
