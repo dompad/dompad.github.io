@@ -149,6 +149,13 @@ framework.builder.update = function(target) {
 }
 
 framework.tools = {};
+framework.tools.oninput = function(event) {
+    var target = event.target;
+    if(target.textContent.trim().length === 0) {
+        target.innerHTML = "";
+    }
+    console.log(1027, event, target); 
+}
 framework.tools.path = function(target) {
     console.log(119, { target });
     var block = target.closest('block, header, footer');

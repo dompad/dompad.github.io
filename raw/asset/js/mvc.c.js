@@ -1007,6 +1007,10 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
         tap: function(target, host) {
             var tagName = target.tagName.toLowerCase();
+            var block = target.closest('block, footer, header');
+            if(block.querySelector('[contenteditable]')) {
+                block.querySelector('[contenteditable]').removeAttribute('contenteditable');
+            }
             if(['block', 'card', 'box'].includes(tagName)) {
                 var element = target;
                 var focus = element.tagName.toLowerCase();
@@ -1023,13 +1027,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                             var focus = "cell";
                             if(cell.tagName.toLowerCase() === 'text') {
                                 cell.setAttribute('contenteditable', true);
-                                cell.addEventListener("input", (event) => {
-                                    var target = event.target;
-                                    if(target.textContent.trim().length === 0) {
-                                        target.innerHTML = "";
-                                    }
-                                    console.log(1027, event, target); 
-                                });
+                                cell.setAttribute("oninput", "framework.tools.oninput(event)")
                                 cell.focus();
                             }
                         } else {
@@ -1040,7 +1038,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     var focus = element.tagName.toLowerCase();
                 }
             }
-            var block = target.closest('block, footer, header');
             console.log(969, { target, tagName, element, focus, block });
             block.removeAttribute('focus');
             block.querySelector('[focus]') ? block.querySelector('[focus]').removeAttribute('focus') : null;
