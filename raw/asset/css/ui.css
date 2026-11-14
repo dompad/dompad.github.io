@@ -133,7 +133,7 @@
         /* padding: 20px 0; */
     }
 
-    body > header, body page > blocks > empty, body > footer {
+    body > header, body page > blocks > block, body > footer {
         box-shadow: 0 0 10px -3px;
         display: flex;
         flex-direction: column;

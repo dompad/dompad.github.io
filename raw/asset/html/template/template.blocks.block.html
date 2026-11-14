@@ -1,0 +1,33 @@
+<block class="align-items-center min-height-100pct justify-content-center width-100pct" css-background-color="rgba(0,0,0,0.5)" css-backdrop-filter="blur(10px)">
+    <flex css-position="absolute" css-height="100%" css-width="100%" data-tap="modal.exit(event.target)"></flex>
+    <flex class="margin-20px" css-height="100%" css-width="calc(100% - 40px)">
+        <card class="background-color-fff border-radius-10px margin-auto" css-width="100%" data-element="main">
+            <column class="padding-20px">
+                <box class="font-size-16px gap-20px">
+                    <column>
+                        <text class="font-weight-bolder" css-display="inline-flex" css-line-height="36px">
+                            <span>Blocks</span>
+                            <ico css-height="36px" css-margin-left="auto" css-width="36px" data-tap="modal.exit(event.target)">
+                                <n class="gg-close"></n>
+                            </ico>
+                        </text>
+                        <text class="line-height-18px">Select a block to be placed within the content section of your page.</text>
+                    </column>
+                </box>
+            </column>
+            <column class="gap-20px padding-20px">                
+                <box css-gap="5px">
+                    <section class="component" class="background-color-000 height-50px width-100pct"></section>
+                    <footer>
+                        <text css-background-color="#000" css-border-radius="20px" css-color="#fff" css-display="inline-flex" css-line-height="36px" css-margin-left="auto" data-tap="controller.builder.component(event.target)">
+                            <ico css-height="36px" css-width="36px">
+                                <n class="gg-math-plus"></n>
+                            </ico>
+                            <span css-padding-right="10px">Add</span>
+                        </text>
+                    </footer>
+                </box>
+            </column>
+        </card>
+    </flex>
+</block>

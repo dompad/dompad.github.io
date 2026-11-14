@@ -63,12 +63,29 @@
         </header>
         <main>
             <template>
-                <empty class="align-items-center background-color-f5 display-flex flex-direction-column gap-5px justify-content-center min-height-586px padding-30px text-align-center">
-                    <column class="gap-5px padding-30px">
-                        <text class="display-block font-weight-bolder">Add Page Content</text>
-                        <text class="background-color-777 border-radius-5px color-fff display-block font-size-13px margin-auto padding-5px text-transform-uppercase width-100px" data-tap="framework.builder.blocks(event.target)">Add Block</text>
-                    </column>
-                </empty>
+                <block>
+                    <section class="host"></section>
+                    <empty class="align-items-center display-flex flex-direction-column gap-5px justify-content-center text-align-center">
+                        <column class="gap-5px padding-30px">
+                            <text class="display-block font-weight-bolder">Add Page Content</text>
+                            <text class="background-color-777 border-radius-5px color-fff display-block font-size-13px margin-auto padding-5px text-transform-uppercase width-100px" data-tap="framework.builder.blocks(event.target)">Add Block</text>
+                        </column>
+                        <flex class="flex-1">
+                            <ico data-tap="framework.builder.update(event.target)">
+                                <n class="gg-pen"></n>
+                            </ico>
+                            <ico data-tap="framework.builder.create(event.target)">
+                                <n class="gg-add"></n>
+                            </ico>
+                            <ico data-tap="framework.tools.path(event.target)">
+                                <n class="gg-path-back"></n>
+                            </ico>
+                            <ico class="margin-left-auto" data-tap="framework.builder.delete(event.target)">
+                                <n class="gg-trash"></n>
+                            </ico>
+                        </flex>
+                    </empty>
+                </block>
             </template>
         </main>
         <footer>

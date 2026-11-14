@@ -885,6 +885,33 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             shadow.lastElementChild.addEventListener("click", (event) => {
                 controller.builder.tap(event.target, selected);
             });
+
+            var main = selected.closest("main");
+            if(main) {
+                var block = selected.closest("block");
+                var before = block.previousElementSibling;
+                var after = block.nextElementSibling;
+                if(before) {
+                    var sdw = before.find(".host[shadow='true']");
+                    if(sdw) {
+                        var tpl = main.lastElementChild.content.firstElementChild.cloneNode(true);
+                        block.insertAdjacentHTML("beforebegin", tpl.outerHTML);  
+                    }
+                } else {
+                    var tpl = main.lastElementChild.content.firstElementChild.cloneNode(true);
+                    block.insertAdjacentHTML("beforeBegin", tpl.outerHTML);
+                }
+                if(after) {
+                    var sdw = after.find(".host[shadow='true']");
+                    if(sdw) {
+                        var tpl = main.lastElementChild.content.firstElementChild.cloneNode(true);
+                        block.insertAdjacentHTML("afterEnd", tpl.outerHTML);  
+                    }
+                } else {
+                    var tpl = main.lastElementChild.content.firstElementChild.cloneNode(true);
+                    block.insertAdjacentHTML("afterEnd", tpl.outerHTML);                    
+                }
+            }
             
             modal.exit(popup);
         },

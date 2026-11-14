@@ -18,6 +18,7 @@ framework.builder.blocks = async function(target) {
             var c = 0;
             do {
                 var component = components[c];
+                tagName === 'main' ? tagName = 'block' : tagName;
                 var block = await ajax('raw/asset/html/block/' + tagName + '/' + tagName + '.' + c + '.html');
                 const shadow = component.attachShadow({mode: "open"});
                 
@@ -98,9 +99,14 @@ framework.builder.delete = async function(target) {
         var tagName = selected.tagName.toLowerCase();
         var focus = selected.getAttribute("focus");
         if(['block', 'header', 'footer'].includes(focus)) {
-            var section = document.createElement('section');
-            section.className = 'host';
-            host.replaceWith(section);            
+            var block = target.closest("block");
+            if(block.previousElementSibling) {
+                block.remove();
+            } else {
+                var section = document.createElement('section');
+                section.className = 'host';
+                host.replaceWith(section);
+            }
         }
         else if(focus === 'card') {
             var parent = selected.closest('block, header, footer');
@@ -133,6 +139,7 @@ framework.builder.update = function(target) {
     console.log(218, { block, host, shadow, element, selected });
 
     if(selected) {
+        var focus = selected.getAttribute("focus");
         var iframe = window.parent.byId('iframe-editor');
         var pages = iframe.closest('pages');
         var tools = pages.nextElementSibling;
@@ -151,6 +158,26 @@ framework.builder.update = function(target) {
         }
         else if(tagName === 'box') {
             var toolset = tools.querySelector("[data-mode='box']");
+            toolset.removeAttribute('css-display');
+        }        
+        else if(tagName === 'href') {
+            var toolset = tools.querySelector("[data-mode='href']");
+            toolset.removeAttribute('css-display');
+        }        
+        else if(tagName === 'text') {
+            var toolset = tools.querySelector("[data-mode='text']");
+            toolset.removeAttribute('css-display');
+        }             
+        else if(tagName === 'ico') {
+            var toolset = tools.querySelector("[data-mode='icon']");
+            toolset.removeAttribute('css-display');
+        }                
+        else if(tagName === 'feed') {
+            var toolset = tools.querySelector("[data-mode='feed']");
+            toolset.removeAttribute('css-display');
+        }                
+        else if(tagName === 'picture') {
+            var toolset = tools.querySelector("[data-mode='picture']");
             toolset.removeAttribute('css-display');
         }        
     }
