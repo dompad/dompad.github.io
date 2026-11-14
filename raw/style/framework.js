@@ -425,10 +425,13 @@ framework.branding.marginSize = event=>{
 framework.css = {}
 framework.css.render = (host) => {
     console.log(141, { host });
-    var elems = host.lastElementChild.all("*");
+    var elems = $(host.lastElementChild.all("*"));
+    elems.push(host.lastElementChild)
     var rules = [];
+    console.log(431, {elems});
     elems.forEach(elem => {
-        if(elem.attributes.length > 0) {
+        console.log(elem);
+        if(elem.attributes && elem.attributes.length > 0) {
             console.log(`Element: <${elem.tagName.toLowerCase()}>`);
             for (let i = 0; i < elem.attributes.length; i++) {
                 const attr = elem.attributes[i]; //console.log(147, attr);
