@@ -579,27 +579,28 @@ framework.tools.elements = function(target) {
         console.log(591, { target, text, value, ppp, selected });
         if(value === 'link') {
             var href = doument.createElement('href');
-            selected.insertAdjacentHTML('beforeEnd', href.outerHTML);
+            selected.find('section').insertAdjacentHTML('beforeEnd', href.outerHTML);
             modal.exit(target);
         }
         else if(value === 'text') {
             var text = document.createElement('text')
-            selected.insertAdjacentHTML('beforeEnd', text.outerHTML);
+            selected.find('section').insertAdjacentHTML('beforeEnd', text.outerHTML);
             modal.exit(target);
         }
         else if(value === 'icon') {
             var ico = document.createElement('ico');
-            selected.insertAdjacentHTML('beforeEnd', ico.outerHTML);
+            ico.innerHTML = '<n></n>';
+            selected.find('section').insertAdjacentHTML('beforeEnd', ico.outerHTML);
             modal.exit(target);
         }
         else if(value === 'media') {
             var feed = document.createElement('feed');
-            selected.insertAdjacentHTML('beforeEnd', feed.outerHTML);
+            selected.find('section').insertAdjacentHTML('beforeEnd', feed.outerHTML);
             modal.exit(target);
         }
         else if(value === 'image') {
             var picture = document.createElement('picture');
-            selected.insertAdjacentHTML('beforeEnd', picture.outerHTML);
+            selected.find('section').insertAdjacentHTML('beforeEnd', picture.outerHTML);
             modal.exit(target);
         }
     }

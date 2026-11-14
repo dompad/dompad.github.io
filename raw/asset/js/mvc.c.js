@@ -1009,10 +1009,21 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var tagName = target.tagName.toLowerCase();
             if(['block', 'card', 'box'].includes(tagName)) {
                 var element = target;
+                var focus = element.tagName.toLowerCase();
             } else {
                 var element = target.closest('block, box, card, footer, header');
+                var cell = target.closest('href, text, ico, feed, picture') 
+                if(cell) {
+                    if(host.selected.tagName.toLowerCase() === 'box' && host.selected.contains(cell)) {
+                        var element = cell;
+                        var focus = "cell";
+                    } else {
+                        var focus = element.tagName.toLowerCase();
+                    }
+                } else {
+                    var focus = element.tagName.toLowerCase();
+                }
             }
-            var focus = element.tagName.toLowerCase();
             var block = target.closest('block, footer, header');
             console.log(969, { target, tagName, element, focus, block });
             block.removeAttribute('focus');

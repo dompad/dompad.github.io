@@ -41,6 +41,13 @@ style + footer card box[focus="box"] {
     outline-offset: -2px;
 }
 
+style + header card box [focus="cell"], 
+style + block card box [focus="cell"],
+style + footer card box [focus="cell"] {
+    outline: 2px solid #777;
+    outline-offset: -2px;
+}
+
 /*BLOCKS*/
 header > section:empty,
 block > section:empty,
@@ -55,4 +62,49 @@ card > section:empty {
 box > section:empty {
     min-height: 50px;
     min-width: 50px;
+}
+
+/*ELEMENTS*/
+text:empty:before {
+    content: 'Text';
+    color: #aaa;
+}
+
+ico:has(n:not([class])) {
+    width: 50px;
+    height: 50px;
+}
+ico n:not([class]) {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #bbb;
+  border-radius: 5px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+/* Inner geometric diamond glyph */
+ico n:not([class])::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 2px solid #bbb;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+
+/* Center dot */
+ico n:not([class])::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  background: #bbb;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
