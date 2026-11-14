@@ -438,7 +438,7 @@ framework.css.render = (host) => {
                     var parts = attr.name.split('-');
                     if(parts[1].startsWith('dw')) {
                         var width = parts[1].split('dw')[1];
-                        var property = parts[2];
+                        var property = parts.splice(2, parts.length - 1).join('-');
                         var value = attr.value; //css-dw960px-display="none"
                         var rule = "@media screen and (max-width: " + width + ") { [" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " } }";
                         console.log(542, 'media screen', {
@@ -476,12 +476,44 @@ framework.css.render = (host) => {
         }
         return a.localeCompare(b);
     });
-    var stylesheet = unique.join("\n");    
+    const sorted = sortCssWithMediaQueriesLast(unique);
+    var stylesheet = sorted.join("\n");    
     const style = document.createElement('style');
     style.type = 'text/css';
     style.innerHTML = stylesheet;
-    console.log(163, {rules, stylesheet, unique});
-    return style;
+    console.log(163, {rules, stylesheet, unique, sorted});
+    function sortCssWithMediaQueriesLast(cssRules) {
+        if (!Array.isArray(cssRules)) {
+            throw new TypeError("Input must be an array of CSS rule strings.");
+        }
+    
+        // Helper: Extract numeric width from media query string
+        const extractWidth = (rule) => {
+            if (typeof rule !== "string") return 0;
+            const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
+            return match ? parseInt(match[1], 10) : 0;
+        };
+    
+        // Separate regular CSS rules and media queries
+        const regularRules = [];
+        const mediaQueries = [];
+    
+        cssRules.forEach(rule => {
+            if (typeof rule !== "string") return; // skip invalid entries
+            if (/^@media/i.test(rule.trim())) {
+                mediaQueries.push(rule);
+            } else {
+                regularRules.push(rule);
+            }
+        });
+    
+        // Sort media queries by descending width
+        mediaQueries.sort((a, b) => extractWidth(b) - extractWidth(a));
+    
+        // Combine: regular rules first, then sorted media queries
+        return [...regularRules, ...mediaQueries];
+    }
+    return style
 }
 
 framework.tools = {}
