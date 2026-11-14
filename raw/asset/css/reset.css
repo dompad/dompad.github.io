@@ -381,11 +381,11 @@
     }
 
     ico:not([css-height]) {
-        height: 50px;
+        min-height: 50px;
     }
 
     ico:not([css-width]) {
-        width: 50px;
+        min-width: 50px;
     }
 
     img:not([src]) {
