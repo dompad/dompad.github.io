@@ -566,7 +566,25 @@ async function viewPage(vp) {
                             shadow.prepend(reset);
                             host.setAttribute("shadow", true);
                             
+                            var before = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
+                            var after = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);                                                     
                             vp.find('blocks').append(empty);
+                            var bfr = vp.find('blocks').lastElementChild.previousElementSibling;
+                            if(bfr) {
+                                if(bfr.find(".host[shadow='true']")) {
+                                    vp.find('blocks').lastElementChild.insertAdjacentHTML('beforeBegin', before.outerHTML);
+                                }
+                            } else {
+                                vp.find('blocks').lastElementChild.insertAdjacentHTML('beforeBegin', before.outerHTML);
+                            }
+                            var afr = vp.find('blocks').lastElementChild.nextElementSibling;
+                            if(afr) {
+                                if(afr.find(".host[shadow='true']")) {
+                                    vp.find('blocks').lastElementChild.insertAdjacentHTML('afterEnd', after.outerHTML);
+                                }
+                            } else {
+                                vp.find('blocks').lastElementChild.insertAdjacentHTML('afterEnd', after.outerHTML);
+                            }
                             b++;
                         } while(b < blocks.length)
                     }
