@@ -433,16 +433,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     var raw = await ajax('raw/asset/html/template/template.iframe.html');
                     var doc = new DOMParser().parseFromString(raw, 'text/html');
 
-                    try {
-                        var css = atob((await github.raw.path('/' + owner + '/' + repo + '/' + branch + '/raw/style/theme.css')).content);
-                        var link = document.createElement('link');
-                        link.href = blob(css, 'text/css');
-                        link.rel = "stylesheet";
-                        doc.head.find('link').insertAdjacentHTML('beforebegin', link.outerHTML);
-                    } catch (e) {
-                        console.log(e);
-                    }
-
                     0 < 1 ? console.log('controller.build.iframe', {
                         doc,
                         html: doc.documentElement.outerHTML,
@@ -915,7 +905,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 var element = target.closest('block, box, card, footer, header');
                 var cell = target.closest('href, text, ico, feed, picture') 
                 if(cell) {
-                    if(host.selected.tagName.toLowerCase() === 'box' && host.selected.contains(cell)) {
+                    if(element.tagName.toLowerCase() === 'box' && element.contains(cell)) {
                         var element = cell;
                         var focus = "cell";
                     } else {

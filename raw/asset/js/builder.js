@@ -58,6 +58,9 @@ async function init() {
             shadow.prepend(build);
             shadow.prepend(cssgg);
             shadow.prepend(reset);
+            shadow.lastElementChild.addEventListener("click", (event) => {
+                window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+            });
         }
 
         var footer = doc.body.find('body > footer');
@@ -82,6 +85,9 @@ async function init() {
             shadow.prepend(build);
             shadow.prepend(cssgg);
             shadow.prepend(reset);
+            shadow.lastElementChild.addEventListener("click", (event) => {
+                window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+            });
         }
 
         0 > 1 ? console.log(48, {
@@ -171,7 +177,6 @@ async function init() {
         press: on.touch.press,
         tap: on.touch.tap
     };
-    dom.body.dataset.theme = "meridiem";
     dom.body.addEventListener("click", function(e) {
         if (window.touch.ing === false) {
             on.touch.tap(e);

@@ -40,21 +40,6 @@ framework.builder.blocks = async function(target) {
     }
 }
 
-framework.builder.tap = function(target) {
-    console.log(118, { target });
-        var tagName = selected.tagName.toLowerCase();
-        if(tagName === 'card') {
-            var parent = selected.closest('block, header, footer');
-            parent.setAttribute('focus', parent.tagName.toLowerCase());
-            host.selected = parent;          
-        }
-        else if(tagName === 'box') {
-            var parent = selected.closest('card');
-            parent.setAttribute('focus', 'card');
-            element.setAttribute('focus', 'card');
-            host.selected = parent;
-        }
-}
 framework.builder.create = async function(target) {
     var block = target.closest('block, header, footer');
     var host = block.find('.host');

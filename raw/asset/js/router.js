@@ -313,11 +313,6 @@ window.rout.ed.bang = async(route)=>{
 
     return route;
 }
-window.rout.ed.close = ()=>{
-    var active = document.body.find('main [data-active="true"][data-fetch]');
-    const goto = (active ? active.dataset.uri : '/');
-    goto.router();
-}
 window.rout.ed.dir = function(url, num, g=[]) {
     if (url) {
         var split = url.split("/");
@@ -558,6 +553,9 @@ async function viewPage(vp) {
                         shadow.prepend(build);
                         shadow.prepend(cssgg);
                         shadow.prepend(reset);
+                        shadow.lastElementChild.addEventListener("click", (event) => {
+                            window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                        });
                         host.setAttribute("shadow", true);
                         
                         var before = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);

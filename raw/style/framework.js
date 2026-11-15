@@ -34,8 +34,104 @@ framework.builder.push = async function() {
         } while(h < hosts.length)
     }
     var page = blocks.join('\n');
-    console.log(7, 'framework.builder.push', {GOT, dir}, {body, header, footer}, {hdr, ftr, shell}, {hosts, blocks});
 
+    var hosts = doc.body.querySelectorAll('body .host[shadow="true"]');
+    var css = [];
+    if(hosts.length > 0) {
+        var h = 0;
+        do {
+            var host = hosts[h];
+            var shadow = host.shadowRoot;
+            var block = shadow.lastElementChild;
+            css.push(framework.css.render(shadow).innerHTML);
+            h++;
+        } while(h < hosts.length)
+    }
+    var stylesheet = sortCSS(css.join('\n'));
+    console.log(7, 'framework.builder.push', {GOT, dir}, {body, header, footer}, {hdr, ftr, shell}, {hosts, blocks}, {css, stylesheet});
+    function sortCSS(css) {
+        // Remove comments
+        css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+    
+        const mediaBlocks = [];
+        const normalBlocks = [];
+    
+        // Regex to match media queries
+        const mediaRegex = /@media[^{]+\{([\s\S]*?)\}/g;
+        let match;
+    
+        // Extract media queries
+        while ((match = mediaRegex.exec(css)) !== null) {
+            const fullBlock = match[0];
+            const innerCSS = match[1].trim();
+            const condition = fullBlock.match(/@media\s*(.*)\{/)[1].trim();
+    
+            mediaBlocks.push({
+                condition,
+                innerCSS
+            });
+        }
+    
+        // Remove media queries from main CSS
+        css = css.replace(mediaRegex, '');
+    
+        // Match normal selector blocks
+        const blocks = css.match(/[^{}]+{[^{}]+}/g) || [];
+    
+        // Parse normal blocks
+        normalBlocks.push(...blocks.map(block => parseBlock(block)));
+    
+        // Sort normal selectors alphabetically
+        normalBlocks.sort((a, b) => a.selector.localeCompare(b.selector));
+    
+        // Sort media queries by descending max-width
+        mediaBlocks.sort((a, b) => {
+            const maxA = extractMaxWidth(a.condition);
+            const maxB = extractMaxWidth(b.condition);
+            return maxB - maxA; // descending
+        });
+    
+        // Sort inner blocks inside each media query
+        mediaBlocks.forEach(mb => {
+            const innerBlocks = mb.innerCSS.match(/[^{}]+{[^{}]+}/g) || [];
+            const parsedInner = innerBlocks.map(block => parseBlock(block));
+            parsedInner.sort((a, b) => a.selector.localeCompare(b.selector));
+            mb.innerCSS = parsedInner.map(b => buildBlock(b)).join('\n\n');
+        });
+    
+        // Build final CSS
+        const normalCSS = normalBlocks.map(b => buildBlock(b)).join('\n\n');
+        const mediaCSS = mediaBlocks.map(mb => `@media ${mb.condition} {\n${indent(mb.innerCSS)}\n}`).join('\n\n');
+    
+        return `${normalCSS}\n\n${mediaCSS}`;
+    }
+    function parseBlock(block) {
+        const [selector, body] = block.split('{');
+        const properties = body
+            .replace('}', '')
+            .trim()
+            .split(';')
+            .map(p => p.trim())
+            .filter(Boolean);
+    
+        properties.sort((a, b) => a.localeCompare(b));
+    
+        return {
+            selector: selector.trim(),
+            properties
+        };
+    }
+    function buildBlock(b) {
+        return `${b.selector} {\n    ${b.properties.join(';\n    ')};\n}`;
+    }
+    function extractMaxWidth(condition) {
+        const match = condition.match(/max-width\s*:\s*(\d+)px/i);
+        return match ? parseInt(match[1], 10) : Infinity;
+    }
+    function indent(str) {
+        return str.split('\n').map(line => '    ' + line).join('\n');
+    }
+    
     //PUSH
     var title = dom.body.find('[placeholder="Page Name"]').textContent;
     var params = {
@@ -49,6 +145,9 @@ framework.builder.push = async function() {
     }, {
         content: page,
         path: 'raw/pages/' + dir.join('/') + '/page.html'
+    }, {
+        content: stylesheet,
+        path: 'style.css'
     }];
     try {
         console.log(2452, 'controller.builder.update', "array", {
