@@ -39,53 +39,6 @@ String.prototype.router = async function(params) {
         vp = null;
     }
     if(vp) {
-        if(page) {
-            if (is.iframe(window)) {
-                //alert('Router fetching page');
-                var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
-                console.log(25, {path});
-                try {
-                    console.log(27);
-                    var pg = atob((await github.raw.path(path)).content);
-                    console.log(29);
-                } catch(e) {
-                    console.log(26, {path});
-                }
-            } else {
-                var path = vp.dataset.fetch;
-                var pg = await ajax(path);
-            }
-            if (pg && page.innerHTML === "") {
-                page.innerHTML = pg.replace(/>\s+</g, '><');
-                //alert('Page HTML Updated');
-                //await ajax(page.dataset.fetch);
-                if (is.iframe(window)) {
-                    window.top.css.style.sheet(page);
-                }
-            }
-        } else {
-            if (pages && is.iframe(window)) {
-                //alert('Router fetching pages');
-                var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
-                console.log(25, {path});
-                try {
-                    console.log(27);
-                    var pg = atob((await github.raw.path(path)).content);
-                    console.log(29);
-                } catch(e) {
-                    console.log(26, {path});
-                }
-            
-                if (pg && pages.innerHTML === "") {
-                    pages.innerHTML = pg.replace(/>\s+</g, '><');
-                    //alert('Page HTML Updated');
-                    //await ajax(page.dataset.fetch);
-                    if (is.iframe(window)) {
-                        window.top.css.style.sheet(page);
-                    }
-                }
-            }
-        }
         await viewPage(vp);
     }
     route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
@@ -577,14 +530,54 @@ async function viewPage(vp) {
                 var pg = atob((await github.raw.path(path)).content);
                 if(pg === '') {
                     var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
+                    console.log(580, {vp, empty});
                     pg = '<blocks>'+empty.outerHTML+'</blocks>';
+                    vp.innerHTML = pg;
+                } else {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(pg, 'text/html');
+                    const body = doc.body;
+                    const blocks = body.children;
+                    if(blocks.length > 0) {
+                        var b = 0;
+                        vp.innerHTML = '<blocks></blocks>';
+                        do {
+                            var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
+                            var block = blocks[b];
+                            var host = empty.find('.host');
+                            const shadow = host.attachShadow({mode: 'open'});
+
+                            const reset = document.createElement("link");
+                            reset.setAttribute("rel", "stylesheet");
+                            reset.setAttribute("href", "/raw/asset/css/reset.css");
+                                
+                            const cssgg = document.createElement("link");
+                            cssgg.setAttribute("rel", "stylesheet");
+                            cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+                
+                            const build = document.createElement("link");
+                            build.setAttribute("rel", "stylesheet");
+                            build.setAttribute("href", "/raw/asset/css/builder.css");
+                            
+                            shadow.innerHTML = block.outerHTML;
+                            shadow.prepend(window.parent.framework.css.render(shadow));
+                            shadow.prepend(build);
+                            shadow.prepend(cssgg);
+                            shadow.prepend(reset);
+                            host.setAttribute("shadow", true);
+                            
+                            vp.find('blocks').append(empty);
+                            b++;
+                        } while(b < blocks.length)
+                    }
+                    console.log(537, {pg, blocks});
                 }
             } else {
                 var path = vp.dataset.fetch;
                 var pg = await ajax(path);
+                vp.innerHTML = pg;
             }
             //alert('Inserting Page HTML');
-            vp.innerHTML = pg;
             console.log("router.js 33", path, vp, vp.dataset.fetch);
         }
         const fetching2 = vp.all('[data-fetch]');

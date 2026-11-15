@@ -450,36 +450,16 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     }) : null;
 
                     iframe.src = blob('<!DOCTYPE html>' + doc.documentElement.outerHTML, "text/html");
-                    0 < 1 ? iframe.onload = () => {
-                            var elems = {
-                                iframe,
-                                head: iframe.contentWindow.document.head,
-                                body: iframe.contentWindow.document.body,
-                                main: iframe.contentWindow.document.body.find('main')
-                            };
-                            console.log(422, "controller.build.iframe iframe.onload", elems);
-                            //window.top.css.style.sheet(elems.body);
-                            elems.body.setAttribute('buildable', true);
-
-                            elems.body.addEventListener('mouseover', (e) => {
-                                var target = e.target;
-                                var selectors = target.closest('blocks block, blocks card, blocks box, body > header, body > header card, body > header box, body > footer, body > footer card, body > footer box');
-                                if(selectors) {
-                                    var tagName = selectors.tagName.toLowerCase();
-                                    if(['block', 'box', 'card', 'footer', 'header'].includes(tagName)) {
-                                        var block = target.closest('block, footer, header');
-                                        0 > 1 ? console.log('hovering block', {
-                                            block,
-                                            tagName,
-                                            target
-                                        }) : null;                                        
-                                    }
-                                }
-                            })
-                            
-                            resolve(elems.iframe);
-                        } :
-                        resolve(iframe);
+                    iframe.onload = () => {
+                        var elems = {
+                            iframe,
+                            head: iframe.contentWindow.document.head,
+                            body: iframe.contentWindow.document.body,
+                            main: iframe.contentWindow.document.body.find('main')
+                        };
+                        console.log(422, "controller.build.iframe iframe.onload", elems);                        
+                        resolve(elems.iframe);
+                    } 
                 } 
                 catch (e) {}
             })
@@ -516,6 +496,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 iframe.closest('pages').find('[placeholder="Page Name"]').textContent = json.title;
                 iframe.closest('pages').find('[placeholder="/page-name"]').textContent = json.slug;
             }
+            win.String.prototype.router.call(rout.ed.url(dir));
         },
         else: async () => {
 
