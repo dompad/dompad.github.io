@@ -187,12 +187,11 @@ framework.tools.oninput = function(event) {
     console.log(1027, event, target); 
 }
 framework.tools.path = function(target) {
-    console.log(119, { target });
     var block = target.closest('block, header, footer');
     var host = block.find('.host');
     var shadow = host.shadowRoot;
     var element = shadow.lastElementChild;
-    var selected = host.selected;
+    var selected = element.querySelector('[focus]') ? element.querySelector("[focus]") : element;
     console.log(122, { block, host, shadow, element, selected });
 
     if(selected) {
@@ -207,6 +206,13 @@ framework.tools.path = function(target) {
             var parent = selected.closest('card');
             parent.setAttribute('focus', 'card');
             element.setAttribute('focus', 'card');
+            host.selected = parent;
+            selected.removeAttribute('focus');
+        }
+        else if(["href", "icon", "picture", "text"].includes(tagName)) {
+            var parent = selected.closest('box');
+            parent.setAttribute('focus', 'box');
+            element.setAttribute('focus', 'box');
             host.selected = parent;
             selected.removeAttribute('focus');
         }

@@ -239,6 +239,12 @@
         }
     }
 
+    @media (max-width: 800px) {
+        [css-dw800px-background-color="unset"] {
+            background-color: unset;
+        }
+    }
+
     @media (max-width: 640px) {
         [css-dw640px-background-color="unset"] {
             background-color: unset;
@@ -989,6 +995,10 @@
         [css-dw800px-position="fixed"] {
             position: fixed;
         }
+        
+        [css-dw800px-display="flex"] {
+            display: flex;
+        }
     }
 
     @media (max-width: 960px) {
@@ -1655,7 +1665,7 @@
         height: 70px;
     }
 
-    .height-480px {
+    .height-480px, [css-height="480px"] {
         height: 480px;
     }
 
@@ -2629,7 +2639,7 @@
         position: absolute;
     }
 
-    .position-fixed {
+    .position-fixed, [css-position="fixed"] {
         position: fixed;
     }
 

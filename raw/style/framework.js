@@ -144,7 +144,7 @@ framework.builder.push = async function() {
         path: 'raw/style/template.html'
     }, {
         content: page,
-        path: 'raw/pages/' + dir.join('/') + '/page.html'
+        path: 'raw/pages/' + (dir.length > 0 ? dir.join('/')+'/' : '') + 'page.html'
     }, {
         content: stylesheet,
         path: 'style.css'
