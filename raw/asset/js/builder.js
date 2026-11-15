@@ -38,12 +38,50 @@ async function init() {
 
         var header = doc.body.find('body > header');
         if (header) {
-            dom.body.find('body > header').replaceWith(header);
+            var shadow = dom.body.find('body > header .host').attachShadow({mode: 'open'});
+
+            const reset = document.createElement("link");
+            reset.setAttribute("rel", "stylesheet");
+            reset.setAttribute("href", "/raw/asset/css/reset.css");
+                
+            const cssgg = document.createElement("link");
+            cssgg.setAttribute("rel", "stylesheet");
+            cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+
+            const build = document.createElement("link");
+            build.setAttribute("rel", "stylesheet");
+            build.setAttribute("href", "/raw/asset/css/builder.css");
+            
+            dom.body.find('body > header .host').setAttribute('shadow', true);
+            shadow.innerHTML = header.outerHTML;
+            shadow.prepend(window.parent.framework.css.render(shadow));
+            shadow.prepend(build);
+            shadow.prepend(cssgg);
+            shadow.prepend(reset);
         }
 
         var footer = doc.body.find('body > footer');
         if (footer) {
-            dom.body.find('body > footer').replaceWith(footer);
+            var shadow = dom.body.find('body > footer .host').attachShadow({mode: 'open'});
+
+            const reset = document.createElement("link");
+            reset.setAttribute("rel", "stylesheet");
+            reset.setAttribute("href", "/raw/asset/css/reset.css");
+                
+            const cssgg = document.createElement("link");
+            cssgg.setAttribute("rel", "stylesheet");
+            cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+
+            const build = document.createElement("link");
+            build.setAttribute("rel", "stylesheet");
+            build.setAttribute("href", "/raw/asset/css/builder.css");
+            
+            dom.body.find('body > footer .host').setAttribute('shadow', true);
+            shadow.innerHTML = footer.outerHTML;
+            shadow.prepend(window.parent.framework.css.render(shadow));
+            shadow.prepend(build);
+            shadow.prepend(cssgg);
+            shadow.prepend(reset);
         }
 
         0 > 1 ? console.log(48, {

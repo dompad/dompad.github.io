@@ -100,21 +100,23 @@ framework.builder.delete = async function(target) {
         var focus = selected.getAttribute("focus");
         if(['block', 'header', 'footer'].includes(focus)) {
             var block = target.closest("block");
-            var before = block.previousElementSibling;
-            var after = block.nextElementSibling;
-            if(before || after) {
-                var sdw = before.find(".host[shadow='true']");
-                if(!sdw) {
-                    if(after) {
-                        before.remove();
+            if(block) {
+                var before = block.previousElementSibling;
+                var after = block.nextElementSibling;
+                if(before || after) {
+                    var sdw = before.find(".host[shadow='true']");
+                    if(!sdw) {
+                        if(after) {
+                            before.remove();
+                        }
                     }
-                }
-                block.remove();
+                    block.remove();
+                } 
             } else {
                 var section = document.createElement('section');
                 section.className = 'host';
                 host.replaceWith(section);
-            }
+            }  
         }
         else if(focus === 'card') {
             var parent = selected.closest('block, header, footer');

@@ -528,67 +528,65 @@ async function viewPage(vp) {
             if (is.iframe(window)) {
                 var path = "/" + window.parent.GET[1] + "/" + window.parent.GET[2] + "/main/" + vp.dataset.fetch;
                 var pg = atob((await github.raw.path(path)).content);
-                if(pg === '') {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(pg, 'text/html');
+                const body = doc.body;
+                const blocks = body.children;
+                if(blocks.length > 0)  {
+                    var b = 0;
+                    vp.innerHTML = '<blocks></blocks>';
+                    do {
+                        var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
+                        var block = blocks[b];
+                        var host = empty.find('.host');
+                        const shadow = host.attachShadow({mode: 'open'});
+
+                        const reset = document.createElement("link");
+                        reset.setAttribute("rel", "stylesheet");
+                        reset.setAttribute("href", "/raw/asset/css/reset.css");
+                            
+                        const cssgg = document.createElement("link");
+                        cssgg.setAttribute("rel", "stylesheet");
+                        cssgg.setAttribute("href", "/raw/asset/css/gg.css");
+            
+                        const build = document.createElement("link");
+                        build.setAttribute("rel", "stylesheet");
+                        build.setAttribute("href", "/raw/asset/css/builder.css");
+                        
+                        shadow.innerHTML = block.outerHTML;
+                        shadow.prepend(window.parent.framework.css.render(shadow));
+                        shadow.prepend(build);
+                        shadow.prepend(cssgg);
+                        shadow.prepend(reset);
+                        host.setAttribute("shadow", true);
+                        
+                        var before = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
+                        var after = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);                                                     
+                        vp.find('blocks').append(empty);
+                        var bfr = vp.find('blocks').lastElementChild.previousElementSibling;
+                        if(bfr) {
+                            if(bfr.find(".host[shadow='true']")) {
+                                vp.find('blocks').lastElementChild.insertAdjacentHTML('beforeBegin', before.outerHTML);
+                            }
+                        } else {
+                            vp.find('blocks').lastElementChild.insertAdjacentHTML('beforeBegin', before.outerHTML);
+                        }
+                        var afr = vp.find('blocks').lastElementChild.nextElementSibling;
+                        if(afr) {
+                            if(afr.find(".host[shadow='true']")) {
+                                vp.find('blocks').lastElementChild.insertAdjacentHTML('afterEnd', after.outerHTML);
+                            }
+                        } else {
+                            vp.find('blocks').lastElementChild.insertAdjacentHTML('afterEnd', after.outerHTML);
+                        }
+                        b++;
+                    } while(b < blocks.length);
+                    console.log(537, {pg, blocks});
+                } else {
                     var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
                     console.log(580, {vp, empty});
                     pg = '<blocks>'+empty.outerHTML+'</blocks>';
                     vp.innerHTML = pg;
-                } else {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(pg, 'text/html');
-                    const body = doc.body;
-                    const blocks = body.children;
-                    if(blocks.length > 0) {
-                        var b = 0;
-                        vp.innerHTML = '<blocks></blocks>';
-                        do {
-                            var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
-                            var block = blocks[b];
-                            var host = empty.find('.host');
-                            const shadow = host.attachShadow({mode: 'open'});
-
-                            const reset = document.createElement("link");
-                            reset.setAttribute("rel", "stylesheet");
-                            reset.setAttribute("href", "/raw/asset/css/reset.css");
-                                
-                            const cssgg = document.createElement("link");
-                            cssgg.setAttribute("rel", "stylesheet");
-                            cssgg.setAttribute("href", "/raw/asset/css/gg.css");
-                
-                            const build = document.createElement("link");
-                            build.setAttribute("rel", "stylesheet");
-                            build.setAttribute("href", "/raw/asset/css/builder.css");
-                            
-                            shadow.innerHTML = block.outerHTML;
-                            shadow.prepend(window.parent.framework.css.render(shadow));
-                            shadow.prepend(build);
-                            shadow.prepend(cssgg);
-                            shadow.prepend(reset);
-                            host.setAttribute("shadow", true);
-                            
-                            var before = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
-                            var after = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);                                                     
-                            vp.find('blocks').append(empty);
-                            var bfr = vp.find('blocks').lastElementChild.previousElementSibling;
-                            if(bfr) {
-                                if(bfr.find(".host[shadow='true']")) {
-                                    vp.find('blocks').lastElementChild.insertAdjacentHTML('beforeBegin', before.outerHTML);
-                                }
-                            } else {
-                                vp.find('blocks').lastElementChild.insertAdjacentHTML('beforeBegin', before.outerHTML);
-                            }
-                            var afr = vp.find('blocks').lastElementChild.nextElementSibling;
-                            if(afr) {
-                                if(afr.find(".host[shadow='true']")) {
-                                    vp.find('blocks').lastElementChild.insertAdjacentHTML('afterEnd', after.outerHTML);
-                                }
-                            } else {
-                                vp.find('blocks').lastElementChild.insertAdjacentHTML('afterEnd', after.outerHTML);
-                            }
-                            b++;
-                        } while(b < blocks.length)
-                    }
-                    console.log(537, {pg, blocks});
                 }
             } 
             else {

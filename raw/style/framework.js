@@ -1,6 +1,69 @@
 window.framework = {};
 
 framework.builder = {};
+framework.builder.push = async function() {
+    var GOT = window.route.GOT;
+    var dir = GOT.splice(5, GOT.length - 1);
+    var iframe = byId('iframe-editor');
+    var doc = iframe.contentWindow.document;
+    var body = doc.body;
+    var header = doc.body.querySelector('body > header');
+    
+    if(header.find('.host[shadow="true"]')) {
+        var hdr = header.find('.host[shadow="true"]').shadowRoot.lastElementChild;
+    }
+    var footer = doc.body.querySelector('body > footer');
+    if(footer.find('.host[shadow="true"]')) {
+        var ftr = footer.find('.host[shadow="true"]').shadowRoot.lastElementChild;        
+    }
+    var shell = '';
+    hdr ? shell += hdr.outerHTML+'\n' : null;
+    shell += '<main></main>';
+    ftr ? shell += '\n'+ftr.outerHTML : null;
+
+    var hosts = doc.body.querySelectorAll('body page[data-active="true"] .host[shadow="true"]');
+    var blocks = [];
+    if(hosts.length > 0) {
+        var h = 0;
+        do {
+            var host = hosts[h];
+            var shadow = host.shadowRoot;
+            var block = shadow.lastElementChild;
+            blocks.push(block.outerHTML);
+            h++;
+        } while(h < hosts.length)
+    }
+    var page = blocks.join('\n');
+    console.log(7, 'framework.builder.push', {GOT, dir}, {body, header, footer}, {hdr, ftr, shell}, {hosts, blocks});
+
+    //PUSH
+    var title = dom.body.find('[placeholder="Page Name"]').textContent;
+    var params = {
+        message: 'Update "' + title + '" Page UI',
+        repo: GOT[2],
+        owner: GOT[1]
+    };
+    var array = [{
+        content: shell,
+        path: 'raw/style/template.html'
+    }, {
+        content: page,
+        path: 'raw/pages/' + dir.join('/') + '/page.html'
+    }];
+    try {
+        console.log(2452, 'controller.builder.update', "array", {
+            array, params
+        });
+        await github.crud.update(params, array);
+        //("/dashboard/:get/build/preview/:dir").router();
+    } catch (e) {
+        modal.alert({
+            body: "There was an error saving this page.",
+            submit: "OK",
+            title: "Push Error"
+        })
+    }
+}
 
 framework.branding = {};
 framework.branding.appName = event=>{
@@ -564,56 +627,3 @@ framework.tools.page = function(target) {
     pages.setAttribute('css-dw800px-margin-top', '50vh');
     tools.setAttribute('css-dw800px-bottom', '50vh');
 }
-
-window.tool = {}
-
-window.tool.set = {};
-window.tool.set.tab = function(target) {
-    var iframe = byId('iframe-editor');
-    var win = iframe.contentWindow;
-    var doc = win.document;
-
-    var ppp = target.closest('aside');
-
-    var header = target.closest('card > header');
-    $(header.children).addClass('border-bottom-1px-solid');
-
-    var box = target.closest('box');
-    box.classList.remove('border-bottom-1px-solid');
-
-    var tabs = header.parentNode.all('card > column');
-    var tab = $(tabs)[box.index()];
-    console.log(tabs);
-
-    $(tabs).attr('css-display', 'none')
-    tab.removeAttribute('css-display');
-
-    var element = box.find('text').dataset.before;
-    var parent = ppp.focus.closest(element);
-    var elem = ppp.focus.closest('box, card, block, body > header, body > footer');
-
-    $(doc.body.all('[focus]')).forEach(function(el) {
-        el.removeAttribute('focus');
-    });
-    $(doc.body.all('box text[contenteditable]')).forEach(function(el) {
-        el.removeAttribute('contenteditable');
-    });
-    $([doc.body]).attr('focus', element);
-    $([parent, elem.closest('block, footer, header')]).attr('focus', element);
-
-    console.log(dom.body, $('[focus]'), $(dom.body.all('[focus]')), {
-        tabs,
-        tab
-    }, {
-        elem,
-        focus: ppp.focus,
-        parent
-    });
-}
-
-/*TOOL API*/
-window.tool.tip = {};
-
-window.tool.bar = {};
-
-window.tool.box = {};
