@@ -451,13 +451,14 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                     iframe.src = blob('<!DOCTYPE html>' + doc.documentElement.outerHTML, "text/html");
                     iframe.onload = () => {
+                        var win = iframe.contentWindow;
                         var elems = {
                             iframe,
                             head: iframe.contentWindow.document.head,
                             body: iframe.contentWindow.document.body,
                             main: iframe.contentWindow.document.body.find('main')
                         };
-                        console.log(422, "controller.build.iframe iframe.onload", elems);                        
+                        console.log(422, "controller.build.iframe iframe.onload", elems);                 
                         resolve(elems.iframe);
                     } 
                 } 
@@ -495,8 +496,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             if(json) {
                 iframe.closest('pages').find('[placeholder="Page Name"]').textContent = json.title;
                 iframe.closest('pages').find('[placeholder="/page-name"]').textContent = json.slug;
-            }
-            win.String.prototype.router.call(rout.ed.url(dir));
+            }  
+            var path = win.boot;
+            win.String.prototype.router.call(path);     
         },
         else: async () => {
 

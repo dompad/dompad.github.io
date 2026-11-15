@@ -111,45 +111,14 @@ async function init() {
     var go = false;
     //alert('Loading page...');
     window.boot.router().then(function() {
-        //alert('Page loaded');
-        go = true;
-        var vp = dom.body.find('[data-fetch][data-page="' + route.page + '"]');
-        var empty = dom.body.find('main').lastElementChild.content.firstElementChild.cloneNode(true);
-        if(vp) {
-            if(vp.find('blocks')) {
-                //vp.insertAdjacentHTML('beforeend', '<blocks><section></section>'+empty.outerHTML+'</blocks>');
-            } else {
-                //vp.insertAdjacentHTML('beforeend', '<blocks><section></section>'+empty.outerHTML+'</blocks>');
-            }
-            //vp.find('blocks').find('section').insertAdjacentHTML('aftereend', empty.outerHTML);
-        } else {
-            alert("This page does not exist")
-            //var confirm = modal.confirm("This page does not exist");
-            //if(confirm) {
-                //var goto = '/dashboard/:get/pages/page';
-                //console.log(183, {goto})
-            //}
-        }
         
     })
     .catch(async(e) => {
         
         //alert("Page not loaded");
         console.log('Page not loaded', {e});
-        if(0 > 1) {
-            var confirm = await window.parent.modal.confirm({
-                "title": e.code,
-                "body": "Page Not Found",
-            }, ["Create", "Exit"]);
-            if(confirm) {
-                window.parent.String.prototype.router.call("/dashboard/:get/build");
-            } else {
-                window.parent.String.prototype.router.call("/dashboard/:get/pages/page");
-            }
-        } else {
-            if(e.code === 404) {
-                //alert(e.code);           
-            }
+        if(e.code === 404) {
+            //alert(e.code);           
         }
         
     });

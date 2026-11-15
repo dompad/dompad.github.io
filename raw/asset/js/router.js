@@ -590,7 +590,8 @@ async function viewPage(vp) {
                     }
                     console.log(537, {pg, blocks});
                 }
-            } else {
+            } 
+            else {
                 var path = vp.dataset.fetch;
                 var pg = await ajax(path);
                 vp.innerHTML = pg;
