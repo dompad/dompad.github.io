@@ -41,7 +41,7 @@ async function init() {
     }
 
     //SHELL
-    html = await ajax('./raw/asset/html/template/template.shell.html');
+    html = await ajax('./raw/style/template.html');
     html.length > 0 ? dom.body.find('boot').insertAdjacentHTML('afterend', html) : null;
 
     //PAGES
