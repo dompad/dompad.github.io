@@ -64,7 +64,7 @@
         <main>
             <template>
                 <block>
-                    <section class="host"></section>
+                    <section class="host" spellcheck="false"></section>
                     <empty class="align-items-center display-flex flex-direction-column gap-5px justify-content-center text-align-center">
                         <column class="gap-5px padding-30px">
                             <text class="display-block font-weight-bolder">Add Page Content</text>
@@ -89,7 +89,7 @@
             </template>
         </main>
         <footer>
-            <section class="host"></section>
+            <section class="host" spellcheck="false"></section>
             <empty class="align-items-center display-flex flex-direction-column gap-5px justify-content-center text-align-center">
                 <column class="gap-5px padding-30px">
                     <text class="display-block font-weight-bolder">Add Site Footer</text>
@@ -101,6 +101,9 @@
                     </ico>
                     <ico data-tap="framework.builder.create(event.target)">
                         <n class="gg-add"></n>
+                    </ico>
+                    <ico data-tap="framework.tools.path(event.target)">
+                        <n class="gg-path-back"></n>
                     </ico>
                     <ico class="margin-left-auto" data-tap="framework.builder.delete(event.target)">
                         <n class="gg-trash"></n>
