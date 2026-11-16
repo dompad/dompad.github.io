@@ -45,7 +45,7 @@ framework.builder.create = async function(target) {
     var host = block.find('.host');
     var shadow = host.shadowRoot;
     var element = shadow.lastElementChild;
-    var selected = host.selected;
+    var selected = element.querySelector("[focus]") ? element.querySelector("[focus]") : element;
     console.log(122, { block, host, shadow, element, selected });
 
     if(selected) {
@@ -130,7 +130,7 @@ framework.builder.update = function(target) {
     var host = block.find('.host');
     var shadow = host.shadowRoot;
     var element = shadow.lastElementChild;
-    var selected = host.selected;
+    var selected = element.querySelector("[focus]") ? element.querySelector("[focus]") : element;
     console.log(218, { block, host, shadow, element, selected });
 
     if(selected) {
