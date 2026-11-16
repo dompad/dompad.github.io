@@ -217,6 +217,7 @@ framework.tools.path = function(target) {
             host.selected = parent;
             selected.removeAttribute('focus');
         }
+        window.parent.framework.tools.close();
     }
 }
 

@@ -931,6 +931,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 cell.setAttribute("oninput", "framework.tools.oninput(event)")
                 cell.focus();
             }
+            framework.tools.close();
         },
 
         push: async function() {
