@@ -35,7 +35,7 @@ framework.builder.push = async function() {
     }
     var page = blocks.join('\n');
 
-    var hosts = doc.body.querySelectorAll('body .host[shadow="true"]');
+    var hosts = doc.body.querySelectorAll('body page[data-active="true"] .host[shadow="true"]');
     var css = [];
     if(hosts.length > 0) {
         var h = 0;
@@ -47,8 +47,22 @@ framework.builder.push = async function() {
             h++;
         } while(h < hosts.length)
     }
-    var stylesheet = sortCSS(css.join('\n'));
-    console.log(7, 'framework.builder.push', {GOT, dir}, {body, header, footer}, {hdr, ftr, shell}, {hosts, blocks}, {css, stylesheet});
+    var stylesheetPage = sortCSS(css.join('\n'));
+
+    var hosts = doc.body.querySelectorAll('body > header .host[shadow="true"], body > footer .host[shadow="true"]');
+    var css = [];
+    if(hosts.length > 0) {
+        var h = 0;
+        do {
+            var host = hosts[h];
+            var shadow = host.shadowRoot;
+            var block = shadow.lastElementChild;
+            css.push(framework.css.render(shadow).innerHTML);
+            h++;
+        } while(h < hosts.length)
+    }
+    var stylesheetShell = sortCSS(css.join('\n'));
+    console.log(7, 'framework.builder.push', {GOT, dir}, {body, header, footer}, {hdr, ftr, shell}, {hosts, blocks}, {stylesheetPage, stylesheetShell});
     function sortCSS(css) {
         // Remove comments
         css = css.replace(/\/\*[\s\S]*?\*\//g, '');
@@ -104,32 +118,33 @@ framework.builder.push = async function() {
         const mediaCSS = mediaBlocks.map(mb => `@media ${mb.condition} {\n${indent(mb.innerCSS)}\n}`).join('\n\n');
     
         return `${normalCSS}\n\n${mediaCSS}`;
-    }
-    function parseBlock(block) {
-        const [selector, body] = block.split('{');
-        const properties = body
-            .replace('}', '')
-            .trim()
-            .split(';')
-            .map(p => p.trim())
-            .filter(Boolean);
-    
-        properties.sort((a, b) => a.localeCompare(b));
-    
-        return {
-            selector: selector.trim(),
-            properties
-        };
-    }
-    function buildBlock(b) {
-        return `${b.selector} {\n    ${b.properties.join(';\n    ')};\n}`;
-    }
-    function extractMaxWidth(condition) {
-        const match = condition.match(/max-width\s*:\s*(\d+)px/i);
-        return match ? parseInt(match[1], 10) : Infinity;
-    }
-    function indent(str) {
-        return str.split('\n').map(line => '    ' + line).join('\n');
+        
+        function parseBlock(block) {
+            const [selector, body] = block.split('{');
+            const properties = body
+                .replace('}', '')
+                .trim()
+                .split(';')
+                .map(p => p.trim())
+                .filter(Boolean);
+        
+            properties.sort((a, b) => a.localeCompare(b));
+        
+            return {
+                selector: selector.trim(),
+                properties
+            };
+        }
+        function buildBlock(b) {
+            return `${b.selector} {\n    ${b.properties.join(';\n    ')};\n}`;
+        }
+        function extractMaxWidth(condition) {
+            const match = condition.match(/max-width\s*:\s*(\d+)px/i);
+            return match ? parseInt(match[1], 10) : Infinity;
+        }
+        function indent(str) {
+            return str.split('\n').map(line => '    ' + line).join('\n');
+        }
     }
     
     //PUSH
@@ -146,7 +161,10 @@ framework.builder.push = async function() {
         content: page,
         path: 'raw/pages/' + (dir.length > 0 ? dir.join('/')+'/' : '') + 'page.html'
     }, {
-        content: stylesheet,
+        content: stylesheetPage,
+        path: 'raw/style/' + (dir.length > 0 ? dir.join('/')+'/' : '') + 'page.css'
+    }, {
+        content: stylesheetShell,
         path: 'style.css'
     }];
     try {

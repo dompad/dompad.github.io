@@ -78,20 +78,21 @@ String.prototype.router = async function(params) {
 
                 const hash = window.hub ? "/#" : "";
                 const link = hash + (route.hash.length > 0 ? route.hash.split('#')[1] : route.path) + route.search;
-                0 > 1 ? console.log(66, {
-                    hub,
+                0 < 1 ? console.log(66, {
                     hash,
                     link,
                     route
                 }) : null;
                 document.body.dataset.path = route.path;
                 history.pushState(link, '', link);
-
+                if(byId('style-page')) {
+                    var href = "raw/style" + route.page + (route.page === "/" ? "" : "/") + "page.css";
+                    byId('style-page').setAttribute("href", href)
+                }
+                
             }
 
             //is.iframe(window) ? alert("Router.js 115") : null;
-
-            //await viewPage(vp);
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             //is.iframe(window) ? alert('Router.js 112') : null;

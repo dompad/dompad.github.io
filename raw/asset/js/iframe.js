@@ -50,7 +50,7 @@ framework.builder.create = async function(target) {
 
     if(selected) {
         var tagName = selected.tagName.toLowerCase();
-        if(tagName === 'header') {
+        if(['block', 'footer', 'header'].includes(tagName)) {
             var card = document.createElement('card');
             card.innerHTML = '<section></section>';
             element.find('section').insertAdjacentHTML('beforeEnd', card.outerHTML);
