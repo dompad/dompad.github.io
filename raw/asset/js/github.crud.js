@@ -80,7 +80,6 @@ window.github.crud.update = async(params,array)=>{
         params,
         array
     });
-    alert(1218);
     var user = await github.user.get();
     var message = params.message;
     var owner = params.owner;
@@ -100,7 +99,6 @@ window.github.crud.update = async(params,array)=>{
         references,
         sha
     });
-    alert(1238);
 
     //TREE
     var tree = [];
