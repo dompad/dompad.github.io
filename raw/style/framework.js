@@ -10,11 +10,13 @@ framework.builder.push = async function() {
     var header = doc.body.querySelector('body > header');
     
     if(header.find('.host[shadow="true"]')) {
-        var hdr = header.find('.host[shadow="true"]').shadowRoot.lastElementChild;
+        var hdr = header.find('.host[shadow="true"]').shadowRoot.lastElementChild.cloneNode(true);
+        $(hdr.all('[contenteditable]')).removeAttr("contenteditable");
     }
     var footer = doc.body.querySelector('body > footer');
     if(footer.find('.host[shadow="true"]')) {
-        var ftr = footer.find('.host[shadow="true"]').shadowRoot.lastElementChild;        
+        var ftr = footer.find('.host[shadow="true"]').shadowRoot.lastElementChild.cloneNode(true);
+        $(ftr.all('[contenteditable]')).removeAttr("contenteditable");
     }
     var shell = '';
     hdr ? shell += hdr.outerHTML+'\n' : null;
@@ -28,7 +30,8 @@ framework.builder.push = async function() {
         do {
             var host = hosts[h];
             var shadow = host.shadowRoot;
-            var block = shadow.lastElementChild;
+            var block = shadow.lastElementChild.cloneNode(true);
+            $(block.all('[contenteditable]')).removeAttr("contenteditable");
             blocks.push(block.outerHTML);
             h++;
         } while(h < hosts.length)
@@ -180,6 +183,150 @@ framework.builder.push = async function() {
             title: "Push Error"
         })
     }
+}
+
+framework.css = {}
+framework.css.render = (host) => {
+    var elems = $(host.lastElementChild.all("*"));
+    elems.push(host.lastElementChild)
+    var rules = [];
+    console.log(431, {elems});
+    elems.forEach(elem => {
+        console.log(elem);
+        if(elem.attributes && elem.attributes.length > 0) {
+            console.log(`Element: <${elem.tagName.toLowerCase()}>`);
+            for (let i = 0; i < elem.attributes.length; i++) {
+                const attr = elem.attributes[i]; //console.log(147, attr);
+                if(attr.name.startsWith('css-')) {
+                    var parts = attr.name.split('-');
+                    if(parts[1].startsWith('dw')) {
+                        var width = parts[1].split('dw')[1];
+                        var property = parts.splice(2, parts.length - 1).join('-');
+                        var value = attr.value; //css-dw960px-display="none"
+                        var rule = "@media screen and (max-width: " + width + ") { [" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " } }";
+                        console.log(542, 'media screen', {
+                            css: property + ' - ' + value,
+                            kv: `${attr.name} = "${attr.value}"`,
+                            rule: rule,
+                            width: width
+                        });
+                        rules.push(rule);
+                    }
+                    else {
+                        var property = attr.name.replace("css-", "");
+                        var value = attr.value;
+                        var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
+                        console.log(551, 'css rule', {
+                            css: property + ' - ' + value,
+                            kv: `${attr.name} = "${attr.value}"`,
+                            rule: rule
+                        });
+                        rules.push(rule);
+                    }
+                }
+            }
+        }
+    });
+    let unique = rules.filter((item, index) => rules.indexOf(item) === index);
+    unique.sort((a, b) => {
+        const startsWithPlaceA = a.startsWith("@media screen");
+        const startsWithPlaceB = b.startsWith("@media screen");    
+        if (startsWithPlaceA && !startsWithPlaceB) {
+            return 1;
+        }
+        if (!startsWithPlaceA && startsWithPlaceB) {
+            return -1;
+        }
+        return a.localeCompare(b);
+    });
+    const sorted = sortCssWithMediaQueriesLast(unique);
+    var stylesheet = sorted.join("\n");    
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = stylesheet;
+    console.log(163, {rules, stylesheet, unique, sorted});
+    function sortCssWithMediaQueriesLast(cssRules) {
+        if (!Array.isArray(cssRules)) {
+            throw new TypeError("Input must be an array of CSS rule strings.");
+        }
+    
+        // Helper: Extract numeric width from media query string
+        const extractWidth = (rule) => {
+            if (typeof rule !== "string") return 0;
+            const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
+            return match ? parseInt(match[1], 10) : 0;
+        };
+    
+        // Separate regular CSS rules and media queries
+        const regularRules = [];
+        const mediaQueries = [];
+    
+        cssRules.forEach(rule => {
+            if (typeof rule !== "string") return; // skip invalid entries
+            if (/^@media/i.test(rule.trim())) {
+                mediaQueries.push(rule);
+            } else {
+                regularRules.push(rule);
+            }
+        });
+    
+        // Sort media queries by descending width
+        mediaQueries.sort((a, b) => extractWidth(b) - extractWidth(a));
+    
+        // Combine: regular rules first, then sorted media queries
+        return [...regularRules, ...mediaQueries];
+    }
+    return style
+}
+
+framework.tools = {}
+framework.tools.close = function(target) {
+    var pages = byId('iframe-editor').closest('pages');
+    var tools = pages.nextElementSibling;
+    pages.removeAttribute('css-dw800px-margin-top');
+    tools.setAttribute('css-display', 'none');
+    tools.setAttribute('css-dw800px-bottom', '100%');
+}
+framework.tools.elements = function(target) {
+    var button = target.closest("[data-value]");
+    if(button) {
+        var value = button.dataset.value;
+        var ppp = target.closest('aside');
+        var selected = ppp.selected;
+        console.log(591, { target, text, value, ppp, selected });
+        if(value === 'link') {
+            var href = document.createElement('href');
+            selected.find('section').insertAdjacentHTML('beforeEnd', href.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'text') {
+            var text = document.createElement('text')
+            selected.find('section').insertAdjacentHTML('beforeEnd', text.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'icon') {
+            var ico = document.createElement('ico');
+            ico.innerHTML = '<n></n>';
+            selected.find('section').insertAdjacentHTML('beforeEnd', ico.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'media') {
+            var feed = document.createElement('feed');
+            selected.find('section').insertAdjacentHTML('beforeEnd', feed.outerHTML);
+            modal.exit(target);
+        }
+        else if(value === 'image') {
+            var picture = document.createElement('picture');
+            selected.find('section').insertAdjacentHTML('beforeEnd', picture.outerHTML);
+            modal.exit(target);
+        }
+    }
+}
+framework.tools.page = function(target) {
+    var pages = byId('iframe-editor').closest('pages');
+    var tools = pages.nextElementSibling;
+    pages.setAttribute('css-dw800px-margin-top', '50vh');
+    tools.setAttribute('css-dw800px-bottom', '50vh');
 }
 
 framework.branding = {};
@@ -600,147 +747,4 @@ framework.branding.marginSize = event=>{
     //$(target.closest('card').all('rect')).attr('fill', fill)
     $(target.closest('card').all('foreignObject, svg')).attr('height', ms + "px").attr('width', ms + "px")
     $(target.closest('card').all('foreignObject')).attr('x', x).attr('y', y);
-}
-
-framework.css = {}
-framework.css.render = (host) => {
-    var elems = $(host.lastElementChild.all("*"));
-    elems.push(host.lastElementChild)
-    var rules = [];
-    console.log(431, {elems});
-    elems.forEach(elem => {
-        console.log(elem);
-        if(elem.attributes && elem.attributes.length > 0) {
-            console.log(`Element: <${elem.tagName.toLowerCase()}>`);
-            for (let i = 0; i < elem.attributes.length; i++) {
-                const attr = elem.attributes[i]; //console.log(147, attr);
-                if(attr.name.startsWith('css-')) {
-                    var parts = attr.name.split('-');
-                    if(parts[1].startsWith('dw')) {
-                        var width = parts[1].split('dw')[1];
-                        var property = parts.splice(2, parts.length - 1).join('-');
-                        var value = attr.value; //css-dw960px-display="none"
-                        var rule = "@media screen and (max-width: " + width + ") { [" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " } }";
-                        console.log(542, 'media screen', {
-                            css: property + ' - ' + value,
-                            kv: `${attr.name} = "${attr.value}"`,
-                            rule: rule,
-                            width: width
-                        });
-                        rules.push(rule);
-                    }
-                    else {
-                        var property = attr.name.replace("css-", "");
-                        var value = attr.value;
-                        var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
-                        console.log(551, 'css rule', {
-                            css: property + ' - ' + value,
-                            kv: `${attr.name} = "${attr.value}"`,
-                            rule: rule
-                        });
-                        rules.push(rule);
-                    }
-                }
-            }
-        }
-    });
-    let unique = rules.filter((item, index) => rules.indexOf(item) === index);
-    unique.sort((a, b) => {
-        const startsWithPlaceA = a.startsWith("@media screen");
-        const startsWithPlaceB = b.startsWith("@media screen");    
-        if (startsWithPlaceA && !startsWithPlaceB) {
-            return 1;
-        }
-        if (!startsWithPlaceA && startsWithPlaceB) {
-            return -1;
-        }
-        return a.localeCompare(b);
-    });
-    const sorted = sortCssWithMediaQueriesLast(unique);
-    var stylesheet = sorted.join("\n");    
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.innerHTML = stylesheet;
-    console.log(163, {rules, stylesheet, unique, sorted});
-    function sortCssWithMediaQueriesLast(cssRules) {
-        if (!Array.isArray(cssRules)) {
-            throw new TypeError("Input must be an array of CSS rule strings.");
-        }
-    
-        // Helper: Extract numeric width from media query string
-        const extractWidth = (rule) => {
-            if (typeof rule !== "string") return 0;
-            const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
-            return match ? parseInt(match[1], 10) : 0;
-        };
-    
-        // Separate regular CSS rules and media queries
-        const regularRules = [];
-        const mediaQueries = [];
-    
-        cssRules.forEach(rule => {
-            if (typeof rule !== "string") return; // skip invalid entries
-            if (/^@media/i.test(rule.trim())) {
-                mediaQueries.push(rule);
-            } else {
-                regularRules.push(rule);
-            }
-        });
-    
-        // Sort media queries by descending width
-        mediaQueries.sort((a, b) => extractWidth(b) - extractWidth(a));
-    
-        // Combine: regular rules first, then sorted media queries
-        return [...regularRules, ...mediaQueries];
-    }
-    return style
-}
-
-framework.tools = {}
-framework.tools.close = function(target) {
-    var pages = byId('iframe-editor').closest('pages');
-    var tools = pages.nextElementSibling;
-    pages.removeAttribute('css-dw800px-margin-top');
-    tools.setAttribute('css-dw800px-bottom', '100%');
-}
-framework.tools.elements = function(target) {
-    var button = target.closest("[data-value]");
-    if(button) {
-        var value = button.dataset.value;
-        var ppp = target.closest('aside');
-        var selected = ppp.selected;
-        console.log(591, { target, text, value, ppp, selected });
-        if(value === 'link') {
-            var href = document.createElement('href');
-            selected.find('section').insertAdjacentHTML('beforeEnd', href.outerHTML);
-            modal.exit(target);
-        }
-        else if(value === 'text') {
-            var text = document.createElement('text')
-            selected.find('section').insertAdjacentHTML('beforeEnd', text.outerHTML);
-            modal.exit(target);
-        }
-        else if(value === 'icon') {
-            var ico = document.createElement('ico');
-            ico.innerHTML = '<n></n>';
-            selected.find('section').insertAdjacentHTML('beforeEnd', ico.outerHTML);
-            modal.exit(target);
-        }
-        else if(value === 'media') {
-            var feed = document.createElement('feed');
-            selected.find('section').insertAdjacentHTML('beforeEnd', feed.outerHTML);
-            modal.exit(target);
-        }
-        else if(value === 'image') {
-            var picture = document.createElement('picture');
-            selected.find('section').insertAdjacentHTML('beforeEnd', picture.outerHTML);
-            modal.exit(target);
-        }
-    }
-}
-framework.tools.page = function(target) {
-    var pages = byId('iframe-editor').closest('pages');
-    var tools = pages.nextElementSibling;
-    pages.setAttribute('css-dw800px-margin-top', '50vh');
-    tools.setAttribute('css-dw800px-bottom', '50vh');
 }
