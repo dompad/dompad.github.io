@@ -1,24 +1,62 @@
+<link href="https://dompad.pages.dev/raw/asset/css/reset.css" rel="stylesheet">
+<style>
+    [css-font-size="120px"] {
+        font-size: 120px;
+    }
+    
+    [css-font-size="24px"] {
+        font-size: 24px;
+    }
+    
+    [css-font-weight="bolder"] {
+        font-weight: bolder;
+    }
+
+    [css-gap="20px"] {
+        gap: 20px;
+    }
+
+    [css-margin="auto"] {
+        margin: auto;
+    }
+
+    [css-padding="20px"] {
+        padding: 20px;
+    }
+
+    [css-padding="72px"] {
+        padding: 72px;
+    }
+
+    [css-text-align="center"] {
+        text-align: center;
+    }
+
+    [css-background-color="#000000"] {
+        background-color: #000000;
+    }
+
+    [css-color="#ffffff"] {
+        color: #ffffff;
+    }
+</style>
 <blocks>
     <block>
         <section>
-            <card class="margin-auto padding-20px-0 text-align-center width-240px">
-                <section>
-                    <box>
+            <card css-margin="auto" css-padding="72px" css-text-align="center">
+                <column css-gap="20px">
+                    <box css-font-weight="bolder">
+                        <column>
+                            <text css-font-size="120px">404</text>
+                            <text css-font-size="24px">Page Not Found</text>
+                        </column>
+                    </box>
+                    <box css-background-color="#000000" css-font-weight="bolder" css-padding="20px">
                         <section>
-                            <img class="margin-auto" src="https://dompad.pages.dev/raw/asset/svg/alert.svg" width="120px">
+                            <href css-color="#ffffff" css-margin="auto" data-href="/">Go Home</text>
                         </section>
                     </box>
-                    <box class="padding-10px-0 text-align-center">
-                        <section>
-                            <text class="font-size-24px">Page Not Found</text>
-                        </section>
-                    </box>
-                    <box class="border-1px-solid padding-10px-0 text-align-center" data-href="/">
-                        <section>
-                            <text>Go Home</text>
-                        </section>
-                    </box>
-                </section>
+                </column>
             </card>
         </section>
     </block>

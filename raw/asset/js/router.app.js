@@ -53,7 +53,6 @@ String.prototype.router = async function(params) {
     route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
     //console.log(route);
 
-    $("page-route[data-error='404']").remove();
     var go = async function(resolve, reject) {
         //is.iframe(window) ? alert('Go') : null;
         console.log('String.prototype.router', route);
@@ -227,6 +226,7 @@ window.rout.ed.bang = async(route)=>{
         page
     }) : null;
 
+    $("page-route[data-error='404']").remove();
     //$('pages').removeAttr("data-active");
     //$(':not(pages)[data-pages]').removeAttr("data-active");
     $(':not(page):not(pages)[data-page]').removeAttr("data-active");
