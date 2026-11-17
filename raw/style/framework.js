@@ -286,7 +286,7 @@ function sortCssWithMediaQueriesLast(cssRules) {
 framework.tools = {}
 framework.tools.close = function(target) {
     var pages = byId('iframe-editor').closest('pages');
-    var tools = pages.nextElementSibling;
+    var tools = pages.previousElementSibling;
     pages.removeAttribute('css-dw800px-margin-top');
     tools.setAttribute('css-display', 'none');
     tools.setAttribute('css-dw800px-bottom', '100%');
@@ -330,7 +330,7 @@ framework.tools.elements = function(target) {
 }
 framework.tools.page = function(target) {
     var pages = byId('iframe-editor').closest('pages');
-    var tools = pages.nextElementSibling;
+    var tools = pages.previousElementSibling;
     pages.setAttribute('css-dw800px-margin-top', '50vh');
     tools.setAttribute('css-dw800px-bottom', '50vh');
 }

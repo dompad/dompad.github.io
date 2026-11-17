@@ -3555,7 +3555,7 @@
 
 /*Z-INDEX*/
 @media {
-    .z-index-1 {
+    .z-index-1, [css-z-index="1"] {
         z-index: 1;
     }
 

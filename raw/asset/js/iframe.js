@@ -137,7 +137,7 @@ framework.builder.update = async function(target) {
         var focus = selected.getAttribute("focus");
         var iframe = window.parent.byId('iframe-editor');
         var pages = iframe.closest('pages');
-        var tools = pages.nextElementSibling;
+        var tools = pages.previousElementSibling;
         var tagName = selected.tagName.toLowerCase();
         tools.selected = selected;
         $(tools.querySelector('blocks').children).attr('css-display', 'none');
@@ -182,6 +182,9 @@ framework.builder.update = async function(target) {
                     var i = 0;
                     do {
                         var values = Object.values(icons)[i][0];
+                        var clone = tpl.content.firstElementChild.cloneNode(true);
+                        clone.querySelector("ico").innerHTML = values.svg;
+                        wrap.insertAdjacentHTML("beforeEnd", clone.outerHTML)
                         console.log(184, {values});
                         i++;
                     } while(i < 704)
