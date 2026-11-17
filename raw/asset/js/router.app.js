@@ -47,10 +47,13 @@ String.prototype.router = async function(params) {
     }
     if(vp) {
         await viewPage(vp);
+    } else {
+        four = true;
     }
     route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
     //console.log(route);
 
+    $("page-route[data-error='404']").remove();
     var go = async function(resolve, reject) {
         //is.iframe(window) ? alert('Go') : null;
         console.log('String.prototype.router', route);
@@ -134,7 +137,7 @@ window.rout = {};
 window.rout.e = state=>{
     var arr1 = [];
     var arr2 = rout.ed.dir(state.split('#')[0].split('?')[0]);
-    var page = '/';
+    var page = '';
     var path = rout.ed.url(arr2);
     const GOT = rout.ed.dir(path);
     const root = GOT[0];
@@ -185,13 +188,18 @@ window.rout.e = state=>{
         do {
             //page = window.rout.ing(pgs, state, GOT, n);
             page = window.rout.ing(pgs, path, GOT, n);
-            //console.log(148, {n, path, state, page});
+            console.log(148, {n, path, state, page});
             if (page)
                 break;
             n++;
         } while (n < GOT.length);
     }
-
+    else {
+        if (path === "/") {
+            page = "/";            
+        }
+    }
+    
     const data = {
         GOT,
         hash,
@@ -201,7 +209,7 @@ window.rout.e = state=>{
         search,
         pgs
     };
-    0 > 1 ? console.log(164, {
+    0 < 1 ? console.log(164, {
         data
     }) : null;
     return data;
@@ -219,7 +227,6 @@ window.rout.ed.bang = async(route)=>{
         page
     }) : null;
 
-    $('[data-hide]').attr("data-active", true);
     //$('pages').removeAttr("data-active");
     //$(':not(pages)[data-pages]').removeAttr("data-active");
     $(':not(page):not(pages)[data-page]').removeAttr("data-active");
@@ -241,10 +248,8 @@ window.rout.ed.bang = async(route)=>{
     }
 
     //console.log({page:route.page});
-
-    $('[data-hide="' + route.page + '"]').attr("data-active", false);
-    $('[data-page="' + route.page + '"]').attr("data-active", true);
-    $('[data-path="' + route.path + '"]').attr("data-active", true);
+    route.page ? $('[data-page="' + route.page + '"]').attr("data-active", true) : null;
+    route.path ? $('[data-path="' + route.path + '"]').attr("data-active", true) : null;
 
     $('page-route[data-page="' + route.page + '"]').attr("data-uri", route.path);
 
@@ -413,9 +418,10 @@ window.rout.es = function getRoot() {
         arr.sort();
         arr.reverse();
         window.paths.arr = arr;
-        root = paths.page.stringExists(arr);
+        console.log(416,{page:paths.page,arr,root});
+        root = paths.page ? paths.page.stringExists(arr) : null;
         //root = arr.includes(paths.page) ? paths.page : null;
-        //console.log({page:paths.page,arr,root});
+        console.log(416,{page:paths.page,arr,root});
     }
     return root;
 }
@@ -475,12 +481,12 @@ window.rout.ing = (pgs,href,GOT,n)=>{
                     //console.log(318, 'page 2', page);
                 }
             } else {
-                ed = page;
+                //ed = page;
                 checked.push(page);
                 //console.log(318, 'page 1', page);
             }
 
-            if (ed.endsWith('*') && !ed.startsWith('/*')) {
+            if (ed && ed.endsWith('*') && !ed.startsWith('/*')) {
                 stop = true;
                 //console.log(377, stop, ed, truth(bools), bools);
                 //return false;
@@ -583,6 +589,4 @@ async function viewPage(vp) {
             f++;
         } while (fetching4.length < 0);
     }
-    
-    $("page-route[data-error='404']").remove();
 }
