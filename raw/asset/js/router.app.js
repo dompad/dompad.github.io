@@ -1,7 +1,7 @@
 class Page extends HTMLElement {
     constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
+        super();
+        this.attachShadow({ mode: 'open' });
     }
 } 
 customElements.define('page-route', Page);
@@ -105,14 +105,12 @@ String.prototype.router = async function(params) {
                 };
                 //is.iframe(window) ? alert(e.code) : null;
                 if(e.code === 404) {
-                    $("page-route[data-error='404']").remove();
                     var main = dom.body.find('main');
                     var error = document.createElement("page-route");
                     error.dataset.error = 404;
-                    error.dataset.active = true;
-                    var tpl = "https://dompad.pages.dev/raw/asset/html/error/error.404.html";
-                    error.shadowRoot.innerHTML = await ajax(tpl);
-                    main.lastElementChild.insertAdjacentHTML("beforebegin", error.outerHTML);               
+                    error.dataset.active = true;              
+                    main.insertAdjacentHTML("beforeEnd", error.outerHTML);        
+                    main.lastElementChild.shadowRoot.innerHTML = await ajax("https://dompad.pages.dev/raw/asset/html/error/error.404.html"); 
                 }
                 reject(e);
                 //resolve(route);
@@ -585,4 +583,6 @@ async function viewPage(vp) {
             f++;
         } while (fetching4.length < 0);
     }
+    
+    $("page-route[data-error='404']").remove();
 }
