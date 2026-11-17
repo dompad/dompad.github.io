@@ -20,10 +20,10 @@
         <header class="padding-top-20px">
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Font</text>
         </header>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="background-color" tabindex="1">
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="color" tabindex="1">
             <text class="font-weight-bolder">Color</text>
             <flex class="gap-5px" data-declaration="string">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" data-value="hex" onkeyup="tool.box.value(event)" type="text" value="#000000">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" data-value="hex" oninput="tools.link.color(event)" type="text" value="#000000">
             </flex>
         </row>
         <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="font-family" tabindex="2">
@@ -50,7 +50,13 @@
                 </field>
             </flex>
         </row>
-        <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="font-weight" tabindex="3">
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="font-size" tabindex="3">
+            <text class="font-weight-bolder">Font Size</text>
+            <flex class="gap-5px" data-declaration="string">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" data-value="hex" oninput="tools.link.fontSize(event)" type="text" value="16px">
+            </flex>
+        </row>
+        <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="font-weight" tabindex="4">
             <text class="font-weight-bolder">Font Weight</text>
             <flex class="gap-5px" data-declaration="value">
                 <field class="position-relative">
