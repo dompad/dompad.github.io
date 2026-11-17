@@ -8,24 +8,24 @@ framework.builder.push = async function() {
     var doc = iframe.contentWindow.document;
     var body = doc.body;
     var header = doc.body.querySelector('body > header');
-    
-    if(header.find('.host[shadow="true"]')) {
+
+    if (header.find('.host[shadow="true"]')) {
         var hdr = header.find('.host[shadow="true"]').shadowRoot.lastElementChild.cloneNode(true);
         $(hdr.all('[contenteditable]')).removeAttr("contenteditable");
     }
     var footer = doc.body.querySelector('body > footer');
-    if(footer.find('.host[shadow="true"]')) {
+    if (footer.find('.host[shadow="true"]')) {
         var ftr = footer.find('.host[shadow="true"]').shadowRoot.lastElementChild.cloneNode(true);
         $(ftr.all('[contenteditable]')).removeAttr("contenteditable");
     }
     var shell = '';
-    hdr ? shell += hdr.outerHTML+'\n' : null;
+    hdr ? shell += hdr.outerHTML + '\n' : null;
     shell += '<main></main>';
-    ftr ? shell += '\n'+ftr.outerHTML : null;
+    ftr ? shell += '\n' + ftr.outerHTML : null;
 
     var hosts = doc.body.querySelectorAll('body page[data-active="true"] .host[shadow="true"]');
     var blocks = [];
-    if(hosts.length > 0) {
+    if (hosts.length > 0) {
         var h = 0;
         do {
             var host = hosts[h];
@@ -34,122 +34,110 @@ framework.builder.push = async function() {
             $(block.all('[contenteditable]')).removeAttr("contenteditable");
             blocks.push(block.outerHTML);
             h++;
-        } while(h < hosts.length)
+        } while (h < hosts.length)
     }
     var page = blocks.join('\n');
 
     var hosts = doc.body.querySelectorAll('body page[data-active="true"] .host[shadow="true"]');
-    var css = [];
-    if(hosts.length > 0) {
+    var css1 = [];
+    if (hosts.length > 0) {
         var h = 0;
         do {
             var host = hosts[h];
             var shadow = host.shadowRoot;
             var block = shadow.lastElementChild;
-            css.push(framework.css.render(shadow).innerHTML);
+            css1.push(framework.css.render(shadow).innerHTML);
             h++;
-        } while(h < hosts.length)
+        } while (h < hosts.length)
     }
-    var stylesheetPage = sortCSS(css.join('\n'));
+    var stylesheetPage = sortCSS(css1.join('\n'));
 
     var hosts = doc.body.querySelectorAll('body > header .host[shadow="true"], body > footer .host[shadow="true"]');
-    var css = [];
-    if(hosts.length > 0) {
+    var css2 = [];
+    if (hosts.length > 0) {
         var h = 0;
         do {
             var host = hosts[h];
             var shadow = host.shadowRoot;
             var block = shadow.lastElementChild;
-            css.push(framework.css.render(shadow).innerHTML);
+            css2.push(framework.css.render(shadow).innerHTML);
             h++;
-        } while(h < hosts.length)
+        } while (h < hosts.length)
     }
-    var stylesheetShell = sortCSS(css.join('\n'));
-    console.log(7, 'framework.builder.push', {GOT, dir}, {body, header, footer}, {hdr, ftr, shell}, {hosts, blocks}, {stylesheetPage, stylesheetShell});
+    var stylesheetShell = sortCSS(css2.join('\n'));
+    console.log(7, 'framework.builder.push', {
+        GOT,
+        dir
+    }, {
+        body,
+        header,
+        footer
+    }, {
+        hdr,
+        ftr,
+        shell
+    }, {
+        hosts,
+        blocks
+    }, {
+        css1,
+        css2
+    }, {
+        stylesheetPage,
+        stylesheetShell
+    });
     function sortCSS(css) {
-        // Remove comments
-        css = css.replace(/\/\*[\s\S]*?\*\//g, '');
-    
-        const mediaBlocks = [];
-        const normalBlocks = [];
-    
-        // Regex to match media queries
-        const mediaRegex = /@media[^{]+\{([\s\S]*?)\}/g;
-        let match;
-    
-        // Extract media queries
-        while ((match = mediaRegex.exec(css)) !== null) {
-            const fullBlock = match[0];
-            const innerCSS = match[1].trim();
-            const condition = fullBlock.match(/@media\s*(.*)\{/)[1].trim();
-    
-            mediaBlocks.push({
-                condition,
-                innerCSS
-            });
+        const sheet = new CSSStyleSheet();
+        sheet.replaceSync(css);
+
+        const rules = [...sheet.cssRules];
+
+        const regularRules = [];
+        const mediaRules = [];
+
+        // Extract and categorize rules
+        rules.forEach(rule => {
+            if (rule instanceof CSSMediaRule) {
+                mediaRules.push(rule);
+            } else {
+                regularRules.push(rule);
+            }
         }
-    
-        // Remove media queries from main CSS
-        css = css.replace(mediaRegex, '');
-    
-        // Match normal selector blocks
-        const blocks = css.match(/[^{}]+{[^{}]+}/g) || [];
-    
-        // Parse normal blocks
-        normalBlocks.push(...blocks.map(block => parseBlock(block)));
-    
-        // Sort normal selectors alphabetically
-        normalBlocks.sort((a, b) => a.selector.localeCompare(b.selector));
-    
-        // Sort media queries by descending max-width
-        mediaBlocks.sort((a, b) => {
-            const maxA = extractMaxWidth(a.condition);
-            const maxB = extractMaxWidth(b.condition);
-            return maxB - maxA; // descending
-        });
-    
-        // Sort inner blocks inside each media query
-        mediaBlocks.forEach(mb => {
-            const innerBlocks = mb.innerCSS.match(/[^{}]+{[^{}]+}/g) || [];
-            const parsedInner = innerBlocks.map(block => parseBlock(block));
-            parsedInner.sort((a, b) => a.selector.localeCompare(b.selector));
-            mb.innerCSS = parsedInner.map(b => buildBlock(b)).join('\n\n');
-        });
-    
-        // Build final CSS
-        const normalCSS = normalBlocks.map(b => buildBlock(b)).join('\n\n');
-        const mediaCSS = mediaBlocks.map(mb => `@media ${mb.condition} {\n${indent(mb.innerCSS)}\n}`).join('\n\n');
-    
-        return `${normalCSS}\n\n${mediaCSS}`;
-        
-        function parseBlock(block) {
-            const [selector, body] = block.split('{');
-            const properties = body
-                .replace('}', '')
-                .trim()
-                .split(';')
-                .map(p => p.trim())
-                .filter(Boolean);
-        
-            properties.sort((a, b) => a.localeCompare(b));
-        
-            return {
-                selector: selector.trim(),
-                properties
-            };
+        );
+
+        // Sort regular rules alphabetically by selector
+        regularRules.sort( (a, b) => {
+            const selectorA = a.selectorText || "";
+            const selectorB = b.selectorText || "";
+
+            return selectorA.localeCompare(selectorB);
         }
-        function buildBlock(b) {
-            return `${b.selector} {\n    ${b.properties.join(';\n    ')};\n}`;
+        );
+
+        // Extract min-width and sort descending
+        mediaRules.sort( (a, b) => {
+            const getWidth = rule => {
+                const match = rule.conditionText.match(/min-width\s*:\s*(\d+(?:\.\d+)?)(px|em|rem)/);
+
+                if (!match)
+                    return 0;
+
+                const value = parseFloat(match[1]);
+                const unit = match[2];
+
+                // Normalize widths for comparison
+                return value * (unit === "px" ? 1 : unit === "em" ? 16 : unit === "rem" ? 16 : 1);
+            }
+            ;
+
+            return getWidth(b) - getWidth(a);
         }
-        function extractMaxWidth(condition) {
-            const match = condition.match(/max-width\s*:\s*(\d+)px/i);
-            return match ? parseInt(match[1], 10) : Infinity;
-        }
-        function indent(str) {
-            return str.split('\n').map(line => '    ' + line).join('\n');
-        }
+        );
+
+        // Reconstruct stylesheet
+        return [...regularRules.map(rule => rule.cssText), ...mediaRules.map(rule => rule.cssText)].join("\n\n");
     }
-    
+
     //PUSH
     var title = dom.body.find('[placeholder="Page Name"]').textContent;
     var params = {
@@ -162,17 +150,18 @@ framework.builder.push = async function() {
         path: 'raw/style/template.html'
     }, {
         content: page,
-        path: 'raw/pages/' + (dir.length > 0 ? dir.join('/')+'/' : '') + 'page.html'
+        path: 'raw/pages/' + (dir.length > 0 ? dir.join('/') + '/' : '') + 'page.html'
     }, {
         content: stylesheetPage,
-        path: 'raw/style/' + (dir.length > 0 ? dir.join('/')+'/' : '') + 'page.css'
+        path: 'raw/style/' + (dir.length > 0 ? dir.join('/') + '/' : '') + 'page.css'
     }, {
         content: stylesheetShell,
         path: 'style.css'
     }];
     try {
         console.log(2452, 'controller.builder.update', "array", {
-            array, params
+            array,
+            params
         });
         await github.crud.update(params, array);
         //("/dashboard/:get/build/preview/:dir").router();
@@ -190,19 +179,23 @@ framework.css.render = (host) => {
     var elems = $(host.lastElementChild.all("*"));
     elems.push(host.lastElementChild)
     var rules = [];
-    console.log(431, {elems});
+    console.log(431, {
+        elems
+    });
     elems.forEach(elem => {
         console.log(elem);
-        if(elem.attributes && elem.attributes.length > 0) {
+        if (elem.attributes && elem.attributes.length > 0) {
             console.log(`Element: <${elem.tagName.toLowerCase()}>`);
             for (let i = 0; i < elem.attributes.length; i++) {
-                const attr = elem.attributes[i]; //console.log(147, attr);
-                if(attr.name.startsWith('css-')) {
+                const attr = elem.attributes[i];
+                //console.log(147, attr);
+                if (attr.name.startsWith('css-')) {
                     var parts = attr.name.split('-');
-                    if(parts[1].startsWith('dw')) {
+                    if (parts[1].startsWith('dw')) {
                         var width = parts[1].split('dw')[1];
                         var property = parts.splice(2, parts.length - 1).join('-');
-                        var value = attr.value; //css-dw960px-display="none"
+                        var value = attr.value;
+                        //css-dw960px-display="none"
                         var rule = "@media screen and (max-width: " + width + ") { [" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " } }";
                         console.log(542, 'media screen', {
                             css: property + ' - ' + value,
@@ -211,8 +204,7 @@ framework.css.render = (host) => {
                             width: width
                         });
                         rules.push(rule);
-                    }
-                    else {
+                    } else {
                         var property = attr.name.replace("css-", "");
                         var value = attr.value;
                         var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
@@ -226,11 +218,12 @@ framework.css.render = (host) => {
                 }
             }
         }
-    });
-    let unique = rules.filter((item, index) => rules.indexOf(item) === index);
-    unique.sort((a, b) => {
+    }
+    );
+    let unique = rules.filter( (item, index) => rules.indexOf(item) === index);
+    unique.sort( (a, b) => {
         const startsWithPlaceA = a.startsWith("@media screen");
-        const startsWithPlaceB = b.startsWith("@media screen");    
+        const startsWithPlaceB = b.startsWith("@media screen");
         if (startsWithPlaceA && !startsWithPlaceB) {
             return 1;
         }
@@ -238,45 +231,56 @@ framework.css.render = (host) => {
             return -1;
         }
         return a.localeCompare(b);
-    });
+    }
+    );
     const sorted = sortCssWithMediaQueriesLast(unique);
-    var stylesheet = sorted.join("\n");    
+    var stylesheet = sorted.join("\n");
     const style = document.createElement('style');
     style.type = 'text/css';
     style.innerHTML = stylesheet;
-    console.log(163, {rules, stylesheet, unique, sorted});
-    function sortCssWithMediaQueriesLast(cssRules) {
-        if (!Array.isArray(cssRules)) {
-            throw new TypeError("Input must be an array of CSS rule strings.");
-        }
-    
-        // Helper: Extract numeric width from media query string
-        const extractWidth = (rule) => {
-            if (typeof rule !== "string") return 0;
-            const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
-            return match ? parseInt(match[1], 10) : 0;
-        };
-    
-        // Separate regular CSS rules and media queries
-        const regularRules = [];
-        const mediaQueries = [];
-    
-        cssRules.forEach(rule => {
-            if (typeof rule !== "string") return; // skip invalid entries
-            if (/^@media/i.test(rule.trim())) {
-                mediaQueries.push(rule);
-            } else {
-                regularRules.push(rule);
-            }
-        });
-    
-        // Sort media queries by descending width
-        mediaQueries.sort((a, b) => extractWidth(b) - extractWidth(a));
-    
-        // Combine: regular rules first, then sorted media queries
-        return [...regularRules, ...mediaQueries];
-    }
+    console.log(163, {
+        rules,
+        stylesheet,
+        unique,
+        sorted
+    });
     return style
+}
+function sortCssWithMediaQueriesLast(cssRules) {
+    if (!Array.isArray(cssRules)) {
+        throw new TypeError("Input must be an array of CSS rule strings.");
+    }
+
+    // Helper: Extract numeric width from media query string
+    const extractWidth = (rule) => {
+        if (typeof rule !== "string")
+            return 0;
+        const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
+        return match ? parseInt(match[1], 10) : 0;
+    }
+    ;
+
+    // Separate regular CSS rules and media queries
+    const regularRules = [];
+    const mediaQueries = [];
+
+    cssRules.forEach(rule => {
+        if (typeof rule !== "string")
+            return;
+        // skip invalid entries
+        if (/^@media/i.test(rule.trim())) {
+            mediaQueries.push(rule);
+        } else {
+            regularRules.push(rule);
+        }
+    }
+    );
+
+    // Sort media queries by descending width
+    mediaQueries.sort( (a, b) => extractWidth(b) - extractWidth(a));
+
+    // Combine: regular rules first, then sorted media queries
+    return [...regularRules, ...mediaQueries];
 }
 
 framework.tools = {}
@@ -289,33 +293,35 @@ framework.tools.close = function(target) {
 }
 framework.tools.elements = function(target) {
     var button = target.closest("[data-value]");
-    if(button) {
+    if (button) {
         var value = button.dataset.value;
         var ppp = target.closest('aside');
         var selected = ppp.selected;
-        console.log(591, { target, text, value, ppp, selected });
-        if(value === 'link') {
+        console.log(591, {
+            target,
+            text,
+            value,
+            ppp,
+            selected
+        });
+        if (value === 'link') {
             var href = document.createElement('href');
             selected.find('section').insertAdjacentHTML('beforeEnd', href.outerHTML);
             modal.exit(target);
-        }
-        else if(value === 'text') {
+        } else if (value === 'text') {
             var text = document.createElement('text')
             selected.find('section').insertAdjacentHTML('beforeEnd', text.outerHTML);
             modal.exit(target);
-        }
-        else if(value === 'icon') {
+        } else if (value === 'icon') {
             var ico = document.createElement('ico');
             ico.innerHTML = '<n></n>';
             selected.find('section').insertAdjacentHTML('beforeEnd', ico.outerHTML);
             modal.exit(target);
-        }
-        else if(value === 'media') {
+        } else if (value === 'media') {
             var feed = document.createElement('feed');
             selected.find('section').insertAdjacentHTML('beforeEnd', feed.outerHTML);
             modal.exit(target);
-        }
-        else if(value === 'image') {
+        } else if (value === 'image') {
             var picture = document.createElement('picture');
             selected.find('section').insertAdjacentHTML('beforeEnd', picture.outerHTML);
             modal.exit(target);
@@ -330,14 +336,14 @@ framework.tools.page = function(target) {
 }
 
 framework.branding = {};
-framework.branding.appName = event=>{
+framework.branding.appName = event => {
     var target = event.target;
     var value = target.value;
     var card = target.closest('card');
     var names = card.all('[data-value="app-name"]');
     $(names).html(value);
 }
-framework.branding.backgroundColor = event=>{
+framework.branding.backgroundColor = event => {
     var target = event.target;
     var value = target.value;
     var card = target.closest('card');
@@ -398,7 +404,7 @@ framework.branding.backgroundColor = event=>{
         }
     });
 }
-framework.branding.borderRadius = event=>{
+framework.branding.borderRadius = event => {
     var target = event.target;
     var value = target.value;
     var svg = target.closest('card').find('svg');
@@ -418,7 +424,7 @@ framework.branding.dedicatedPicture = async function(event) {
     var row = target.closest('column').nextElementSibling.lastElementChild;
     var svg = row.find('svg');
     var file = await on.change.file(event);
-    ImageTracer.imageToSVG(file.result, (svgstr)=>{
+    ImageTracer.imageToSVG(file.result, (svgstr) => {
         svg.find('foreignObject').innerHTML = svgstr;
         row.removeAttribute('css-display');
     }
@@ -426,7 +432,7 @@ framework.branding.dedicatedPicture = async function(event) {
         viewbox: true
     });
 }
-framework.branding.display = (event)=>{
+framework.branding.display = (event) => {
     var target = event.target;
     var value = target.value;
     var row = target.closest('row');
@@ -648,7 +654,7 @@ framework.branding.icon = function(event) {
     var foreignObjects = target.closest('box').previousElementSibling.all('picture > svg:first-child foreignObject');
     $(foreignObjects).html(icon.outerHTML)
 }
-framework.branding.imageSize = event=>{
+framework.branding.imageSize = event => {
     var target = event.target;
     var value = target.value;
     var svg = target.closest('card').find('svg');
@@ -664,7 +670,7 @@ framework.branding.imageSize = event=>{
     $(target.closest('card').all('foreignObject, svg')).attr('height', hw + "px").attr('width', hw + "px")
     $(target.closest('card').all('foreignObject')).attr('x', x).attr('y', y);
 }
-framework.branding.themeColor = event=>{
+framework.branding.themeColor = event => {
     var target = event.target;
     var value = target.value;
     var card = target.closest('card');
@@ -725,7 +731,7 @@ framework.branding.themeColor = event=>{
         }
     });
 }
-framework.branding.marginSize = event=>{
+framework.branding.marginSize = event => {
     var target = event.target;
     var value = target.value;
     var svg = target.closest('card').find('svg');
