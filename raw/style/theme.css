@@ -1,6 +1,6 @@
 /*ALIGN ITEMS*/
 @media screen {
-    .align-items-center {
+    .align-items-center, [css-align-items="center"] {
         align-items: center;
     }
 
@@ -1794,7 +1794,7 @@
 
 /*JUSTIFY CONTENT*/
 @media screen {
-    .justify-content-center {
+    .justify-content-center, [css-justify-content="Center"] {
         justify-content: center;
     }
 
@@ -2341,6 +2341,13 @@
 @media screen {
     .min-width-240px {
         min-width: 240px;
+    }
+}
+
+
+@media screen {
+    [css-aspect-ratio="1 / 1"] {
+        aspect-ratio: 1 / 1;
     }
 }
 

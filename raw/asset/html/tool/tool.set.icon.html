@@ -1,6 +1,51 @@
 <column class="flex-1 gap-20px padding-10px overflow-x-hidden">
     <box class="display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="2">
         <header>
+            <text class="font-size-13px font-weight-bolder text-transform-uppercase">Size</text>
+        </header>
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="focus" data-property="margin" tabindex="3">
+            <text class="align-items-center display-flex font-weight-bolder gap-5px line-height-20px">
+                <span>Height</span>
+            </text>
+            <flex class="gap-5px" data-declaration="dimension">
+                <input class="border-1px-solid border-color-777 border-radius-3px display-none text-align-center width-50px" data-value="number" onchange="tool.box.value(event)" type="number" value="50">
+                <field class="position-relative">
+                    <row class="align-items-center gap-5px justify-content-center" data-dropdown data-ignore>
+                        <text data-value="unit">unset</text>
+                    </row>
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto z-index-5" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tool.box.unit(event)" css-top="100%">
+                        <text class="-hover-background-color-eb padding-x-20px">auto</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-dimension="unit">px</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-dimension="unit">vw</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-dimension="unit">%</text>
+                        <text class="-hover-background-color-eb padding-x-20px">unset</text>
+                    </column>
+                </field>
+            </flex>
+        </row>
+        <row class="border-top-1px-solid border-color-ddd flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="padding" tabindex="3">
+            <text class="align-items-center display-flex font-weight-bolder gap-5px line-height-20px">
+                <span>Width</span>
+            </text>
+            <flex class="gap-5px" data-declaration="dimension">
+                <input class="border-1px-solid border-color-777 border-radius-3px display-none text-align-center width-50px" data-value="number" onchange="tool.box.value(event)" type="number" value="50">
+                <field class="position-relative">
+                    <row class="align-items-center gap-5px justify-content-center" data-dropdown data-ignore>
+                        <text data-value="unit">unset</text>
+                    </row>
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto z-index-5" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tool.box.unit(event)" css-top="100%">
+                        <text class="-hover-background-color-eb padding-x-20px">auto</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-dimension="unit">px</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-dimension="unit">vw</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-dimension="unit">%</text>
+                        <text class="-hover-background-color-eb padding-x-20px">unset</text>
+                    </column>
+                </field>
+            </flex>
+        </row>
+    </box>
+    <box class="display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="2">
+        <header>
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Box Model</text>
         </header>
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="focus" data-property="margin" tabindex="3">
@@ -198,6 +243,19 @@
             </row>
         </column>
     </box>
+    <box class="display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="2">
+        <header>
+            <text class="font-size-13px font-weight-bolder text-transform-uppercase">Icons</text>
+        </header>
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" css-columns="4" tabindex="3"></row>
+        <template id="template-tools-icons">
+            <flex css-align-items="center" css-aspect-ratio="1 / 1" css-justify-content="Center" css-outline="1px dashed gray">
+                <ico>
+                    <n class="gg-check"></n>
+                </ico>
+            </flex>
+        </template>
+    </box> 
 </column>
 <row class="background-color-ccc">
     <box class="font-size-18px font-weight-bolder line-height-50px">

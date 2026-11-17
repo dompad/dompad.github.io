@@ -125,7 +125,7 @@ framework.builder.delete = async function(target) {
         }
     }
 }
-framework.builder.update = function(target) {
+framework.builder.update = async function(target) {
     var block = target.closest('block, header, footer');
     var host = block.find('.host');
     var shadow = host.shadowRoot;
@@ -143,7 +143,7 @@ framework.builder.update = function(target) {
         $(tools.querySelector('blocks').children).attr('css-display', 'none');
         tools.setAttribute('css-display', 'flex');
         pages.setAttribute('css-dw800px-margin-top', '50vh');
-        tools.setAttribute('css-dw800px-bottom', '50vh')
+        tools.setAttribute('css-dw800px-bottom', '50vh');
         if(['block', 'header', 'footer'].includes(tagName)) {
             var toolset = tools.querySelector("[data-mode='block']");
             toolset.removeAttribute('css-display');
@@ -173,6 +173,20 @@ framework.builder.update = function(target) {
             var toolset = tools.querySelector("[data-mode='icon']");
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
+            var tpl = toolset.querySelector("#template-tools-icons");
+            var wrap = tpl.previousElementSibling;
+            if(wrap.children.length === 0) {
+                var icons = JSON.parse(await ajax("/raw/asset/json/icons.json"));
+                console.log(182, {icons});
+                if(Object.keys(icons).length > 0) {
+                    var i = 0;
+                    do {
+                        var values = Object.values(icons)[i][0];
+                        console.log(184, {values});
+                        i++;
+                    } while(i < 704)
+                }
+            }
         }                
         else if(tagName === 'feed') {
             var toolset = tools.querySelector("[data-mode='feed']");
