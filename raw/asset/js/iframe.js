@@ -147,34 +147,42 @@ framework.builder.update = function(target) {
         if(['block', 'header', 'footer'].includes(tagName)) {
             var toolset = tools.querySelector("[data-mode='block']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }
         else if(tagName === 'card') {
             var toolset = tools.querySelector("[data-mode='card']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }
         else if(tagName === 'box') {
             var toolset = tools.querySelector("[data-mode='box']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }        
         else if(tagName === 'href') {
             var toolset = tools.querySelector("[data-mode='href']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }        
         else if(tagName === 'text') {
             var toolset = tools.querySelector("[data-mode='text']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }             
         else if(tagName === 'ico') {
             var toolset = tools.querySelector("[data-mode='icon']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }                
         else if(tagName === 'feed') {
             var toolset = tools.querySelector("[data-mode='feed']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }                
         else if(tagName === 'picture') {
             var toolset = tools.querySelector("[data-mode='picture']");
             toolset.removeAttribute('css-display');
+            toolset.selected = selected;
         }        
     }
 }

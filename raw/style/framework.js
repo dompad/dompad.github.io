@@ -335,6 +335,24 @@ framework.tools.page = function(target) {
     tools.setAttribute('css-dw800px-bottom', '50vh');
 }
 
+window.tools = {};
+
+tools.link = {};
+tools.link.name = function(event) {
+    var target = event.target;
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    console.log(342, 'tools.link.name', {event, target, toolset, selected});
+    selected.textContent = target.value;
+}
+tools.link.href = function(event) {
+    var target = event.target;
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    console.log(352, 'tools.link.href', {event, target, toolset, selected});
+    selected.dataset.href = target.value;  
+}
+
 framework.branding = {};
 framework.branding.appName = event => {
     var target = event.target;
