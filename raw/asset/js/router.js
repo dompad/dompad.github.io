@@ -84,12 +84,7 @@ String.prototype.router = async function(params) {
                     route
                 }) : null;
                 document.body.dataset.path = route.path;
-                history.pushState(link, '', link);
-                if(byId('style-page')) {
-                    var href = "raw/style" + route.page + (route.page === "/" ? "" : "/") + "page.css";
-                    byId('style-page').setAttribute("href", href)
-                }
-                
+                history.pushState(link, '', link);               
             }
 
             //is.iframe(window) ? alert("Router.js 115") : null;
@@ -589,9 +584,17 @@ async function viewPage(vp) {
                 }
             } 
             else {
-                var path = vp.dataset.fetch;
-                var pg = await ajax(path);
-                vp.innerHTML = pg;
+                if(byId("style-page")) {
+                    alert("This is a managed website");
+                    var path = vp.dataset.fetch;
+                    var pg = await ajax(path);
+                    var shadow = vp.attachShadow({ mode: "open" });
+                    shadow.innerHTML = pg;
+                } else {
+                    var path = vp.dataset.fetch;
+                    var pg = await ajax(path);
+                    vp.innerHTML = pg;
+                }
             }
             //alert('Inserting Page HTML');
             console.log("router.js 33", path, vp, vp.dataset.fetch);
@@ -617,7 +620,7 @@ async function viewPage(vp) {
         var f = 0;
         do {
             if (fetching[f].innerHTML === "") {
-                fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
+                //fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
             }
             f++;
         } while (fetching.length < 0);

@@ -53,7 +53,7 @@ async function init() {
             var p = 0;
             do {
                 var row = pages[p];
-                var tagName = 'page' + (row.pages ? 's' : '');
+                var tagName = 'page' + (row.pages ? 's' : '') + '-route';
                 var sel = tagName + '[data-page="' + row.page + '"]';
                 el = document.createElement(tagName);
                 el.dataset.fetch = "/raw/pages" + row.slug.replaceAll("*", "_") + (rout.ed.dir(row.slug).length > 0 ? "/" : "") + "page.html";
