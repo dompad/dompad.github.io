@@ -105,12 +105,13 @@ String.prototype.router = async function(params) {
                 };
                 //is.iframe(window) ? alert(e.code) : null;
                 if(e.code === 404) {
+                    $("page-route[data-error='404']").remove();
                     var main = dom.body.find('main');
-                    var error = document.createElement("page");
+                    var error = document.createElement("page-route");
                     error.dataset.error = 404;
                     error.dataset.active = true;
-                    var tpl = is.iframe(window) ? "/raw/asset/html/error/error.404.builder.html" : "/raw/asset/html/error/error.404.html";
-                    error.innerHTML = await ajax(tpl);
+                    var tpl = "https://dompad.pages.dev/raw/asset/html/error/error.404.html";
+                    error.shadowRoot.innerHTML = await ajax(tpl);
                     main.lastElementChild.insertAdjacentHTML("beforebegin", error.outerHTML);               
                 }
                 reject(e);
