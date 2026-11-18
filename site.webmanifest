@@ -1,4 +1,5 @@
 {
+    "description": "domPad is a browser-based website builder and content management system built around GitHub repositories.",
     "name": "domPad",
     "short_name": "domPad",
     "icons": [
