@@ -157,6 +157,7 @@
 
     card > section {
         flex-wrap: wrap;
+        place-items: flex-start;
     }
 
     header > picture, nav > picture, footer > picture, block > picture, card > picture, box > picture {
