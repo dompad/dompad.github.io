@@ -999,16 +999,6 @@
         }
     }
 
-    @media (max-width: 800px) {
-        [css-dw800px-position="fixed"] {
-            position: fixed;
-        }
-        
-        [css-dw800px-display="flex"] {
-            display: flex;
-        }
-    }
-
     @media (max-width: 960px) {
         [css-dw960px-display="flex"] {
             display: flex;
@@ -1742,12 +1732,20 @@
     }
 
     @media (max-width: 800px) {
+        [css-dw800px-height="0"] {
+            height: 0;
+        }
+        
         [css-dw800px-height="50%"] {
             height: 50%;
         }
         
         [css-dw800px-height="calc(50% - 10px)"] {
             height: calc(50% - 10px);
+        }
+        
+        [css-dw800px-height="calc(50vh - 10px)"] {
+            height: calc(50vh - 10px);
         }
     }
 
@@ -1912,6 +1910,10 @@
     @media screen and (max-width: 800px) {
         [css-dw800px-margin="0 10px 10px"] {
             margin: 0 10px 10px;
+        }
+        
+        [css-dw800px-margin="0 10px"] {
+            margin: 0 10px;
         }
         
         [css-dw800px-margin-right="10px"] {
@@ -2683,6 +2685,20 @@
 
         .-dw1024px-position-relative {
             position: relative;
+        }
+    }
+
+    @media (max-width: 800px) {
+        [css-dw800px-position="relative"] {
+            position: relative;
+        }
+        
+        [css-dw800px-position="fixed"] {
+            position: fixed;
+        }
+        
+        [css-dw800px-display="flex"] {
+            display: flex;
         }
     }
 

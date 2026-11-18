@@ -142,8 +142,7 @@ framework.builder.update = async function(target) {
         tools.selected = selected;
         $(tools.querySelector('blocks').children).attr('css-display', 'none');
         tools.setAttribute('css-display', 'flex');
-        pages.setAttribute('css-dw800px-margin-top', '50vh');
-        tools.setAttribute('css-dw800px-bottom', '50vh');
+        tools.setAttribute('css-dw800px-height', 'calc(50vh - 10px)');
         if(['block', 'header', 'footer'].includes(tagName)) {
             var toolset = tools.querySelector("[data-mode='block']");
             toolset.removeAttribute('css-display');
