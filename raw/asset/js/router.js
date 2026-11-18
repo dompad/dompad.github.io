@@ -620,7 +620,7 @@ async function viewPage(vp) {
         var f = 0;
         do {
             if (fetching[f].innerHTML === "") {
-                fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
+                //fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
             }
             f++;
         } while (fetching.length < 0);
