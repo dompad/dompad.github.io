@@ -508,7 +508,7 @@ async function viewPage(vp) {
         var ff = 0;
         do {
             if (fetching3[ff].innerHTML === "") {
-                //fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
+                fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
             }
             ff++;
         } while (ff < fetching3.length);
@@ -620,7 +620,7 @@ async function viewPage(vp) {
         var f = 0;
         do {
             if (fetching[f].innerHTML === "") {
-                //fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
+                fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
             }
             f++;
         } while (fetching.length < 0);
