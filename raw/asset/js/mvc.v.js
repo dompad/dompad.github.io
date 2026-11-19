@@ -429,10 +429,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             webmanifest,
                                             color
                                         }) : null;
-                                        
-                                        controller.setup.colorPicker(vp.find('[data-iro]'), {
-                                            color: color
-                                        });
                                         try {
     
                                             var res = await github.repos.contents({
@@ -479,6 +475,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             var bg = rect.getAttribute('fill');
                                             rect.removeAttribute('rx');
                                             svg.setAttribute('css-color', colors.contrast(bg));
+                                        
+                                            controller.setup.colorPicker(vp.find('[data-iro]'), {
+                                                color: bg
+                                            });
     
                                             //doc.setAttribute('class', 'border-1px-solid border-color-ddd border-radius-15pct box-shadow-0px-1px-6px-0px height-100pct position-absolute top-0 width-100pct');
                                             //console.log(432, svg);
@@ -502,17 +502,19 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                             //svg.find('rect').setAttribute('fill', bg);
                                             //svg.find('rect').insertAdjacentHTML('afterend', foreignObject.outerHTML);
-                                            0 < 1 ? vp.all('[data-value="favicon"]').forEach(function(el, index) {
+                                            0 > 1 ? vp.all('[data-value="favicon"]').forEach(function(el, index) {
                                                 var width = Math.round(s * 1);
                                                 var height = Math.round(s * 1);
                                                 var x = (s - width) / 2;
                                                 var y = (s - height) / 2;
                                                 var rect = el.find('rect');
                                                 var bg = rect ? rect.getAttribute('fill') : null;
-                                                0 > 1 ? console.log(el.find('foreignObject'), {
+                                                0 < 1 ? console.log(512, el.dataset.favicon, el.find('foreignObject'), {
                                                     rect,
-                                                    fobj
+                                                    fobj,
+                                                    bg
                                                 }) : null;
+                                                rect && bg ? (rect.setAttribute("fill", bg)) : null;
                                                 el.find('foreignObject') ? (el.find('foreignObject').innerHTML = fobj.innerHTML) : (rect ? rect.insertAdjacentHTML('afterend', svgstr) : el.innerHTML = svgstr);
                                                 el.setAttribute('viewBox', '0 0 ' + s + ' ' + s);
                                                 var foreignObject = el.find('foreignObject');
@@ -554,7 +556,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             //$(vp.all('[data-value="favicon"]')).html(svgstr);
                                             //console.log(vp.all('[data-value="favicon"]'));
     
-                                            0 > 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
+                                            0 < 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
                                                 var raw = await github.repos.contents({
                                                     owner: get[1],
                                                     path: '/' + el.dataset.favicon,
@@ -563,6 +565,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                     accept: 'application/vnd.github.raw'
                                                 });
                                                 var svg = new DOMParser().parseFromString(raw, 'text/xml').documentElement;
+                                                const rect = svg.find("rect");
+                                                const bg = rect ? rect.getAttribute("fill") : null;
+                                                rect && bg ? rect.setAttribute('fill', bg) : null;
                                                 //console.log(el, el.dataset.favicon);
                                                 svg.getAttribute('height') ? el.setAttribute('height', svg.getAttribute('height')) : null;
                                                 svg.getAttribute('viewBox') ? el.setAttribute('viewBox', svg.getAttribute('viewBox')) : null;
