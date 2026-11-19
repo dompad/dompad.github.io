@@ -892,7 +892,21 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             }
         },
 
-        tap: function(target, host) {
+        tap: function(target) {
+            const host = target.getRootNode().host;
+            const body = host.closest('body');
+
+            var hosts = $(body.all('.host'));
+            hosts.removeAttr("focus");
+            hosts.forEach(elem => {
+                var shadow = elem.shadowRoot;
+                if(shadow) {
+                    var block = shadow.lastElementChild;
+                    block.removeAttribute("focus");
+                    $(block.all("[focus]")).removeAttr("focus");
+                }
+            })
+            
             var tagName = target.tagName.toLowerCase();
             var block = target.closest('block, footer, header');
             if(block.querySelector('[contenteditable]')) {
@@ -924,7 +938,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             block.removeAttribute('focus');
             block.querySelector('[focus]') ? block.querySelector('[focus]').removeAttribute('focus') : null;
             element.setAttribute('focus', focus);
-            block.setAttribute('focus', focus)
+            block.setAttribute('focus', focus);
+            host.setAttribute('focus', focus);
             host.selected = element;
             if(focus === 'cell' && cell.tagName.toLowerCase() === 'text') {
                 cell.setAttribute('contenteditable', true);

@@ -251,42 +251,42 @@ framework.css.render = (host) => {
         sorted
     });
     return style
-}
-function sortCssWithMediaQueriesLast(cssRules) {
-    if (!Array.isArray(cssRules)) {
-        throw new TypeError("Input must be an array of CSS rule strings.");
-    }
-
-    // Helper: Extract numeric width from media query string
-    const extractWidth = (rule) => {
-        if (typeof rule !== "string")
-            return 0;
-        const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
-        return match ? parseInt(match[1], 10) : 0;
-    }
-    ;
-
-    // Separate regular CSS rules and media queries
-    const regularRules = [];
-    const mediaQueries = [];
-
-    cssRules.forEach(rule => {
-        if (typeof rule !== "string")
-            return;
-        // skip invalid entries
-        if (/^@media/i.test(rule.trim())) {
-            mediaQueries.push(rule);
-        } else {
-            regularRules.push(rule);
+    function sortCssWithMediaQueriesLast(cssRules) {
+        if (!Array.isArray(cssRules)) {
+            throw new TypeError("Input must be an array of CSS rule strings.");
         }
+    
+        // Helper: Extract numeric width from media query string
+        const extractWidth = (rule) => {
+            if (typeof rule !== "string")
+                return 0;
+            const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
+            return match ? parseInt(match[1], 10) : 0;
+        }
+        ;
+    
+        // Separate regular CSS rules and media queries
+        const regularRules = [];
+        const mediaQueries = [];
+    
+        cssRules.forEach(rule => {
+            if (typeof rule !== "string")
+                return;
+            // skip invalid entries
+            if (/^@media/i.test(rule.trim())) {
+                mediaQueries.push(rule);
+            } else {
+                regularRules.push(rule);
+            }
+        }
+        );
+    
+        // Sort media queries by descending width
+        mediaQueries.sort( (a, b) => extractWidth(b) - extractWidth(a));
+    
+        // Combine: regular rules first, then sorted media queries
+        return [...regularRules, ...mediaQueries];
     }
-    );
-
-    // Sort media queries by descending width
-    mediaQueries.sort( (a, b) => extractWidth(b) - extractWidth(a));
-
-    // Combine: regular rules first, then sorted media queries
-    return [...regularRules, ...mediaQueries];
 }
 
 framework.tools = {}
