@@ -1722,6 +1722,24 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
         delete: async function(target) {
             console.log(1724, {target});
+            const confirm = await modal.confirm({
+                title: "Delete App",
+                body: "Are you sure you want to delete this app?"
+            }, ["No", "Yes"]);
+            if(confirm) {
+                try {
+                    const owner = target.closest("box").previousElementSibling.find("[placeholder='Project Owner']").textContent;
+                    const repo = target.closest("box").previousElementSibling.find("[placeholder='Project Name']").textContent
+                    console.log("Deleting app", {owner, repo}); 
+                    await github.repos.delete({
+                        owner,
+                        repo
+                    })
+                    window.route.path.router();
+                } catch(e) {
+                    alert("There was an error deleting this app.");
+                }
+            }
         }
         
     },
