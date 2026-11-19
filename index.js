@@ -69,7 +69,7 @@ async function init() {
         tap: on.touch.tap
     };
     dom.body.dataset.theme = "meridiem";
-    dom.body.addEventListener("click", function(e) {
+    dom.body.addEventListener("pointerup", function(e) {
         if (window.touch.ing === false) {
             on.touch.tap(e);
             //console.log(e.type,window.touch.ing);
