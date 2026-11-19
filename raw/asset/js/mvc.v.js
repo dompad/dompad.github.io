@@ -132,7 +132,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         if (repository.private) {
                             dom.body.find('[data-page="/dashboard/*"]').setAttribute('github-repo-private', repository.private);
                         }
-    
+
                         var project = dom.body.find('main nav').find('[placeholder="Project Name"]');
                         var link = dom.body.find('main nav').find('[placeholder="Link"]');
                         var username = dom.body.find('main nav').find('[placeholder="username"]');
@@ -2253,6 +2253,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     const row = data[x].repository ? data[x].repository : data[x];
                                     var private = row.private;
                                     const shortname = row.name;
+                                    const ownerLogin = row.owner.login;
                                     var pushed_at = new Date(row.pushed_at);
                                     var date = pushed_at.toLocaleString('en-US', {
                                         month: 'short'
@@ -2262,13 +2263,14 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                                     (Math.abs(x % 2) == 1) ? template.classList.add('background-color-fff') : null;
 
-                                    //private === true ? template.find('.gg-lock').closest('text').setAttribute("css-display", "flex"); : null;
+                                    private === true ? template.find('.gg-lock').closest('text').setAttribute("css-display", "flex") : null;
 
-                                    template.find('text').dataset.owner = row.owner.login;
-                                    template.find('text').dataset.repo = row.name;
-                                    template.find('text').textContent = shortname;
+                                    template.find('[placeholder="Project Owner"]').dataset.owner = ownerLogin;
+                                    template.find('[placeholder="Project Owner"]').textContent = ownerLogin;
+                                    template.find('[placeholder="Project Name"]').dataset.repo = shortname;
+                                    template.find('[placeholder="Project Name"]').textContent = shortname;
                                     template.find('[placeholder="Date"]').textContent = date;
-                                    template.dataset.href = "/dashboard/" + row.name + "/";
+                                    template.dataset.href = "/dashboard/" + shortname + "/";
                                     template.dataset.href = "/dashboard/" + row.owner.login + "/" + row.name;
 
                                     feed.insertAdjacentHTML('beforeend', template.outerHTML);

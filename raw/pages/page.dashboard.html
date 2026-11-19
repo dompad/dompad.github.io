@@ -146,7 +146,7 @@
 <template id="template-feed-dashboard">
     <card class="margin-bottom-1px margin-auto padding-y-10px width-100pct">
         <row class="-hd-max-width-480px align-items-center flex-grow-1 margin-auto max-width-768px padding-x-4vw width-100pct" css-width="calc(100% - 8vw)">
-            <box css-width="64px">
+            <box css-display="none" css-width="64px">
                 <row>
                     <ico class="background-color-000 border-radius-15pct" css-height="64px" css-width="64px">
                         <n></n>
@@ -156,7 +156,8 @@
             </box>
             <box class="flex-1 justify-content-space-between" css-width="calc(100% - 84px)">
                 <flex class="align-items-flex-start flex-1 flex-direction-column">
-                    <text class="font-weight-bolder margin-right-auto overflow-hidden padding-x-10px text-overflow-ellipsis white-space-nowrap" css-width="calc(100% - 40px)" placeholder="Project Name"></text>
+                    <text class="font-weight-bolder font-size-13px margin-right-auto overflow-hidden padding-x-10px text-overflow-ellipsis white-space-nowrap" css-width="calc(100% - 40px)" placeholder="Project Owner"></text>
+                    <text class="color-005cc8 font-weight-bolder margin-right-auto overflow-hidden padding-x-10px text-overflow-ellipsis white-space-nowrap" css-width="calc(100% - 40px)" placeholder="Project Name"></text>
                     <text class="align-items-center color-777 font-size-13px line-height-20px padding-x-10px">
                         <span>Last pushed on</span>
                         <span placeholder="Date">Jan 1, 2023 (a month ago)</span>
@@ -172,7 +173,7 @@
             <box class="color-777 margin-left-auto" css-width="20px">
                 <row>
                     <ico css-height="20px" css-width="20px">
-                        <n class="gg-chevron-right"></n>
+                        <n class="gg-trash"></n>
                     </ico>
                 </row>
             </box>
