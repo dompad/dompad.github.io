@@ -221,6 +221,11 @@ framework.tools.path = function(target) {
 
     if(selected) {
         var tagName = selected.tagName.toLowerCase();
+        if(['block', 'header', 'footer'].includes(tagName)) {
+            host.selected = null;
+            host.removeAttribute('focus');
+            selected.removeAttribute('focus');
+        }
         if(tagName === 'card') {
             var parent = selected.closest('block, header, footer');
             parent.setAttribute('focus', parent.tagName.toLowerCase());
