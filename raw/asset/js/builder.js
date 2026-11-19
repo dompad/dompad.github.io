@@ -60,7 +60,7 @@ async function init() {
             shadow.prepend(build);
             shadow.prepend(cssgg);
             shadow.prepend(reset);
-            shadow.lastElementChild.addEventListener("click", (event) => {
+            shadow.lastElementChild.addEventListener("pointerup", (event) => {
                 window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
             });
         }
@@ -89,7 +89,7 @@ async function init() {
             shadow.prepend(build);
             shadow.prepend(cssgg);
             shadow.prepend(reset);
-            shadow.lastElementChild.addEventListener("click", (event) => {
+            shadow.lastElementChild.addEventListener("pointerup", (event) => {
                 window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
             });
         }
