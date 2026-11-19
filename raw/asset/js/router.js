@@ -503,11 +503,12 @@ window.rout.ing = (pgs,href,GOT,n)=>{
 
 async function viewPage(vp) {
     console.log(561, {vp, routes: rout.es()});
-    const fetching3 = dom.body.all('[data-fetch][data-page="' + rout.es() + '"]:empty');
+    const fetching3 = dom.body.all('[data-fetch][data-page="' + rout.es() + '"]:empty:not(page)');
     if (fetching3.length > 0) {
         var ff = 0;
         do {
             if (fetching3[ff].innerHTML === "") {
+                console.log(511, fetching3[ff])
                 fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
             }
             ff++;
@@ -576,7 +577,8 @@ async function viewPage(vp) {
                         b++;
                     } while(b < blocks.length);
                     console.log(537, {pg, blocks});
-                } else {
+                } 
+                else {
                     var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
                     console.log(580, {vp, empty});
                     pg = '<blocks>'+empty.outerHTML+'</blocks>';
@@ -620,7 +622,7 @@ async function viewPage(vp) {
         var f = 0;
         do {
             if (fetching[f].innerHTML === "") {
-                fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
+                //fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
             }
             f++;
         } while (fetching.length < 0);

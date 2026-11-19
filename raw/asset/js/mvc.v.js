@@ -411,13 +411,26 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                             }
                             if (get[3] === "config") {
-                                console.log(391, route);
                                 var vp = dom.body.find('block[data-page="' + route.page + '"]');
-                                if (get.length > 3) {
+                                console.log(391, {route});
+                                if (get.length > 4) {
     
-                                    if (get[3] === "branding") {
+                                    if (get[4] === "branding") {
+                                        var webmanifest = await github.repos.contents({
+                                            owner: get[1],
+                                            repo: get[2],
+                                            path: "/site.webmanifest"
+                                        }, {
+                                            accept: "application/vnd.github.raw"
+                                        });
+                                        var color = webmanifest && webmanifest["background_color"] ? webmanifest["background_color"] : "#ff3b30";
+                                        0 < 1 ? console.log({
+                                            webmanifest,
+                                            color
+                                        }) : null;
+                                        
                                         controller.setup.colorPicker(vp.find('[data-iro]'), {
-                                            color: "#ff3b30"
+                                            color: color
                                         });
                                         try {
     
@@ -540,11 +553,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             //$(vp.all('[data-value="favicon"]')).html(svgstr);
                                             //console.log(vp.all('[data-value="favicon"]'));
     
-                                            0 < 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
+                                            0 > 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
                                                 var raw = await github.repos.contents({
-                                                    owner: window.owner.login,
-                                                    path: '/' + el.dataset.favicon,
-                                                    repo: GET[1]
+                                                    owner: get[1],
+                                                    path: '/icon.svg',// + el.dataset.favicon,
+                                                    repo: get[2]
                                                 }, {
                                                     accept: 'application/vnd.github.raw'
                                                 });
@@ -561,7 +574,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                         resolve(route);
                                     }
-                                    if (get[3] === "checkout") {
+                                    if (get[4] === "checkout") {
     
                                         var block = vp.find('block');
                                         0 > 1 ? console.log(424, route.page, {
@@ -575,8 +588,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         try {
     
                                             var json = await github.repos.contents({
-                                                owner: window.owner.login,
-                                                repo: get[1],
+                                                owner: get[1],
+                                                repo: get[2],
                                                 path: '/raw/asset/json/stripe.json'
                                             }, {
                                                 accept: 'application/vnd.github.raw'
@@ -610,7 +623,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                         resolve(route);
                                     }
-                                    if (get[3] === "deploy") {
+                                    if (get[4] === "deploy") {
                                         var columns = vp.all('[github-private-display]');
                                         $(columns).attr('css-display', 'none');
                                         if (repository.private === true) {
@@ -627,8 +640,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         var pages = null;
                                         try {
                                             pages = await github.pages.crud({
-                                                owner: window.owner.login,
-                                                repo: get[1]
+                                                owner: get[1],
+                                                repo: get[2]
                                             });
                                             console.log(1136, 'controller.config.deploy', {
                                                 pages
@@ -684,7 +697,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                         resolve(route);
                                     }
     
-                                } else {
+                                }
+                                else {
                                     var cards = vp.all('card');
                                     var general = cards[0];
                                     general.find('input[placeholder="Shortname"]').value = repository.name;
@@ -693,12 +707,12 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                     var details = cards[1];
                                     var webmanifest = await github.repos.contents({
-                                        owner: window.owner.login,
-                                        repo: get[1],
+                                        owner: get[1],
+                                        repo: get[2],
                                         path: "/site.webmanifest"
                                     }, {
                                         accept: "application/vnd.github.raw"
-                                    })
+                                    });
                                     0 > 1 ? console.log({
                                         webmanifest
                                     }) : null;

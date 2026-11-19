@@ -553,9 +553,9 @@ framework.branding.generate = async function(target) {
     //}
 
     var siteWEBMANIFEST = await github.repos.contents({
-        owner: window.owner.login,
-        path: 'site.webmanifest',
-        repo: GET[1]
+        owner: GET[1],
+        path: '/site.webmanifest',
+        repo: GET[2]
     }, {
         accept: 'application/vnd.github.raw'
     });
@@ -608,9 +608,9 @@ framework.branding.generate = async function(target) {
     themeColorMETA.setAttribute('name', 'theme-color');
     themeColorMETA.setAttribute('content', color);
     var content = await github.repos.contents({
-        owner: window.owner.login,
-        path: 'index.html',
-        repo: GET[1]
+        owner: GET[1],
+        path: '/index.html',
+        repo: GET[2]
     }, {
         accept: 'application/vnd.github.raw'
     });
@@ -637,8 +637,8 @@ framework.branding.generate = async function(target) {
     //PUSH
     var params = {
         message: "Generate Favicons",
-        repo: GET[1],
-        owner: window.owner.login
+        repo: GET[2],
+        owner: GET[1]
     };
     var array = [];
     Object.values(zip).forEach(function(content, index) {
