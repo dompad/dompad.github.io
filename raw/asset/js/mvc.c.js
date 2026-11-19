@@ -1718,6 +1718,14 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
     },
 
+    dashboard: {
+
+        delete: async function(target) {
+            console.log(1724, {target});
+        }
+        
+    },
+
     design: {
 
         install: async (target) => {
@@ -2554,713 +2562,6 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 row,
                 selected
             }) : null;
-        }
-
-    },
-
-    product: {
-
-        select: async (target) => {
-            var column = target.closest('column')
-            var row = target.closest('card');
-            var selected = column.all(':checked');
-            var footer = column.parentNode.lastElementChild;
-            if (selected.length > 0) {
-                footer.setAttribute("css-display", "flex")
-            } else {
-                footer.setAttribute("css-display", "none")
-            }
-            console.log({
-                column,
-                footer,
-                row,
-                selected
-            });
-        },
-
-        attribute: async (target) => {
-            var attribute = target.find('input');
-            var variations = target.nextElementSibling;
-            if (attribute.value.length > 0) {
-                variations.classList.remove('opacity-50pct');
-            } else {
-                variations.classList.add('opacity-50pct');
-            }
-        },
-
-        attributes: async (target) => {
-            var attributes = await modal.dropdown(target);
-            var variations = target.nextElementSibling;
-            console.log(attributes, variations, target.find('[placeholder]').textContent);
-            if (target.find('[placeholder]').textContent.length > 0) {
-                variations.classList.remove('opacity-50pct');
-            } else {
-                variations.classList.add('opacity-50pct');
-            }
-        },
-
-        browsenode: async (target) => {
-            var dropdown = await modal.dropdown(target.closest('dropdown'), {
-                other: true
-            });
-            var step = target.closest('card');
-            var category = step.find('[placeholder]').textContent;
-        },
-
-        category: async (target) => {
-            var dropdown = await modal.dropdown(target.closest('dropdown'), {
-                other: true
-            });
-            var step = target.closest('card');
-            var category = step.find('[placeholder]').textContent;
-        },
-
-        create: async (event) => {
-            event.preventDefault();
-
-            var form = event.target;
-
-            var images = [];
-            var thumbnails = form.find('card').firstElementChild.find('box > section').all('img');
-            if (thumbnails.length > 0) {
-                var i = 0;
-                do {
-                    var thumbnail = thumbnails[i];
-                    images.push(thumbnail.src.startsWith("data:") ? {
-                        content: thumbnail.src,
-                        extension: thumbnail.src.split(';base64,')[0].split('/')[1]
-                    } : {
-                        content: thumbnail.dataset.resource,
-                        extension: thumbnail.dataset.resource.split('.')[thumbnail.dataset.resource.split('.').length - 1]
-                    });
-                    i++;
-                } while (i < thumbnails.length)
-            }
-
-            var category = form.find('[data-after="Category"]').closest('box').find('[placeholder="Value"]').textContent;
-
-            var title = form.find('[placeholder="Enter a title"]').value;
-
-            var description = form.find('[placeholder="Provide a detailed description."]').value;
-
-            var keywords = form.find('[data-after="Tags"]').closest('box').find('flex').all('text');
-            var tags = [];
-            if (keywords.length > 0) {
-                var t = 0;
-                do {
-                    var tag = keywords[t];
-                    var keyword = tag.find('span').textContent;
-                    tags.push(keyword);
-                    t++;
-                } while (t < keywords.length);
-                tags = [...new Set(tags)];
-            }
-
-            var attributes = {};
-            var dimensions = [];
-            var traits = form.find('[data-after="Traits"]').closest('box').children[1].children;
-            if (traits.length > 0) {
-                var t = 0;
-                do {
-                    var trait = traits[t];
-                    var name = trait.find('field [placeholder]').textContent;
-                    var value = trait.find('dropdown [placeholder]').textContent;
-                    if (name && value) {
-                        attributes[name] = value;
-                    }
-                    dimensions[t] = {
-                        name,
-                        values: []
-                    };
-                    var values = trait.find('dropdown').children[1].children;
-                    if (values.length > 0) {
-                        var v = 0;
-                        do {
-                            dimensions[t].values[v] = values[v].find('span').dataset.after;
-                            v++;
-                        } while (v < values.length);
-                    }
-                    t++;
-                } while (t < traits.length);
-            }
-
-            var child = null;
-            var cousin = null;
-            var parent = null;
-
-            var keys = Object.keys(attributes);
-            var child = keys.length > 0 && keys.length === traits.length;
-            var cousin = keys.length > 0 && keys.length < traits.length;
-            var parent = keys.length === 0;
-
-            var valid = [];
-            if (!GET[5] && images.length === 0) {
-                valid.push("images");
-            }
-
-            if (valid.length === 0) {
-                var row = {
-                    description,
-                    title
-                }
-
-                if (category.length > 0) {
-                    row.category = category;
-                }
-
-                if (images.length > 0) {
-                    var imgs = [];
-                    var i = 0;
-                    do {
-                        if (images[i].content.startsWith("data:")) {
-                            if (child || cousin) {
-                                imgs.push("/raw/merch/" + GET[4] + "/" + GET[5] + "/image." + i + "." + images[i].extension);
-                            } else {
-                                imgs.push("/raw/merch/" + GET[4] + "/image." + i + "." + images[i].extension);
-                            }
-                        } else {
-                            imgs.push(images[i].content);
-                        }
-                        i++;
-                    } while (i < images.length);
-                    imgs.length > 0 ? row.images = imgs : null;
-                }
-
-                if (tags.length > 0) {
-                    row.tags = tags;
-                }
-
-                var values = {};
-                var details = form.find('[data-after="Details"]').closest('box').find('column').children;
-                if (details.length > 0) {
-                    var d = 0;
-                    do {
-                        var detail = details[d];
-                        var name = detail.all('field')[0].find('textarea').value;
-                        var value = detail.all('field')[1].find('textarea').value;
-                        if (name.length > 0 && value.length > 0) {
-                            values[name] = value;
-                        }
-                        d++;
-                    } while (d < details.length);
-                    row.details = values;
-                }
-
-                var features = [];
-                var about = form.find('[data-after="About"]').closest('box').find('column').children;
-                if (about.length > 0) {
-                    var a = 0;
-                    do {
-                        var feature = about[a];
-                        var text = feature.find('textarea').value;
-                        if (text.length > 0) {
-                            features.push(text);
-                        }
-                        a++;
-                    } while (a < about.length);
-                    row.about = features;
-                }
-
-                var ListPrice = form.find('[data-after="Pricing"]').closest('box').find('flex').children[0].find('[type="number"]').value;
-                var SalePrice = form.find('[data-after="Pricing"]').closest('box').find('flex').children[1].find('[type="number"]').value;
-                if (ListPrice || SalePrice) {
-                    row.pricing = {};
-                    ListPrice ? row.pricing.ListPrice = ListPrice : null;
-                    SalePrice ? row.pricing.SalePrice = SalePrice : null;
-                }
-
-                var quantity = form.find('[data-after="Quantity"]').closest('box').find('input').value;
-                if (quantity.length > 0 && parseInt(quantity) > 0) {
-                    row.quantity = parseInt(quantity);
-                }
-
-                if (child || cousin) {
-                    row.attributes = attributes;
-                    row.slug = slug = GET[4] + "/" + GET[5];
-                }
-                if (parent) {
-                    row.dimensions = dimensions;
-                    row.slug = slug = GET[4];
-                }
-
-                //MERCH
-                if (child || cousin) {
-                    try {
-                        var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
-                            path: "/raw/merch/merch.json"
-                        });
-                        var j = JSON.parse(atob(data.content));
-                        var json = JSON.parse(atob(data.content));
-                        var exists = false;
-                        if (json.length > 0) {
-                            var js = 0;
-                            do {
-                                if (json[js].slug === slug) {
-                                    var exists = true;
-                                    json[js] = row;
-                                }
-                                js++;
-                            } while (js < json.length);
-                        }
-                        if (exists === false) {
-                            json.push(row);
-                        }
-                    } catch (e) {
-                        var j = [];
-                        var json = [row];
-                    }
-                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
-                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
-                    var str = JSON.stringify(rows, null, 4);
-
-                    try {
-                        var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
-                            path: "/raw/merch/" + GET[4] + "/merch.json"
-                        });
-                        var j = JSON.parse(atob(data.content));
-                        var json = JSON.parse(atob(data.content));
-                        var exists = false;
-                        if (json.length > 0) {
-                            var js = 0;
-                            do {
-                                if (json[js].slug === slug) {
-                                    var exists = true;
-                                    json[js] = row;
-                                } else {}
-                                js++;
-                            } while (js < json.length);
-                        }
-                        //console.log(1218, exists, row);
-                        if (exists === false) {
-                            json.push(row);
-                        }
-                    } catch (e) {
-                        var j = [];
-                        var json = [row];
-                    }
-                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
-                    //console.log(1225, exists, rows);
-                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
-                    var str0 = JSON.stringify(rows, null, 4);
-
-                    var str1 = JSON.stringify(row, null, 4);
-                } else {
-                    try {
-                        var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
-                            path: "/raw/merch/merch.json"
-                        });
-                        var j = JSON.parse(atob(data.content));
-                        var json = JSON.parse(atob(data.content));
-                        var exists = false;
-                        if (json.length > 0) {
-                            var js = 0;
-                            do {
-                                if (json[js].slug === slug) {
-                                    var exists = true;
-                                    json[js] = row;
-                                }
-                                js++;
-                            } while (js < json.length);
-                        }
-                        if (exists === false) {
-                            json.push(row);
-                        }
-                    } catch (e) {
-                        var j = [];
-                        var json = [row];
-                    }
-                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
-                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
-                    var str = JSON.stringify(rows, null, 4);
-
-                    try {
-                        var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
-                            path: "/raw/merch/" + GET[4] + "/merch.json"
-                        });
-                        var j = JSON.parse(atob(data.content));
-                        var json = JSON.parse(atob(data.content));
-                        var exists = false;
-                        if (json.length > 0) {
-                            var js = 0;
-                            do {
-                                if (json[js].slug === GET[4]) {
-                                    var exists = true;
-                                    json[js] = row;
-                                } else {}
-                                js++;
-                            } while (js < json.length);
-                        }
-                        if (exists === false) {
-                            json.push(row);
-                        }
-                    } catch (e) {
-                        var j = [];
-                        var json = [row];
-                    }
-                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
-                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
-                    var str0 = JSON.stringify(rows, null, 4);
-                }
-
-                0 > 1 ? console.log(1902, "controller.merch.create", {
-                    row
-                }) : null;
-
-                //PUSH
-                var params = {
-                    message: "Add " + title + " to Merch",
-                    repo: GET[1],
-                    owner: window.owner.login
-                };
-                if (child || cousin) {
-                    var array = [{
-                        content: str,
-                        path: "raw/merch/merch.json"
-                    }, {
-                        content: str0,
-                        path: "raw/merch/" + GET[4] + "/merch.json"
-                    }, {
-                        content: str1,
-                        path: "raw/merch/" + GET[4] + "/" + GET[5] + "/merch.json"
-                    }];
-                } else {
-                    var array = [{
-                        content: str,
-                        path: "raw/merch/merch.json"
-                    }, {
-                        content: str0,
-                        path: "raw/merch/" + GET[4] + "/merch.json"
-                    }];
-                }
-                if (images.length > 0) {
-                    var i = 0;
-                    do {
-                        if (images[i].content.startsWith('data:')) {
-                            array.push({
-                                content: images[i].content.split(';base64,')[1],
-                                path: "raw/merch/" + slug + "/image." + i + "." + images[i].extension,
-                                type: "base64"
-                            });
-                        }
-                        i++;
-                    } while (i < images.length)
-                }
-                console.log(1168, 'controller.merch.update', "array", {
-                    array,
-                    attributes,
-                    tags
-                }, {
-                    child,
-                    cousin,
-                    parent
-                }, {
-                    row,
-                    str: JSON.parse(str),
-                    str0: JSON.parse(str0),
-                    str1: str1 ? JSON.parse(str1) : null
-                });
-                await github.crud.update(params, array);
-            } else {
-                modal.alert({
-                    body: "You must supply " + valid.join(', ') + ".",
-                    submit: "OK",
-                    title: "Validation Error"
-                })
-            }
-        },
-
-        delete: async (slug) => {
-            console.log(slug);
-            var dir = rout.ed.dir(slug);
-            console.log(dir);
-
-            try {
-                var ancestor = await github.repos.contents({
-                    owner: owner.login,
-                    repo: GET[1],
-                    path: "/raw/merch/" + dir[0] + "/merch.json"
-                }, {
-                    accept: "application/vnd.github.raw",
-                    cache: "reload"
-                });
-                if (ancestor.length > 0) {
-                    var ancestor = ancestor.filter(function(obj) {
-                        return obj.slug !== slug;
-                    });
-                }
-                console.log(1417, {
-                    ancestor
-                })
-            } catch (e) {
-                console.log("error", {
-                    e
-                })
-            }
-
-            try {
-                var merch = await github.repos.contents({
-                    owner: owner.login,
-                    repo: GET[1],
-                    path: "/raw/merch/merch.json"
-                }, {
-                    accept: "application/vnd.github.raw",
-                    cache: "reload"
-                });
-                if (merch.length > 0) {
-                    var merch = merch.filter(function(obj) {
-                        return obj.slug !== slug;
-                    });
-                }
-                console.log(1447, {
-                    merch
-                })
-            } catch (e) {
-                console.log("error", {
-                    e
-                })
-            }
-
-            //PUSH
-            if (0 < 1) {
-                var params = {
-                    message: "Delete " + slug + " from Merch",
-                    repo: GET[1],
-                    owner: window.owner.login
-                };
-                var array = [{
-                    content: JSON.stringify(merch, null, 4),
-                    path: "raw/merch/merch.json"
-                }];
-                var url = '/dashboard/:get/merch/';
-                if (dir.length > 1) {
-                    array.push({
-                        content: JSON.stringify(ancestor, null, 4),
-                        path: "raw/merch/" + dir[0] + "/merch.json"
-                    })
-                    array.push({
-                        content: null,
-                        path: "raw/merch/" + slug
-                    })
-                    var url = '/dashboard/:get/merch/catalog/:get/';
-                } else {
-                    array.push({
-                        content: null,
-                        path: "raw/merch/" + dir[0]
-                    })
-                }
-                console.log(1168, 'controller.merch.update', "array", {
-                    array,
-                    params
-                }, {
-                    dir,
-                    slug
-                }, {
-                    ancestor,
-                    merch
-                });
-                await github.crud.update(params, array);
-                url.router();
-            }
-        },
-
-        details: target => {
-            var template = target.closest('footer').find('template').content.firstElementChild.cloneNode(true);
-            target.closest('box').find('column').insertAdjacentHTML('beforeend', template.outerHTML);
-        },
-
-        matrix: target => {
-            var dimensions = [];
-            var traits = target.closest('box').all('column');
-            var t = 0;
-            if (traits.length > 0) {
-                do {
-                    var trait = traits[t];
-                    var attribute = trait.find('field').find('input').value;
-                    dimensions[t] = {
-                        name: attribute
-                    };
-                    var values = trait.find("dropdown").lastElementChild;
-                    if (values.length > 0) {
-                        var v = 0;
-                        dimensions[t].values = [];
-                        do {
-                            dimensions[t].values[v] = values.children[v].find('[placeholder="Value"]').textContent;
-                            v++;
-                        } while (v < values.length);
-                    }
-                    t++;
-                } while (t < traits.length);
-            }
-            console.log(1984, {
-                dimensions
-            });
-        },
-
-        features: event => {
-            on.key.up.auto.size(event.target)
-            if (event.keyCode === 8) {
-                var target = event.target;
-                if (target.value === "" && target.closest('column').children.length > 1) {
-                    var input = target.closest('text').previousElementSibling.find('textarea');
-                    input.selectionStart = input.selectEnd = input.value.length;
-                    input.focus();
-                    target.closest('text').remove();
-                }
-            }
-            if (event.keyCode === 13) {
-                var target = event.target;
-                var box = target.closest('box');
-                var template = box.find('template').content.firstElementChild.cloneNode(true);
-                target.closest('text').insertAdjacentHTML('afterend', template.outerHTML);
-                var input = target.closest('text').nextElementSibling.find('textarea');
-                var range = document.createRange();
-                var sel = window.getSelection();
-                range.setStart(input, input.value.length);
-                range.collapse(true);
-                sel.removeAllRanges();
-                sel.addRange(range);
-                input.focus();
-
-            }
-        },
-
-        quantity: target => {
-            var button = target.closest('row').find('input');
-            var ico = target.closest('ico');
-            if (button && ico) {
-                var up = ico.find('.gg-chevron-up');
-                var down = ico.find('.gg-chevron-down');
-                button.value = button.value === '' ? 0 : button.value;
-                if (up) {
-                    button.value = parseInt(button.value) + 1;
-                }
-                if (down && button.value > 0) {
-                    button.value = parseInt(button.value) - 1;
-                }
-            }
-        },
-
-        ring: (target) => {
-            var index = target.closest('box').index();
-            var card = target.closest('card');
-            var section = card.find('box > section');
-            section.style.transform = "translateX(-" + index + "00%)";
-        },
-
-        thumb: async (event) => {
-            var target = event.target;
-            var card = target.closest('card');
-            var section = card.find('box > section');
-            var thumbnails = card.find('[data-columns]')
-            var b64 = await on.change.file(event);
-
-            var template = card.find('template').content.firstElementChild.cloneNode(true);
-            var img = document.createElement('img');
-            img.className = "height-100pct object-fit-cover position-absolute top-0 width-100pct";
-            img.src = b64.result;
-            template.dataset.tap = "controller.product.ring(target)";
-            template.find('picture').innerHTML = img.outerHTML;
-            thumbnails.lastElementChild.insertAdjacentHTML('beforebegin', template.outerHTML);
-
-            var picture = document.createElement('picture');
-            picture.className = "border-radius-20px display-inline-flex height-100pct overflow-hidden position-relative top-0 width-100pct";
-            picture.appendChild(img);
-            section.appendChild(picture);
-            section.style.transform = "translateX(-" + section.lastElementChild.index() + "00%)";
-        },
-
-        traits: async (target) => {
-            var attributes = target.previousElementSibling;
-            var variations = await modal.dropdown(target, {
-                other: false,
-                title: attributes.find('[placeholder]').value
-            });
-
-            var url = '/dashboard/' + GET[1] + '/merch/catalog/' + GET[4] + '/';
-            var values = [];
-            var traits = target.closest('box column').children;
-            if (traits.length > 0) {
-                var t = 0;
-                do {
-                    var trait = traits[t];
-                    var name = trait.find('field [placeholder]').textContent;
-                    var value = trait.find('dropdown [placeholder]').textContent;
-                    if (name.length > 0 && value.length > 0) {
-                        values.push(name.toLowerCase().replaceAll('-', '') + "-" + value.toLowerCase().replaceAll('-', '').replaceAll(' ', '-'));
-                    }
-                    t++;
-                } while (t < traits.length);
-                var matrix = values.join('_');
-
-                if (matrix.length > 0) {
-                    //console.log(matrix, values);
-                    url += matrix + '/';
-                }
-                var vp = target.closest('pages');
-
-                0 < 1 ? console.log({
-                    route,
-                    url,
-                    matrix,
-                    values
-                }, {
-                    attributes,
-                    variations
-                }, {
-                    matrix,
-                    traits,
-                    values
-                }) : null;
-
-                route.path === url ? null : url.router();
-
-            }
-        },
-
-        variation: async (target) => {
-            var footer = target.closest('footer');
-            var template = footer.find('template').content.firstElementChild.cloneNode(true);
-            footer.insertAdjacentHTML('beforebegin', template.outerHTML);
-        },
-
-        variations: async (target) => {
-            if (target.classList.contains('opacity-50pct')) {
-                modal.alert({
-                    body: "You must select an attribute before creating values for your variations.",
-                    submit: "OK",
-                    title: "No Attribute Selected"
-                });
-            } else {
-                var attributes = target.previousElementSibling;
-                var variations = await modal.dropdown(target, {
-                    //multi: attributes,
-                    title: attributes.find('[placeholder]').value
-                });
-                console.log({
-                    attributes,
-                    variations
-                });
-            }
-        },
-
-        pinky: (target) => {
-            var box = target.closest('box');
-            var row = box.firstElementChild;
-            var card = target.closest('card');
-            var thumbnails = card.find('card > row');
-            var index = Math.abs(row.style.transform.replaceAll("translateX(", "").slice(0, -2)) / 100;
-
-            row.children[index].remove();
-            thumbnails.children[index].remove();
-            row.style.transform = "translateX(-" + (index - 1) + "00%)";
         }
 
     },
@@ -4364,6 +3665,713 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 row,
                 selected
             });
+        }
+
+    },
+
+    product: {
+
+        select: async (target) => {
+            var column = target.closest('column')
+            var row = target.closest('card');
+            var selected = column.all(':checked');
+            var footer = column.parentNode.lastElementChild;
+            if (selected.length > 0) {
+                footer.setAttribute("css-display", "flex")
+            } else {
+                footer.setAttribute("css-display", "none")
+            }
+            console.log({
+                column,
+                footer,
+                row,
+                selected
+            });
+        },
+
+        attribute: async (target) => {
+            var attribute = target.find('input');
+            var variations = target.nextElementSibling;
+            if (attribute.value.length > 0) {
+                variations.classList.remove('opacity-50pct');
+            } else {
+                variations.classList.add('opacity-50pct');
+            }
+        },
+
+        attributes: async (target) => {
+            var attributes = await modal.dropdown(target);
+            var variations = target.nextElementSibling;
+            console.log(attributes, variations, target.find('[placeholder]').textContent);
+            if (target.find('[placeholder]').textContent.length > 0) {
+                variations.classList.remove('opacity-50pct');
+            } else {
+                variations.classList.add('opacity-50pct');
+            }
+        },
+
+        browsenode: async (target) => {
+            var dropdown = await modal.dropdown(target.closest('dropdown'), {
+                other: true
+            });
+            var step = target.closest('card');
+            var category = step.find('[placeholder]').textContent;
+        },
+
+        category: async (target) => {
+            var dropdown = await modal.dropdown(target.closest('dropdown'), {
+                other: true
+            });
+            var step = target.closest('card');
+            var category = step.find('[placeholder]').textContent;
+        },
+
+        create: async (event) => {
+            event.preventDefault();
+
+            var form = event.target;
+
+            var images = [];
+            var thumbnails = form.find('card').firstElementChild.find('box > section').all('img');
+            if (thumbnails.length > 0) {
+                var i = 0;
+                do {
+                    var thumbnail = thumbnails[i];
+                    images.push(thumbnail.src.startsWith("data:") ? {
+                        content: thumbnail.src,
+                        extension: thumbnail.src.split(';base64,')[0].split('/')[1]
+                    } : {
+                        content: thumbnail.dataset.resource,
+                        extension: thumbnail.dataset.resource.split('.')[thumbnail.dataset.resource.split('.').length - 1]
+                    });
+                    i++;
+                } while (i < thumbnails.length)
+            }
+
+            var category = form.find('[data-after="Category"]').closest('box').find('[placeholder="Value"]').textContent;
+
+            var title = form.find('[placeholder="Enter a title"]').value;
+
+            var description = form.find('[placeholder="Provide a detailed description."]').value;
+
+            var keywords = form.find('[data-after="Tags"]').closest('box').find('flex').all('text');
+            var tags = [];
+            if (keywords.length > 0) {
+                var t = 0;
+                do {
+                    var tag = keywords[t];
+                    var keyword = tag.find('span').textContent;
+                    tags.push(keyword);
+                    t++;
+                } while (t < keywords.length);
+                tags = [...new Set(tags)];
+            }
+
+            var attributes = {};
+            var dimensions = [];
+            var traits = form.find('[data-after="Traits"]').closest('box').children[1].children;
+            if (traits.length > 0) {
+                var t = 0;
+                do {
+                    var trait = traits[t];
+                    var name = trait.find('field [placeholder]').textContent;
+                    var value = trait.find('dropdown [placeholder]').textContent;
+                    if (name && value) {
+                        attributes[name] = value;
+                    }
+                    dimensions[t] = {
+                        name,
+                        values: []
+                    };
+                    var values = trait.find('dropdown').children[1].children;
+                    if (values.length > 0) {
+                        var v = 0;
+                        do {
+                            dimensions[t].values[v] = values[v].find('span').dataset.after;
+                            v++;
+                        } while (v < values.length);
+                    }
+                    t++;
+                } while (t < traits.length);
+            }
+
+            var child = null;
+            var cousin = null;
+            var parent = null;
+
+            var keys = Object.keys(attributes);
+            var child = keys.length > 0 && keys.length === traits.length;
+            var cousin = keys.length > 0 && keys.length < traits.length;
+            var parent = keys.length === 0;
+
+            var valid = [];
+            if (!GET[5] && images.length === 0) {
+                valid.push("images");
+            }
+
+            if (valid.length === 0) {
+                var row = {
+                    description,
+                    title
+                }
+
+                if (category.length > 0) {
+                    row.category = category;
+                }
+
+                if (images.length > 0) {
+                    var imgs = [];
+                    var i = 0;
+                    do {
+                        if (images[i].content.startsWith("data:")) {
+                            if (child || cousin) {
+                                imgs.push("/raw/merch/" + GET[4] + "/" + GET[5] + "/image." + i + "." + images[i].extension);
+                            } else {
+                                imgs.push("/raw/merch/" + GET[4] + "/image." + i + "." + images[i].extension);
+                            }
+                        } else {
+                            imgs.push(images[i].content);
+                        }
+                        i++;
+                    } while (i < images.length);
+                    imgs.length > 0 ? row.images = imgs : null;
+                }
+
+                if (tags.length > 0) {
+                    row.tags = tags;
+                }
+
+                var values = {};
+                var details = form.find('[data-after="Details"]').closest('box').find('column').children;
+                if (details.length > 0) {
+                    var d = 0;
+                    do {
+                        var detail = details[d];
+                        var name = detail.all('field')[0].find('textarea').value;
+                        var value = detail.all('field')[1].find('textarea').value;
+                        if (name.length > 0 && value.length > 0) {
+                            values[name] = value;
+                        }
+                        d++;
+                    } while (d < details.length);
+                    row.details = values;
+                }
+
+                var features = [];
+                var about = form.find('[data-after="About"]').closest('box').find('column').children;
+                if (about.length > 0) {
+                    var a = 0;
+                    do {
+                        var feature = about[a];
+                        var text = feature.find('textarea').value;
+                        if (text.length > 0) {
+                            features.push(text);
+                        }
+                        a++;
+                    } while (a < about.length);
+                    row.about = features;
+                }
+
+                var ListPrice = form.find('[data-after="Pricing"]').closest('box').find('flex').children[0].find('[type="number"]').value;
+                var SalePrice = form.find('[data-after="Pricing"]').closest('box').find('flex').children[1].find('[type="number"]').value;
+                if (ListPrice || SalePrice) {
+                    row.pricing = {};
+                    ListPrice ? row.pricing.ListPrice = ListPrice : null;
+                    SalePrice ? row.pricing.SalePrice = SalePrice : null;
+                }
+
+                var quantity = form.find('[data-after="Quantity"]').closest('box').find('input').value;
+                if (quantity.length > 0 && parseInt(quantity) > 0) {
+                    row.quantity = parseInt(quantity);
+                }
+
+                if (child || cousin) {
+                    row.attributes = attributes;
+                    row.slug = slug = GET[4] + "/" + GET[5];
+                }
+                if (parent) {
+                    row.dimensions = dimensions;
+                    row.slug = slug = GET[4];
+                }
+
+                //MERCH
+                if (child || cousin) {
+                    try {
+                        var data = await github.repos.contents({
+                            owner: owner.login,
+                            repo: GET[1],
+                            path: "/raw/merch/merch.json"
+                        });
+                        var j = JSON.parse(atob(data.content));
+                        var json = JSON.parse(atob(data.content));
+                        var exists = false;
+                        if (json.length > 0) {
+                            var js = 0;
+                            do {
+                                if (json[js].slug === slug) {
+                                    var exists = true;
+                                    json[js] = row;
+                                }
+                                js++;
+                            } while (js < json.length);
+                        }
+                        if (exists === false) {
+                            json.push(row);
+                        }
+                    } catch (e) {
+                        var j = [];
+                        var json = [row];
+                    }
+                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
+                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
+                    var str = JSON.stringify(rows, null, 4);
+
+                    try {
+                        var data = await github.repos.contents({
+                            owner: owner.login,
+                            repo: GET[1],
+                            path: "/raw/merch/" + GET[4] + "/merch.json"
+                        });
+                        var j = JSON.parse(atob(data.content));
+                        var json = JSON.parse(atob(data.content));
+                        var exists = false;
+                        if (json.length > 0) {
+                            var js = 0;
+                            do {
+                                if (json[js].slug === slug) {
+                                    var exists = true;
+                                    json[js] = row;
+                                } else {}
+                                js++;
+                            } while (js < json.length);
+                        }
+                        //console.log(1218, exists, row);
+                        if (exists === false) {
+                            json.push(row);
+                        }
+                    } catch (e) {
+                        var j = [];
+                        var json = [row];
+                    }
+                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
+                    //console.log(1225, exists, rows);
+                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
+                    var str0 = JSON.stringify(rows, null, 4);
+
+                    var str1 = JSON.stringify(row, null, 4);
+                } else {
+                    try {
+                        var data = await github.repos.contents({
+                            owner: owner.login,
+                            repo: GET[1],
+                            path: "/raw/merch/merch.json"
+                        });
+                        var j = JSON.parse(atob(data.content));
+                        var json = JSON.parse(atob(data.content));
+                        var exists = false;
+                        if (json.length > 0) {
+                            var js = 0;
+                            do {
+                                if (json[js].slug === slug) {
+                                    var exists = true;
+                                    json[js] = row;
+                                }
+                                js++;
+                            } while (js < json.length);
+                        }
+                        if (exists === false) {
+                            json.push(row);
+                        }
+                    } catch (e) {
+                        var j = [];
+                        var json = [row];
+                    }
+                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
+                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
+                    var str = JSON.stringify(rows, null, 4);
+
+                    try {
+                        var data = await github.repos.contents({
+                            owner: owner.login,
+                            repo: GET[1],
+                            path: "/raw/merch/" + GET[4] + "/merch.json"
+                        });
+                        var j = JSON.parse(atob(data.content));
+                        var json = JSON.parse(atob(data.content));
+                        var exists = false;
+                        if (json.length > 0) {
+                            var js = 0;
+                            do {
+                                if (json[js].slug === GET[4]) {
+                                    var exists = true;
+                                    json[js] = row;
+                                } else {}
+                                js++;
+                            } while (js < json.length);
+                        }
+                        if (exists === false) {
+                            json.push(row);
+                        }
+                    } catch (e) {
+                        var j = [];
+                        var json = [row];
+                    }
+                    rows = 0 > 1 ? json : Array.from(new Set(json.map(e => JSON.stringify(e)))).map(e => JSON.parse(e));
+                    var inc = j.some(item => (JSON.stringify(item) === JSON.stringify(row)));
+                    var str0 = JSON.stringify(rows, null, 4);
+                }
+
+                0 > 1 ? console.log(1902, "controller.merch.create", {
+                    row
+                }) : null;
+
+                //PUSH
+                var params = {
+                    message: "Add " + title + " to Merch",
+                    repo: GET[1],
+                    owner: window.owner.login
+                };
+                if (child || cousin) {
+                    var array = [{
+                        content: str,
+                        path: "raw/merch/merch.json"
+                    }, {
+                        content: str0,
+                        path: "raw/merch/" + GET[4] + "/merch.json"
+                    }, {
+                        content: str1,
+                        path: "raw/merch/" + GET[4] + "/" + GET[5] + "/merch.json"
+                    }];
+                } else {
+                    var array = [{
+                        content: str,
+                        path: "raw/merch/merch.json"
+                    }, {
+                        content: str0,
+                        path: "raw/merch/" + GET[4] + "/merch.json"
+                    }];
+                }
+                if (images.length > 0) {
+                    var i = 0;
+                    do {
+                        if (images[i].content.startsWith('data:')) {
+                            array.push({
+                                content: images[i].content.split(';base64,')[1],
+                                path: "raw/merch/" + slug + "/image." + i + "." + images[i].extension,
+                                type: "base64"
+                            });
+                        }
+                        i++;
+                    } while (i < images.length)
+                }
+                console.log(1168, 'controller.merch.update', "array", {
+                    array,
+                    attributes,
+                    tags
+                }, {
+                    child,
+                    cousin,
+                    parent
+                }, {
+                    row,
+                    str: JSON.parse(str),
+                    str0: JSON.parse(str0),
+                    str1: str1 ? JSON.parse(str1) : null
+                });
+                await github.crud.update(params, array);
+            } else {
+                modal.alert({
+                    body: "You must supply " + valid.join(', ') + ".",
+                    submit: "OK",
+                    title: "Validation Error"
+                })
+            }
+        },
+
+        delete: async (slug) => {
+            console.log(slug);
+            var dir = rout.ed.dir(slug);
+            console.log(dir);
+
+            try {
+                var ancestor = await github.repos.contents({
+                    owner: owner.login,
+                    repo: GET[1],
+                    path: "/raw/merch/" + dir[0] + "/merch.json"
+                }, {
+                    accept: "application/vnd.github.raw",
+                    cache: "reload"
+                });
+                if (ancestor.length > 0) {
+                    var ancestor = ancestor.filter(function(obj) {
+                        return obj.slug !== slug;
+                    });
+                }
+                console.log(1417, {
+                    ancestor
+                })
+            } catch (e) {
+                console.log("error", {
+                    e
+                })
+            }
+
+            try {
+                var merch = await github.repos.contents({
+                    owner: owner.login,
+                    repo: GET[1],
+                    path: "/raw/merch/merch.json"
+                }, {
+                    accept: "application/vnd.github.raw",
+                    cache: "reload"
+                });
+                if (merch.length > 0) {
+                    var merch = merch.filter(function(obj) {
+                        return obj.slug !== slug;
+                    });
+                }
+                console.log(1447, {
+                    merch
+                })
+            } catch (e) {
+                console.log("error", {
+                    e
+                })
+            }
+
+            //PUSH
+            if (0 < 1) {
+                var params = {
+                    message: "Delete " + slug + " from Merch",
+                    repo: GET[1],
+                    owner: window.owner.login
+                };
+                var array = [{
+                    content: JSON.stringify(merch, null, 4),
+                    path: "raw/merch/merch.json"
+                }];
+                var url = '/dashboard/:get/merch/';
+                if (dir.length > 1) {
+                    array.push({
+                        content: JSON.stringify(ancestor, null, 4),
+                        path: "raw/merch/" + dir[0] + "/merch.json"
+                    })
+                    array.push({
+                        content: null,
+                        path: "raw/merch/" + slug
+                    })
+                    var url = '/dashboard/:get/merch/catalog/:get/';
+                } else {
+                    array.push({
+                        content: null,
+                        path: "raw/merch/" + dir[0]
+                    })
+                }
+                console.log(1168, 'controller.merch.update', "array", {
+                    array,
+                    params
+                }, {
+                    dir,
+                    slug
+                }, {
+                    ancestor,
+                    merch
+                });
+                await github.crud.update(params, array);
+                url.router();
+            }
+        },
+
+        details: target => {
+            var template = target.closest('footer').find('template').content.firstElementChild.cloneNode(true);
+            target.closest('box').find('column').insertAdjacentHTML('beforeend', template.outerHTML);
+        },
+
+        matrix: target => {
+            var dimensions = [];
+            var traits = target.closest('box').all('column');
+            var t = 0;
+            if (traits.length > 0) {
+                do {
+                    var trait = traits[t];
+                    var attribute = trait.find('field').find('input').value;
+                    dimensions[t] = {
+                        name: attribute
+                    };
+                    var values = trait.find("dropdown").lastElementChild;
+                    if (values.length > 0) {
+                        var v = 0;
+                        dimensions[t].values = [];
+                        do {
+                            dimensions[t].values[v] = values.children[v].find('[placeholder="Value"]').textContent;
+                            v++;
+                        } while (v < values.length);
+                    }
+                    t++;
+                } while (t < traits.length);
+            }
+            console.log(1984, {
+                dimensions
+            });
+        },
+
+        features: event => {
+            on.key.up.auto.size(event.target)
+            if (event.keyCode === 8) {
+                var target = event.target;
+                if (target.value === "" && target.closest('column').children.length > 1) {
+                    var input = target.closest('text').previousElementSibling.find('textarea');
+                    input.selectionStart = input.selectEnd = input.value.length;
+                    input.focus();
+                    target.closest('text').remove();
+                }
+            }
+            if (event.keyCode === 13) {
+                var target = event.target;
+                var box = target.closest('box');
+                var template = box.find('template').content.firstElementChild.cloneNode(true);
+                target.closest('text').insertAdjacentHTML('afterend', template.outerHTML);
+                var input = target.closest('text').nextElementSibling.find('textarea');
+                var range = document.createRange();
+                var sel = window.getSelection();
+                range.setStart(input, input.value.length);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+                input.focus();
+
+            }
+        },
+
+        quantity: target => {
+            var button = target.closest('row').find('input');
+            var ico = target.closest('ico');
+            if (button && ico) {
+                var up = ico.find('.gg-chevron-up');
+                var down = ico.find('.gg-chevron-down');
+                button.value = button.value === '' ? 0 : button.value;
+                if (up) {
+                    button.value = parseInt(button.value) + 1;
+                }
+                if (down && button.value > 0) {
+                    button.value = parseInt(button.value) - 1;
+                }
+            }
+        },
+
+        ring: (target) => {
+            var index = target.closest('box').index();
+            var card = target.closest('card');
+            var section = card.find('box > section');
+            section.style.transform = "translateX(-" + index + "00%)";
+        },
+
+        thumb: async (event) => {
+            var target = event.target;
+            var card = target.closest('card');
+            var section = card.find('box > section');
+            var thumbnails = card.find('[data-columns]')
+            var b64 = await on.change.file(event);
+
+            var template = card.find('template').content.firstElementChild.cloneNode(true);
+            var img = document.createElement('img');
+            img.className = "height-100pct object-fit-cover position-absolute top-0 width-100pct";
+            img.src = b64.result;
+            template.dataset.tap = "controller.product.ring(target)";
+            template.find('picture').innerHTML = img.outerHTML;
+            thumbnails.lastElementChild.insertAdjacentHTML('beforebegin', template.outerHTML);
+
+            var picture = document.createElement('picture');
+            picture.className = "border-radius-20px display-inline-flex height-100pct overflow-hidden position-relative top-0 width-100pct";
+            picture.appendChild(img);
+            section.appendChild(picture);
+            section.style.transform = "translateX(-" + section.lastElementChild.index() + "00%)";
+        },
+
+        traits: async (target) => {
+            var attributes = target.previousElementSibling;
+            var variations = await modal.dropdown(target, {
+                other: false,
+                title: attributes.find('[placeholder]').value
+            });
+
+            var url = '/dashboard/' + GET[1] + '/merch/catalog/' + GET[4] + '/';
+            var values = [];
+            var traits = target.closest('box column').children;
+            if (traits.length > 0) {
+                var t = 0;
+                do {
+                    var trait = traits[t];
+                    var name = trait.find('field [placeholder]').textContent;
+                    var value = trait.find('dropdown [placeholder]').textContent;
+                    if (name.length > 0 && value.length > 0) {
+                        values.push(name.toLowerCase().replaceAll('-', '') + "-" + value.toLowerCase().replaceAll('-', '').replaceAll(' ', '-'));
+                    }
+                    t++;
+                } while (t < traits.length);
+                var matrix = values.join('_');
+
+                if (matrix.length > 0) {
+                    //console.log(matrix, values);
+                    url += matrix + '/';
+                }
+                var vp = target.closest('pages');
+
+                0 < 1 ? console.log({
+                    route,
+                    url,
+                    matrix,
+                    values
+                }, {
+                    attributes,
+                    variations
+                }, {
+                    matrix,
+                    traits,
+                    values
+                }) : null;
+
+                route.path === url ? null : url.router();
+
+            }
+        },
+
+        variation: async (target) => {
+            var footer = target.closest('footer');
+            var template = footer.find('template').content.firstElementChild.cloneNode(true);
+            footer.insertAdjacentHTML('beforebegin', template.outerHTML);
+        },
+
+        variations: async (target) => {
+            if (target.classList.contains('opacity-50pct')) {
+                modal.alert({
+                    body: "You must select an attribute before creating values for your variations.",
+                    submit: "OK",
+                    title: "No Attribute Selected"
+                });
+            } else {
+                var attributes = target.previousElementSibling;
+                var variations = await modal.dropdown(target, {
+                    //multi: attributes,
+                    title: attributes.find('[placeholder]').value
+                });
+                console.log({
+                    attributes,
+                    variations
+                });
+            }
+        },
+
+        pinky: (target) => {
+            var box = target.closest('box');
+            var row = box.firstElementChild;
+            var card = target.closest('card');
+            var thumbnails = card.find('card > row');
+            var index = Math.abs(row.style.transform.replaceAll("translateX(", "").slice(0, -2)) / 100;
+
+            row.children[index].remove();
+            thumbnails.children[index].remove();
+            row.style.transform = "translateX(-" + (index - 1) + "00%)";
         }
 
     },

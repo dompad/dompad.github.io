@@ -2270,8 +2270,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     template.find('[placeholder="Project Name"]').dataset.repo = shortname;
                                     template.find('[placeholder="Project Name"]').textContent = shortname;
                                     template.find('[placeholder="Date"]').textContent = date;
-                                    template.dataset.href = "/dashboard/" + shortname + "/";
-                                    template.dataset.href = "/dashboard/" + row.owner.login + "/" + row.name;
+                                    template.all('box')[0].dataset.href = "/dashboard/" + ownerLogin + "/" + shortname;
 
                                     feed.insertAdjacentHTML('beforeend', template.outerHTML);
                                     x++;

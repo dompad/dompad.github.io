@@ -146,14 +146,6 @@
 <template id="template-feed-dashboard">
     <card class="margin-bottom-1px margin-auto padding-y-10px width-100pct">
         <row class="-hd-max-width-480px align-items-center flex-grow-1 margin-auto max-width-768px padding-x-4vw width-100pct" css-width="calc(100% - 8vw)">
-            <box css-display="none" css-width="64px">
-                <row>
-                    <ico class="background-color-000 border-radius-15pct" css-height="64px" css-width="64px">
-                        <n></n>
-                        <n class="empty-state"></n>
-                    </ico>
-                </row>
-            </box>
             <box class="flex-1 justify-content-space-between" css-width="calc(100% - 84px)">
                 <flex class="align-items-flex-start flex-1 flex-direction-column">
                     <text class="font-weight-bolder font-size-13px margin-right-auto overflow-hidden padding-x-10px text-overflow-ellipsis white-space-nowrap" css-width="calc(100% - 40px)" placeholder="Project Owner"></text>
@@ -170,9 +162,9 @@
                     </text>
                 </flex>
             </box>
-            <box class="color-777 margin-left-auto" css-width="20px">
+            <box class="color-777 margin-left-auto">
                 <row>
-                    <ico css-height="20px" css-width="20px">
+                    <ico css-height="20px" data-tap="controller.dashboard.delete(event.target)">
                         <n class="gg-trash"></n>
                     </ico>
                 </row>
