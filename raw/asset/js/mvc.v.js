@@ -405,11 +405,12 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 }
     
                                 resolve(route);
-                            } else {
+                            } 
+                            else {
     
                                 dom.body.classList.remove('overflow-hidden');
     
-                            }
+                            }                            
                             if (get[3] === "config") {
                                 var vp = dom.body.find('block[data-page="' + route.page + '"]');
                                 console.log(391, {route});
@@ -501,7 +502,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                             //svg.find('rect').setAttribute('fill', bg);
                                             //svg.find('rect').insertAdjacentHTML('afterend', foreignObject.outerHTML);
-                                            0 > 1 ? vp.all('[data-value="favicon"]').forEach(function(el, index) {
+                                            0 < 1 ? vp.all('[data-value="favicon"]').forEach(function(el, index) {
                                                 var width = Math.round(s * 1);
                                                 var height = Math.round(s * 1);
                                                 var x = (s - width) / 2;
@@ -556,7 +557,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             0 > 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
                                                 var raw = await github.repos.contents({
                                                     owner: get[1],
-                                                    path: '/icon.svg',// + el.dataset.favicon,
+                                                    path: '/' + el.dataset.favicon,
                                                     repo: get[2]
                                                 }, {
                                                     accept: 'application/vnd.github.raw'
@@ -2058,7 +2059,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     resolve(route);
                                 }
                             }
-                            if (get[3] == "posts") {
+                            if (get[3] === "posts") {
                                 if (get[3] === "post") {
                                     var vp = dom.body.find('pages[data-page="/dashboard/*/posts/*"]');
     
@@ -2149,7 +2150,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     resolve(route);
                                 }
                             } 
-                            else if (get[3] === "setup") {
+                            if (get[3] === "setup") {
                                 var vp = dom.body.find('[data-page="/setup"]');
                                 if (get.length > 1) {} else {
                                     //alert(vp.outerHTML);
@@ -2163,7 +2164,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 }
                                 resolve(route);
                             } 
-                            else if (get[3] === "style") {
+                            if (get[3] === "style") {
                                 var a = async(d)=>{
                                     //data = data.filter(row=>row.type === "dir")
                                     data = JSON.parse(d);
@@ -2218,12 +2219,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 ajax('raw/asset/json/templates.json').then(a);
                                 resolve(route);
                             }
-                        }
-                        else {
-                            //console.log(2200, "Token invalid");
-                            //github.oauth.logout();
-                            //alert("Token invalid");
-                            //resolve(route);
                         }
                         
                     } 
