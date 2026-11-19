@@ -176,7 +176,6 @@ framework.builder.update = async function(target) {
             var wrap = tpl.previousElementSibling;
             if(wrap.children.length === 0) {
                 var icons = JSON.parse(await ajax("/raw/asset/json/icons.json"));
-                console.log(182, {icons});
                 if(Object.keys(icons).length > 0) {
                     var i = 0;
                     do {
@@ -184,7 +183,7 @@ framework.builder.update = async function(target) {
                         var clone = tpl.content.firstElementChild.cloneNode(true);
                         clone.querySelector("ico").innerHTML = values.svg;
                         wrap.insertAdjacentHTML("beforeEnd", clone.outerHTML)
-                        console.log(184, {values});
+                        //console.log(184, {values});
                         i++;
                     } while(i < 704)
                 }
