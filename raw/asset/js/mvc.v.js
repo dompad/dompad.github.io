@@ -500,58 +500,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 ico.setAttribute('width', w);
                                             }
     
-                                            //svg.find('rect').setAttribute('fill', bg);
-                                            //svg.find('rect').insertAdjacentHTML('afterend', foreignObject.outerHTML);
-                                            0 > 1 ? vp.all('[data-value="favicon"]').forEach(function(el, index) {
-                                                var width = Math.round(s * 1);
-                                                var height = Math.round(s * 1);
-                                                var x = (s - width) / 2;
-                                                var y = (s - height) / 2;
-                                                var rect = el.find('rect');
-                                                var bg = rect ? rect.getAttribute('fill') : null;
-                                                0 < 1 ? console.log(512, el.dataset.favicon, el.find('foreignObject'), {
-                                                    rect,
-                                                    fobj,
-                                                    bg
-                                                }) : null;
-                                                rect && bg ? (rect.setAttribute("fill", bg)) : null;
-                                                el.find('foreignObject') ? (el.find('foreignObject').innerHTML = fobj.innerHTML) : (rect ? rect.insertAdjacentHTML('afterend', svgstr) : el.innerHTML = svgstr);
-                                                el.setAttribute('viewBox', '0 0 ' + s + ' ' + s);
-                                                var foreignObject = el.find('foreignObject');
-                                                var fh = foreignObject.getAttribute('height');
-                                                var fw = foreignObject.getAttribute('width');
-                                                if (fh) {//foreignObject.setAttribute('height', (height * 1));
-                                                //foreignObject.find('svg') ? foreignObject.find('svg').setAttribute('height', fh) : null;
-                                                } else {
-                                                    foreignObject.setAttribute('height', (height * 1));
-                                                }
-                                                if (fw) {//foreignObject.setAttribute('width', (width * 1));
-                                                //foreignObject.find('svg') ? foreignObject.find('svg').setAttribute('width', fw) : null;
-                                                } else {
-                                                    foreignObject.setAttribute('width', (width * 1));
-                                                }
-                                                foreignObject.getAttribute('x') ? null : foreignObject.setAttribute('x', x);
-                                                foreignObject.getAttribute('y') ? null : foreignObject.setAttribute('y', y);
-                                                var ico = el.find('svg');
-                                                ico.removeAttribute('class');
-                                                ico.setAttribute('height', height);
-                                                ico.setAttribute('width', width);
-                                                if (fh) {
-                                                    ico.setAttribute('height', ico.parentElement.getAttribute('height'));
-                                                    0 > 1 ? console.log({
-                                                        ico,
-                                                        pe: ico.parentElement.getAttribute('height')
-                                                    }) : null;
-                                                }
-                                                if (fw) {
-                                                    ico.setAttribute('width', ico.parentElement.getAttribute('width'));
-                                                    0 > 1 ? console.log({
-                                                        ico,
-                                                        pe: ico.parentElement.getAttribute('width')
-                                                    }) : null;
-                                                }
-                                            }) : null;
-    
                                             //console.log(svg.clientWidth, svg.firstElementChild, svg.firstElementChild.clientWidth);  
                                             //$(vp.all('[data-value="favicon"]')).html(svgstr);
                                             //console.log(vp.all('[data-value="favicon"]'));
