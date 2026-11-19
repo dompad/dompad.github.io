@@ -181,7 +181,7 @@ async function init() {
         press: on.touch.press,
         tap: on.touch.tap
     };
-    dom.body.addEventListener("click", function(e) {
+    dom.body.addEventListener("pointerup", function(e) {
         if (window.touch.ing === false) {
             on.touch.tap(e);
             //console.log(e.type,window.touch.ing);
