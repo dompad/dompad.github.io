@@ -37,6 +37,8 @@ async function init() {
         var doc = new DOMParser().parseFromString(html, 'text/html');
 
         var header = doc.body.find('body > header');
+        header.removeAttribute("focus");
+        $(header.all('[focus]')).removeAttr("focus");
         if (header) {
             var shadow = dom.body.find('body > header .host').attachShadow({mode: 'open'});
 
@@ -64,6 +66,8 @@ async function init() {
         }
 
         var footer = doc.body.find('body > footer');
+        footer.removeAttribute("focus");
+        $(footer.all('[focus]')).removeAttr("focus");
         if (footer) {
             var shadow = dom.body.find('body > footer .host').attachShadow({mode: 'open'});
 

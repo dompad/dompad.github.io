@@ -530,6 +530,8 @@ async function viewPage(vp) {
                     do {
                         var empty = vp.closest('main').lastElementChild.content.firstElementChild.cloneNode(true);
                         var block = blocks[b];
+                        block.removeAttribute("focus");
+                        $(block.all('[focus]')).removeAttr("focus");
                         var host = empty.find('.host');
                         const shadow = host.attachShadow({mode: 'open'});
 

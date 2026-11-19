@@ -11,6 +11,9 @@
     .host:not([shadow="true"]) + empty > :nth-child(2) {
         display: none;
     }
+    .host:not([focus]) + empty > :nth-child(2) {
+        display: none;
+    }
     
     body {
         padding: 20px 0;

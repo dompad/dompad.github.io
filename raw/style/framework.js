@@ -12,11 +12,15 @@ framework.builder.push = async function() {
     if (header.find('.host[shadow="true"]')) {
         var hdr = header.find('.host[shadow="true"]').shadowRoot.lastElementChild.cloneNode(true);
         $(hdr.all('[contenteditable]')).removeAttr("contenteditable");
+        $(hdr.all('[focus]')).removeAttr("focus");
+        hdr.removeAttribute('focus');
     }
     var footer = doc.body.querySelector('body > footer');
     if (footer.find('.host[shadow="true"]')) {
         var ftr = footer.find('.host[shadow="true"]').shadowRoot.lastElementChild.cloneNode(true);
         $(ftr.all('[contenteditable]')).removeAttr("contenteditable");
+        $(ftr.all('[focus]')).removeAttr("focus");
+        ftr.removeAttribute('focus');
     }
     var shell = '';
     hdr ? shell += hdr.outerHTML + '\n' : null;
@@ -32,6 +36,8 @@ framework.builder.push = async function() {
             var shadow = host.shadowRoot;
             var block = shadow.lastElementChild.cloneNode(true);
             $(block.all('[contenteditable]')).removeAttr("contenteditable");
+            $(block.all('[focus]')).removeAttr("focus");
+            block.removeAttribute('focus');
             blocks.push(block.outerHTML);
             h++;
         } while (h < hosts.length)
