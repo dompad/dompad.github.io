@@ -145,21 +145,25 @@ framework.builder.update = async function(target) {
         tools.setAttribute('css-dw800px-height', 'calc(50vh - 10px)');
         if(['block', 'header', 'footer'].includes(tagName)) {
             var toolset = tools.querySelector("[data-mode='block']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
         }
         else if(tagName === 'card') {
             var toolset = tools.querySelector("[data-mode='card']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
         }
         else if(tagName === 'box') {
             var toolset = tools.querySelector("[data-mode='box']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
         }        
         else if(tagName === 'href') {
             var toolset = tools.querySelector("[data-mode='href']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
             
@@ -173,8 +177,7 @@ framework.builder.update = async function(target) {
             var padding = selected.getAttribute("css-padding");
             console.log(168, {
                 name, address, fontFamily, fontSize
-            });
-            
+            });           
             toolset.find('input[name="textContent"]').value = name;
             toolset.find('input[name="data-href"]').value = address;
             toolset.find('input[name="color"]').value = color;
@@ -187,11 +190,13 @@ framework.builder.update = async function(target) {
         }        
         else if(tagName === 'text') {
             var toolset = tools.querySelector("[data-mode='text']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
         }             
         else if(tagName === 'ico') {
             var toolset = tools.querySelector("[data-mode='icon']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
             var tpl = toolset.querySelector("#template-tools-icons");
@@ -210,14 +215,22 @@ framework.builder.update = async function(target) {
                     } while(i < 704)
                 }
             }
-        }                
-        else if(tagName === 'feed') {
-            var toolset = tools.querySelector("[data-mode='feed']");
-            toolset.removeAttribute('css-display');
-            toolset.selected = selected;
-        }                
+            
+            var height = selected.getAttribute("css-height");
+            var width = selected.getAttribute("css-width");
+            var margin = selected.getAttribute("css-margin");
+            var padding = selected.getAttribute("css-padding");
+            console.log(168, {
+                height, width, margin, padding
+            });           
+            toolset.find('input[name="height"]').value = height;
+            toolset.find('input[name="width"]').textContent = width;
+            toolset.find('input[name="margin"]').value = margin;
+            toolset.find('input[name="padding"]').value = padding;
+        }
         else if(tagName === 'picture') {
             var toolset = tools.querySelector("[data-mode='picture']");
+            toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
         }        

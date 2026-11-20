@@ -437,6 +437,47 @@ tools.link.padding = function(target) {
     sheet.replaceWith(style);    
 }
 
+tools.icon = {};
+tools.icon.width = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-width") : selected.setAttribute("css-width", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.width', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.icon.height = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-height") : selected.setAttribute("css-height", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.height', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.link.margin = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-margin") : selected.setAttribute("css-margin", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.margin', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.link.padding = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-padding") : selected.setAttribute("css-padding", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.padding', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
 
 framework.branding = {};
 framework.branding.appName = event => {
