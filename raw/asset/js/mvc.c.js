@@ -944,6 +944,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             if(focus === 'cell' && cell.tagName.toLowerCase() === 'text') {
                 cell.setAttribute('contenteditable', true);
                 cell.setAttribute("oninput", "framework.tools.oninput(event)")
+                cell.setAttribute("onpaste", "framework.tools.onpaste(event)")
                 cell.focus();
             }
             framework.tools.close();
