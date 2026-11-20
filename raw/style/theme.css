@@ -2341,6 +2341,10 @@
 }
 
 @media screen {
+    .min-width-120px {
+        min-width: 120px;
+    }
+    
     .min-width-240px {
         min-width: 240px;
     }

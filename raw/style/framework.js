@@ -344,20 +344,44 @@ framework.tools.page = function(target) {
 window.tools = {};
 
 tools.link = {};
-tools.link.name = function(event) {
-    var target = event.target;
+tools.link.name = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = toolset.selected;
-    console.log(342, 'tools.link.name', {event, target, toolset, selected});
+    console.log(342, 'tools.link.name', {target, toolset, selected});
     selected.textContent = target.value;
 }
-tools.link.href = function(event) {
-    var target = event.target;
+tools.link.href = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = toolset.selected;
-    console.log(352, 'tools.link.href', {event, target, toolset, selected});
+    console.log(352, 'tools.link.href', {target, toolset, selected});
     selected.dataset.href = target.value;  
 }
+tools.link.color = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    selected.setAttribute("css-color", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.color', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);
+}
+tools.link.fontFamily = function(target) {
+    
+}
+tools.link.fontSize = function(target) {
+    
+}
+tools.link.fontWeight = function(target) {
+    
+}
+tools.link.margin = function(target) {
+    
+}
+tools.link.padding = function(target) {
+    
+}
+
 
 framework.branding = {};
 framework.branding.appName = event => {

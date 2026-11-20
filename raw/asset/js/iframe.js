@@ -162,6 +162,28 @@ framework.builder.update = async function(target) {
             var toolset = tools.querySelector("[data-mode='href']");
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
+            
+            var name = selected.textContent;
+            var address = selected.dataset.href;
+            var color = selected.getAttribute("css-color");
+            var fontFamily = selected.getAttribute("css-font-family");
+            var fontSize = selected.getAttribute("css-font-size");
+            var fontWeight = selected.getAttribute("css-font-weight");
+            var margin = selected.getAttribute("css-margin");
+            var padding = selected.getAttribute("css-padding");
+            console.log(168, {
+                name, address, fontFamily, fontSize
+            });
+            
+            toolset.find('input[name="textContent"]').value = name;
+            toolset.find('input[name="data-href"]').value = address;
+            toolset.find('input[name="color"]').value = color;
+            toolset.find('text[name="font-family"]').textContent = fontFamily;
+            toolset.find('input[name="font-size"]').value = fontSize;
+            toolset.find('text[name="font-weight"]').textContent = fontWeight;
+            toolset.find('input[name="margin"]').value = margin;
+            toolset.find('input[name="padding"]').value = padding;
+            
         }        
         else if(tagName === 'text') {
             var toolset = tools.querySelector("[data-mode='text']");
@@ -199,6 +221,44 @@ framework.builder.update = async function(target) {
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
         }        
+    }
+}
+framework.builder.read = function(target) {
+    var block = target.closest('block, header, footer');
+    var host = block.find('.host');
+    var shadow = host.shadowRoot;
+    var element = shadow.lastElementChild;
+    var selected = element.querySelector('[focus]') ? element.querySelector("[focus]") : element;
+    console.log(122, { block, host, shadow, element, selected });
+
+    if(selected) {
+        var tagName = selected.tagName.toLowerCase();
+        if(['block', 'header', 'footer'].includes(tagName)) {
+            host.selected = null;
+            host.removeAttribute('focus');
+            selected.removeAttribute('focus');
+        }
+        if(tagName === 'card') {
+            var parent = selected.closest('block, header, footer');
+            parent.setAttribute('focus', parent.tagName.toLowerCase());
+            host.selected = parent;
+            selected.removeAttribute('focus');
+        }
+        else if(tagName === 'box') {
+            var parent = selected.closest('card');
+            parent.setAttribute('focus', 'card');
+            element.setAttribute('focus', 'card');
+            host.selected = parent;
+            selected.removeAttribute('focus');
+        }
+        else if(["href", "ico", "picture", "text"].includes(tagName)) {
+            var parent = selected.closest('box');
+            parent.setAttribute('focus', 'box');
+            element.setAttribute('focus', 'box');
+            host.selected = parent;
+            selected.removeAttribute('focus');
+        }
+        window.parent.framework.tools.close();
     }
 }
 
