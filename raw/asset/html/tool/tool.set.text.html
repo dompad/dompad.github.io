@@ -1,25 +1,26 @@
 <column class="flex-1 gap-20px padding-10px overflow-x-hidden">
-    <box class="display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="1">
-        <header>
+    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="1">
+        <header class="padding-top-20px">
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Font</text>
         </header>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="background-color" tabindex="1">
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="1">
             <text class="font-weight-bolder">Color</text>
             <flex class="gap-5px" data-declaration="string">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px width-100px" data-value="hex" onkeyup="tool.box.value(event)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="color" oninput="tools.link.color(event.target)" type="text">
             </flex>
         </row>
-        <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="font-family" tabindex="2">
-            <text class="font-weight-bolder">Font Family</text>
+        <row class="gap-5px justify-content-space-between padding-y-10px" tabindex="2">
+            <text class="font-weight-bolder white-space-nowrap">Font Family</text>
             <flex class="gap-5px" data-declaration="value">
                 <field class="position-relative">
-                    <row class="align-items-center gap-5px justify-content-center" data-dropdown data-ignore>
-                        <text data-value="value" value="left">Arial</text>
+                    <row class="align-items-center border-1px-solid border-color-777 border-radius-3px gap-5px height-30px padding-x-5px min-width-120px" data-dropdown data-ignore>
+                        <text class="flex-1 white-space-nowrap" name="font-family"></text>
                         <ico class="color-777" css-height="20px" css-width="20px">
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tool.box.value(event)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.link.fontFamily(event.target)" css-top="100%">
+                        <text class="-hover-background-color-eb padding-x-20px" data-value="">None</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="Arial">Arial</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="Verdana">Verdana</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="Tahoma">Tahoma</text>
@@ -35,23 +36,26 @@
         </row>
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="font-size" tabindex="3">
             <text class="font-weight-bolder">Font Size</text>
-            <flex class="gap-5px" data-declaration="string">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" data-value="hex" oninput="tools.link.fontSize(event)" type="text" value="16px">
+            <flex class="gap-5px">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="font-size" oninput="tools.link.fontSize(event.target)" type="text">
             </flex>
         </row>
         <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="font-weight" tabindex="4">
             <text class="font-weight-bolder">Font Weight</text>
             <flex class="gap-5px" data-declaration="value">
                 <field class="position-relative">
-                    <row class="align-items-center gap-5px justify-content-center" data-dropdown data-ignore>
-                        <text data-value="value" value="left">normal</text>
+                    <row class="align-items-center border-1px-solid border-color-777 border-radius-3px gap-5px height-30px padding-x-5px min-width-120px" data-dropdown data-ignore>
+                        <text class="flex-1 white-space-nowrap" name="font-weight"></text>
                         <ico class="color-777" css-height="20px" css-width="20px">
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tool.box.value(event)" css-top="100%">
-                        <text class="-hover-background-color-eb padding-x-20px" data-value="Arial">bolder</text>
-                        <text class="-hover-background-color-eb padding-x-20px" data-value="Verdana">normal</text>
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.link.fontWeight(event.target)" css-top="100%">
+                        <text class="-hover-background-color-eb padding-x-20px" data-value="">None</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-value="bold">bold</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-value="bolder">bolder</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-value="lighter">lighter</text>
+                        <text class="-hover-background-color-eb padding-x-20px" data-value="normal">normal</text>
                     </column>
                 </field>
             </flex>
