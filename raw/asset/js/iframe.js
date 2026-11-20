@@ -280,6 +280,9 @@ framework.tools = {};
 framework.tools.onpaste = function(event) {
     var target = event.target;
     console.log(282, event, target);
+    event.preventDefault();
+    const text = event.clipboardData.getData("text/plain");
+    document.execCommand("insertText", false, text);
 }
 framework.tools.oninput = function(event) {
     var target = event.target;
