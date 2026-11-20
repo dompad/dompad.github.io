@@ -277,6 +277,10 @@ framework.builder.read = function(target) {
 }
 
 framework.tools = {};
+framework.tools.onpaste = function(event) {
+    var target = event.target;
+    console.log(282, event, target);
+}
 framework.tools.oninput = function(event) {
     var target = event.target;
     if(target.textContent.trim().length === 0) {
