@@ -383,7 +383,7 @@ tools.link.fontFamily = function(target) {
     }
     var style = framework.css.render(host);
     var sheet = host.lastElementChild.previousElementSibling;
-    console.log(352, 'tools.link.color', {target, toolset, selected, host, style, sheet});
+    console.log(352, 'tools.link.fontFamily', {target, toolset, selected, host, style, sheet});
     sheet.replaceWith(style);
 }
 tools.link.fontSize = function(target) {
@@ -397,7 +397,24 @@ tools.link.fontSize = function(target) {
     sheet.replaceWith(style);    
 }
 tools.link.fontWeight = function(target) {
-    
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-font-weight");
+        } else {
+            selected.setAttribute("css-font-weight", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="font-weight"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-font-weight");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.fontWeight', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
 }
 tools.link.margin = function(target) {
     var toolset = target.closest('[data-mode]');
