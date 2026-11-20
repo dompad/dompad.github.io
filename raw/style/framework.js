@@ -367,7 +367,24 @@ tools.link.color = function(target) {
     sheet.replaceWith(style);
 }
 tools.link.fontFamily = function(target) {
-    
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-font-family");
+        } else {
+            selected.setAttribute("css-font-family", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="font-family"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-font-family");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.color', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);
 }
 tools.link.fontSize = function(target) {
     var toolset = target.closest('[data-mode]');
