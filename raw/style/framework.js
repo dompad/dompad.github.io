@@ -458,7 +458,7 @@ tools.icon.height = function(target) {
     console.log(352, 'tools.link.height', {target, toolset, selected, host, style, sheet});
     sheet.replaceWith(style);    
 }
-tools.link.margin = function(target) {
+tools.icon.margin = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = toolset.selected;
     var host = selected.getRootNode();
@@ -468,7 +468,7 @@ tools.link.margin = function(target) {
     console.log(352, 'tools.link.margin', {target, toolset, selected, host, style, sheet});
     sheet.replaceWith(style);    
 }
-tools.link.padding = function(target) {
+tools.icon.padding = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = toolset.selected;
     var host = selected.getRootNode();
@@ -477,6 +477,13 @@ tools.link.padding = function(target) {
     var sheet = host.lastElementChild.previousElementSibling;
     console.log(352, 'tools.link.padding', {target, toolset, selected, host, style, sheet});
     sheet.replaceWith(style);    
+}
+tools.icon.select = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    console.log(352, 'tools.link.padding', {target, toolset, selected, host});
+    selected.innerHTML = target.closest("row > flex").find('ico').innerHTML;
 }
 
 framework.branding = {};

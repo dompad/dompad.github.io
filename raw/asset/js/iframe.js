@@ -209,6 +209,7 @@ framework.builder.update = async function(target) {
                         var values = Object.values(icons)[i][0];
                         var clone = tpl.content.firstElementChild.cloneNode(true);
                         clone.querySelector("ico").innerHTML = values.svg;
+                        clone.querySelector("text").textContent = values.name;
                         wrap.insertAdjacentHTML("beforeEnd", clone.outerHTML)
                         //console.log(184, {values});
                         i++;

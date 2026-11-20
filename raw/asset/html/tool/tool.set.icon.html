@@ -37,10 +37,11 @@
         <header>
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Icons</text>
         </header>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" css-columns="4" tabindex="3"></row>
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" css-columns="4" css-dw768px-columns="3" css-dw480px-columns="2" data-tap="tools.icon.select(event.target)" tabindex="3"></row>
         <template id="template-tools-icons">
-            <flex css-align-items="center" css-aspect-ratio="1 / 1" css-justify-content="Center" css-outline="1px dashed gray">
+            <flex css-align-items="center" css-aspect-ratio="1 / 1" css-flex-direction="column" css-font-size="13px" css-justify-content="Center" css-outline="1px dashed gray">
                 <ico></ico>
+                <text css-overflow="hidden" css-white-space="nowrap"></text>
             </flex>
         </template>
     </box>
