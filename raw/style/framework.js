@@ -549,8 +549,8 @@ framework.branding.generate = async function(target) {
 
     var safari = cards[5];
     //if (safari.find('[name="radio-macOSSafari"][value="default"]').checked) {
-    var safariPinnedTabSVG = safari.all('box > column > picture')[0].find('picture > svg:not([css-display]) foreignObject svg');
-    var safariPinnedTabFocusSVG = safari.all('box > column > picture')[1].find('picture > svg:not([css-display]) foreignObject svg');
+    var safariPinnedTabSVG = safari.all('box > column > picture')[0].find('picture > svg:not([css-display])');
+    var safariPinnedTabFocusSVG = safari.all('box > column > picture')[1].find('picture > svg:not([css-display])');
     var safariPinnedTabTouchBarSVG = safari.all('box > column > picture')[2].find('picture > svg:not([css-display])');
     var safariPinnedTabColor = safariPinnedTabTouchBarSVG.find('rect').getAttribute('fill');
     zip["safari-pinned-tab.svg"] = safariPinnedTabSVG.outerHTML;

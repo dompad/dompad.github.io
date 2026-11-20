@@ -518,9 +518,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 rect && bg ? rect.setAttribute('fill', bg) : null;
                                                 //console.log(el, el.dataset.favicon);
                                                 svg.getAttribute('height') ? el.setAttribute('height', svg.getAttribute('height')) : null;
-                                                svg.getAttribute('viewBox') ? el.setAttribute('viewBox', svg.getAttribute('viewBox')) : null;
+                                                //svg.getAttribute('viewBox') ? el.setAttribute('viewBox', svg.getAttribute('viewBox')) : null;
                                                 svg.getAttribute('width') ? el.setAttribute('width', svg.getAttribute('width')) : null;
-                                                0 > 1 ? el.replaceWith(svg) : el.innerHTML = svg.innerHTML;
+                                                el.find('rect') && rect && bg ? el.find('rect').setAttribute('fill', bg) : null;
+                                                el.find('foreignObject') && svg.find('foreignObject') ? el.find('foreignObject').innerHTML = svg.find('foreignObject').innerHTML : null;
                                             }) : null;
                                         } catch (e) {
                                             console.log('error', e);
