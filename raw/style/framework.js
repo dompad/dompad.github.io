@@ -360,7 +360,7 @@ tools.link.color = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = toolset.selected;
     var host = selected.getRootNode();
-    selected.setAttribute("css-color", target.value);
+    target.value === "" ? selected.removeAttribute("css-color") : selected.setAttribute("css-color", target.value);
     var style = framework.css.render(host);
     var sheet = host.lastElementChild.previousElementSibling;
     console.log(352, 'tools.link.color', {target, toolset, selected, host, style, sheet});
