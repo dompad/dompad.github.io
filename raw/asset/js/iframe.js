@@ -225,7 +225,7 @@ framework.builder.update = async function(target) {
                 height, width, margin, padding
             });           
             toolset.find('input[name="height"]').value = height;
-            toolset.find('input[name="width"]').textContent = width;
+            toolset.find('input[name="width"]').value = width;
             toolset.find('input[name="margin"]').value = margin;
             toolset.find('input[name="padding"]').value = padding;
         }
