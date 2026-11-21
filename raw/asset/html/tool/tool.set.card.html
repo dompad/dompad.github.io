@@ -6,7 +6,7 @@
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="2">
             <text class="font-weight-bolder">Width</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="width" oninput="tools.box.width(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="width" oninput="tools.card.width(event.target)" type="text">
             </flex>
         </row>
     </box>
@@ -24,7 +24,7 @@
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.box.display(event.target)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.card.display(event.target)" css-top="100%">
                         <text class="-hover-background-color-eb height-30px padding-x-20px" data-value="">unset</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="none">none</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="flex">flex</text>
@@ -35,7 +35,7 @@
         <row class="border-top-1px-solid border-color-ddd flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="2">
             <text class="font-weight-bolder">Flex</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="flex" oninput="tools.box.flex(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="flex" oninput="tools.card.flex(event.target)" type="text">
             </flex>
         </row>
         <row class="border-top-1px-solid border-color-ddd gap-5px justify-content-space-between padding-y-10px" tabindex="2">
@@ -48,7 +48,7 @@
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.box.flexDirection(event.target)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.card.flexDirection(event.target)" css-top="100%">
                         <text class="-hover-background-color-eb padding-x-20px" data-value="">none</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="column">column</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="column-reverse">column-reverse</text>
@@ -68,7 +68,7 @@
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.box.justifyContent(event.target)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.card.justifyContent(event.target)" css-top="100%">
                         <text class="-hover-background-color-eb padding-x-20px" data-value="">none</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="center">center</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="flex-start">flex-start</text>
@@ -84,7 +84,7 @@
         <row class="border-top-1px-solid border-color-ddd flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="4">
             <text class="font-weight-bolder">Gap</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="gap" oninput="tools.box.gap(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="gap" oninput="tools.card.gap(event.target)" type="text">
             </flex>
         </row>
     </box>
@@ -95,13 +95,13 @@
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="3">
             <text class="font-weight-bolder">Margin</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="margin" oninput="tools.box.margin(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="margin" oninput="tools.card.margin(event.target)" type="text">
             </flex>
         </row>
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="3">
             <text class="font-weight-bolder">Padding</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="padding" oninput="tools.box.padding(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="padding" oninput="tools.card.padding(event.target)" type="text">
             </flex>
         </row>
     </box>

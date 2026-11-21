@@ -734,13 +734,13 @@ tools.box.flexDirection = function(target) {
     var value = target.closest("[data-value]");
     if(value) {
         if(value.dataset.value === "") {
-            selected.removeAttribute("css-flex-direction");
+            selected.find("section").removeAttribute("css-flex-direction");
         } else {
-            selected.setAttribute("css-flex-direction", value.dataset.value);
+            selected.find("section").setAttribute("css-flex-direction", value.dataset.value);
         }
         value.parentNode.previousElementSibling.find('[name="flex-direction"]').textContent = value.dataset.value;
     } else {
-        selected.removeAttribute("css-flex-direction");
+        selected.find("section").removeAttribute("css-flex-direction");
     }
     var style = framework.css.render(host);
     var sheet = host.lastElementChild.previousElementSibling;
@@ -754,13 +754,13 @@ tools.box.justifyContent = function(target) {
     var value = target.closest("[data-value]");
     if(value) {
         if(value.dataset.value === "") {
-            selected.removeAttribute("css-text-align");
+            selected.find("section").removeAttribute("css-text-align");
         } else {
-            selected.setAttribute("css-text-align", value.dataset.value);
+            selected.find("section").setAttribute("css-text-align", value.dataset.value);
         }
         value.parentNode.previousElementSibling.find('[name="text-align"]').textContent = value.dataset.value;
     } else {
-        selected.removeAttribute("css-text-align");
+        selected.find("section").removeAttribute("css-text-align");
     }
     var style = framework.css.render(host);
     var sheet = host.lastElementChild.previousElementSibling;
@@ -771,7 +771,7 @@ tools.box.gap = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = toolset.selected;
     var host = selected.getRootNode();
-    target.value === "" ? selected.removeAttribute("css-gap") : selected.setAttribute("css-gap", target.value);
+    target.value === "" ? selected.find("section").removeAttribute("css-gap") : selected.find("section").setAttribute("css-gap", target.value);
     var style = framework.css.render(host);
     var sheet = host.lastElementChild.previousElementSibling;
     console.log(352, 'tools.box.gap', {target, toolset, selected, host, style, sheet});
@@ -799,6 +799,116 @@ tools.box.padding = function(target) {
 }
 
 tools.card = {};
+tools.card.width = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-width") : selected.setAttribute("css-width", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.width', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.display = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-display");
+        } else {
+            selected.setAttribute("css-display", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="display"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-display");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.display', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.flex = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-flex") : selected.setAttribute("css-flex", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.flex', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.flexDirection = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-flex-direction");
+        } else {
+            selected.setAttribute("css-flex-direction", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="flex-direction"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-flex-direction");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.flexDirection', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.justifyContent = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-text-align");
+        } else {
+            selected.setAttribute("css-text-align", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="text-align"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-text-align");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.textAlign', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.gap = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.find("section").removeAttribute("css-gap") : selected.find("section").setAttribute("css-gap", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.gap', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.margin = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-margin") : selected.setAttribute("css-margin", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.margin', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.card.padding = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-padding") : selected.setAttribute("css-padding", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.box.padding', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
 
 tools.block = {};
 
