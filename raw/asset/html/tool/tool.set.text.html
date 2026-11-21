@@ -5,13 +5,13 @@
         </header>
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="1">
             <text class="font-weight-bolder">Color</text>
-            <flex class="gap-5px" data-declaration="string">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="color" oninput="tools.link.color(event.target)" type="text">
+            <flex class="gap-5px">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="color" oninput="tools.text.color(event.target)" type="text">
             </flex>
         </row>
         <row class="gap-5px justify-content-space-between padding-y-10px" tabindex="2">
             <text class="font-weight-bolder white-space-nowrap">Font Family</text>
-            <flex class="gap-5px" data-declaration="value">
+            <flex class="gap-5px">
                 <field class="position-relative">
                     <row class="align-items-center border-1px-solid border-color-777 border-radius-3px gap-5px height-30px padding-x-5px min-width-120px" data-dropdown data-ignore>
                         <text class="flex-1 white-space-nowrap" name="font-family"></text>
@@ -19,7 +19,7 @@
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.link.fontFamily(event.target)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.text.fontFamily(event.target)" css-top="100%">
                         <text class="-hover-background-color-eb padding-x-20px" data-value="">None</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="Arial">Arial</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="Verdana">Verdana</text>
@@ -34,13 +34,13 @@
                 </field>
             </flex>
         </row>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="font-size" tabindex="3">
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="3">
             <text class="font-weight-bolder">Font Size</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="font-size" oninput="tools.link.fontSize(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="font-size" oninput="tools.text.fontSize(event.target)" type="text">
             </flex>
         </row>
-        <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="font-weight" tabindex="4">
+        <row class="gap-5px justify-content-space-between padding-y-10px" tabindex="4">
             <text class="font-weight-bolder">Font Weight</text>
             <flex class="gap-5px" data-declaration="value">
                 <field class="position-relative">
@@ -50,7 +50,7 @@
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.link.fontWeight(event.target)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.text.fontWeight(event.target)" css-top="100%">
                         <text class="-hover-background-color-eb padding-x-20px" data-value="">None</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="bold">bold</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="bolder">bolder</text>
@@ -65,17 +65,17 @@
         <header class="padding-top-20px">
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Text</text>
         </header>
-        <row class="gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="text-align" tabindex="2">
+        <row class="gap-5px justify-content-space-between padding-y-10px" tabindex="2">
             <text class="font-weight-bolder">Text Align</text>
-            <flex class="gap-5px" data-declaration="value">
+            <flex class="gap-5px">
                 <field class="position-relative">
                     <row class="align-items-center border-1px-solid border-color-777 border-radius-3px gap-5px height-30px padding-x-5px min-width-120px" data-dropdown data-ignore>
-                        <text class="flex-1 white-space-nowrap" name="font-weight"></text>
+                        <text class="flex-1 white-space-nowrap" name="text-align"></text>
                         <ico class="color-777" css-height="20px" css-width="20px">
                             <n class="gg-chevron-down"></n>
                         </ico>
                     </row>
-                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.link.fontWeight(event.target)" css-top="100%">
+                    <column class="-hd-width-100pct- background-color-fff border-radius-10px color-000 line-height-30px margin-auto padding-y-10px position-absolute right-0 white-space-nowrap width-auto" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)" css-display="none" data-hidden="tap" data-tap="tools.text.textAlign(event.target)" css-top="100%">
                         <text class="-hover-background-color-eb padding-x-20px" data-value="">none</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="left">left</text>
                         <text class="-hover-background-color-eb padding-x-20px" data-value="center">center</text>
@@ -89,16 +89,16 @@
         <header class="padding-top-20px">
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Box Model</text>
         </header>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="font-size" tabindex="3">
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="3">
             <text class="font-weight-bolder">Margin</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="margin" oninput="tools.link.margin(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="margin" oninput="tools.text.margin(event.target)" type="text">
             </flex>
         </row>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="font-size" tabindex="3">
+        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="3">
             <text class="font-weight-bolder">Padding</text>
             <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="padding" oninput="tools.link.padding(event.target)" type="text">
+                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-100px" name="padding" oninput="tools.text.padding(event.target)" type="text">
             </flex>
         </row>
     </box>

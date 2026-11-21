@@ -486,6 +486,108 @@ tools.icon.select = function(target) {
     selected.innerHTML = target.closest("row > flex").find('ico').innerHTML;
 }
 
+tools.text = {};
+tools.text.color = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-color") : selected.setAttribute("css-color", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.color', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);
+}
+tools.text.fontFamily = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-font-family");
+        } else {
+            selected.setAttribute("css-font-family", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="font-family"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-font-family");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.fontFamily', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);
+}
+tools.text.fontSize = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-font-size") : selected.setAttribute("css-font-size", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.fontSie', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.text.fontWeight = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-font-weight");
+        } else {
+            selected.setAttribute("css-font-weight", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="font-weight"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-font-weight");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.fontWeight', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.text.textAlign = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-text-align");
+        } else {
+            selected.setAttribute("css-text-align", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="text-align"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-text-align");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.textAlign', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.text.margin = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-margin") : selected.setAttribute("css-margin", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.color', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.text.padding = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-padding") : selected.setAttribute("css-padding", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.text.padding', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+
 framework.branding = {};
 framework.branding.appName = event => {
     var target = event.target;

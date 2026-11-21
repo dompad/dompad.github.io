@@ -33,7 +33,12 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     if (keys.includes('state')) {
                         var state = params['state'].split('_')[0];
                         if (state === 'github') {
-                            await github.oauth.authorize(params);
+                            try {
+                                await github.oauth.authorize(params);
+                            }
+                            catch(e) {
+                                
+                            }
                             route = rout.e(route.path);
                         }
                         if (state === 'stripe') {
@@ -57,7 +62,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
         }
 
         $(dom.body.all('aside')).remove()
-        //console.log(route, root);
+        console.log(65, route, root);
 
         if (root) {
 
