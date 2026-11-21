@@ -25,7 +25,7 @@ Array.prototype.addClass = function(name) {
 }
 
 Array.prototype.has = function(that) {
-    return that.every(v=>this.includes(v));
+    return that.every(v => this.includes(v));
 }
 
 Array.prototype.removeClass = function(name) {
@@ -192,7 +192,7 @@ Element.prototype.hasClass = function(n) {
 ;
 Element.prototype.index = function() {
     var whl = this;
-    [].forEach.call(whl.parentNode.children, (a,b,c)=>(a === whl) ? whl = b : null);
+    [].forEach.call(whl.parentNode.children, (a, b, c) => (a === whl) ? whl = b : null);
     return whl;
 }
 ;
@@ -263,7 +263,7 @@ String.prototype.camelCase = String.prototype.toCamelCase = function() {
 }
 String.prototype.camelPhynate = String.prototype.camelPhenate = function() {
     var string = this.toString();
-    var replace = string.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+    var replace = string.replace(/[A-Z]/g, m => "-" + m.toLowerCase());
     return replace;
 }
 String.prototype.cssValue = function() {
@@ -282,12 +282,12 @@ String.prototype.cssValue = function() {
     }
 }
 String.prototype.pend = {
-    app: str=>{
+    app: str => {
         alert("App: " + str);
         return str;
     }
     ,
-    pre: str=>{
+    pre: str => {
         alert("Pre: " + str);
         return str;
     }
@@ -326,20 +326,20 @@ window.beautify = {
         return result.substring(1, result.length - 3);
     }
 }
-window.byId = s=>{
+window.byId = s => {
     return document.getElementById(s);
 }
-window.getBlobURL = (code,type)=>{
+window.getBlobURL = (code, type) => {
     return URL.createObjectURL(new Blob([code],{
         type
     }));
 }
-window.blob = (code,type)=>{
+window.blob = (code, type) => {
     return URL.createObjectURL(new Blob([code],{
         type
     }));
 }
-window.nd = ()=>{
+window.nd = () => {
     return new Date;
 }
 window.ranger = {
@@ -370,10 +370,10 @@ window.ranger = {
         }
     }
 }
-window.s = (ar,a,b)=>{
+window.s = (ar, a, b) => {
     return ar === 1 ? a : b;
 }
-window.$ = e=>{
+window.$ = e => {
     var obj = e;
     //console.log(334, obj, typeof obj);
     if (typeof obj === 'object') {
@@ -408,25 +408,25 @@ window.$ = e=>{
     }
     return obj;
 }
-window.tld = ()=>window.location.hostname.split('.')[window.location.hostname.split('.').length - 1];
-window.domain = ()=>window.location.hostname.split('.')[window.location.hostname.split('.').length - 2];
+window.tld = () => window.location.hostname.split('.')[window.location.hostname.split('.').length - 1];
+window.domain = () => window.location.hostname.split('.')[window.location.hostname.split('.').length - 2];
 window.is = {
     alphaNumeric(str) {
         let regex = /^[a-zA-Z0-9]+$/;
         return regex.test(str);
     },
-    email: (email)=>{
+    email: (email) => {
         return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
     }
     ,
-    hex: (color)=>{
+    hex: (color) => {
         var reg = /^#([0-9a-f]{3}){1,2}$/i;
         return reg.test(color);
     }
     ,
-    iframe: (win)=>(win.self !== win.top),
+    iframe: (win) => (win.self !== win.top),
     ip: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(window.location.host.split(':')[0]),
-    json: str=>{
+    json: str => {
         try {
             JSON.parse(str);
         } catch (e) {
@@ -435,16 +435,16 @@ window.is = {
         return true;
     }
     ,
-    local: href=>href.contains(['127.0.0.1', 'about:', 'blob:', 'file:', 'localhost', 'tld']),
-    mobile: ()=>{
-        return ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend"in document)
+    local: href => href.contains(['127.0.0.1', 'about:', 'blob:', 'file:', 'localhost', 'tld']),
+    mobile: () => {
+        return ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
     }
     ,
-    touch: ()=>{
-        return (('ontouchstart'in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    touch: () => {
+        return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
     }
     ,
-    absoluteURI: str=>{
+    absoluteURI: str => {
         return new RegExp('^(?:[a-z]+:)?//','i').test(str)
     }
 };
@@ -455,7 +455,7 @@ function ajax(url, settings) {
             url = base.href + (base.href.endsWith('/') && url.startsWith('/') ? url.slice(1) : url);
         }
     }
-    return new Promise((resolve,reject)=>{
+    return new Promise( (resolve, reject) => {
         var req;
         var data = {};
         //console.log(url, settings);
@@ -475,9 +475,9 @@ function ajax(url, settings) {
         } else {
             req = url;
         }
-        fetch(url, data).then(async(response)=>{
+        fetch(url, data).then(async (response) => {
             if (!response.ok) {
-                return response.text().then(text=>{
+                return response.text().then(text => {
                     var statusText = JSON.parse(text);
                     var data = {
                         code: response.status,
@@ -490,12 +490,12 @@ function ajax(url, settings) {
             }
             return response.text();
         }
-        ).then(response=>{
+        ).then(response => {
             const isJSON = is.json(response);
             const data = isJSON ? JSON.parse(response) : response;
             resolve(response);
         }
-        ).then(response=>resolve(response)).catch(error=>{
+        ).then(response => resolve(response)).catch(error => {
             console.log('vanilla.js ajax.fetch catch', error.message);
             const isJSON = is.json(error.message);
             var message = isJSON ? JSON.parse(error.message) : error.message;
@@ -530,7 +530,7 @@ function beautify(html) {
 }
 
 function convert(svg, options) {
-    return new Promise((resolve,reject)=>{
+    return new Promise( (resolve, reject) => {
         img = new Image(),
         serializer = new XMLSerializer(),
         svgStr = serializer.serializeToString(svg);
@@ -578,11 +578,11 @@ function fullscreen(elem) {
 }
 
 function compareObjects(a, b) {
-    return JSON.stringify(a.sort((a,b)=>(a.slug > b.slug) ? 1 : ((b.slug > a.slug) ? -1 : 0))) === JSON.stringify(b.sort((a,b)=>(a.slug > b.slug) ? 1 : ((b.slug > a.slug) ? -1 : 0)))
+    return JSON.stringify(a.sort( (a, b) => (a.slug > b.slug) ? 1 : ((b.slug > a.slug) ? -1 : 0))) === JSON.stringify(b.sort( (a, b) => (a.slug > b.slug) ? 1 : ((b.slug > a.slug) ? -1 : 0)))
 }
 
 function toQueryString(obj) {
-    let getPairs = (obj,keys=[])=>Object.entries(obj).reduce((pairs,[key,value])=>{
+    let getPairs = (obj, keys=[]) => Object.entries(obj).reduce( (pairs, [key,value]) => {
         if (typeof value === 'object')
             pairs.push(...getPairs(value, [...keys, key]));
         else
@@ -590,7 +590,7 @@ function toQueryString(obj) {
         return pairs;
     }
     , []);
-    let x = getPairs(obj).map(([[key0,...keysRest],value])=>`${key0}${keysRest.map(a=>`[${a}]`).join('')}=${value}`).join('&');
+    let x = getPairs(obj).map( ([[key0,...keysRest],value]) => `${key0}${keysRest.map(a => `[${a}]`).join('')}=${value}`).join('&');
     console.log(x);
     return x;
 }
@@ -639,7 +639,7 @@ function lazyLoad(images, vp) {
         var doc = images[0].ownerDocument;
         var win = doc.defaultView;
         var lazyImages = [].slice.call(images);
-        var intObs = "IntersectionObserver"in win && "IntersectionObserverEntry"in win && "intersectionRatio"in win.IntersectionObserverEntry.prototype;
+        var intObs = "IntersectionObserver" in win && "IntersectionObserverEntry" in win && "intersectionRatio" in win.IntersectionObserverEntry.prototype;
         if (intObs) {
             let lazyImageObserver = new IntersectionObserver(async function(entries, observer) {
                 entries.forEach(async function(entry) {
@@ -702,9 +702,12 @@ function getPath(links) {
 
 window.colors = {
 
-    contrast: color=>{
+    contrast: color => {
 
         var r, g, b, hsp;
+        if (color.trim().toLowerCase() === "transparent") {
+            return "#000000";
+        }
 
         if (color.match(/^rgb/)) {
             color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
@@ -729,7 +732,43 @@ window.colors = {
     }
     ,
 
-    random: ()=>{
+    fg: backgroundColor => {
+        // Convert HEX to RGB
+        if (backgroundColor.trim().toLowerCase() === "transparent") {
+            return "#000000";
+        }
+        
+        if (backgroundColor.startsWith("#")) {
+            let hex = backgroundColor.slice(1);
+
+            if (hex.length === 3) {
+                hex = hex.split("").map(c => c + c).join("");
+            }
+
+            const value = parseInt(hex, 16);
+
+            backgroundColor = {
+                r: (value >> 16) & 255,
+                g: (value >> 8) & 255,
+                b: value & 255
+            };
+        }
+
+        // Calculate relative luminance
+        const channels = ["r", "g", "b"].map(key => {
+            const value = backgroundColor[key] / 255;
+
+            return value <= 0.04045 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+        }
+        );
+
+        const luminance = 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+
+        return luminance > 0.179 ? "#000000" : "#ffffff";
+    }
+    ,
+
+    random: () => {
         return Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
     }
 
@@ -746,7 +785,7 @@ function printer(elem, obj) {
 
 window.nodb = {
     check: {
-        value: (json,obj,row)=>{
+        value: (json, obj, row) => {
             var hasMatch = false;
             var name = obj.name;
             var value = obj.value;

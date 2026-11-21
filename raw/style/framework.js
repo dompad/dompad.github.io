@@ -1252,9 +1252,11 @@ framework.branding.backgroundColor = event => {
         if (ground === "background") {
             if (value.length > 0) {
                 if (isHex) {
+                    console.log(1230, {theme, bg, value});
                     theme.style.backgroundColor = value;
                     theme.setAttribute('fill', value);
-                    $(theme.all('svg [fill]')).attr('fill', value);
+                    $(theme.all('svg rect[fill]')).attr('fill', value);
+                    $(theme.all('svg foreignObject [fill]')).attr('fill', colors.contrast(value));
                 }
             } else {
                 theme.style.backgroundColor = bg;

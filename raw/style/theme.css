@@ -762,7 +762,7 @@
     }
 
     .color-ffffff, .color-ffffff path:not([fill]), [css-color="#ffffff"], [css-color="#ffffff"] path:not([fill]), [css-color="#ffffff"] path:not([fill=""]) {
-        fill: #ffffff;
+        /* fill: #ffffff; */
     }
 
     .color-ff3b30 {

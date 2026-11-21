@@ -526,7 +526,13 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 //svg.getAttribute('viewBox') ? el.setAttribute('viewBox', svg.getAttribute('viewBox')) : null;
                                                 svg.getAttribute('width') ? el.setAttribute('width', svg.getAttribute('width')) : null;
                                                 el.find('rect') && rect && bg ? el.find('rect').setAttribute('fill', bg) : null;
-                                                el.find('foreignObject') && svg.find('foreignObject') ? el.find('foreignObject').innerHTML = svg.find('foreignObject').innerHTML : null;
+                                                if(el.find('foreignObject') && svg.find('foreignObject')) {
+                                                    el.find('foreignObject').innerHTML = svg.find('foreignObject').innerHTML;
+                                                    el.find('rect') && rect && bg ? $(el.find('foreignObject').all("path")).forEach(path => {
+                                                        console.log(532, {path})
+                                                        path.setAttribute("fill", colors.contrast(bg))
+                                                    }) : null;
+                                                }
                                             }) : null;
                                         } catch (e) {
                                             console.log('error', e);

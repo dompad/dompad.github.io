@@ -1516,11 +1516,17 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     
             ImageTracer.imageToSVG(data.result, (svgstr) => {
                 //console.log(svgstr);
-                foreignObject.innerHTML = svgstr;
-                $(foreignObject).innerHTML = svgstr;
-                var svg = foreignObject.firstElementChild;
-                svg.setAttribute('class', 'height-100pct position-absolute top-0 width-100pct');
-                $(vp.all('[data-value="favicon"] foreignObject')).html(svgstr);
+                //foreignObject.innerHTML = svgstr;
+                //var svg = foreignObject.firstElementChild;
+                //svg.setAttribute('class', 'height-100pct position-absolute top-0 width-100pct');
+                $(vp.all('[data-value="favicon"] foreignObject')).forEach(icon => {
+                    icon.innerHTML = svgstr;
+                    var rect = icon.previousElementSibling;
+                    var bg = rect ? rect.getAttribute("fill") : "#ffffffff";
+                    var fg = bg ? colors.contrast(bg) : null;
+                    console.log(1527, {icon, rect, bg, fg});
+                    $(icon.all("path")).attr("fill", fg);
+                });
             }, {
                 viewbox: true
             });
