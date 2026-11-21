@@ -1203,7 +1203,7 @@ tools.shell.lineHeight = function(target) {
     var toolset = target.closest('[data-mode]');
     var selected = byId("iframe-editor").contentWindow.document.body;
     var host = selected;
-    target.value === "" ? selected.removeAttribute("css-line-height") : selected.setAttribute("css-line-heihgt", target.value);
+    target.value === "" ? selected.removeAttribute("css-line-height") : selected.setAttribute("css-line-height", target.value);
     var style = framework.css.body(host);
     style.id = "style-body";
     var sheet = byId("iframe-editor").contentWindow.document.head.find("#style-body");
