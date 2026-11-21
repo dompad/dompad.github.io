@@ -288,6 +288,110 @@ framework.css.render = (host) => {
         return [...regularRules, ...mediaQueries];
     }
 }
+framework.css.body = (elem) => {
+    var rules = [];
+    console.log(431, {
+        elem
+    });
+    
+    console.log(elem);
+    if (elem.attributes && elem.attributes.length > 0) {
+        console.log(`Element: <${elem.tagName.toLowerCase()}>`);
+        for (let i = 0; i < elem.attributes.length; i++) {
+            const attr = elem.attributes[i];
+            //console.log(147, attr);
+            if (attr.name.startsWith('css-')) {
+                var parts = attr.name.split('-');
+                if (parts[1].startsWith('dw')) {
+                    var width = parts[1].split('dw')[1];
+                    var property = parts.splice(2, parts.length - 1).join('-');
+                    var value = attr.value;
+                    //css-dw960px-display="none"
+                    var rule = "@media screen and (max-width: " + width + ") { [" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " } }";
+                    console.log(542, 'media screen', {
+                        css: property + ' - ' + value,
+                        kv: `${attr.name} = "${attr.value}"`,
+                        rule: rule,
+                        width: width
+                    });
+                    rules.push(rule);
+                } else {
+                    var property = attr.name.replace("css-", "");
+                    var value = attr.value;
+                    var rule = "[" + attr.name + `='` + value + `']` + " { " + property + ": " + value + " }";
+                    console.log(551, 'css rule', {
+                        css: property + ' - ' + value,
+                        kv: `${attr.name} = "${attr.value}"`,
+                        rule: rule
+                    });
+                    rules.push(rule);
+                }
+            }
+        }
+    }
+    
+    let unique = rules.filter( (item, index) => rules.indexOf(item) === index);
+    unique.sort( (a, b) => {
+        const startsWithPlaceA = a.startsWith("@media screen");
+        const startsWithPlaceB = b.startsWith("@media screen");
+        if (startsWithPlaceA && !startsWithPlaceB) {
+            return 1;
+        }
+        if (!startsWithPlaceA && startsWithPlaceB) {
+            return -1;
+        }
+        return a.localeCompare(b);
+    }
+    );
+    const sorted = sortCssWithMediaQueriesLast(unique);
+    var stylesheet = sorted.join("\n");
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = stylesheet;
+    console.log(163, {
+        rules,
+        stylesheet,
+        unique,
+        sorted
+    });
+    return style
+    function sortCssWithMediaQueriesLast(cssRules) {
+        if (!Array.isArray(cssRules)) {
+            throw new TypeError("Input must be an array of CSS rule strings.");
+        }
+    
+        // Helper: Extract numeric width from media query string
+        const extractWidth = (rule) => {
+            if (typeof rule !== "string")
+                return 0;
+            const match = rule.match(/min-width\s*:\s*(\d+)px/i) || rule.match(/max-width\s*:\s*(\d+)px/i);
+            return match ? parseInt(match[1], 10) : 0;
+        }
+        ;
+    
+        // Separate regular CSS rules and media queries
+        const regularRules = [];
+        const mediaQueries = [];
+    
+        cssRules.forEach(rule => {
+            if (typeof rule !== "string")
+                return;
+            // skip invalid entries
+            if (/^@media/i.test(rule.trim())) {
+                mediaQueries.push(rule);
+            } else {
+                regularRules.push(rule);
+            }
+        }
+        );
+    
+        // Sort media queries by descending width
+        mediaQueries.sort( (a, b) => extractWidth(b) - extractWidth(a));
+    
+        // Combine: regular rules first, then sorted media queries
+        return [...regularRules, ...mediaQueries];
+    }
+}
 
 framework.tools = {}
 framework.tools.close = function(target) {
@@ -334,11 +438,30 @@ framework.tools.elements = function(target) {
         }
     }
 }
-framework.tools.page = function(target) {
+framework.tools.shell = async function(target) {
     var pages = byId('iframe-editor').closest('pages');
     var tools = pages.previousElementSibling;
-    pages.setAttribute('css-dw800px-margin-top', '50vh');
-    tools.setAttribute('css-dw800px-bottom', '50vh');
+    var selected = byId("iframe-editor").contentWindow.document.body;
+    $(tools.querySelector('blocks').children).attr('css-display', 'none');
+    tools.setAttribute('css-display', 'flex');
+    tools.setAttribute('css-dw800px-height', 'calc(50vh - 10px)');
+    var toolset = tools.querySelector("[data-mode='shell']");
+    toolset.innerHTML = await ajax(toolset.dataset.fetch);
+    toolset.removeAttribute('css-display');
+            
+    var backgroundColor = selected.getAttribute("css-background-color");
+    var color = selected.getAttribute("css-color");
+    var fontFamily = selected.getAttribute("css-font-family");
+    var fontSize = selected.getAttribute("css-font-size");
+    var lineHeight = selected.getAttribute("css-line-height");
+    console.log(168, {
+        fontFamily, fontSize
+    });
+    toolset.find('input[name="background-color"]').value = backgroundColor;
+    toolset.find('input[name="color"]').value = color;
+    toolset.find('text[name="font-family"]').textContent = fontFamily;
+    toolset.find('input[name="font-size"]').value = fontSize;
+    toolset.find('input[name="line-height"]').value = lineHeight;
 }
 
 window.tools = {};
@@ -1023,6 +1146,70 @@ tools.block.padding = function(target) {
 }
 
 tools.shell = {};
+tools.shell.backgroundColor = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = byId("iframe-editor").contentWindow.document.body;
+    var host = selected;
+    target.value === "" ? selected.removeAttribute("css-background-color") : selected.setAttribute("css-background-color", target.value);
+    var style = framework.css.body(host);
+    style.id = "style-body";
+    var sheet = byId("iframe-editor").contentWindow.document.head.find("#style-body");
+    console.log(352, 'tools.block.backgroundColor', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.shell.color = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = byId("iframe-editor").contentWindow.document.body;
+    var host = selected;
+    target.value === "" ? selected.removeAttribute("css-color") : selected.setAttribute("css-color", target.value);
+    var style = framework.css.body(host);
+    style.id = "style-body";
+    var sheet = byId("iframe-editor").contentWindow.document.head.find("#style-body");
+    console.log(352, 'tools.block.backgroundColor', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style); 
+}
+tools.shell.fontFamily = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-flex-direction");
+        } else {
+            selected.setAttribute("css-flex-direction", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="flex-direction"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-flex-direction");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.flexDirection', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.shell.fontSize = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = byId("iframe-editor").contentWindow.document.body;
+    var host = selected;
+    target.value === "" ? selected.removeAttribute("css-font-size") : selected.setAttribute("css-font-size", target.value);
+    var style = framework.css.body(host);
+    style.id = "style-body";
+    var sheet = byId("iframe-editor").contentWindow.document.head.find("#style-body");
+    console.log(352, 'tools.block.backgroundColor', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);   
+}
+tools.shell.lineHeight = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = byId("iframe-editor").contentWindow.document.body;
+    var host = selected;
+    target.value === "" ? selected.removeAttribute("css-line-height") : selected.setAttribute("css-line-heihgt", target.value);
+    var style = framework.css.body(host);
+    style.id = "style-body";
+    var sheet = byId("iframe-editor").contentWindow.document.head.find("#style-body");
+    console.log(352, 'tools.block.backgroundColor', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);   
+}
 
 framework.branding = {};
 framework.branding.appName = event => {
