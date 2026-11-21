@@ -1,77 +1,8 @@
 <column class="flex-1 gap-20px padding-10px overflow-x-hidden">
-    <box class="display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="5">
-        <header class="padding-top-20px">
-            <text class="font-size-13px font-weight-bolder text-transform-uppercase">Media</text>
-        </header>
-        <row class="gap-5px justify-content-space-between line-height-30px padding-y-10px" data-element="wrapper" data-property="media" tabindex="5">
-            <text class="font-weight-bolder">Format</text>
-            <row class="gap-5px" data-function="tool.function.media" data-declaration="array">
-                <label class='align-items-center display-flex gap-5px justify-content-center' css-height="30px">
-                    <input name="audio" onchange="tool.box.value(event)" type="checkbox">
-                    <ico class="-checked-background-color-005cc8 -checked-border-color-005cc8 -checked-color-fff border-2px-solid border-color-ccc border-radius-5px box-sizing-border-box color-777 color-ddd" css-height="30px" css-width="30px">
-                        <n class="--ggs-75pct gg-music"></n>
-                    </ico>
-                </label>
-                <label class='align-items-center display-flex gap-5px justify-content-center' css-height="30px">
-                    <input name="pages" onchange="tool.box.value(event)" type="checkbox">
-                    <ico class="-checked-background-color-005cc8 -checked-border-color-005cc8 -checked-color-fff border-2px-solid border-color-ccc border-radius-5px box-sizing-border-box color-777 color-ddd" css-height="30px" css-width="30px">
-                        <n class="--ggs-75pct gg-file-document"></n>
-                    </ico>
-                </label>
-                <label class='align-items-center display-flex gap-5px justify-content-center' css-height="30px">
-                    <input name="photo" onchange="tool.box.value(event)" type="checkbox">
-                    <ico class="-checked-background-color-005cc8 -checked-border-color-005cc8 -checked-color-fff border-2px-solid border-color-ccc border-radius-5px box-sizing-border-box color-777 color-ddd" css-height="30px" css-width="30px">
-                        <n class="--ggs-75pct gg-image"></n>
-                    </ico>
-                </label>
-                <label class='align-items-center display-flex gap-5px justify-content-center' css-height="30px">
-                    <input name="video" onchange="tool.box.value(event)" type="checkbox">
-                    <ico class="-checked-background-color-005cc8 -checked-border-color-005cc8 -checked-color-fff border-2px-solid border-color-ccc border-radius-5px box-sizing-border-box color-777 color-ddd" css-height="30px" css-width="30px">
-                        <n class="--ggs-75pct gg-film"></n>
-                    </ico>
-                </label>
-                <label class='align-items-center display-flex gap-5px justify-content-center' css-height="30px">
-                    <input name="merch" onchange="tool.box.value(event)" type="checkbox">
-                    <ico class="-checked-background-color-005cc8 -checked-border-color-005cc8 -checked-color-fff border-2px-solid border-color-ccc border-radius-5px box-sizing-border-box color-777 color-ddd" css-height="30px" css-width="30px">
-                        <n class="--ggs-75pct gg-shopping-bag"></n>
-                    </ico>
-                </label>
-            </row>
-        </row>
-        <row class="border-top-1px-solid border-color-ddd display-none flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="wrapper" data-property="limit" tabindex="3">
-            <text class="font-weight-bolder">Limit</text>
-            <field data-declaration="number">
-                <ico class="opacity-25pct" css-height="20px" css-width="20px">
-                    <n class="gg-math-minus"></n>
-                </ico>
-                <input class="border-1px-solid border-color-db border-radius-3px font-size-16px line-height-30px margin-x-5px padding-x-10px text-align-center width-20px" data-formula="repeat({var}, minmax(0, 1fr))" data-value="number" onchange="tool.box.value(event)" type="number" value="0">
-                <ico css-height="20px" css-width="20px">
-                    <n class="gg-math-plus"></n>
-                </ico>
-            </field>
-        </row>
-    </box>
-    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="1">
-        <header class="padding-top-20px">
-            <text class="font-size-13px font-weight-bolder text-transform-uppercase">Background</text>
-        </header>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" data-element="node" data-property="background-color" tabindex="1">
-            <text class="font-weight-bolder">Background Color</text>
-            <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="background-color" oninput="tools.box.backgroundColor(event.target)" type="text">
-            </flex>
-        </row>
-    </box>
-    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="3">
-        <header class="padding-top-20px">
+    <box class="display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="1">
+        <header>
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Size</text>
         </header>
-        <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="1">
-            <text class="font-weight-bolder">Height</text>
-            <flex class="gap-5px">
-                <input class="border-1px-solid border-color-777 border-radius-3px height-30px padding-x-10px width-120px" name="height" oninput="tools.box.height(event.target)" type="text">
-            </flex>
-        </row>
         <row class="flex-1 gap-5px justify-content-space-between padding-y-10px" tabindex="2">
             <text class="font-weight-bolder">Width</text>
             <flex class="gap-5px">
@@ -79,7 +10,7 @@
             </flex>
         </row>
     </box>
-    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="5">
+    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="2">
         <header class="padding-top-20px">
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Layout</text>
         </header>
@@ -157,7 +88,7 @@
             </flex>
         </row>
     </box>
-    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="6">
+    <box class="border-top-1px-solid border-color-777 display-flex flex-direction-column justify-content-space-between line-height-30px" tabindex="3">
         <header class="padding-top-20px">
             <text class="font-size-13px font-weight-bolder text-transform-uppercase">Box Model</text>
         </header>

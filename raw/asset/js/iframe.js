@@ -138,6 +138,36 @@ framework.builder.update = async function(target) {
             toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
+            
+            var backgroundColor = selected.getAttribute("css-background-color");
+            var border = selected.getAttribute("css-border");
+            var borderRadius = selected.getAttribute("css-border-radius");
+            var height = selected.getAttribute("css-height");
+            var width = selected.getAttribute("css-width");
+            var textAlign = selected.getAttribute("css-text-align");
+            var display = selected.getAttribute("css-display");
+            var flex = selected.getAttribute("css-flex");
+            var flexDirection = selected.getAttribute("css-flex-direction");
+            var justifyContent = selected.getAttribute("css-justify-content");
+            var gap = selected.getAttribute("css-gap");
+            var margin = selected.getAttribute("css-margin");
+            var padding = selected.getAttribute("css-padding");
+            console.log(168, {
+                name, address, fontFamily, fontSize
+            });
+            toolset.find('input[name="background-color"]').value = backgroundColor;
+            toolset.find('input[name="border"]').value = border;
+            toolset.find('input[name="border-radius"]').value = borderRadius;
+            toolset.find('input[name="height"]').value = height;
+            toolset.find('input[name="width"]').value = width;
+            toolset.find('text[name="text-align"]').textContent = textAlign;
+            toolset.find('text[name="display"]').textContent = display;
+            toolset.find('input[name="flex"]').value = flex;
+            toolset.find('text[name="flex-direction"]').textContent = flexDirection;
+            toolset.find('text[name="justify-content"]').textContent = justifyContent;
+            toolset.find('input[name="gap"]').value = gap;
+            toolset.find('input[name="margin"]').value = margin;
+            toolset.find('input[name="padding"]').value = padding;
         }
         else if(tagName === 'box') {
             var toolset = tools.querySelector("[data-mode='box']");
@@ -247,8 +277,7 @@ framework.builder.update = async function(target) {
                     } while(i < 704)
                 }
             }
-
-            var src = selected.find("image").getAttribute("src");
+            
             var height = selected.getAttribute("css-height");
             var width = selected.getAttribute("css-width");
             var margin = selected.getAttribute("css-margin");

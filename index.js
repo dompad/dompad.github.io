@@ -154,22 +154,7 @@ async function init() {
         //console.log(event, "location: " + document.location + ", state: " + JSON.stringify(state));
     }
 
-    window.addEventListener("resize", window.on.resize)
-
-    //DATABASE
-    var cache = window.cache = {
-        feed: {
-            dashboard: {
-                index: true
-            }
-        },
-        repository: null
-    };
-    if (localStorage.githubAccessToken) {
-        try {
-            window.owner = await github.user.get();
-        } catch (e) {}
-    }
+    window.addEventListener("resize", window.on.resize);
 
     //ROUTE
     var go = false;
