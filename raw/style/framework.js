@@ -588,6 +588,65 @@ tools.text.padding = function(target) {
     sheet.replaceWith(style);    
 }
 
+tools.image = {};
+tools.image.src = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.find("img").removeAttribute("src") : selected.find("img").setAttribute("src", target.value);
+    console.log(352, 'tools.image.src', {target, toolset, selected, host});
+}
+tools.image.height = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-height") : selected.setAttribute("css-height", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.image.height', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.image.width = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-width") : selected.setAttribute("css-width", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.image.width', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.image.aspectRatio = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-aspect-ratio") : selected.setAttribute("css-aspect-ratio", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.image.aspectRatio', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.image.margin = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-margin") : selected.setAttribute("css-margin", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.color', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.image.padding = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-padding") : selected.setAttribute("css-padding", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.link.padding', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+
 framework.branding = {};
 framework.branding.appName = event => {
     var target = event.target;

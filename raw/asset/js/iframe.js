@@ -217,14 +217,15 @@ framework.builder.update = async function(target) {
                     } while(i < 704)
                 }
             }
-            
+
+            var src = selected.find("image").getAttribute("src");
             var height = selected.getAttribute("css-height");
             var width = selected.getAttribute("css-width");
             var margin = selected.getAttribute("css-margin");
             var padding = selected.getAttribute("css-padding");
             console.log(168, {
                 height, width, margin, padding
-            });           
+            });
             toolset.find('input[name="height"]').value = height;
             toolset.find('input[name="width"]').value = width;
             toolset.find('input[name="margin"]').value = margin;
@@ -235,6 +236,22 @@ framework.builder.update = async function(target) {
             toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
+
+            var src = selected.find("img").getAttribute("src");           
+            var height = selected.getAttribute("css-height");
+            var width = selected.getAttribute("css-width");
+            var aspectRatio = selected.getAttribute("css-aspect-ratio");
+            var margin = selected.getAttribute("css-margin");
+            var padding = selected.getAttribute("css-padding");
+            console.log(168, {
+                name, address, fontFamily, fontSize
+            });
+            toolset.find('input[name="src"]').value = src;
+            toolset.find('input[name="height"]').value = height;
+            toolset.find('input[name="width"]').value = width;
+            toolset.find('input[name="aspect-ratio"]').value = aspectRatio;
+            toolset.find('input[name="margin"]').value = margin;
+            toolset.find('input[name="padding"]').value = padding;
         }        
     }
 }
