@@ -132,6 +132,26 @@ framework.builder.update = async function(target) {
             toolset.innerHTML = await ajax(toolset.dataset.fetch);
             toolset.removeAttribute('css-display');
             toolset.selected = selected;
+            
+            var backgroundColor = selected.getAttribute("css-background-color");
+            var display = selected.getAttribute("css-display");
+            var flexDirection = selected.find("section").getAttribute("css-flex-direction");
+            var justifyContent = selected.find("section").getAttribute("css-justify-content");
+            var gap = selected.find("section").getAttribute("css-gap");
+            var columns = selected.find("section").getAttribute("css-grid-template-columns");
+            var margin = selected.getAttribute("css-margin");
+            var padding = selected.getAttribute("css-padding");
+            console.log(168, {
+                name, address, fontFamily, fontSize
+            });
+            toolset.find('input[name="background-color"]').value = backgroundColor;
+            toolset.find('text[name="display"]').textContent = display;
+            toolset.find('text[name="flex-direction"]').textContent = flexDirection;
+            toolset.find('text[name="justify-content"]').textContent = justifyContent;
+            toolset.find('input[name="gap"]').value = gap;
+            toolset.find('input[name="columns"]').value = columns;
+            toolset.find('input[name="margin"]').value = margin;
+            toolset.find('input[name="padding"]').value = padding;
         }
         else if(tagName === 'card') {
             var toolset = tools.querySelector("[data-mode='card']");

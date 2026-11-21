@@ -911,6 +911,116 @@ tools.card.padding = function(target) {
 }
 
 tools.block = {};
+tools.block.backgroundColor = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-background-color") : selected.setAttribute("css-background-color", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.backgroundColor', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.display = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.find("section").removeAttribute("css-display");
+        } else {
+            selected.find("section").setAttribute("css-display", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="display"]').textContent = value.dataset.value;
+    } else {
+        selected.find("section").removeAttribute("css-display");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.display', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.flexDirection = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-flex-direction");
+        } else {
+            selected.setAttribute("css-flex-direction", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="flex-direction"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-flex-direction");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.flexDirection', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.justifyContent = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    var value = target.closest("[data-value]");
+    if(value) {
+        if(value.dataset.value === "") {
+            selected.removeAttribute("css-text-align");
+        } else {
+            selected.setAttribute("css-text-align", value.dataset.value);
+        }
+        value.parentNode.previousElementSibling.find('[name="text-align"]').textContent = value.dataset.value;
+    } else {
+        selected.removeAttribute("css-text-align");
+    }
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.textAlign', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.gap = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.find("section").removeAttribute("css-gap") : selected.find("section").setAttribute("css-gap", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.gap', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.columns = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.find("section").removeAttribute("css-grid-template-columns") : selected.find("section").setAttribute("css-grid-template-columns", "repeat("+target.value+", minmax(0, 1fr))");
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.columns', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.margin = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-margin") : selected.setAttribute("css-margin", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.margin', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
+tools.block.padding = function(target) {
+    var toolset = target.closest('[data-mode]');
+    var selected = toolset.selected;
+    var host = selected.getRootNode();
+    target.value === "" ? selected.removeAttribute("css-padding") : selected.setAttribute("css-padding", target.value);
+    var style = framework.css.render(host);
+    var sheet = host.lastElementChild.previousElementSibling;
+    console.log(352, 'tools.block.padding', {target, toolset, selected, host, style, sheet});
+    sheet.replaceWith(style);    
+}
 
 tools.shell = {};
 
