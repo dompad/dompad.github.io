@@ -529,7 +529,6 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 if(el.find('foreignObject') && svg.find('foreignObject')) {
                                                     el.find('foreignObject').innerHTML = svg.find('foreignObject').innerHTML;
                                                     el.find('rect') && rect && bg ? $(el.find('foreignObject').all("path")).forEach(path => {
-                                                        console.log(532, {path})
                                                         path.setAttribute("fill", colors.contrast(bg))
                                                     }) : null;
                                                 }
