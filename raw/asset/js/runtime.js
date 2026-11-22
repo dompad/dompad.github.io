@@ -95,8 +95,7 @@ async function init() {
         press: on.touch.press,
         tap: on.touch.tap
     };
-    dom.body.dataset.theme = "meridiem";
-    dom.body.addEventListener("click", function(e) {
+    dom.body.addEventListener("pointerup", function(e) {
         if (window.touch.ing === false) {
             on.touch.tap(e);
             //console.log(e.type,window.touch.ing);
@@ -142,4 +141,23 @@ async function init() {
             boot
         });
     }) : null;
+
+    class Page extends HTMLElement {
+        constructor() {
+            super();
+            this.attachShadow({
+                mode: 'open'
+            });
+            this.shadowRoot.addEventListener("pointerup", function(e) {
+                if (window.touch.ing === false) {
+                    on.touch.tap(e);
+                    console.log(e.type,window.touch.ing);
+                } else {
+                    window.touch.ing = false;
+                    //console.log(e.type,window.touch.ing);
+                }
+            });
+        }
+    }
+    customElements.define('page-route', Page);
 }

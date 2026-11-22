@@ -1,10 +1,3 @@
-class Page extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
-} 
-customElements.define('page-route', Page);
 String.prototype.router = async function(params) {
     var uri = this.toString();
 
@@ -16,7 +9,8 @@ String.prototype.router = async function(params) {
 
     var pages = dom.body.find('pages-route[data-page="' + rout.es() + '"]');
     var page = dom.body.find('page-route[data-page="' + route.page + '"]');
-    var page = page ? page : page;//dom.body.find('pages-route[data-page="' + route.page + '"]');
+    var page = page ? page : page;
+    //dom.body.find('pages-route[data-page="' + route.page + '"]');
     var vp = page ? page : pages;
 
     0 < 1 ? console.log(15, {
@@ -25,11 +19,10 @@ String.prototype.router = async function(params) {
         route,
         vp
     }) : null;
-    
+
     var rd = rout.ed.dir(route.page);
     var rp = rout.ed.dir(route.path);
-    if((!pages && page) && rd.length < rp.length) {
-        //route.page = "";
+    if ((!pages && page) && rd.length < rp.length) {//route.page = "";
     }
 
     var four = ((!pages && page && rd.length < rp.length));
@@ -40,12 +33,12 @@ String.prototype.router = async function(params) {
         route,
         vp
     }) : null;
-    
+
     //is.iframe(window) ? alert('Router checking page') : null;
     if (four) {
         vp = null;
     }
-    if(vp) {
+    if (vp) {
         await viewPage(vp);
     } else {
         four = true;
@@ -61,7 +54,7 @@ String.prototype.router = async function(params) {
             var pop = params ? params.pop : null;
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
-            
+
             //is.iframe(window) ? alert("Router.js 81") : null;
             await rout.ed.bang(route, goto);
 
@@ -72,7 +65,7 @@ String.prototype.router = async function(params) {
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             //is.iframe(window) ? alert("Router.js 88") : null;
-            
+
             //await rout.ed.bang(route);
             //alert('bang');
 
@@ -82,7 +75,7 @@ String.prototype.router = async function(params) {
             //is.iframe(window) ? alert("Router.js 96") : null;
             vp ? lazyLoad(dom.body.all('[data-src]'), vp) : null;
             //is.iframe(window) ? alert("Router.js 98") : null;
-            
+
             if (!pop && !["blob:"].includes(window.location.protocol)) {
 
                 const hash = window.hub ? "/#" : "";
@@ -100,19 +93,21 @@ String.prototype.router = async function(params) {
 
             route = window.paths = window.route = rout.e(url.hash ? url.hash.split('#')[1] : goto + url.search + url.hash);
             //is.iframe(window) ? alert('Router.js 112') : null;
-            console.log(145, {four})
-            if(four) {
+            console.log(145, {
+                four
+            })
+            if (four) {
                 const e = {
                     code: 404
                 };
                 //is.iframe(window) ? alert(e.code) : null;
-                if(e.code === 404) {
+                if (e.code === 404) {
                     var main = dom.body.find('main');
                     var error = document.createElement("page-route");
                     error.dataset.error = 404;
-                    error.dataset.active = true;              
-                    main.insertAdjacentHTML("beforeEnd", error.outerHTML);        
-                    main.lastElementChild.shadowRoot.innerHTML = await ajax("https://dompad.pages.dev/raw/asset/html/error/error.404.html"); 
+                    error.dataset.active = true;
+                    main.insertAdjacentHTML("beforeEnd", error.outerHTML);
+                    main.lastElementChild.shadowRoot.innerHTML = await ajax("https://dompad.pages.dev/raw/asset/html/error/error.404.html");
                 }
                 reject(e);
                 //resolve(route);
@@ -128,12 +123,12 @@ String.prototype.router = async function(params) {
             reject(e);
         }
     };
-    return new Promise(async(resolve,reject)=>go(resolve, reject));
+    return new Promise(async (resolve, reject) => go(resolve, reject));
 }
 
 window.rout = {};
 
-window.rout.e = state=>{
+window.rout.e = state => {
     var arr1 = [];
     var arr2 = rout.ed.dir(state.split('#')[0].split('?')[0]);
     var page = '';
@@ -178,7 +173,7 @@ window.rout.e = state=>{
         }) : null;
 
         //pgs = pgs.toReversed();
-        
+
         0 > 1 ? console.log(124, 151, {
             pgs,
             GOT
@@ -187,18 +182,22 @@ window.rout.e = state=>{
         do {
             //page = window.rout.ing(pgs, state, GOT, n);
             page = window.rout.ing(pgs, path, GOT, n);
-            console.log(148, {n, path, state, page});
+            console.log(148, {
+                n,
+                path,
+                state,
+                page
+            });
             if (page)
                 break;
             n++;
         } while (n < GOT.length);
-    }
-    else {
+    } else {
         if (path === "/") {
-            page = "/";            
+            page = "/";
         }
     }
-    
+
     const data = {
         GOT,
         hash,
@@ -215,7 +214,7 @@ window.rout.e = state=>{
 }
 
 window.rout.ed = {};
-window.rout.ed.bang = async(route)=>{
+window.rout.ed.bang = async (route) => {
 
     var page = dom.body.find('page-route[data-page="' + route.page + '"]');
     var pages = dom.body.find('pages-route[data-page="' + route.page + '"]');
@@ -323,7 +322,7 @@ window.rout.ed.bang = async(route)=>{
 window.rout.ed.dir = function(url, num, g=[]) {
     if (url) {
         var split = url.split("/");
-        var it = (a,i)=>{
+        var it = (a, i) => {
             i < split.length - 0 ? g[i] = a : null;
         }
         ;
@@ -418,15 +417,23 @@ window.rout.es = function getRoot() {
         arr.sort();
         arr.reverse();
         window.paths.arr = arr;
-        console.log(416,{page:paths.page,arr,root});
+        console.log(416, {
+            page: paths.page,
+            arr,
+            root
+        });
         root = paths.page ? paths.page.stringExists(arr) : null;
         //root = arr.includes(paths.page) ? paths.page : null;
-        console.log(416,{page:paths.page,arr,root});
+        console.log(416, {
+            page: paths.page,
+            arr,
+            root
+        });
     }
     return root;
 }
 
-window.rout.ing = (pgs,href,GOT,n)=>{
+window.rout.ing = (pgs, href, GOT, n) => {
     var ed = null;
     var checked = [];
     0 > 1 ? console.log(338, {
@@ -494,15 +501,21 @@ window.rout.ing = (pgs,href,GOT,n)=>{
             //return check;
         }
     });
-    checked.sort((a, b) => {
-      const aIsStar = a.startsWith("*");
-      const bIsStar = b.startsWith("*");
+    checked.sort( (a, b) => {
+        const aIsStar = a.startsWith("*");
+        const bIsStar = b.startsWith("*");
 
-      if (aIsStar && !bIsStar) return -1; // place 'a' before 'b'
-      if (!aIsStar && bIsStar) return 1;  // place 'b' before 'a'
+        if (aIsStar && !bIsStar)
+            return -1;
+        // place 'a' before 'b'
+        if (!aIsStar && bIsStar)
+            return 1;
+        // place 'b' before 'a'
 
-      return a.localeCompare(b);           // standard alphabetical sort
-    });
+        return a.localeCompare(b);
+        // standard alphabetical sort
+    }
+    );
     var l = checked[checked.length - 1];
     0 < 1 ? console.log(385, {
         ed,
@@ -514,13 +527,15 @@ window.rout.ing = (pgs,href,GOT,n)=>{
 }
 
 async function viewPage(vp) {
-    console.log(561, {vp, routes: rout.es()});
+    console.log(561, {
+        vp,
+        routes: rout.es()
+    });
     const fetching3 = dom.body.all('[data-fetch][data-page="' + rout.es() + '"]:empty');
     if (fetching3.length > 0) {
         var ff = 0;
         do {
-            if (fetching3[ff].innerHTML === "") {
-                //fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
+            if (fetching3[ff].innerHTML === "") {//fetching3[ff].innerHTML = await ajax(fetching3[ff].dataset.fetch);
             }
             ff++;
         } while (ff < fetching3.length);
@@ -535,15 +550,15 @@ async function viewPage(vp) {
             const reset = document.createElement("link");
             reset.setAttribute("rel", "stylesheet");
             reset.setAttribute("href", "https://dompad.localhost/raw/asset/css/reset.css");
-                
+
             const cssgg = document.createElement("link");
             cssgg.setAttribute("rel", "stylesheet");
             cssgg.setAttribute("href", "https://dompad.localhost/raw/asset/css/gg.css");
 
             const build = document.createElement("link");
             build.setAttribute("rel", "stylesheet");
-            build.setAttribute("href", "/raw/style" + (rout.es() === "/" ? "/" : rout.es()+"/") + "page.css");
-            
+            build.setAttribute("href", "/raw/style" + (rout.es() === "/" ? "/" : rout.es() + "/") + "page.css");
+
             vp.shadowRoot.prepend(build);
             vp.shadowRoot.prepend(cssgg);
             vp.shadowRoot.prepend(reset);
@@ -570,8 +585,7 @@ async function viewPage(vp) {
     if (fetching.length > 0) {
         var f = 0;
         do {
-            if (fetching[f].innerHTML === "") {
-                //fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
+            if (fetching[f].innerHTML === "") {//fetching[f].innerHTML = await ajax(fetching[f].dataset.fetch);
             }
             f++;
         } while (fetching.length < 0);
