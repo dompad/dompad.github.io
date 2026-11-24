@@ -461,6 +461,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const header = block.find('header');
 
             const nav = document.body.find('body > main nav');
+            nav.setAttribute("css-width", "0");
+            
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = iframe.closest('main nav + pages');
 
@@ -492,15 +494,15 @@ window.mvc.c ? null : (window.mvc.c = controller = {
         else: async () => {
 
             const iframe = byId('iframe-editor');
-            const block = dom.body.find('[data-page="/dashboard/*/build/er"]');
+            const block = dom.body.find('[data-page="/dashboard/*/*/build/er"]');
             const header = block.find('header');
 
             const nav = document.body.find('body > main nav');
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = block.closest('main nav + pages');
             const toggle = 0 < 1;
-
-            nav.classList.remove('display-none');
+            
+            nav.setAttribute("css-width", "320px");
 
             if (iframe) {
 
@@ -522,6 +524,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const header = block.find('header');
 
             const nav = document.body.find('body > main nav');
+            nav.setAttribute("css-width", "320px");
+            
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = block.closest('main nav + pages');
             const toggle = 0 < 1;
