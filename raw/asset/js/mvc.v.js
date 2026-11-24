@@ -2199,10 +2199,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     
                 } 
                 else {
-
-                    var isLogin = await github.oauth.verify();
-                    console.log(352, isLogin);
-                    if (isLogin) {
+                    try {
+                        var isLogin = await github.oauth.verify();
+                        console.log(352, isLogin);
                         
                         if(get[1]) {
                             var params = {};
@@ -2329,17 +2328,17 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 cache: "reload"
                             }).then(p) : null;
                             resolve(route);
-                        }
-                        
+                        }                        
                     }
-                    else {
+                    catch(e) {
                         console.log(2279, "Token invalid");
                         github.oauth.logout();
                         //alert("Token invalid");
                         resolve(route);
                     }
                 }
-            } else if (root === "design") {
+            } 
+            else if (root === "design") {
 
                 if (get.length > 1) {
 
@@ -2388,7 +2387,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                 }
                 resolve(route)
-            } else if (root === "marketplace") {
+            } 
+            else if (root === "marketplace") {
                 if (github.oauth.verify()) {
                     const settings = {};
                     console.log(settings);
@@ -2422,7 +2422,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     );
                 }
                 resolve(route)
-            } else if (root === "new") {
+            }
+            else if (root === "new") {
                 if (get[1] === "app") {
                     var vp = dom.body.find('[data-page="/new/app"]');
                     var form = vp.find('form');
@@ -2471,7 +2472,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     );
                 }
                 resolve(route)
-            } else {
+            } 
+            else {
                 resolve(route);
             }
 
