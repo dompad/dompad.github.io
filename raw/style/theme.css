@@ -3636,6 +3636,7 @@
 
 .scrollbar-1::-webkit-scrollbar {
     background: #e2dcd8;
+    width: 10px;
 }
 
 .scrollbar-1::-webkit-scrollbar-thumb {
