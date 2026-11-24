@@ -1,0 +1,66 @@
+<blocks>
+    <header class="line-height-50px position-fixed top-0 width-100pct z-index-5" data-fetch="raw/asset/html/template/template.header.html"></header>
+    <block>
+        <picture class="background-color-ddd"></picture>
+        <section>
+            <card class="-mobile-margin-x-10px margin-x-4vw padding-top-160px padding-bottom-20px padding-top-160px">
+                <column>
+                    <box>
+                        <section>
+                            <text class="font-size-48px" placeholder="Owner"></text>
+                        </section>
+                    </box>
+                    <box>
+                        <section>
+                            <text class="font-size-18px" placeholder="Quote">Your own repositories, followed by each organization you belong to.</text>
+                        </section>
+                    </box>
+                </column>
+            </card>
+        </section>
+    </block>
+    <block class="-hd-margin-x-20px -isauth align-items-center justify-content-space-between z-index-1">
+        <column class="width-100pct" id="feed-dashboard-account"></column>
+        <column class="align-items-center empty-state gap-50px justify-content-center margin-y-50px">
+            <card class="-hd-margin-x-20px margin-x-4vw">
+                <column>
+                    <box>
+                        <column class="align-items-center justifiy-content-center">
+                            <picture class="position-relative width-240px" data-max-width="calc(100% - 40px)">
+                                <img class="width-100pct" src="raw/asset/png/astronaut-computer.png">
+                            </picture>
+                        </column>
+                    </box>
+                    <box>
+                        <column>
+                            <text class="font-size-24px font-weight-bolder line-height-50px text-align-center">No repositories yet</text>
+                            <text class="font-size-18px text-align-center" data-dw960px-max-width="640px">Create a repository for this account to list it here.</text>
+                        </column>
+                    </box>
+                </column>
+            </card>
+        </column>
+    </block>
+</blocks>
+<template id="template-feed-dashboard-account">           
+    <card class="margin-bottom-1px margin-auto padding-y-10px width-100pct">
+        <row class="-hd-max-width-480px align-items-center flex-grow-1 margin-auto max-width-768px padding-x-4vw width-100pct" css-width="calc(100% - 8vw)">
+            <box class="flex-1 justify-content-space-between" css-width="calc(100% - 84px)">
+                <flex class="align-items-flex-start flex-1 flex-direction-column">
+                    <text class="font-weight-bolder font-size-13px margin-right-auto overflow-hidden padding-x-10px text-overflow-ellipsis white-space-nowrap" css-width="calc(100% - 40px)" placeholder="Project Owner"></text>
+                    <text class="color-005cc8 font-weight-bolder margin-right-auto overflow-hidden padding-x-10px text-overflow-ellipsis white-space-nowrap" css-width="calc(100% - 40px)" placeholder="Project Name"></text>
+                    <text class="align-items-center color-777 font-size-13px line-height-20px padding-x-10px">
+                        <span>Last pushed on</span>
+                        <span placeholder="Date">Jan 1, 2023 (a month ago)</span>
+                    </text>
+                    <text class="align-items-center color-777 font-size-13px font-weight-bolder line-height-20px padding-x-10px" css-display="none">
+                        <ico css-height="20px" css-width="20px">
+                            <n class="--ggs-75pct gg-lock"></n>
+                        </ico>
+                        <span>Private</span>
+                    </text>
+                </flex>
+            </box>            
+        </row>
+    </card>
+</template>

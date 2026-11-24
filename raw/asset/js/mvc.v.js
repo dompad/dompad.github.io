@@ -98,7 +98,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     }
                     );
                     resolve(route);
-                } else {
+                } 
+                else {
                     var vp = dom.body.find('[data-page="/*"]');
                     var owner = await github.users.get({
                         username: get[0]
@@ -123,7 +124,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
 
                     var isLogin = await github.oauth.verify();
                     //alert("119 : " + isLogin);
+                    
                     if(isLogin) {
+                        
                         console.log(121, "Token valid", {isLogin});
                         //alert(121 + " - " + await github.oauth.verify());
                         
@@ -1579,7 +1582,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 vp.find('[data-after="Quantity"]').closest('box').find('flex').children[0].find('[type="number"]').value = json.quantity;
                                             }
     
-                                        } else {
+                                        } 
+                                        else {
                                             //vp.find('form').removeAttribute('css-display');
                                             //vp.find('error').setAttribute("css-display", "none");
     
@@ -2199,55 +2203,134 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                     var isLogin = await github.oauth.verify();
                     console.log(352, isLogin);
                     if (isLogin) {
-                        window.owner = await github.user.get();
-                        var params = {};
-                        var p = d=>{
-                            var data = d.content ? JSON.parse(atob(d.content)) : d;
-                            const feed = byId('feed-dashboard');
-                            console.log(2215, {feed});
-                            feed.innerHTML = "";
-                            if (data.length > 0) {
-                                var x = 0;
-                                do {
-                                    const row = data[x].repository ? data[x].repository : data[x];
-                                    var private = row.private;
-                                    const shortname = row.name;
-                                    const ownerLogin = row.owner.login;
-                                    var pushed_at = new Date(row.pushed_at);
-                                    var date = pushed_at.toLocaleString('en-US', {
-                                        month: 'short'
-                                    }) + " " + (pushed_at.getDay() + 1) + ", " + pushed_at.getFullYear();
-
-                                    const template = byId('template-feed-dashboard').content.firstElementChild.cloneNode(true);
-
-                                    (Math.abs(x % 2) == 1) ? template.classList.add('background-color-fff') : null;
-
-                                    private === true ? template.find('.gg-lock').closest('text').setAttribute("css-display", "flex") : null;
-
-                                    template.find('[placeholder="Project Owner"]').dataset.owner = ownerLogin;
-                                    template.find('[placeholder="Project Owner"]').textContent = ownerLogin;
-                                    template.find('[placeholder="Project Name"]').dataset.repo = shortname;
-                                    template.find('[placeholder="Project Name"]').textContent = shortname;
-                                    template.find('[placeholder="Date"]').textContent = date;
-                                    template.all('box')[0].dataset.href = "/dashboard/" + ownerLogin + "/" + shortname;
-
-                                    feed.insertAdjacentHTML('beforeend', template.outerHTML);
-                                    x++;
-                                } while (x < data.length);
+                        
+                        if(get[1]) {
+                            var params = {};
+                            var p = d=>{
+                                var data = d.content ? JSON.parse(atob(d.content)) : d;
+                                const feed = byId('feed-dashboard-account');
+                                console.log(2215, {feed});
+                                feed.innerHTML = "";
+                                if (data.length > 0) {
+                                    var x = 0;
+                                    do {
+                                        const row = data[x].repository ? data[x].repository : data[x];
+                                        var private = row.private;
+                                        const shortname = row.name;
+                                        const ownerLogin = row.owner.login;
+                                        var pushed_at = new Date(row.pushed_at);
+                                        var date = pushed_at.toLocaleString('en-US', {
+                                            month: 'short'
+                                        }) + " " + (pushed_at.getDay() + 1) + ", " + pushed_at.getFullYear();
+    
+                                        const template = byId('template-feed-dashboard-account').content.firstElementChild.cloneNode(true);
+    
+                                        (Math.abs(x % 2) == 1) ? template.classList.add('background-color-fff') : null;
+    
+                                        private === true ? template.find('.gg-lock').closest('text').setAttribute("css-display", "flex") : null;
+    
+                                        template.find('[placeholder="Project Owner"]').dataset.owner = ownerLogin;
+                                        template.find('[placeholder="Project Owner"]').textContent = ownerLogin;
+                                        template.find('[placeholder="Project Name"]').dataset.repo = shortname;
+                                        template.find('[placeholder="Project Name"]').textContent = shortname;
+                                        template.find('[placeholder="Date"]').textContent = date;
+                                        template.all('box')[0].dataset.href = "/dashboard/" + ownerLogin + "/" + shortname;
+    
+                                        feed.insertAdjacentHTML('beforeend', template.outerHTML);
+                                        x++;
+                                    } while (x < data.length);
+                                }
                                 resolve(route);
                             }
-                        }
-                        github.repos.user({
-                            username: window.owner.login,
-                            query: {
-                                direction: 'desc',
-                                sort: "pushed",
-                                per_page: 60,
-                                affiliation: "owner, organization_member"
+
+                            var myAccount = await github.user.get();
+                            var account = await github.users.get({
+                                username: get[1]
+                            });
+                            console.log(2249, {account});
+                            
+                            var vp = dom.body.find('[data-page="' + route.page + '"]');
+                            vp.find('[placeholder="Owner"]').textContent = account.login;
+
+                            if(account.type === "User" && myAccount.login === account.login) {
+                                vp.find('[placeholder="Quote"]').textContent = "Repositories you own.";
+                                0 < 1 ? github.repos.user({
+                                    username: get[1],
+                                    query: {
+                                        affiliation: 'owner',
+                                        direction: 'desc',
+                                        sort: "pushed",
+                                        per_page: 60
+                                    }
+                                }, {
+                                    cache: "reload"
+                                }).then(p) : null;
                             }
-                        }, {
-                            cache: "reload"
-                        }).then(p);
+
+                            if(account.type === "Organization") {
+                                vp.find('[placeholder="Quote"]').textContent = "Repositories you can access in this organization.";
+                                0 < 1 ? github.orgs.repos({
+                                    owner: get[1],
+                                    query: {
+                                        direction: 'desc',
+                                        sort: "pushed",
+                                        per_page: 60
+                                    }
+                                }, {
+                                    cache: "reload"
+                                }).then(p) : null;
+                            }
+                        }
+                        else {
+                            var myAccount = await github.user.get();
+                            var vp = dom.body.find('[data-page="' + route.page + '"]');
+                            vp.find('[placeholder="Account Owner"]').closest("box").previousElementSibling.find("img").src = myAccount.avatar_url;
+                            vp.find('[placeholder="Account Owner"]').textContent = myAccount.login;
+                            vp.find('[placeholder="Account Owner"]').closest("card").dataset.href = "/dashboard/" + myAccount.login;
+                            
+                            var p = d=>{
+                                var data = d.content ? JSON.parse(atob(d.content)) : d;
+                                const feed = byId('feed-dashboard');
+                                console.log(2215, {feed});
+                                feed.innerHTML = "";
+                                if (data.length > 0) {
+                                    var x = 0;
+                                    do {
+                                        const row = data[x].repository ? data[x].repository : data[x];
+                                        var private = row.private;
+                                        const shortname = row.name;
+                                        const ownerLogin = row.login;
+                                        var pushed_at = new Date(row.pushed_at);
+                                        var date = pushed_at.toLocaleString('en-US', {
+                                            month: 'short'
+                                        }) + " " + (pushed_at.getDay() + 1) + ", " + pushed_at.getFullYear();
+    
+                                        const template = byId('template-feed-dashboard').content.firstElementChild.cloneNode(true);
+    
+                                        (Math.abs(x % 2) == 1) ? template.classList.add('background-color-fff') : null;
+    
+                                        private === true ? template.find('.gg-lock').closest('text').setAttribute("css-display", "flex") : null;
+                                        
+                                        template.find('[placeholder="Organization Name"]').textContent = ownerLogin;
+                                        template.find('picture img').src = row.avatar_url;
+                                        template.dataset.href = "/dashboard/" + ownerLogin;
+    
+                                        feed.insertAdjacentHTML('beforeend', template.outerHTML);
+                                        x++;
+                                    } while (x < data.length);
+                                }
+                                resolve(route);
+                            }
+                            0 < 1 ? github.user.orgs({
+                                query: {
+                                    per_page: 60
+                                }
+                            }, {
+                                cache: "reload"
+                            }).then(p) : null;
+                            resolve(route);
+                        }
+                        
                     }
                     else {
                         console.log(2279, "Token invalid");

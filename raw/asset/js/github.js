@@ -46,17 +46,18 @@ window.github = {
         client_id: {
             "100.115.92.14:8080": "8f48243dba09dd64030b",
             "dompad.io": "1a41e41b2b371e7a1a5b",
+            "dompad.localhost": "Ov23li1M9H82WEVYKikg",
             "dompad.pages.dev": "fdeadaa98b35c6df688c",
             "dompad.github.tld": 0 < 1 ? "d100ccbc44112f0d5a92" : "Iv1.cbe275c17b8db02d"
         },
         config: {
             client_id: 0 < 1 ? "Iv1.cbe275c17b8db02d" : "d100ccbc44112f0d5a92",
             redirect_uri: window.location.protocol + "//" + window.location.host + "/dashboard",
-            scope: "delete_repo,gist,user,public_repo,repo"
+            scope: "delete_repo,gist,user,public_repo,read:org,repo"
         },
         login: (target)=>{
-            //var client_id = github.oauth.client_id[location.host];
-            var client_id = "Iv1.cbe275c17b8db02d";
+            var client_id = github.oauth.client_id[location.host];
+            //var client_id = "Iv1.cbe275c17b8db02d";
             var redirect_uri = github.oauth.config.redirect_uri;
             var search = route.search;
 
@@ -656,6 +657,31 @@ window.github = {
             );            
         }
     },
+    orgs: {
+        repos: (params, settings) => {
+            console.log(params, settings);
+            var settings = settings ? settings : {};
+            return new Promise((resolve,reject)=>{
+                const query = params.query ? "?" + new URLSearchParams(params.query).toString() : "";
+                console.log(query);
+                const a = (d)=>{
+                    const data = JSON.parse(d);
+                    resolve(data);
+                }
+                const b = (error)=>{
+                    console.log(error);
+                    reject(error);
+                }
+                const accessToken = localStorage.githubAccessToken;
+                accessToken ? settings.headers = {
+                    Accept: "application/vnd.github.v3+json",
+                    Authorization: "token " + accessToken
+                } : null;
+                const url = github.endpoint + "/orgs/" + params.owner + "/repos" + query;
+                ajax(url, settings).then(a).catch(b);
+            });
+        }  
+    },
     pages: {
         crud: function(params, settings) {
             console.log(586, params, settings);
@@ -1117,6 +1143,33 @@ window.github = {
             );
         }
         ,
+        orgs: (params,settings)=>{
+            var params = params ? params : {};
+            var settings = settings ? settings : {};
+            console.log(params, settings);
+            return new Promise((resolve,reject)=>{
+                console.log(params);
+                const query = params.query ? "?" + new URLSearchParams(params.query).toString() : "";
+                const url = github.endpoint + "/user/orgs" + query;
+                const a = (d)=>{
+                    const data = JSON.parse(d);
+                    resolve(data);
+                }
+                const b = (error)=>{
+                    console.log(error);
+                    reject(error);
+                }
+                settings.cache = "reload";
+                const accessToken = localStorage.githubAccessToken;
+                accessToken ? settings.headers = {
+                    Accept: "application/vnd.github+json",
+                    Authorization: "token " + accessToken
+                } : null;
+                console.log(url, settings);
+                ajax(url, settings).then(a).catch(b);
+            }
+            );
+        },
         repos: (params,settings)=>{
             var params = params ? params : {};
             var settings = settings ? settings : {};
