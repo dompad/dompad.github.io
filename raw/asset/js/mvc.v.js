@@ -119,7 +119,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
             }
             if (root === "dashboard") {
                 //console.log(107, root, get);
-                0 < 1 ? controller.nav.hide() : controller.nav.close();
+                //0 < 1 ? controller.nav.hide() : controller.nav.close();
                 if (get.length > 2) { 
 
                     var isLogin = await github.oauth.verify();
@@ -383,7 +383,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         if (get.length > 3) {
                             if (global.dashboard.routes.includes(get[3])) {
                                 var index = window.global.dashboard.routes.indexOf(get[3]);
-                                dom.body.find('main nav').children[1].children[index].find('.gg-chevron-down').click();
+                                dom.body.find('main nav > block').children[1].children[index].find('.gg-chevron-down').click();
                             }
                             if (get[3] === "build") {
                                 var vp = dom.body.find('pages[data-page="/dashboard/*/*/build"]');

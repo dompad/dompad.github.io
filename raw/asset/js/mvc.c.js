@@ -2617,7 +2617,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var button = target.closest('ico');
             if (button && button.find('.gg-chevron-down')) {
                 $(target.closest('card').parentNode.all('card > row + column')).attr('css-display', 'none');
-                $(target.closest('nav > column').all('ico.transition-1s')).removeAttr('css-transform');
+                $(target.closest('nav > block > column').all('ico.transition-1s')).removeAttr('css-transform');
 
                 var elem = target.closest('card > row');
                 if (elem.nextElementSibling.getAttribute("css-display") === 'none') {
@@ -2666,20 +2666,12 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             const nav = document.body.find('body > main nav');
             const transform = nav.getAttribute("css-dw960px-transform");
             const blocks = dom.body.find('main nav + pages');
-            const toggle = transform === "translateX(0)";
+            const toggle = transform === "translateX(-100%)";
 
             if (toggle) {
-                nav.setAttribute("css-transform", "translateX(-100%)");
-                nav.setAttribute("css-dw960px-transform", "translateX(-100%)");
-
-                blocks.setAttribute("css-left", "0");
-                blocks.setAttribute("css-dw960px-left", "0");
-            } else {
-                nav.setAttribute("css-transform", "translateX(0)");
                 nav.setAttribute("css-dw960px-transform", "translateX(0)");
-
-                blocks.setAttribute("css-left", "320px");
-                blocks.setAttribute("css-dw960px-left", "320px");
+            } else {
+                nav.setAttribute("css-dw960px-transform", "translateX(-100%)");
             }
 
         }
