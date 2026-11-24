@@ -2251,33 +2251,50 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             var vp = dom.body.find('[data-page="' + route.page + '"]');
                             vp.find('[placeholder="Owner"]').textContent = account.login;
 
-                            if(account.type === "User" && myAccount.login === account.login) {
+                            if(account.type === "User") {
                                 vp.find('[placeholder="Quote"]').textContent = "Repositories you own.";
-                                0 < 1 ? github.repos.user({
-                                    username: get[1],
-                                    query: {
-                                        affiliation: 'owner',
-                                        direction: 'desc',
-                                        sort: "pushed",
-                                        per_page: 60
-                                    }
-                                }, {
-                                    cache: "reload"
-                                }).then(p) : null;
+                                if(myAccount.login === account.login) {
+                                    0 < 1 ? github.repos.user({
+                                        username: get[1],
+                                        query: {
+                                            affiliation: 'owner',
+                                            direction: 'desc',
+                                            sort: "pushed",
+                                            per_page: 60
+                                        }
+                                    }, {
+                                        cache: "reload"
+                                    }).then(p) : null;
+                                } else {
+                                    "/dashboard".router();
+                                }
                             }
-
+                            
+                            var orgs = await github.user.orgs({
+                                query: {
+                                    per_page: 60
+                                }
+                            }, {
+                                cache: "reload"
+                            });
+                            var exists = orgs.some(u => u.login === get[1]);
+                            console.log(2276, {orgs, exists});
                             if(account.type === "Organization") {
                                 vp.find('[placeholder="Quote"]').textContent = "Repositories you can access in this organization.";
-                                0 < 1 ? github.orgs.repos({
-                                    owner: get[1],
-                                    query: {
-                                        direction: 'desc',
-                                        sort: "pushed",
-                                        per_page: 60
-                                    }
-                                }, {
-                                    cache: "reload"
-                                }).then(p) : null;
+                                if(exists) {
+                                    0 < 1 ? github.orgs.repos({
+                                        owner: get[1],
+                                        query: {
+                                            direction: 'desc',
+                                            sort: "pushed",
+                                            per_page: 60
+                                        }
+                                    }, {
+                                        cache: "reload"
+                                    }).then(p) : null;
+                                } else {
+                                    "/dashboard".router();
+                                }
                             }
                         }
                         else {
