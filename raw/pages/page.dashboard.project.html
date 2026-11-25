@@ -112,6 +112,28 @@
                     </box>
                 </section>
             </card>
+            <card>
+                <header>    
+                    <box>
+                        <column>
+                            <text class="font-size-13px font-weight-bolder line-height-50px">COMMIT HISTORY</text>
+                        </column>
+                    </box> 
+                </header>
+                <section class="gap-20px" css-columns="1"></section>
+                <section class="empty-state">There are no recent commits to this repository yet.</section>
+                <template id="commit-history">
+                    <box class="background-color-ccc border-radius-10px grid-gap-20px padding-20px">
+                        <row class="align-items-center">
+                            <text>
+                                <p class="font-weight-bolder" name="message"></p>
+                                <p class="font-size-13px" name="author"></p>
+                            </text>
+                            <text class="margin-left-auto" name="sha"></text>
+                        </row>
+                    </box>
+                </template>
+            </card>
         </section>
     </block>
     <block class="-dw480px-padding-10px grid-gap-20px padding-20px margin-bottom-50px" css-columns="1" css-display="none">

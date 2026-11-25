@@ -2194,6 +2194,26 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             console.log(2194, {vp})
                             vp.find("[placeholder='Owner']").textContent = get[1];
                             vp.find("[placeholder='Repository']").textContent = get[2];
+
+                            var commits = await github.repos.commits({
+                                owner: get[1],
+                                repo: get[2],
+                                query: {
+                                    per_page: 5
+                                }
+                            });
+                            if(commits.length > 0) {
+                                var c = 0;
+                                do {
+                                    var row = commits[c];
+                                    var template = byId("commit-history").content.firstElementChild.cloneNode(true);
+                                    template.find("[name='message']").textContent = row.commit.message;
+                                    template.find("[name='author']").textContent = row.committer.login;
+                                    template.find("[name='sha']").textContent = row.sha;
+                                    byId("commit-history").previousElementSibling.previousElementSibling.insertAdjacentHTML("afterBegin", template.outerHTML);
+                                    c++;
+                                } while(c < commits.length)
+                            }
                         }
                         
                     } 

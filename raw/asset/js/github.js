@@ -712,6 +712,30 @@ window.github = {
         }
     },
     repos: {
+        commits: (params, settings)=>{
+            console.log(params, settings);
+            var settings = settings ? settings : {};
+            return new Promise((resolve,reject)=>{
+                const query = params.query ? "?" + new URLSearchParams(params.query).toString() : "";
+                console.log(query);
+                const a = (d)=>{
+                    const data = JSON.parse(d);
+                    resolve(data);
+                }
+                const b = (error)=>{
+                    console.log(error);
+                    reject(error);
+                }
+                const accessToken = localStorage.githubAccessToken;
+                accessToken ? settings.headers = {
+                    Accept: "application/vnd.github.v3+json",
+                    Authorization: "token " + accessToken
+                } : null;
+                const url = github.endpoint + "/repos/" + params.owner + "/" + params.repo + "/commits" + query;
+                ajax(url, settings).then(a).catch(b);
+            }
+            );
+        },
         contents: (params,settings)=>{
             //console.log(555, {params, settings});
             if (settings && settings.dataType) {
