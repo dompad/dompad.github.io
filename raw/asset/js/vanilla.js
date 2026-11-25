@@ -506,6 +506,15 @@ function ajax(url, settings) {
     );
 }
 
+function ago(iso) {
+    if (!iso) return "";
+    var d = (Date.now() - new Date(iso).getTime()) / 1000;
+    if (d < 3600) return Math.max(1, Math.round(d / 60)) + " min ago";
+    if (d < 86400) return Math.round(d / 3600) + " h ago";
+    if (d < 86400 * 60) return Math.round(d / 86400) + " d ago";
+    return new Date(iso).toLocaleDateString(undefined, { month: "short", year: "numeric" });
+}
+
 function beautify(html) {
 
     console.log(html);

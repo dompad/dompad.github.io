@@ -119,7 +119,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
             }
             if (root === "dashboard") {
                 //console.log(107, root, get);
-                //0 < 1 ? controller.nav.hide() : controller.nav.close();
+                controller.nav.hide();
                 if (get.length > 2) { 
 
                     var isLogin = await github.oauth.verify();
@@ -2192,8 +2192,14 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                         } else {
                             var vp = dom.body.find("page[data-page='" + route.page + "']");
                             console.log(2194, {vp})
+                            
                             vp.find("[placeholder='Owner']").textContent = get[1];
                             vp.find("[placeholder='Repository']").textContent = get[2];
+                            
+                            vp.find("[name='visibility']").textContent = repository.private ? "Private" : "Public";
+                            vp.find("[name='branch']").textContent = repository["default_branch"];
+                            vp.find("[name='push']").textContent = ago(repository.pushed_at) || "Never";
+                            vp.find("[name='access']").textContent = repository.permissions && repository.permissions.push ? "Can push" : "Read only";
 
                             var commits = await github.repos.commits({
                                 owner: get[1],

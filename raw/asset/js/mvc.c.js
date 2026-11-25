@@ -2651,17 +2651,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
         hide: () => {
 
             const nav = document.body.find('body > main nav');
-            const transform = nav.getAttribute("css-dw960px-transform");
-            const blocks = dom.body.find('main nav + pages');
-
-            nav.setAttribute("css-transform", "translateX(-100%)");
-            blocks.setAttribute("css-transform", "0");
-
             nav.setAttribute("css-dw960px-transform", "translateX(-100%)");
-            blocks.setAttribute("css-dw960px-transform", "0");
-
-            blocks.setAttribute("css-left", "0");
-            blocks.setAttribute("css-dw960px-left", "0");
 
         },
 
