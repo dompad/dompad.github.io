@@ -1876,7 +1876,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             } else {
                                                 throw Error("Page not found");
                                             }
-                                        } catch (e) {
+                                        }
+                                        catch (e) {
                                             console.log(e);
                                         }
                                     } else {
@@ -2188,6 +2189,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 ajax('raw/asset/json/templates.json').then(a);
                                 resolve(route);
                             }
+                        } else {
+                            var vp = dom.body.find("page[data-page='" + route.page + "']");
+                            console.log(2194, {vp})
+                            vp.find("[placeholder='Owner']").textContent = get[1];
+                            vp.find("[placeholder='Repository']").textContent = get[2];
                         }
                         
                     } 

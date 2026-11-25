@@ -888,6 +888,9 @@
         .dw768px-grid-template-columns, [css-dw768px-columns="1"], [css-dw768px-grid-template-columns="repeat(1, minmax(0, 1fr))"], [css-tablet-columns="1"] {
             grid-template-columns: repeat(1, minmax(0, 1fr));
         }
+        .dw768px-grid-template-columns, [css-dw768px-columns="2"], [css-dw768px-grid-template-columns="repeat(2, minmax(0, 1fr))"], [css-tablet-columns="2"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
         .dw768px-grid-template-columns, [css-dw768px-columns="3"], [css-dw768px-grid-template-columns="repeat(3, minmax(0, 1fr))"], [css-tablet-columns="3"] {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
@@ -3205,6 +3208,10 @@
 
     .width-640px, [css-width="640px"] {
         width: 640px;
+    }
+
+    .width-960px, [css-width="960px"] {
+        width: 960px;
     }
 
     .width-1280px, [css-width="1280px"] {
