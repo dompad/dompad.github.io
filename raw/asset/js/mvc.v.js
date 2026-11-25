@@ -2209,8 +2209,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     var template = byId("commit-history").content.firstElementChild.cloneNode(true);
                                     template.find("[name='message']").textContent = row.commit.message;
                                     template.find("[name='author']").textContent = row.committer.login;
-                                    template.find("[name='sha']").textContent = row.sha;
-                                    byId("commit-history").previousElementSibling.previousElementSibling.insertAdjacentHTML("afterBegin", template.outerHTML);
+                                    template.find("[name='sha']").textContent = row.sha.substring(0, 7);
+                                    byId("commit-history").previousElementSibling.previousElementSibling.insertAdjacentHTML("beforeEnd", template.outerHTML);
                                     c++;
                                 } while(c < commits.length)
                             }
