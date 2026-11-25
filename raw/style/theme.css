@@ -979,6 +979,10 @@
         display: -webkit-inline-flex;
     }
 
+    .display-contents {
+        display: contents;
+    }
+
     .display-grid {
         display: grid;
     }
@@ -3206,10 +3210,6 @@
         width: 224px;
     }
 
-    .width-240px, [css-width="240px"] {
-        width: 120px;
-    }
-
     .width-640px, [css-width="640px"] {
         width: 640px;
     }
@@ -3364,10 +3364,6 @@
 
     .width-101px, [css-width="101px"] {
         width: 101px;
-    }
-
-    .width-120px {
-        width: 120px;
     }
 
     .width-160px {

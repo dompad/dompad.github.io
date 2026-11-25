@@ -1,5 +1,5 @@
 <block class="justify-content-center min-height-100pct width-100pct" css-background-color="rgba(0,0,0,0.5)" css-backdrop-filter="blur(0px)">
-    <flex class="margin-auto">
+    <flex class="display-contents margin-auto">
         <form class="background-color-fff border-radius-20px display-flex flex-direction-column width-480px" css-margin="20px auto" css-max-width="calc(100% - 40px)" onsubmit="controller.setup.webmanifest(event)">
             <header class="position-relative top-0 width-100pct z-index-5">
                 <section>
@@ -27,9 +27,9 @@
                     </card>
                 </section>
             </header>
-            <block class="align-items-center justify-content-center margin-x-auto overflow-x-hidden padding-top-20px">
+            <block class="justify-content-center overflow-x-hidden padding-top-20px">
                 <column>
-                    <card class="">
+                    <card>
                         <header>
                             <box class="padding-20px text-align-center">
                                 <column>
@@ -39,16 +39,16 @@
                             </box>
                         </header>
                         <section>
-                            <box class="padding-top-50px">
+                            <box>
                                 <section>
                                     <picture class="margin-auto width-240px">
                                         <img class="width-100pct" src="raw/asset/png/astronaut-typing.png">
                                     </picture>
                                 </section>
                             </box>
-                            <box class="border-1px-solid border-color-bbb border-radius-10px height-50px margin-top-20px margin-bottom-20px" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)">
+                            <box class="border-1px-solid border-color-bbb border-radius-10px height-50px margin-auto margin-top-20px margin-bottom-20px width-240px" css-box-shadow="0 1px 6px rgb(32 33 36 / 28%)">
                                 <text class="background-color-fff color-bbb height-18px line-height-18px margin-x-10px padding-x-10px position-absolute" css-transform="translate3d(0,-50%,0)">Name</text>
-                                <row class="height-100pct left-0 position-absolute right-0 top-0 width-100pct">
+                                <row class="height-100pct left-0 position-absolute right-0 top-0">
                                     <input class="flex-grow-1 height-100pct padding-x-20px" onkeydown="on.key.down.setup.app(event)" onkeyup="on.key.up.setup.app(event)" type="text">
                                     <input type="submit">
                                 </row>
