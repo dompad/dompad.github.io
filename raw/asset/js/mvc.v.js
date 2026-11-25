@@ -2208,6 +2208,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     per_page: 5
                                 }
                             });
+                            byId("commit-history").previousElementSibling.previousElementSibling.innerHTML = "";
                             if(commits.length > 0) {
                                 var c = 0;
                                 do {
