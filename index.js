@@ -70,12 +70,14 @@ async function init() {
     };
     dom.body.dataset.theme = "meridiem";
     dom.body.addEventListener("pointerup", function(e) {
-        if (window.touch.ing === false) {
-            on.touch.tap(e);
-            //console.log(e.type,window.touch.ing);
-        } else {
-            window.touch.ing = false;
-            //console.log(e.type,window.touch.ing);
+        if(e.button === 0) {
+            if (window.touch.ing === false) {
+                on.touch.tap(e);
+                //console.log(e.type,window.touch.ing);
+            } else {
+                window.touch.ing = false;
+                //console.log(e.type,window.touch.ing);
+            }
         }
     });
     dom.body.addEventListener("touchstart", function(e) {

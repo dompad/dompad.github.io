@@ -1203,19 +1203,19 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                             }
                             if (get[3] === "merch") {
     
-                                if (get.length > 3) {
-                                    if (get[3] === "catalog") {
+                                if (get.length > 4) {
+                                    if (get[4] === "catalog") {
                                         var feed = byId('feed-dashboard-catalog');
-                                        if (get[4]) {
-                                            var vp = dom.body.find('pages[data-page="/dashboard/*/merch/catalog/*"]');
+                                        if (get[5]) {
+                                            var vp = dom.body.find('pages[data-page="/dashboard/*/*/merch/catalog/*"]');
     
                                             //ANCESTOR
                                             try {
                                                 var slug = get[5] ? get[4] + "/" + get[5] : get[4];
                                                 var res = window.ancestor = await github.repos.contents({
-                                                    owner: window.owner.login,
-                                                    repo: get[1],
-                                                    path: "/raw/merch/" + get[4] + "/merch.json"
+                                                    owner: get[1],
+                                                    repo: get[2],
+                                                    path: "/raw/merch/" + get[5] + "/merch.json"
                                                 }, {
                                                     accept: "application/vnd.github.raw",
                                                     cache: "reload"
@@ -1223,7 +1223,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 if (res.length > 0) {
                                                     var r = 0;
                                                     do {
-                                                        if (res[r].slug === get[4]) {
+                                                        if (res[r].slug === get[5]) {
                                                             console.log(211, res[r], slug);
                                                             var json = res[r];
                                                         }
@@ -1486,7 +1486,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             var categories = JSON.parse(arr).merch;
                                             if (categories.length > 0) {
                                                 var c = 0;
-                                                var vp = dom.body.find('[data-page="/dashboard/*/merch/catalog/*"]');
+                                                var vp = dom.body.find('[data-page="/dashboard/*/*/merch/catalog/*"]');
                                                 var step2 = vp.all('block card')[1];
                                                 var list = step2.find('[data-after="Category"]').closest('box').find('dropdown group');
                                                 do {
@@ -1592,7 +1592,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             var categories = JSON.parse(json).merch;
                                             if (categories.length > 0) {
                                                 var c = 0;
-                                                var vp = dom.body.find('[data-page="/dashboard/*/merch/catalog"]');
+                                                var vp = dom.body.find('[data-page="/dashboard/*/*/merch/catalog"]');
                                                 console.log({
                                                     vp
                                                 });
@@ -1608,7 +1608,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             }
                                         }
                                     } 
-                                    else if (get[3] === "orders") {
+                                    else if (get[4] === "orders") {
                                         var vp = dom.body.find('page[data-page="/dashboard/*/merch/orders"]');
     
                                         var orders = await github.repos.contents({
@@ -1642,7 +1642,7 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             }
                                         });
                                     } 
-                                    else if (get[3] === "product") {
+                                    else if (get[4] === "product") {
                                         var vp = dom.body.find('pages[data-page="/dashboard/*/merch/product"]');
                                         var slug = get[4];
                                         if (slug) {
@@ -1661,13 +1661,13 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 } 
                                 else {
                                     var feed = byId('feed-dashboard-merch');
-                                    var vp = dom.body.find('page[data-page="/dashboard/*/merch"]');
+                                    var vp = dom.body.find('page[data-page="/dashboard/*/*/merch"]');
                                     vp.find('block > footer').setAttribute("css-display", "none");
                                     //alert("Attempting to fetch files");
                                     github.repos.contents({
-                                        owner: window.owner.login,
+                                        owner: get[1],
                                         path: "/raw/merch/merch.json",
-                                        repo: get[1]
+                                        repo: get[2]
                                     }, {
                                         accept: "application/vnd.github.raw"
                                     }).then(data=>{
@@ -1691,8 +1691,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                         var card = byId('template-feed-dashboard-merch').content.firstElementChild.cloneNode(true);
                                                         card.find('[data-value="product.stock"]').textContent = stock;
                                                         card.find('[placeholder="Title"]').textContent = title;
-                                                        card.find('[placeholder="Title"]').dataset.href = "/dashboard/:get/merch/catalog/" + slug + "/";
-                                                        card.find('.gg-tag').closest('text').dataset.href = "/dashboard/:get/merch/catalog/" + slug + "/";
+                                                        card.find('[placeholder="Title"]').dataset.href = "/dashboard/:get/:get/merch/catalog/" + slug + "/";
+                                                        card.find('.gg-tag').closest('text').dataset.href = "/dashboard/:get/:get/merch/catalog/" + slug + "/";
                                                         html += card.outerHTML;
                                                     }
                                                     //feed.insertAdjacentHTML('beforeend', html);

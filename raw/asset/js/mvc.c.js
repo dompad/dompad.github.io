@@ -1086,8 +1086,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             //PUSH
             var params = {
                 message: "Add " + name + " to Merch",
-                repo: GET[1],
-                owner: owner.login
+                repo: GET[2],
+                owner: GET[1]
             };
             var array = [{
                 content: str1,
@@ -1101,7 +1101,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             });
             try {
                 await github.crud.update(params, array);
-                ("/dashboard/:get/merch/catalog/" + slug + "/").router()
+                ("/dashboard/:get/:get/merch/catalog/" + slug + "/").router()
             } catch (e) {
                 modal.alert({
                     body: "There was an error creating this product.",
@@ -4306,7 +4306,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 title: attributes.find('[placeholder]').value
             });
 
-            var url = '/dashboard/' + GET[1] + '/merch/catalog/' + GET[4] + '/';
+            var url = '/dashboard/' + GET[1] + '/' + GET[2] + '/merch/catalog/' + GET[5] + '/';
             var values = [];
             var traits = target.closest('box column').children;
             if (traits.length > 0) {

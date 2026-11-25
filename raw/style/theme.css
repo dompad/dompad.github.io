@@ -2486,6 +2486,10 @@
         padding-bottom: 20px;
     }
 
+    .padding-bottom-50px {
+        padding-bottom: 50px;
+    }
+
     .padding-top-20px {
         padding-top: 20px;
     }
@@ -3294,7 +3298,7 @@
         width: 100%;
     }
 
-    [css-width="calc(100% - 20px)"] {
+    .width-100pct-minus-20px, [css-width="calc(100% - 20px)"] {
         width: calc(100% - 20px);
     }
 

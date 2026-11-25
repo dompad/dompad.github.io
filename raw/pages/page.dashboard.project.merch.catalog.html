@@ -4,7 +4,7 @@
             <row class="gap-10px">
                 <box class="display-nonre" data-dw960px-display="flex" data-tap="controller.nav.toggle(event.target)">
                     <section>
-                        <ico data-height="30px" data-width="30px">
+                        <ico css-height="30px" css-width="30px">
                             <n class="gg-menu"></n>
                         </ico>
                     </section>
@@ -20,7 +20,7 @@
             <row>
                 <box class="line-height-30px" data-href="/dashboard/:get/:get/merch/">
                     <row class="align-items-center justify-content-center">
-                        <ico data-height="30px" data-width="30px">
+                        <ico css-height="30px" css-width="30px">
                             <n class="gg-view-list"></n>
                         </ico>
                         <text class="font-size-14px font-weight-bolder">Browse Catalog</text>
@@ -30,11 +30,11 @@
         </card>
     </row>
 </header>
-<form onsubmit="controller.catalog.create(event)">
+<form class="flex-grow-1 padding-bottom-50px" onsubmit="controller.catalog.create(event)">
     <block class="align-items-center display-flex justify-content-center height-100pct width-100pct">
         <column class="-dw960px-gap-50px display-flex gap-10px max-width-100pct width-640px">
-            <card class="align-items-center justify-content-center" data-display="flex">
-                <column data-width="calc(100% - 40px)">
+            <card class="align-items-center justify-content-center" css-display="flex">
+                <column css-width="calc(100% - 40px)">
                     <box class="padding-y-20px">
                         <column>
                             <text class="font-size-24px font-weight-bolder">Product Name</text>
@@ -43,14 +43,14 @@
                     </box>
                     <box class="width-100pct">
                         <section>
-                            <input class="border-1px-solid border-color-ccc border-radius-50px flex-1 font-size-16px height-50px padding-x-10px width-100pct" onkeydown="on.key.down.prevent.submit(event)" onkeyup="on.key.up.catalog.name(event.target)">
+                            <input class="border-1px-solid border-color-ccc border-radius-50px flex-1 font-size-16px height-50px padding-x-10px width-100pct-minus-20px" onkeydown="on.key.down.prevent.submit(event)" onkeyup="on.key.up.catalog.name(event.target)">
                         </section>
                     </box>
                 </column>
                 <footer class="bottom-0 display-flex flex-direction-row left-0 justify-content-space-between line-height-50px margin-auto position-fixed right-0 width-100pct">
                     <box class="padding-x-10px" data-href="/dashboard/:get/merch/">
                         <row>
-                            <ico data-width="25px">
+                            <ico css-width="25px">
                                 <n class="gg-chevron-left"></n>
                             </ico>
                             <text>Exit</text>
@@ -59,15 +59,15 @@
                     <box class="opacity-50pct padding-x-10px" data-tap="controller.catalog.step(event.target)">
                         <row>
                             <text>Next</text>
-                            <ico data-width="25px">
+                            <ico css-width="25px">
                                 <n class="gg-chevron-right"></n>
                             </ico>
                         </row>
                     </box>
                 </footer>
             </card>
-            <card class="align-items-center justify-content-center" data-display="none">
-                <column data-width="calc(100% - 40px)">
+            <card class="align-items-center justify-content-center" css-display="none">
+                <column css-width="calc(100% - 40px)">
                     <box class="padding-y-20px">
                         <column>
                             <text class="font-size-24px font-weight-bolder">Browse Nodes</text>
@@ -79,16 +79,16 @@
                             <dropdown class="align-items-center background-color-fff border-1px-solid border-color-ccc border-radius-50px display-flex height-50px justify-content-center line-height-36px width-100pct">
                                 <row class="align-items-center justify-content-center padding-x-10px width-100pct" data-tap="controller.catalog.category(event.target)">
                                     <text class="flex-1" placeholder="Category"></text>
-                                    <ico data-height="30px" data-width="30px">
+                                    <ico css-height="30px" css-width="30px">
                                         <n class="gg-chevron-down"></n>
                                     </ico>
                                 </row>
-                                <group data-display="none"></group>
+                                <group css-display="none"></group>
                                 <template>
                                     <box class="flex-1">
                                         <row class="align-items-center justify-content-center width-100pct">
                                             <text class="align-items-center display-flex flex-1">
-                                                <ico class="border-2px-solid border-color-ccc border-radius-50px" data-height="20px" data-width="20px"></ico>
+                                                <ico class="border-2px-solid border-color-ccc border-radius-50px" css-height="20px" css-width="20px"></ico>
                                                 <span class="display-flex flex-1 height-36px line-height-36px padding-x-10px" data-after="Appliances"></span>
                                             </text>
                                         </row>
@@ -101,7 +101,7 @@
                 <footer class="bottom-0 display-flex flex-direction-row left-0 justify-content-space-between line-height-50px margin-auto position-fixed right-0 width-100pct">
                     <box class="padding-x-10px" data-tap="controller.catalog.step(event.target)">
                         <row>
-                            <ico data-width="25px">
+                            <ico css-width="25px">
                                 <n class="gg-chevron-left"></n>
                             </ico>
                             <text>Back</text>
@@ -110,32 +110,32 @@
                     <box class="opacity-50pct padding-x-10px" data-tap="controller.catalog.step(event.target)">
                         <row>
                             <text>Next</text>
-                            <ico data-width="25px">
+                            <ico css-width="25px">
                                 <n class="gg-chevron-right"></n>
                             </ico>
                         </row>
                     </box>
                 </footer>
             </card>
-            <card class="align-items-center justify-content-center" data-display="none">
-                <column class="gap-10px" data-width="calc(100% - 40px)">
+            <card class="align-items-center justify-content-center" css-display="none">
+                <column class="gap-10px" css-width="calc(100% - 40px)">
                     <box class="padding-y-20px">
                         <column>
                             <text class="font-size-24px font-weight-bolder">Variation Model</text>
                             <text class="font-size-16px">Create a theme for products with attributes.</text>
                         </column>
                     </box>
-                    <box class="border-radius-10px overflow-hidden" data-display="none">
+                    <box class="border-radius-10px overflow-hidden" css-display="none">
                         <header class="align-items-center background-color-ccc display-flex flex-direction-row grid-gap-10px height-30px padding-10px">
-                            <cell class="background-color-ddd border-1px-solid border-color-ccc border-radius-5px" data-height="30px">
+                            <cell class="background-color-ddd border-1px-solid border-color-ccc border-radius-5px" css-height="30px">
                                 <row>
-                                    <ico data-height="30px" data-width="30px">
+                                    <ico css-height="30px" css-width="30px">
                                         <n class="gg-format-text"></n>
                                     </ico>
-                                    <ico data-display="none" data-height="30px" data-width="30px">
+                                    <ico css-display="none" css-height="30px" css-width="30px">
                                         <n class="gg-image"></n>
                                     </ico>
-                                    <ico data-height="30px" data-width="20px">
+                                    <ico css-height="30px" css-width="20px">
                                         <n class="--ggs-50pct gg-chevron-down"></n>
                                     </ico>
                                 </row>
@@ -158,7 +158,7 @@
                     <box class="gap-10px">
                         <footer class="width-100pct">
                             <text class="align-items-center border-1px-solid border-radius-50px display-flex flex-1 font-size-18px font-weight-bolder gap-5px height-36px justify-content-center line-height-36px text-align-center width-100pct" data-tap="controller.catalog.variation(event.target)">
-                                <ico data-height="20px" data-width="30px">
+                                <ico css-height="20px" css-width="30px">
                                     <n class="gg-add"></n>
                                 </ico>
                                 <span>Add Variation</span>
@@ -167,13 +167,13 @@
                                 <column class="flex-direction-row grid-gap-10px">
                                     <cell class="background-color-ddd border-1px-solid border-color-ccc border-radius-5px">
                                         <row>
-                                            <ico data-height="36px" data-width="30px">
+                                            <ico css-height="36px" css-width="30px">
                                                 <n class="gg-format-text"></n>
                                             </ico>
-                                            <ico data-display="none" data-height="36px" data-width="30px">
+                                            <ico css-display="none" css-height="36px" css-width="30px">
                                                 <n class="gg-image"></n>
                                             </ico>
-                                            <ico data-height="36px" data-width="20px">
+                                            <ico css-height="36px" css-width="20px">
                                                 <n class="--ggs-50pct gg-chevron-down"></n>
                                             </ico>
                                         </row>
@@ -186,13 +186,13 @@
                                     <dropdown class="align-items-center border-1px-solid border-radius-50px display-flex height-36px justify-content-center line-height-36px opacity-50pct width-50pct">
                                         <row class="align-items-center justify-content-center padding-x-10px width-100pct" data-tap="controller.catalog.variations(event.target.closest('dropdown'))">
                                             <text class="flex-1" placeholder="Value"></text>
-                                            <ico data-height="30px" data-width="30px">
+                                            <ico css-height="30px" css-width="30px">
                                                 <n class="gg-chevron-down"></n>
                                             </ico>
                                         </row>
-                                        <group data-display="none"></group>
+                                        <group css-display="none"></group>
                                     </dropdown>
-                                    <ico class="color-ff3b30" data-height="36px" data-tap="event.target.closest('column').remove()" data-width="36px">
+                                    <ico class="color-ff3b30" css-height="36px" data-tap="event.target.closest('column').remove()" css-width="36px">
                                         <n class="gg-close"></n>
                                     </ico>
                                 </column>
@@ -203,7 +203,7 @@
                 <footer class="bottom-0 display-flex flex-direction-row left-0 justify-content-space-between line-height-50px margin-auto position-fixed right-0 width-100pct">
                     <box class="padding-x-10px" data-tap="controller.catalog.step(event.target)">
                         <row>
-                            <ico data-width="25px">
+                            <ico css-width="25px">
                                 <n class="gg-chevron-left"></n>
                             </ico>
                             <text>Back</text>
@@ -212,7 +212,7 @@
                     <box class="padding-x-10px" data-tap="controller.catalog.step(event.target)">
                         <label for="submit-dashboard-merch-catalog">
                             <text>Done</text>
-                            <ico data-width="25px">
+                            <ico css-width="25px">
                                 <n class="gg-chevron-right"></n>
                             </ico>
                             <input id="submit-dashboard-merch-catalog" type="submit">
