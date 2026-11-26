@@ -115,7 +115,7 @@ Important JavaScript files
 
 File responsibilities may evolve as the dashboard and website runtimes are consolidated.
 
-Data model
+# Data model
 
 domPad uses repository files as the persistence layer for managed website data. Application code references JSON resources for site configuration and collections such as:
 
@@ -140,7 +140,7 @@ These paths describe data files expected in managed website repositories; they a
 
 GitHub is used to read and write repository content. This makes the repository the source of truth for the managed site’s files and structured data.
 
-#Hosting and deployment
+# Hosting and deployment
 
 The dashboard repository is connected to Cloudflare Pages, with the main branch configured for continuous deployment. Changes pushed to that branch are deployed by the hosting integration.
 
@@ -148,7 +148,7 @@ The exact Cloudflare Pages build command, output-directory setting, environment 
 
 Managed websites can also be deployed as static sites. GitHub Pages and custom-domain workflows are represented in the dashboard’s configuration and deployment features.
 
-#Development notes
+# Development notes
 
 Current architecture
 
@@ -157,7 +157,7 @@ Current architecture
 • Managed websites currently use a separate mvc.js.
 • The dashboard and website runtime share or reuse supporting browser utilities and routing/framework code where appropriate.
 
-#Planned architecture
+# Planned architecture
 
 The intended consolidation is:
 
@@ -167,11 +167,11 @@ The intended consolidation is:
 
 This is the planned direction, not a description of a completed refactor.
 
-#Development status
+# Development status
 
 domPad is under active development. The dashboard modules, website runtime, shared framework, and external integrations may all be subject to ongoing debugging, refinement, and architectural changes. The module descriptions above explain their intended responsibilities; they should not be read as a guarantee that every workflow is finalized.
 
-##External services
+## External services
 
 The application integrates with external services for key capabilities:
 
