@@ -448,15 +448,13 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 accept: 'application/vnd.github.raw'
                                             });
                                             var doc = new DOMParser().parseFromString(res, 'image/svg+xml').documentElement;
-                                            var svg = vp.find('card > header + * picture svg');
-                                            var pic = svg.parentElement;
+                                            var svg = vp.find('[data-favicon="icon.svg"]');
                                             var foreignObject = fobj = doc.find('foreignObject');
-                                            $(foreignObject.all('path')).removeAttr('fill');
-                                            console.log(foreignObject);
+                                            //$(foreignObject.all('path')).removeAttr('fill');
                                             var fo = svg.find('foreignObject');
                                             if (fo) {
-                                                var vb = fo.getAttribute('viewBox').split(' ');
-                                                var s = vb[vb.length - 1];
+                                                //var vb = fo.getAttribute('viewBox').split(' ');
+                                                //var s = vb[vb.length - 1];
                                             } else {
                                                 var s = 570;
                                             }
@@ -469,21 +467,11 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 y
                                             });
     
-                                            foreignObject.setAttribute('class', 'position-relative');
-                                            foreignObject.setAttribute('height', (w * 1));
-                                            foreignObject.setAttribute('width', (w * 1));
-                                            foreignObject.setAttribute('x', x);
-                                            foreignObject.setAttribute('y', y);
-                                            foreignObject.firstElementChild.setAttribute('class', 'height-100pct position-absolute top-0 width-100pct');
-                                            foreignObject.removeAttribute('class');
-                                            foreignObject.removeAttribute('data-fetch');
-                                            foreignObject.removeAttribute('style');
-    
                                             var svgstr = foreignObject.outerHTML;
                                             var rect = doc.find('rect');
                                             var bg = rect.getAttribute('fill');
-                                            rect.removeAttribute('rx');
-                                            svg.setAttribute('css-color', colors.contrast(bg));
+                                            //rect.removeAttribute('rx');
+                                            //svg.setAttribute('css-color', colors.contrast(bg));
                                         
                                             controller.setup.colorPicker(vp.find('[data-iro]'), {
                                                 color: bg
@@ -492,26 +480,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                             //doc.setAttribute('class', 'border-1px-solid border-color-ddd border-radius-15pct box-shadow-0px-1px-6px-0px height-100pct position-absolute top-0 width-100pct');
                                             //console.log(432, svg);
                                             if (!svg.find('foreignObject')) {
-                                                svg.find('rect').setAttribute('fill', bg)
-                                                svg.insertAdjacentHTML('beforeend', svgstr);
-                                                svg.setAttribute('viewBox', '0 0 ' + s + ' ' + s);
-                                                //console.log('1.0.1', svg, svg.lastElementChild);
-                                                //svg.lastElementChild.setAttribute('x', 0);
-                                                //svg.lastElementChild.setAttribute('y', 0);
-                                                svg.parentElement.style.color = colors.contrast('#' + bg);
-                                                $(svg.all('path')).attr('fill', '#' + bg);
-                                                //console.log(svg.clientWidth, svg.firstElementChild, svg.firstElementChild.clientWidth);
-    
-                                                //svg.find('svg').setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-                                                var ico = svg.find('svg');
-                                                ico.removeAttribute('class');
-                                                ico.setAttribute('height', w);
-                                                ico.setAttribute('width', w);
+                                                //svg.find('rect').setAttribute('fill', bg)
+                                                //svg.insertAdjacentHTML('beforeend', svgstr);
+                                                //svg.setAttribute('viewBox', '0 0 ' + s + ' ' + s);
                                             }
-    
-                                            //console.log(svg.clientWidth, svg.firstElementChild, svg.firstElementChild.clientWidth);  
-                                            //$(vp.all('[data-value="favicon"]')).html(svgstr);
-                                            //console.log(vp.all('[data-value="favicon"]'));
     
                                             0 < 1 ? vp.all('[data-favicon]').forEach(async function(el, index) {
                                                 var raw = await github.repos.contents({
@@ -524,6 +496,24 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 var svg = new DOMParser().parseFromString(raw, 'text/xml').documentElement;
                                                 const rect = svg.find("rect");
                                                 const bg = rect ? rect.getAttribute("fill") : null;
+                                                var foreignObject = svg.find("foreignObject");
+
+                                                var s = 570;
+                                                var w = Math.round(s * 0.69);
+                                                var h = Math.round(s * 0.69);
+                                                var x = (s - w) / 2;
+                                                var y = (s - h) / 2;
+
+                                                if(el.find('foreignObject')) {
+                                                    el.find('foreignObject').setAttribute('height', (w * 1));
+                                                    el.find('foreignObject').setAttribute('width', (w * 1));
+                                                    el.find('foreignObject').setAttribute('x', x);
+                                                    el.find('foreignObject').setAttribute('y', y);
+                                                    //foreignObject.removeAttribute('class');
+                                                    //foreignObject.removeAttribute('data-fetch');
+                                                    //foreignObject.removeAttribute('style');
+                                                }
+                                                
                                                 rect && bg ? rect.setAttribute('fill', bg) : null;
                                                 //console.log(el, el.dataset.favicon);
                                                 svg.getAttribute('height') ? el.setAttribute('height', svg.getAttribute('height')) : null;
