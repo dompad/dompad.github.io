@@ -498,10 +498,23 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                 const bg = rect ? rect.getAttribute("fill") : null;
                                                 var foreignObject = svg.find("foreignObject");
 
-                                                var s = 570;
+                                                if(foreignObject) {
+                                                    var vb = foreignObject.parentElement.getAttribute('viewBox') ? foreignObject.parentElement.getAttribute('viewBox').split(' ') : null;
+                                                    console.log(503, el.dataset.favicon, { vb });
+                                                    if(vb && vb.length > 0) {
+                                                        var s = vb[vb.length - 1];
+                                                        var ss = vb[vb.length - 2];
+                                                    } else {
+                                                        var s = 570;
+                                                        var ss = 570;
+                                                    }
+                                                } else {
+                                                    var s = 570;
+                                                    var ss = 570;                                                    
+                                                }
                                                 var w = Math.round(s * 0.69);
                                                 var h = Math.round(s * 0.69);
-                                                var x = (s - w) / 2;
+                                                var x = (ss - w) / 2;
                                                 var y = (s - h) / 2;
 
                                                 if(el.find('foreignObject')) {
