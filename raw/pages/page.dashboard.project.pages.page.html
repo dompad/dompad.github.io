@@ -3,7 +3,7 @@
         <row class="justify-content-space-between padding-x-20px">
             <card>
                 <row class="gap-10px">
-                    <box class="display-noner" css-dw960px-display="flex" data-tap="controller.nav.toggle(event.target)">
+                    <box class="display-none" css-dw960px-display="flex" data-tap="controller.nav.toggle(event.target)">
                         <section>
                             <ico css-height="30px" css-width="30px">
                                 <n class="gg-menu"></n>
@@ -98,7 +98,7 @@
                             <text class="font-weight-bolder line-height-50px padding-x-10px text-transform-uppercase">URL Route</text>
                         </header>
                         <flex class="align-items-center font-size-18px height-36px line-height-36px overflow-y-hidden padding-10px position-relative scrollbar-0 white-space-nowrap">
-                            <input class="display-flex font-size-16px height-100pct white-space-nowrap width-4px" disabled type="text" value="/">
+                            <input class="display-flex font-size-16px height-100pct white-space-nowrap width-5px" disabled type="text" value="/">
                             <input class="display-flex flex-1 font-size-16px height-100pct text-transform-lowercase white-space-nowrap" data-value="pages.slug" onkeydown="on.key.down.route(event)" onkeyup="on.key.up.route(event)" type="text" placeholder="url/*/route/:slug/goes/*/here/:dir">
                         </flex>
                     </box>
@@ -119,7 +119,7 @@
                             <text class="font-weight-bolder line-height-50px padding-x-10px text-transform-uppercase">Dynamic Link</text>
                         </header>
                         <flex class="align-items-center font-size-18px height-36px line-height-36px overflow-y-hidden padding-10px position-relative scrollbar-0 white-space-nowrap">
-                            <input class="display-flex font-size-16px height-100pct white-space-nowrap" disabled type="text" value="/">
+                            <input class="display-flex font-size-16px height-100pct white-space-nowrap width-5px" disabled type="text" value="/">
                             <input class="display-flex flex-1 font-size-16px height-100pct text-transform-lowercase white-space-nowrap" data-value="pages.route" onkeydown="on.key.down.route(event)" onkeyup="on.key.up.route(event)" type="text" placeholder="url/route/*/here/:slug">
                         </flex>
                     </box>
