@@ -2030,8 +2030,8 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                 }
                             }
                             if (get[3] === "posts") {
-                                if (get[3] === "post") {
-                                    var vp = dom.body.find('pages[data-page="/dashboard/*/posts/*"]');
+                                if (get[4] === "post") {
+                                    var vp = dom.body.find('pages[data-page="/dashboard/*/*/posts/*"]');
     
                                     var image = vp.find('block > header card').firstElementChild;
                                     var title = vp.find('[data-after="Title"]').closest('box').find('textarea');
@@ -2047,15 +2047,14 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                     category.textContent = "";
                                     $(tags.children[1].all('text')).remove();
     
-                                    if (get.length > 4) {
-                                        const user = await github.user.get();
+                                    if (get.length > 5) {
     
                                         if (0 < 1) {
     
                                             github.repos.contents({
-                                                owner: window.owner.login,
-                                                path: "/raw/posts/" + get[4] + "/index.html",
-                                                repo: get[1]
+                                                owner: get[1],
+                                                path: "/raw/posts/" + get[5] + "/index.html",
+                                                repo: get[2]
                                             }, {
                                                 accept: "application/vnd.github.raw"
                                             }).then(async(data)=>{
@@ -2065,9 +2064,9 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                                     try {
                                                         var res = await github.raw.blob({
-                                                            owner: window.owner.login,
-                                                            repo: get[1],
-                                                            resource: "/raw/posts/" + get[4] + "/image.jpeg"
+                                                            owner: get[1],
+                                                            repo: get[2],
+                                                            resource: "/raw/posts/" + get[5] + "/image.jpeg"
                                                         })
                                                         var img = document.createElement('img');
                                                         img.className = "height-100pct object-fit-cover position-absolute width-100pct";
@@ -2114,9 +2113,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                     }
                                     resolve(route);
-                                } else {
+                                } 
+                                else {
                                     const user = await github.user.get();
-                                    controller.posts.read(get[1]);
+                                    controller.posts.read(get[2]);
                                     resolve(route);
                                 }
                             } 
