@@ -182,7 +182,7 @@ The application integrates with external services for key capabilities:
 
 Credentials, tokens, and environment-specific configuration should be managed securely and should not be committed to the repository.
 
-##Contributing and changes
+## Contributing and changes
 
 This README documents the repository’s current high-level structure and the intended direction of the architecture. Before changing shared runtime files, consider whether the behavior is used by the dashboard, managed websites, or both.
 
