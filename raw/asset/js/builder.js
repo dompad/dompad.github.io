@@ -61,7 +61,9 @@ async function init() {
             shadow.prepend(cssgg);
             shadow.prepend(reset);
             shadow.lastElementChild.addEventListener("pointerup", (event) => {
-                window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                if(event.button === 0) {
+                    window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                }
             });
         }
 
@@ -90,7 +92,9 @@ async function init() {
             shadow.prepend(cssgg);
             shadow.prepend(reset);
             shadow.lastElementChild.addEventListener("pointerup", (event) => {
-                window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                if(event.button === 0) {
+                    window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                }
             });
         }
 
@@ -182,12 +186,14 @@ async function init() {
         tap: on.touch.tap
     };
     dom.body.addEventListener("pointerup", function(e) {
-        if (window.touch.ing === false) {
-            on.touch.tap(e);
-            //console.log(e.type,window.touch.ing);
-        } else {
-            window.touch.ing = false;
-            //console.log(e.type,window.touch.ing);
+        if(event.button === 0) {
+            if (window.touch.ing === false) {
+                on.touch.tap(e);
+                //console.log(e.type,window.touch.ing);
+            } else {
+                window.touch.ing = false;
+                //console.log(e.type,window.touch.ing);
+            }
         }
     });
     dom.body.addEventListener("touchstart", function(e) {

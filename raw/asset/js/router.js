@@ -553,7 +553,9 @@ async function viewPage(vp) {
                         shadow.prepend(cssgg);
                         shadow.prepend(reset);
                         shadow.lastElementChild.addEventListener("pointerup", (event) => {
-                            window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                            if(event.button === 0) {
+                                window.parent.controller.builder.tap(event.target, shadow.lastElementChild);
+                            }
                         });
                         host.setAttribute("shadow", true);
                         
