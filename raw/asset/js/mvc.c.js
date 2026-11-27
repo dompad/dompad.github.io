@@ -1068,8 +1068,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             //MERCH
             try {
                 var data = await github.repos.contents({
-                    owner: owner.login,
-                    repo: GET[1],
+                    owner: GET[1],
+                    repo: GET[2],
                     path: "/raw/merch/merch.json"
                 });
                 var j = JSON.parse(atob(data.content));
