@@ -3,7 +3,7 @@
         <row class="justify-content-space-between">
             <card>
                 <row class="gap-10px">
-                    <box class="display-noner" css-dw960px-display="flex" data-tap="controller.nav.toggle(event.target)">
+                    <box class="display-none" css-dw960px-display="flex" data-tap="controller.nav.toggle(event.target)">
                         <section>
                             <ico css-height="30px" css-width="30px">
                                 <n class="gg-menu"></n>
@@ -42,7 +42,7 @@
                                 <n class="gg-image"></n>
                             </ico>
                             <text>Upload Image</text>
-                            <input accept="image/jpeg" onchange="controller.posts.image(event)" type="file">
+                            <input accept="image/jpeg,image/png,image/webp" onchange="controller.posts.image(event)" type="file">
                         </label>
                     </box>
                 </flex>

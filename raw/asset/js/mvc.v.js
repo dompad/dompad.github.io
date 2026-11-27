@@ -2056,20 +2056,33 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
     
                                             github.repos.contents({
                                                 owner: get[1],
-                                                path: "/raw/posts/" + get[5] + "/index.html",
+                                                path: "/raw/posts/" + get[5] + "/index.json",
                                                 repo: get[2]
                                             }, {
                                                 accept: "application/vnd.github.raw"
                                             }).then(async(data)=>{
                                                 //var data = atob(d.content);
                                                 if (data) {
-                                                    const doc = new DOMParser().parseFromString(data, "text/html");
+    
+                                                    try {
+                                                        var htm = await github.repos.contents({
+                                                            owner: get[1],
+                                                            path: "/raw/posts/" + get[5] + "/index.html",
+                                                            repo: get[2]
+                                                        }, {
+                                                            accept: "application/vnd.github.raw"
+                                                        })
+                                                        var doc = new DOMParser().parseFromString(htm, "text/html");
+                                                        console.log(2079, {doc});
+                                                    } catch (e) {
+                                                        console.log(862, e);
+                                                    }    
     
                                                     try {
                                                         var res = await github.raw.blob({
                                                             owner: get[1],
                                                             repo: get[2],
-                                                            resource: "/raw/posts/" + get[5] + "/image.jpeg"
+                                                            resource: data.image
                                                         })
                                                         var img = document.createElement('img');
                                                         img.className = "height-100pct object-fit-cover position-absolute width-100pct";
@@ -2079,15 +2092,16 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                         console.log(862, e);
                                                     }
     
-                                                    title.value = doc.head.find("title").textContent;
+                                                    title.value = data.title;
                                                     on.key.up.auto.size(title);
     
-                                                    description.value = doc.head.find("meta[name='description']").content;
+                                                    description.value = data.description;
                                                     on.key.up.auto.size(description);
     
-                                                    article.innerHTML = doc.body.all('article')[doc.body.all('article').length - 1].innerHTML;
+                                                    console.log(2100, {doc});
+                                                    article.innerHTML = doc.body.find('article').innerHTML;
     
-                                                    doc.head.find("meta[name='category']") ? category.textContent = doc.head.find("meta[name='category']").content : null;
+                                                    data.category ? category.textContent = data.category : null;
     
                                                     var keywords = doc.head.find("meta[name='keywords']");
                                                     if (keywords) {

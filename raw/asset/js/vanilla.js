@@ -574,6 +574,24 @@ function convert(svg, options) {
     )
 }
 
+function extFromURI(dataUrl) {
+    if (!dataUrl.startsWith('data:')) return null;
+    
+    let mimeType = dataUrl.split(';')[0]; // e.g., "data:image/png"
+    let type = mimeType.replace('data:', '').split('/')[1];
+    
+    const mimeToExt = {
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/webp': 'webp',
+    'image/gif': 'gif',
+    'application/pdf': 'pdf',
+    'text/plain': 'txt'
+    };
+    
+    return mimeToExt[type] || type;
+}
+
 function fullscreen(elem) {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();

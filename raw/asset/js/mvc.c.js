@@ -3282,7 +3282,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                 var row = {
                     description,
-                    image: image.startsWith("data:") ? "/raw/posts/" + slug + "/image.jpeg" : image,
+                    image: image.startsWith("data:") ? "/raw/posts/" + slug + "/image." + extFromURI(image) : image,
                     slug,
                     title
                 }
@@ -3489,8 +3489,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                             var card = byId('template-feed-dashboard-posts').content.firstElementChild.cloneNode(true);
                             //card.find('[placeholder="Title"]').setAttribute('value', title);
                             card.find('[placeholder="Title"]').textContent = title;
-                            card.find('[placeholder="Title"]').dataset.href = "/dashboard/:get/posts/post/" + slug + "/";
-                            card.find('.gg-tag').closest('text').dataset.href = "/dashboard/:get/posts/post/" + slug + "/";
+                            card.find('[placeholder="Title"]').dataset.href = "/dashboard/:get/:get/posts/post/" + slug + "/";
+                            card.find('.gg-tag').closest('text').dataset.href = "/dashboard/:get/:get/posts/post/" + slug + "/";
                             html += card.outerHTML;
                             //feed.insertAdjacentHTML('beforeend', html);
                             d++;
