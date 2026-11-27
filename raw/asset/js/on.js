@@ -254,7 +254,7 @@ window.on.touch = {
     //console.log("tap",{iframe:self===top},event.type);
     event.touch = "tap";
     var target = event.target;
-    console.log('tap',{event,target});
+    //console.log('tap',{event,target});
 
     target.closest('[data-ignore]') ? null : $("[data-hidden='tap']").attr('css-display', 'none');
 

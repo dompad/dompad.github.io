@@ -2476,8 +2476,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
             try {
                 var res = await github.repos.contents({
-                    owner: owner.login,
-                    repo: GET[1],
+                    owner: GET[1],
+                    repo: GET[2],
                     path: "/raw/merch/merch.json"
                 }, {
                     accept: "application/vnd.github.raw",
@@ -2529,8 +2529,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             if (0 < 1) {
                 var params = {
                     message: "Delete " + titles + " from Merch",
-                    repo: GET[1],
-                    owner: window.owner.login
+                    repo: GET[2],
+                    owner: GET[1]
                 };
                 var array = [{
                     content: JSON.stringify(posts, null, 4),
@@ -2556,7 +2556,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     posts,
                 });
                 await github.crud.update(params, array);
-                ('/dashboard/:get/merch/').router();
+                ('/dashboard/:get/:get/merch/').router();
             }
         },
 
@@ -3836,9 +3836,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                     do {
                         if (images[i].content.startsWith("data:")) {
                             if (child || cousin) {
-                                imgs.push("/raw/merch/" + GET[4] + "/" + GET[5] + "/image." + i + "." + images[i].extension);
+                                imgs.push("/raw/merch/" + GET[5] + "/" + GET[6] + "/image." + i + "." + images[i].extension);
                             } else {
-                                imgs.push("/raw/merch/" + GET[4] + "/image." + i + "." + images[i].extension);
+                                imgs.push("/raw/merch/" + GET[5] + "/image." + i + "." + images[i].extension);
                             }
                         } else {
                             imgs.push(images[i].content);
@@ -3898,19 +3898,19 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                 if (child || cousin) {
                     row.attributes = attributes;
-                    row.slug = slug = GET[4] + "/" + GET[5];
+                    row.slug = slug = GET[5] + "/" + GET[6];
                 }
                 if (parent) {
                     row.dimensions = dimensions;
-                    row.slug = slug = GET[4];
+                    row.slug = slug = GET[5];
                 }
 
                 //MERCH
                 if (child || cousin) {
                     try {
                         var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
+                            owner: GET[1],
+                            repo: GET[2],
                             path: "/raw/merch/merch.json"
                         });
                         var j = JSON.parse(atob(data.content));
@@ -3939,9 +3939,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                     try {
                         var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
-                            path: "/raw/merch/" + GET[4] + "/merch.json"
+                            owner: GET[1],
+                            repo: GET[2],
+                            path: "/raw/merch/" + GET[5] + "/merch.json"
                         });
                         var j = JSON.parse(atob(data.content));
                         var json = JSON.parse(atob(data.content));
@@ -3973,8 +3973,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 } else {
                     try {
                         var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
+                            owner: GET[1],
+                            repo: GET[2],
                             path: "/raw/merch/merch.json"
                         });
                         var j = JSON.parse(atob(data.content));
@@ -4003,9 +4003,9 @@ window.mvc.c ? null : (window.mvc.c = controller = {
 
                     try {
                         var data = await github.repos.contents({
-                            owner: owner.login,
-                            repo: GET[1],
-                            path: "/raw/merch/" + GET[4] + "/merch.json"
+                            owner: GET[1],
+                            repo: GET[2],
+                            path: "/raw/merch/" + GET[5] + "/merch.json"
                         });
                         var j = JSON.parse(atob(data.content));
                         var json = JSON.parse(atob(data.content));
@@ -4039,8 +4039,8 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                 //PUSH
                 var params = {
                     message: "Add " + title + " to Merch",
-                    repo: GET[1],
-                    owner: window.owner.login
+                    owner: GET[1],
+                    repo: GET[2]
                 };
                 if (child || cousin) {
                     var array = [{
@@ -4048,10 +4048,10 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         path: "raw/merch/merch.json"
                     }, {
                         content: str0,
-                        path: "raw/merch/" + GET[4] + "/merch.json"
+                        path: "raw/merch/" + GET[5] + "/merch.json"
                     }, {
                         content: str1,
-                        path: "raw/merch/" + GET[4] + "/" + GET[5] + "/merch.json"
+                        path: "raw/merch/" + GET[5] + "/" + GET[6] + "/merch.json"
                     }];
                 } else {
                     var array = [{
@@ -4059,7 +4059,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
                         path: "raw/merch/merch.json"
                     }, {
                         content: str0,
-                        path: "raw/merch/" + GET[4] + "/merch.json"
+                        path: "raw/merch/" + GET[5] + "/merch.json"
                     }];
                 }
                 if (images.length > 0) {
@@ -4281,7 +4281,7 @@ window.mvc.c ? null : (window.mvc.c = controller = {
             var target = event.target;
             var card = target.closest('card');
             var section = card.find('box > section');
-            var thumbnails = card.find('[data-columns]')
+            var thumbnails = card.find('[css-columns]')
             var b64 = await on.change.file(event);
 
             var template = card.find('template').content.firstElementChild.cloneNode(true);

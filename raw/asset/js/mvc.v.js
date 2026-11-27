@@ -1456,10 +1456,10 @@ window.mvc.v ? null : (window.mvc.v = view = function(route) {
                                                     var thumbnail = card.all("box")[0].firstElementChild;
     
                                                     var img = document.createElement('img');
-                                                    img.className = "height-100pct object-fit-cover position-absolute top-0 width-100pct";
+                                                    img.className = "height-100pct object-fit-contain position-absolute top-0 width-100pct";
                                                     img.src = await github.raw.blob({
-                                                        owner: window.owner.login,
-                                                        repo: get[1],
+                                                        owner: get[1],
+                                                        repo: get[2],
                                                         resource: json.images[i]
                                                     });
                                                     img.dataset.resource = json.images[i];
